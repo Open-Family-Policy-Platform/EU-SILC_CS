@@ -23,32 +23,32 @@ replace ml_eli = 0 			if ml_eli == . & country == "SE" & year == 2014 & gender =
 
 
 * DURATION (weeks)
-/*	-> total: 90 calendar days 
+/*	-> total: 60 calendar days 
 	-> prenatal: non-compulsory 2 weeks 	
 	-> single fathers: entitled to the whole share 	
 */
 
 replace ml_dur1 = 0 		if country == "SE" & year == 2014 & ml_eli == 1
 
-replace ml_dur2 = 90/7 		if country == "SE" & year == 2014 & ml_eli == 1
+replace ml_dur2 = 60/7 		if country == "SE" & year == 2014 & ml_eli == 1
 
 
 * BENEFIT (monthly)
 /*	-> eligible for earning related benefit: min. income €27/day (coded) for 240 calendar days (not coded) before childbirth
-		- for 195 calendar days (includes 90 non-transferable leave): 77.6% earning
-			- minimum: €27/day
-			- ceiling: €46,972/month - this is an earning ceiling NOT benefit ceiling (LP&R 2014)
+		- for 195 calendar days (includes 60 non-transferable leave): 77.6% earning
+			- minimum: €24/day
+			- ceiling: €48,834/month - this is an earning ceiling NOT benefit ceiling (LP&R 2014)
 		- for 45 days: €19/day (only applicable for pl_ben)
-	-> all others: €27/day
+	-> all others: €24/day
  */
 
  
 replace ml_ben1 = 0.776*earning 		if country == "SE" & year == 2014 & ml_eli == 1 ///
-										& (earning/30) >= 26
-replace ml_ben1 = 27*30					if country == "SE" & year == 2014 & ml_eli == 1 ///
-										& ml_ben1 < 27*30
-replace ml_ben1 = 0.776*46972			if country == "SE" & year == 2014 & ml_eli == 1 ///
-										& earning >= 46972
+										& (earning/30) >= 23
+replace ml_ben1 = 24*30					if country == "SE" & year == 2014 & ml_eli == 1 ///
+										& ml_ben1 < 24*30
+replace ml_ben1 = 0.776*48834			if country == "SE" & year == 2014 & ml_eli == 1 ///
+										& earning >= 48834
 
 									
 replace ml_ben2 = ml_ben1 			if country == "SE" & year == 2014 & ml_eli == 1
