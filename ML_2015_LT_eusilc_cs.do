@@ -34,7 +34,7 @@ replace ml_dur2 = 56/5 		if country == "LT" & year == 2015 & ml_eli == 1
 replace ml_ben1 = earning 		if country == "LT" & year == 2015 & ml_eli == 1
 
 replace ml_ben1 = 1380			if country == "LT" & year == 2015 & ml_eli == 1 ///
-								& ml_ben1 < 1380
+								& ml_ben1 >= 1380
 										
 replace ml_ben2 = ml_ben1 		if country == "LT" & year == 2015 & ml_eli == 1
 
