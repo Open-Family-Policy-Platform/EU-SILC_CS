@@ -13,9 +13,9 @@ replace pt_eli = 0 		if pt_eli == . & country == "IT" & year == 2014 & gender ==
 
 
 * DURATION (weeks)
-/*	-> 4 days */
+/*	-> 3 days */
 
-replace pt_dur = 4/5 	if country == "IT" & year == 2014 & pt_eli == 1
+replace pt_dur = 3/5 	if country == "IT" & year == 2014 & pt_eli == 1
 
 
 * BENEFIT (monthly)
