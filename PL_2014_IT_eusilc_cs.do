@@ -20,7 +20,7 @@ replace pl_eli =  0			if pl_eli == . & country == "IT" & year == 2014
 	-> fathers who take at least 3 months of PL are entitled to extra 1 month of PL (not coded)
 	-> self-employed: 3 months/parent/child
 	-> single parents: 10 months 
-	-> until child is 12 years old
+	-> until child is 8 years old
 */
 
 
