@@ -23,54 +23,54 @@ replace pt_eli = 0 		if pt_eli == . & country == "SE" & year == 2014 & gender ==
 
 
 * DURATION (weeks)
-/*	-> total: 90 calendar days 
+/*	-> total: 60 calendar days 
 	-> leave in connection with childbirth: 10 calendar days 	
 */
 
-replace pt_dur = (90/7) + (10/7)		 	if country == "SE" & year == 2014 & pt_eli == 1
+replace pt_dur = (60/7) + (10/7)		 	if country == "SE" & year == 2014 & pt_eli == 1
 
 
 * BENEFIT (monthly)
 /*	-> 10 days: 77.6% earning
-		- ceiling: €35,224/year - this is earning ceiling NOT benefit ceiling 
+		- ceiling: €36,211/year - this is earning ceiling NOT benefit ceiling 
 		- minimum: not specified, also not specified whether only for working parents => 
 			assumed identical with the 90 days 
 	-> 90 days: 77.6% earning
-			- minimum: €27/day
-			- ceiling: €46,972/year - this is an earning ceiling NOT benefit ceiling (LP&R 2014)
+			- minimum: €24/day
+			- ceiling: €48,834/year - this is an earning ceiling NOT benefit ceiling (LP&R 2014)
 */
 
 
 replace pt_ben1 = 0.776 * earning 		if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& (earning/21.7) >= 26
+										& (earning/21.7) >= 23
 
-replace pt_ben1 = 27 * 21.7				if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& (earning/21.7) < 27
+replace pt_ben1 = 24 * 21.7				if country == "SE" & year == 2014 & pt_eli == 1 ///
+										& (earning/21.7) < 24
 
-replace pt_ben1 = ((0.776 * (35224/12)) * (10/(90+10))) + ((0.776 * earning) * (90/(90+10))) ///
+replace pt_ben1 = ((0.776 * (36211/12)) * (10/(90+10))) + ((0.776 * earning) * (90/(90+10))) ///
 										if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& inrange((earning*12),35224,46972)
+										& inrange((earning*12),36211,48834)
 
-replace pt_ben1 = ((0.776 * (35224/12)) * (10/(90+10)))	+ ((0.776 * (46972/12)) * (90/(90+10))) ///
+replace pt_ben1 = ((0.776 * (36211/12)) * (10/(90+10)))	+ ((0.776 * (48834/12)) * (90/(90+10))) ///
 											if country == "SE" & year == 2014 & pt_eli == 1 ///
-											& earning > 46972/12
+											& earning > 48834/12
 
 	
 	
 	
 replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& (earning/21.7) >= 26
+										& (earning/21.7) >= 23
 
-replace pt_ben2 = 27*21.7				if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& (earning/21.7) < 27
+replace pt_ben2 = 24*21.7				if country == "SE" & year == 2014 & pt_eli == 1 ///
+										& (earning/21.7) < 24
 										
-replace pt_ben2 = ((0.776 * (35224/12)) * (10/21.7)) + ((0.776 * earning) * ((21.7-10)/21.7)) ///
+replace pt_ben2 = ((0.776 * (36211/12)) * (10/21.7)) + ((0.776 * earning) * ((21.7-10)/21.7)) ///
 										if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& inrange((earning*12),35224,46803)
+										& inrange((earning*12),36211,48834)
 										
-replace pt_ben2 = ((0.776 * (35224/12)) * (10/21.7)) + ((0.776 * (46972/12)) * ((21.7-10)/21.7)) ///
+replace pt_ben2 = ((0.776 * (36211/12)) * (10/21.7)) + ((0.776 * (48834/12)) * ((21.7-10)/21.7)) ///
 										if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& earning > 46972/12
+										& earning > 48834/12
 								
 										
 
