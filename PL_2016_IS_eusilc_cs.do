@@ -87,7 +87,7 @@ replace pl_ben1 = 799	 				if country == "IS" & year == 2016 & pl_eli == 1 ///
 										
 replace pl_ben1 = 2677	 				if country == "IS" & year == 2016 & pl_eli == 1 ///
 										& inlist(econ_status,1,2) & inrange(whours,10,19) ///
-										& pl_ben1 >= 4138 & gender == 2 & parstat == 1
+										& pl_ben1 >= 2677 & gender == 2 & parstat == 1
 										
 * employed, self-employed working 20+ hours/week - single men			
 replace pl_ben1 = 0.8*earning	 		if country == "IS" & year == 2016 & pl_eli == 1 ///
