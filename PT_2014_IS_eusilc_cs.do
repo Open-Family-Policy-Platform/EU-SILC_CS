@@ -32,26 +32,29 @@ replace pt_dur = 3*4.3 	if country == "IS" & year == 2014 & pt_eli == 1
 /*	-> employed, self-employed: active for 6 months prior to birth
 			- employed for at least 25% of full time (10 hours/week for 40 hours/week full-time employment) 
 			- 80% earning
-			- ceiling: €2,504/month 
-			- minimum: €682/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
-					   €945/month  if worked between 50% and 100% FT (i.e. more than 20 hours/week)
+
+			- ceiling: €2,389/month 
+			- minimum: €631/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
+					   €1,108/month  if worked between 50% and 100% FT (i.e. more than 20 hours/week)
 					   
 	-> those not fulfilling the conditions: 
-		- students: €945/month
-		- working less than 25% FT: €412/month
+		- students: €1,108/month
+		- working less than 25% FT: €382/month
 */
 
 * employed, self-employed working 10-20 hours/week			
 replace pt_ben1 = 0.8*earning	 		if country == "IS" & year == 2014 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & inrange(whours,10,19)
 
-replace pt_ben1 = 682	 				if country == "IS" & year == 2014 & pt_eli == 1 ///
+
+replace pt_ben1 = 631	 				if country == "IS" & year == 2014 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & inrange(whours,10,19) ///
-										& pt_ben1 < 682
+										& pt_ben1 < 631
 										
-replace pt_ben1 = 2504	 				if country == "IS" & year == 2014 & pt_eli == 1 ///
+replace pt_ben1 = 2389	 				if country == "IS" & year == 2014 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & inrange(whours,10,19) ///
-										& pt_ben1 >= 2504
+										& pt_ben1 >= 2389
+
 										
 * employed, self-employed working 20+ hours/week			
 replace pt_ben1 = 0.8*earning	 		if country == "IS" & year == 2014 & pt_eli == 1 ///
@@ -61,14 +64,15 @@ replace pt_ben1 = 945	 				if country == "IS" & year == 2014 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & whours >= 20 ///
 										& pt_ben1 < 945
 										
-replace pt_ben1 = 2504	 				if country == "IS" & year == 2014 & pt_eli == 1 ///
+
+replace pt_ben1 = 2389	 				if country == "IS" & year == 2014 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & whours >= 20 ///
-										& pt_ben1 >= 2504
+										& pt_ben1 >= 2389
 										
 * the rest 
-replace pt_ben1 = 412					if country == "IS" & year == 2014 & pt_eli == 1 ///
+replace pt_ben1 = 382					if country == "IS" & year == 2014 & pt_eli == 1 ///
 										& inlist(econ_status,1,2) & whours < 10
-replace pt_ben1 = 412					if country == "IS" & year == 2014 & pt_eli == 1 ///
+replace pt_ben1 = 382					if country == "IS" & year == 2014 & pt_eli == 1 ///
 										& inlist(econ_status,3,4) 
 										
 * students
