@@ -15,14 +15,16 @@ replace pl_eli =  0			if pl_eli == . & country == "RO" & year == 2014
 
 * DURATION (weeks)
 /*	-> benefit is a family entitlement => in couples, all is assigned to the woman
-	-> until child is 2 year old 	*/
+	-> parents can choose between 1 or 2 years of leave
+		-> coded 1, more generous
+*/
 
 * women	
-replace pl_dur =  (1*52) - ml_dur2		if country == "RO" & year == 2014 & pl_eli == 1 ///
+replace pl_dur =  52 - ml_dur2		if country == "RO" & year == 2014 & pl_eli == 1 ///
 										& gender == 1 
 
 * single men
-replace pl_dur = 1*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2014 & pl_eli == 1 ///
+replace pl_dur = 52 - pt_dur - ml_dur2 		if country == "RO" & year == 2014 & pl_eli == 1 ///
 												& gender == 2 & parstat == 1
 
 
