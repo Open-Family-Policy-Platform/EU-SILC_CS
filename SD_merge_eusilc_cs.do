@@ -1,57 +1,52 @@
-clear	
-set more off
+***************************************
+*** 	EU-SILC (CS): Setup 		***
+***************************************
 
-* original data
-global sourcepath "[enter RAW DATA directory]"
-* temporary data folder
-global datapath "[enter temporary directory]"
+clear all
 
-* merged EU-SILC data folder
-global outpath "[enter directory for the final merged data]"
+* enter your path to the folder with the downloaded EU-SILC files ("Cross")
+global csv_path "/Users/alzbeta/Documents/Data/EU-SILCnov2021/Cross"
 
-cd "$datapath" // Select a working directory where the files will be stored
-
-
-** IS UK to be added with 2019 data
-local countries "AT BE BG CH CY CZ DE DK EE EL ES FI FR HR HU IE IS IT LT LU LV MT NL NO PL PT RO SE SI SK UK"
-local countries_x "BE BG CH CY CZ DE DK EE EL ES FI FR HR HU IE IS IT LT LU LV MT NL NO PL PT RO SE SI SK UK"
-local time "18 19" 
+* destination for the .log and .dta files created via adjusted EU-SILC setup files in the "Setup_ver_2021_04" folder
+global log "/Users/alzbeta/Documents/Data/EUSILC_test"
 
 
-foreach x in D H P R {
-	foreach t of local time {
-		foreach k of local countries {
-			insheet using "$sourcepath\\`k'\20`t'\UDB_c`k'`t'`x'.csv", names clear 
-			save "$datapath\UDB_`k'`x'`t'.dta", replace
-		}	
+
+
+* create log files with var labels
+* transforms .csv files to .dta 
+
+forval x = 2010/2019 { // !!!! <- adjust years !!!
+	
+	foreach y in p r h d {
+		
+		run "$csv_path/Setup_ver_2021_04/`x'_cross_eu_silc_`y'_ver_2021_04.do"
 	}
 }
 
 
-foreach x in D H P R {
-	foreach t of local time {
-		use "$datapath\UDB_AT`x'`t'.dta", clear
-		foreach c of local countries_x {
-			append using "$datapath\UDB_`c'`x'`t'.dta", force
-		}
-		save "$datapath\UDB_C`t'`x'.dta", replace
-	}
-}
 
+* Merge files (r,p,h,d) for each year
+* format of the final data files: SILC`year'_ver_2021_04.dta (e.g. SILC2014_ver_2021_04.dta)
 
-local time "18 19"
-
+local time "10 11 12 13 14 15 16 17 18 19" // <- !!! adjust years !!!
 
 foreach t of local time {
+noisily: display "Preparing EU-SILC 20`t'" 
 	
-	local prefix "UDB_C`t'"
-	local suffix ""
+	global datapath "/Users/alzbeta/Documents/Data/EUSILC_test" // <- folder where the .dta files are stored (should be the same as in "global log" above)
+	
+	global outpath "/Users/alzbeta/Documents/Data/EU-SILC_merged" // <- destination of the merged .dta files
+	cd "${datapath}" 
+
+	local prefix "eusilc_20`t'_"
+	local suffix "_cs"
 	local year 20`t'
 	global versdat 1
 
 	*link R and P files
 			
-	use "${datapath}\\`prefix'R`suffix'", clear 
+	use "${datapath}/`prefix'r`suffix'", clear 
 				
 	foreach var of varlist _all {
 		local newname = lower("`var'")
@@ -67,7 +62,7 @@ foreach t of local time {
 	compress
 	save "r-file`year'.dta", replace
 
-	use "${datapath}\\`prefix'P`suffix'", clear
+	use "${datapath}/`prefix'p`suffix'", clear
 
 	foreach var of varlist _all {
 		local newname = lower("`var'")
@@ -90,7 +85,7 @@ foreach t of local time {
 
 	*link H file and D file
 
-	use "${datapath}\\`prefix'H`suffix'" , clear 
+	use "${datapath}/`prefix'h`suffix'" , clear 
 
 	foreach var of varlist _all {
 		local newname = lower("`var'")
@@ -105,7 +100,7 @@ foreach t of local time {
 	compress
 	save "h-file`year'.dta", replace
 
-	use "${datapath}\\`prefix'D`suffix'", clear
+	use "${datapath}/`prefix'd`suffix'", clear
 	compress
 	foreach var of varlist _all {
 		local newname = lower("`var'")
@@ -131,7 +126,7 @@ foreach t of local time {
 
 	cap drop __*
 	compress
-	save "${outpath}\SILC`year'.dta", replace
+	save "${outpath}/SILC`year'_ver_2021_04.dta", replace
 
 	erase "r-file`year'.dta"
 	erase "p-file`year'.dta"
@@ -140,3 +135,7 @@ foreach t of local time {
 	erase "h-file`year'.dta"
 	erase "hd-file`year'.dta"
 }
+
+
+
+
