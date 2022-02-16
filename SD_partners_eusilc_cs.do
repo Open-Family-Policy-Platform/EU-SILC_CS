@@ -27,9 +27,13 @@ rename rx010 p_age
 rename econ_status p_econ_status
 rename estatus* p_estatus*
 
-rename partner_id rb240_n
-rename person_id partner_id
-rename rb240_n person_id 
+gen partner_id_new = person_id
+gen person_id_new = partner_id
+
+drop partner_id person_id
+
+rename partner_id_new partner_id
+rename person_id_new person_id
 
 * partner's duration of employment
 egen p_duremp = anycount(p_estatus*), values(1) // own calculation depending on the dataset; in months
@@ -68,9 +72,14 @@ rename rx010 p_age
 rename econ_status p_econ_status
 rename estatus* p_estatus*
 
-rename partner_id rb240_n
-rename person_id partner_id
-rename rb240_n person_id 
+gen partner_id_new = person_id
+gen person_id_new = partner_id
+
+drop partner_id person_id
+
+rename partner_id_new partner_id
+rename person_id_new person_id
+
 
 * partner's duration of employment
 egen p_duremp = anycount(p_estatus*), values(1) // own calculation depending on the dataset; in months
@@ -94,12 +103,21 @@ save eusilc_malepartner.dta, replace
 
 use eusilc_cs.dta, clear
 drop _merge
-mer 1:1 person_id using eusilc_fempartner.dta 
+mer 1:m person_id using eusilc_fempartner.dta 
 drop _merge
-mer 1:1 person_id using eusilc_malepartner.dta, update keep(1 3 4)
+save eusilc_temp, replace
+
+duplicates tag person_id, gen(dup)
+drop if dup == 1
+drop dup
+
+mer 1:m person_id using eusilc_malepartner.dta , update keep(1 3 4)
 drop _merge
 
-save eusilc_cs.dta, replace 
+
+save eusilc_partners.dta, replace 
 
 erase "$DATA/eusilc_fempartner.dta"
 erase "$DATA/eusilc_malepartner.dta"
+erase "$DATA/eusilc_temp.dta"
+erase "$DATA/eusilc_cs.dta"
