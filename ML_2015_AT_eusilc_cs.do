@@ -4,6 +4,7 @@
 
 * ELIGIBILITY
 /*   
+   -> Employed
    -> Self-employed: if voluntarily insured => not coded.
    -> Unemployed: if receive unemployment benefits/completed 3 months of 
 	continuous  employment		
@@ -17,6 +18,8 @@ replace ml_eli = 1 		if country == "AT" & year == 2015 & gender == 1 ///
 						& econ_status == 3 & duremp >= 3
 				
 replace ml_eli = 0 		if ml_eli == . & country == "AT" & year == 2015 & gender == 1
+
+
 
 
 * DURATION (weeks)
@@ -41,6 +44,8 @@ replace ml_ben1 = earning 	if country == "AT" & year == 2015 & gender == 1 ///
 								
 				
 replace ml_ben2 = ml_ben1 	if country == "AT" & year == 2015 & gender == 1 & ml_eli == 1
+
+
 				
 foreach x in 1 2 {
     replace ml_dur`x' = 0 	if ml_eli == 0 & country == "AT" & year == 2015

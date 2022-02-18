@@ -3,9 +3,10 @@
 * AUSTRIA - 2017
 
 * ELIGIBILITY
-/* -> Employed: earnings at least €425.7/month  
-   -> Self-employed: if voluntarily insured => not coded.
-   -> Unemployed: if receive unemployment benefits/completed 3 months of 
+/* 
+	-> Employed: earnings at least €425.7/month  
+	-> Self-employed: if voluntarily insured => not coded.
+	-> Unemployed: if receive unemployment benefits/completed 3 months of 
 	continuous  employment		
 	
 	-> leave is not transferable => single fathers are assumed to be ineligible
@@ -19,6 +20,7 @@ replace ml_eli = 1 		if country == "AT" & year == 2017 & gender == 1 ///
 replace ml_eli = 0 		if ml_eli == . & country == "AT" & year == 2017 & gender == 1
 
 
+
 * DURATION (weeks)
 /*	-> total: 16 weeks
 	-> prenatal: 8 weeks
@@ -27,6 +29,7 @@ replace ml_eli = 0 		if ml_eli == . & country == "AT" & year == 2017 & gender ==
 replace ml_dur1 = 8 	if country == "AT" & year == 2017 & gender == 1 & ml_eli == 1
 
 replace ml_dur2 = 8 	if country == "AT" & year == 2017 & gender == 1 & ml_eli == 1
+
 
 
 * BENEFIT (monthly)
@@ -41,6 +44,9 @@ replace ml_ben1 = earning 	if country == "AT" & year == 2017 & gender == 1 ///
 								
 				
 replace ml_ben2 = ml_ben1 	if country == "AT" & year == 2017 & gender == 1 & ml_eli == 1
+
+
+
 				
 foreach x in 1 2 {
     replace ml_dur`x' = 0 	if ml_eli == 0 & country == "AT" & year == 2017
