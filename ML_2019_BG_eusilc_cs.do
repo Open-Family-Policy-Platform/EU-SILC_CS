@@ -33,7 +33,8 @@ replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2019 & gender == 1 & 
 /*	-> 90% earning 
 	-> minimum: €235.16/month
 	-> ceiling: €1,329.36/month
-The minimum and maximum values of benefit are sourced from LP&R 2019. 
+
+	-> the minimum and maximum values of benefit are sourced from LP&R 2019. 
 */ 
 
 replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2019 ///
