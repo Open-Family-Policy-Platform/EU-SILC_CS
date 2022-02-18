@@ -6,8 +6,7 @@
 
 */
 
-
-use eusilc_cs.dta, clear 
+use eusilc_merged.dta, clear 
 
 *** MALE PARTNERS ***
 
@@ -54,7 +53,7 @@ save eusilc_fempartner.dta, replace
 
 *** FEMALE PARTNERS ***
 
-use eusilc_cs.dta, clear
+use eusilc_merged.dta, clear
 
 * delete single and missing values
 keep if parstat == 2
@@ -101,7 +100,7 @@ save eusilc_malepartner.dta, replace
 
 *** Merge with the main dataset ***
 
-use eusilc_cs.dta, clear
+use eusilc_merged.dta, clear
 drop _merge
 mer 1:m person_id using eusilc_fempartner.dta 
 drop _merge
@@ -114,10 +113,14 @@ drop dup
 mer 1:m person_id using eusilc_malepartner.dta , update keep(1 3 4)
 drop _merge
 
+duplicates tag person_id, gen(dup)
+drop if dup == 1
+drop dup
+
 
 save eusilc_partners.dta, replace 
 
 erase "$DATA/eusilc_fempartner.dta"
 erase "$DATA/eusilc_malepartner.dta"
 erase "$DATA/eusilc_temp.dta"
-erase "$DATA/eusilc_cs.dta"
+//erase "$DATA/eusilc_cs.dta"
