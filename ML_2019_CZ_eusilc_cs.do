@@ -79,7 +79,7 @@ gen dab3 = (129 - 64)*0.3 			if country == "CZ" & year == 2019  ///
 
 replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2019 ///
 									& earning/21.7 > 129 & dab == . 										
-drop dab1 dab2 dab3 										
+						
 										
 
 
@@ -99,5 +99,6 @@ foreach x in 1 2 {
 }
 
 
+drop dab dab1 dab2 dab3 				
 
 
