@@ -8,8 +8,9 @@ This code runs the OPEN FAMILY POLICY PROGRAM (OFPP)
 *** Merge raw EU-SILC data
 run "$CODE/SD_merge_eusilc_cs.do"
 
-clear 
 */
+
+clear all
 
 *** Data directory
 //global DATA "[enter your directory]" 
@@ -25,39 +26,56 @@ cd "$DATA"
 global CODE "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/EU-SILC" 
 
 
+foreach x of numlist 4/9 {
+	
+	use SILC201`x'_ver_2021_04, clear 
+	
+	*** Delete Serbia, Cyprus, Malta ***
+	drop if country == "RS"
+	drop if country == "CY"
+	drop if country == "MT"
+	drop if country == "CH"
+
+
+	*** Standardize country codes according to ISO 3166-1 alpha-2 ***
+	replace country = "GR" if country == "EL"
+	replace country = "GB" if country == "UK"
+	
+	run "$CODE/SD_uid_eusilc.do"
+	run "$CODE/SD_standard_eusilc.do"
+
+	save SILC201`x'_standard, replace
+	
+}
+	
+	
+
+
+/*
 use SILC2014_ver_2021_04, clear 
 append using SILC2015_ver_2021_04
 append using SILC2016_ver_2021_04
-//append using SILC2017_ver_2021_04
+append using SILC2017_ver_2021_04
 append using SILC2018_ver_2021_04
 append using SILC2019_ver_2021_04
+*/
 
 
-*** Delete Serbia, Cyprus, Malta ***
-drop if country == "RS"
-drop if country == "CY"
-drop if country == "MT"
-drop if country == "CH"
-
-
-*** Standardize country codes according to ISO 3166-1 alpha-2 ***
-replace country = "GR" if country == "EL"
-replace country = "GB" if country == "UK"
+use SILC2014_standard, clear 
+append using SILC2015_standard
+append using SILC2016_standard
+append using SILC2017_standard
+append using SILC2018_standard
+append using SILC2019_standard
 
 save eusilc_merged, replace
 
-*** Generate unique household and personal identifiers ***
-run "$CODE/SD_uid_eusilc.do"
 
+foreach x of numlist 4/9 {
+	
+	erase "$DATA/SILC201`x'_standard.dta"
+}
 
-
-*** Standardize variables for OFPP ***
-run "$CODE/SD_standard_eusilc.do"
-
-
-
-save eusilc_cs, replace
-drop _merge
 
 
 *** Assign information about partners ***
@@ -69,17 +87,14 @@ run "$CODE/SD_partners_eusilc_cs.do"
 *** Delete same-sex couples *** 
 drop if gender == p_gender
 
+save eusilc_partners, replace
 
-
+*** Select SAMPLE ***
+run "$CODE/SD_sample_eusilc_cs.do"
 
 *** Number of children per household ***
 run "$CODE/SD_nchild_eusilc_cs.do"
 
-
-
-
-*** Select SAMPLE ***
-run "$CODE/SD_sample_eusilc_cs.do"
 
 
 
@@ -99,7 +114,7 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 	run "$CODE/ML_2014_`x'_eusilc_cs.do"
 	run "$CODE/ML_2015_`x'_eusilc_cs.do"
 	run "$CODE/ML_2016_`x'_eusilc_cs.do"
-	//run "$CODE/ML_2017_`x'_eusilc_cs.do"
+	run "$CODE/ML_2017_`x'_eusilc_cs.do"
 	run "$CODE/ML_2018_`x'_eusilc_cs.do"
 	run "$CODE/ML_2019_`x'_eusilc_cs.do"
 }
