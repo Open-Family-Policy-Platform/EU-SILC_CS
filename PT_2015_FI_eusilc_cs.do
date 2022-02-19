@@ -19,13 +19,7 @@ replace pt_dur = 54/6 if country == "FI" & year == 2015 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> first 30 days:
-		-> €24.02/day if unemployed or earnings are less than €9,610/year (income group 30a)
-		-> 75% on earnings between €9,610/year and €56,032/year (IG 30b)
-		-> 32.5% on earnings above €56,032/year (IG 30c)
-		
-	-> remaining 24 days:
-		-> €24.02/day if unemployed or earnings are less than €9,610/year (IG 24a)
+/*		-> €24.02/day if unemployed or earnings are less than €9,610/year (IG 24a)
 		-> 70% on earnings between €10,297/year and €36,420/year (IG 24b)
 		-> 40% on earnings between €36,420/year and €56,032/year (IG 24c)
 		-> 25% on earnings above €56,032/year
@@ -33,82 +27,54 @@ replace pt_dur = 54/6 if country == "FI" & year == 2015 & pt_eli == 1
 */
 
 
-* Income group (IG) 30a
-replace pt_ben30 = 24.64 * 21.7 		if country == "FI" & year == 2015 ///
-									& gender == 2 & pt_eli == 1 ///
-									& (earning*12) < 9610
+* IGa
+replace pt_ben1 = 24.02 * 21.7 			if country == "FI" & year == 2015 & gender == 2 ///
+									& pt_eli == 1 
 
-* IG 30b			
-replace pt_ben30 = (earning * 0.75) 	if country == "FI" & year == 2015 ///
-									& gender == 2 & pt_eli == 1 & pt_ben30 == . ///
-									& inrange((earning*12),9610,56032)
 
-* IG 30c			
-gen pt_ben30a = (56032/12) * 0.75 	if country == "FI" & year == 2015 ///
-									& gender == 2 & (earning*12) > 56032 ///
-									& pt_eli == 1
 									
-gen pt_ben30b = (earning - (56032/12)) * 0.325 		if country == "FI" & year == 2015 ///
-													& gender == 2 ///
-													& (earning*12) > 57183 & pt_eli == 1
-	
-	
-replace pt_ben30 = pt_ben30a + pt_ben30b 		if country == "FI" & year == 2015 ///
-												& gender == 2 & pt_eli == 1 ///
-												& pt_ben30 == . ///
-												& (earning*12) > 56032 
+* IGb
+replace pt_ben1 = earning * 0.7 	if country == "FI" & year == 2015 & gender == 2 ///
+									& pt_eli == 1 & inrange((earning*12),10297,36420)
 
-
-
-* IG 24a - annual earnings less than €9,610/year
-replace pt_ben24 = 24.64 * 21.7 		if country == "FI" & year == 2015 & gender == 2 ///
-									& pt_eli == 1 & (earning*12) < 9610
-
-* IG 24b - €10,297/year and €36,420/year
-replace pt_ben24 = earning * 0.7 	if country == "FI" & year == 2015 & gender == 2 ///
-									& pt_eli == 1 & pt_ben24 == . ///
-									& inrange((earning*12),9610,36420)
-
-* IG 24c - annual earnings between €36,420/year and €56,032/year
-gen pt_ben24a = (37167/12) * 0.7 	if country == "FI" & year == 2015 & gender == 2 ///
+									
+									
+									
+* IGc 
+gen pt_bena = (36420/12) * 0.7 		if country == "FI" & year == 2015 & gender == 2 ///
 									& pt_eli == 1 & (earning*12) > 36420
 			
-gen pt_ben24b = (earning - (36420/12)) * 0.4 		if country == "FI" ///
-									& year == 2015	& gender == 2 & pt_eli == 1 ///
+gen pt_benb = (earning - (36420/12)) * 0.4 		///
+									if country == "FI" & year == 2015	///
+									& gender == 2 & pt_eli == 1 ///
 									& inrange((earning*12),36420,56032)
+															
 
-replace pt_ben24 = pt_ben24a + pt_ben24b 		if country == "FI" ///
+replace pt_ben1 = pt_bena + pt_benb 		if country == "FI" ///
 												& year == 2015	& gender == 2 ///
-												& pt_eli == 1 & pt_ben24 == . ///
-												& inrange((earning*12),36420,56,032)			
+												& pt_eli == 1 & inrange((earning*12),36420,56032)			
 			
-* IG 24d - annual earnings above €56,032	
-gen pt_ben24c = (56032/12) * 0.4			if country == "FI" ///
+
+
+* IGd	
+gen pt_benc = (56032/12) * 0.4			if country == "FI" ///
 													& year == 2015	& gender == 2 ///
 													& pt_eli == 1 & (earning*12) > 56032
 	
-gen pt_ben24d = (earning - (56032/12)) * 0.25 		if country == "FI" ///
+gen pt_bend = (earning - (56032/12)) * 0.25 		///
+									if country == "FI" & year == 2015	///
+									& gender == 2 & pt_eli == 1 ///
+									& (earning*12) > 56032
+									
+									
+
+replace pt_ben1 = pt_bena + pt_benc + pt_bend 		if country == "FI" ///
 									& year == 2015	& gender == 2 & pt_eli == 1 ///
 									& (earning*12) > 56032
-			
-
-replace pt_ben24 = pt_ben24a + pt_ben24c + pt_ben24d 		if country == "FI" ///
-							& year == 2015	& gender == 2 & pt_eli == 1 & pt_ben24 == . ///
-							& (earning*12) > 56032
 
 
-
-* PT benefit 
-replace pt_ben1 = ((pt_ben30 * (30/54) ) + (pt_ben24 * (24/54)))		if country == "FI" ///
-												& year == 2015	& gender == 2 & pt_eli == 1
-
-
-			 
-replace pt_ben2 = pt_ben30 		if country == "FI" & year == 2015 & gender == 2 & pt_eli == 1
-
-
-
-
+replace pt_ben2 = pt_ben1 	if country == "FI" & year == 2015 & gender == 2 & pt_eli == 1
+		
 								
 foreach x in 1 2 {
 	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "FI" & year == 2015
@@ -116,6 +82,6 @@ foreach x in 1 2 {
 
 replace pt_dur = 0 if pt_eli == 0 & country == "FI" & year == 2015			
 			
-drop pt_bena pt_benb
+drop pt_bena pt_benb pt_benc pt_bend
 
 

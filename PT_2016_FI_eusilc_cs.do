@@ -81,6 +81,6 @@ foreach x in 1 2 {
 
 replace pt_dur = 0 if pt_eli == 0 & country == "FI" & year == 2016			
 			
-drop pt_bena pt_benb
+drop pt_bena pt_benb pt_benc pt_bend
 
 
