@@ -23,7 +23,7 @@ replace pt_dur = 10/5 	if country == "LU" & year == 2019 & pt_eli == 1
 replace pt_ben1 = earning 	if country == "LU" & year == 2019 & pt_eli == 1
 
 * ceiling
-replace pt_ben1 = (10448.75 * (pt_dur/4.3)) + (earning * ((4.3-pt_dur)/4.3) ///
+replace pt_ben1 = (10448.75 * (pt_dur/4.3)) + (earning * ((4.3-pt_dur)/4.3)) ///
 							if country == "LU" & year == 2019 & pt_eli == 1 ///
 							& earning >= 10448.75
 
