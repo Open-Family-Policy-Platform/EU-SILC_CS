@@ -21,7 +21,8 @@ replace pt_dur = 10/5 	if country == "BE" & year == 2017 & gender == 2 ///
 
 
 * BENEFIT (monthly)
-/*	-> 82% of earnings, ceiling = €113.68/day 		*/
+/*	-> 82% of earnings
+	-> ceiling = €113.68/day 		*/
 
 replace pt_ben1 = (((0.82 * earning)/4.3) * pt_dur)	+ (earning * (4.3-pt_dur)) ///
 									if country == "BE" & year == 2017 ///
