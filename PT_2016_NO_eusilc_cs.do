@@ -67,7 +67,7 @@ replace pt_ben1 = 4943/11			if country == "NO" & year == 2016 & pt_eli == 1 ///
 									& pt_ben1 < 4943/11
 
 
-replace pt_ben2 = ml_ben1 		if country == "NO" & year == 2016 & pt_eli == 1
+replace pt_ben2 = pt_ben1		if country == "NO" & year == 2016 & pt_eli == 1
 
 
 
