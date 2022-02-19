@@ -47,7 +47,7 @@ replace ml_ben1 = 0.776*earning 		if country == "SE" & year == 2015 & ml_eli == 
 										& (earning/30) >= 23 /*  Shouldn't it be 24 here? if someone makes 23,80/day for instance, they should get the minimum of 24 instead right?  */
 replace ml_ben1 = 24*30					if country == "SE" & year == 2015 & ml_eli == 1 ///
 										& ml_ben1 < 24*30
-replace ml_ben1 = 0.776*(48136/12)			if country == "SE" & year == 2015 & ml_eli == 1 ///
+replace ml_ben1 = 48136/12			if country == "SE" & year == 2015 & ml_eli == 1 ///
 										& earning >= (48136/12)
 
 									
