@@ -10,7 +10,7 @@ date created: 27/09/2021
 /*	-> employed
 	-> self-employed 	*/
 	
-replace pt_eli = 1 		if country == "LV" & year == 2017 & gender == 2 
+replace pt_eli = 1 		if country == "LV" & year == 2017 & gender == 2 & inlist(econ_status,1,2) 
 replace pt_eli = 0 		if pt_eli == . & country == "LV" & year == 2017 & gender == 2
 
 * DURATION (weeks)
