@@ -1,9 +1,4 @@
-/* PT_2017_DK_eusilc_cs
-
-date created: 27/09/2021
-
-
-*/
+/* PT_2017_DK_eusilc_cs */
 
 * DENMARK - 2017
 
