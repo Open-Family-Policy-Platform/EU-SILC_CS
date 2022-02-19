@@ -17,6 +17,7 @@ replace pt_ben1 = .a 	if country == "DE" & year == 2015 & pt_eli == 1
 replace pt_ben2 = .a 	if country == "DE" & year == 2015 & pt_eli == 1
 
 
+/*
 foreach x in 1 2 {
 	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "DE" & year == 2015
 }
