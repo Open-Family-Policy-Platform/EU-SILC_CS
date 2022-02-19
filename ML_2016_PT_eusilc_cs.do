@@ -13,7 +13,7 @@
 */
 	
 replace ml_eli = 1 			if country == "PT" & year == 2016 & gender == 1 ///
-							& inlist(econ_status,1,2) & duremp >= 6
+							& inlist(econ_status,1,2) & (duremp + dursemp) >= 6
 
 							
 replace ml_eli = 0 			if ml_eli == . & country == "PT" & year == 2016 & gender == 1
