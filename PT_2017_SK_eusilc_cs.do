@@ -26,9 +26,8 @@ date created: 28/09/2021
 	-> single fathers can also claim "ML" - already coded in ml_eli!	*/
 	
 replace pt_eli = 1 		if country == "SK" & year == 2017 & gender == 2 ///
-						& econ_status ==  1 & duremp >= (270/7)/4.3 & parstat == 2
-replace pt_eli = 1 		if country == "SK" & year == 2017 & gender == 2 ///
-						& econ_status ==  2 & dursemp >= (270/7)/4.3 & parstat == 2		
+						& econ_status ==  1 & (duremp+dursemp) >= (270/7)/4.3 & parstat == 2
+	
 						
 replace pt_eli = 0 		if pt_eli == . & country == "SK" & year == 2017 & gender == 2
 
