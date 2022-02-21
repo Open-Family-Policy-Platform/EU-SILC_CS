@@ -16,7 +16,9 @@ replace pt_eli = 1 			if country == "SI" & year == 2016 & gender == 2 ///
 							& inlist(econ_status,1,2) 
 replace pt_eli = 1 			if country == "SI" & year == 2016 & gender == 2 ///
 							& inlist(econ_status,3,4) & (duremp + dursemp) >= 12	
-	
+
+replace pt_eli = 0 			if country == "SI" & year == 2016 & gender == 2 ///
+							& pt_eli == .
 
 * DURATION (weeks)
 /*	-> 70 calendar days in total
@@ -33,13 +35,16 @@ replace pt_dur = 70/7 	if country == "SI" & year == 2016 & pt_eli == 1
 
 replace pt_ben1 = (0.9*earning) * (20/70) 	 if country == "SI" & year == 2016 & pt_eli == 1 
 replace pt_ben1 = 790.73	 	 	if country == "SI" & year == 2016 & pt_eli == 1 ///
-									& (0.9*earning) < 790.73
+									& pt_ben1 < 790.73
 replace pt_ben1 = 2863		 	 	if country == "SI" & year == 2016 & pt_eli == 1 ///
-									& (0.9*earning) > 2863
+									& pt_ben1 > 2863
 
 
 replace pt_ben2 = (0.9*earning) * (20/21.7) 	if country == "SI" & year == 2016 & pt_eli == 1
-replace pt_ben2 = pt_ben1 	if country == "SI" & year == 2016 & pt_eli == 1 if ((0.9*earning) < 790.73 | (0.9*earning) > 2863)
+replace pt_ben2 = 790.73	 	 	if country == "SI" & year == 2016 & pt_eli == 1 ///
+									& pt_ben2 < 790.73
+replace pt_ben2 = 2863		 	 	if country == "SI" & year == 2016 & pt_eli == 1 ///
+									& pt_ben2 > 2863
 
 foreach x in 1 2 {
 	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "SI" & year == 2016

@@ -14,7 +14,10 @@
 replace pt_eli = 1 			if country == "SI" & year == 2019 & gender == 2 ///
 							& inlist(econ_status,1,2) 
 replace pt_eli = 1 			if country == "SI" & year == 2019 & gender == 2 ///
-							& inlist(econ_status,3,4) & (duremp + dursemp) >= 12	
+							& inlist(econ_status,3,4) & (duremp + dursemp) >= 12
+							
+replace pt_eli = 0 			if country == "SI" & year == 2019 & gender == 2 ///
+							& pt_eli == .
 	
 
 * DURATION (weeks)
