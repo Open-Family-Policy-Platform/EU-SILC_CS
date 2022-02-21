@@ -58,6 +58,7 @@ gen earning_yg = py010g + py050g  if econ_status != . 	// collapses earning from
 
 gen dureact = duremp + dursemp 	if econ_status != . // adds of employment and self-employment
 gen earning = earning_yg/dureact 
+replace earning = earning_yg/12 if (dureact == 0 | dureact == .) 
 
 
 * self-employed are allowed negative "income"
