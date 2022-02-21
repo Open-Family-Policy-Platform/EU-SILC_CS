@@ -1,8 +1,4 @@
-/* PT_2017_SE_eusilc_cs
-
-date created: 28/09/2021
-
-*/
+/* PT_2017_SE_eusilc_cs */
 
 /*	Sweden doesn't distinguish between ML and PT but only recognizes PARENTAL LEAVE, 
 	which is a combination of individual non-transferable and individual transferable
@@ -45,37 +41,35 @@ replace pt_dur = (90/7) + (10/7)		 	if country == "SE" & year == 2017 & pt_eli =
 */
 
 
-replace pt_ben1 = 0.776*earning 		if country == "SE" & year == 2017 & pt_eli == 1 ///
-										& (earning/30) >= 26
+replace pt_ben1 = 0.776 * earning 		if country == "SE" & year == 2017 & pt_eli == 1 
 
-replace pt_ben1 = 26*30					if country == "SE" & year == 2017 & ml_eli == 1 ///
-										& (earning/30) < 26
+replace pt_ben1 = 26 * 21.7				if country == "SE" & year == 2017 & pt_eli == 1 ///
+										& (earning/21.7) < 26
 
-replace pt_ben1 = [(0.776*34563) * (10/(90+10))] + [(0.776*earning) * (90/(90+10))] ///
-										if country == "SE" & year == 2017 & ml_eli == 1 ///
-										& inrange(earning,34563,46083)
+replace pt_ben1 = ((0.776 * (34563/12)) * (10/(90+10))) + ((0.776 * earning) * (90/(90+10))) ///
+										if country == "SE" & year == 2017 & pt_eli == 1 ///
+										& inrange((earning*12),35224,46972)
 
-replace pt_ben2 = [(0.776*35103) * (10/(90+10))] + [(0.776*46083) * (90/(90+10))] ///
-										if country == "SE" & year == 2017 & ml_eli == 1 ///
-										& earning > 46083
+replace pt_ben1 = ((0.776 * (34563/12)) * (10/(90+10)))	+ ((0.776 * (46972/12)) * (90/(90+10))) ///
+											if country == "SE" & year == 2017 & pt_eli == 1 ///
+											& earning > 46972/12
 
-		
-		
-replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2017 & pt_eli == 1 ///
-										& (earning/30) >= 26
+	
+	
+	
+replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2017 & pt_eli == 1 
 
-replace pt_ben2 = 26*30					if country == "SE" & year == 2017 & ml_eli == 1 ///
-										& (earning/30) < 26
+replace pt_ben2 = 26*21.7				if country == "SE" & year == 2017 & pt_eli == 1 ///
+										& (earning/21.7) < 26
 										
-replace pt_ben2 = [((0.776*35103)/4.3) * (10/7)] + [((0.776*earning)/4.3) * ((30-10)/7)] ///
-										if country == "SE" & year == 2017 & ml_eli == 1 ///
-										& inrange(earning,35103,46803)
+replace pt_ben2 = ((0.776 * (34563/12)) * (10/21.7)) + ((0.776 * earning) * ((21.7-10)/21.7)) ///
+										if country == "SE" & year == 2017 & pt_eli == 1 ///
+										& inrange((earning*12),34563,46803)
 										
-replace pt_ben2 = [((0.776*35103)/4.3) * (10/7)] + [((0.776*46803)/4.3) * ((30-10)/7)] ///
-										if country == "SE" & year == 2017 & ml_eli == 1 ///
-										& earning > 46803
-
- 										
+replace pt_ben2 = ((0.776 * (34563/12)) * (10/21.7)) + ((0.776 * (46972/12)) * ((21.7-10)/21.7)) ///
+										if country == "SE" & year == 2017 & pt_eli == 1 ///
+										& earning > 46972/12
+								
 										
 
 

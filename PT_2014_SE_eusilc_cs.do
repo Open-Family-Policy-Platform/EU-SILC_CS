@@ -41,9 +41,8 @@ replace pt_dur = (60/7) + (10/7)		 	if country == "SE" & year == 2014 & pt_eli =
 */
 
 
-replace pt_ben1 = 0.776 * earning 		if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& (earning/21.7) >= 23
-
+replace pt_ben1 = 0.776 * earning 		if country == "SE" & year == 2014 & pt_eli == 1 
+										
 replace pt_ben1 = 24 * 21.7				if country == "SE" & year == 2014 & pt_eli == 1 ///
 										& (earning/21.7) < 24
 
@@ -58,8 +57,7 @@ replace pt_ben1 = ((0.776 * (36211/12)) * (10/(90+10)))	+ ((0.776 * (48834/12)) 
 	
 	
 	
-replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2014 & pt_eli == 1 ///
-										& (earning/21.7) >= 23
+replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2014 & pt_eli == 1 
 
 replace pt_ben2 = 24*21.7				if country == "SE" & year == 2014 & pt_eli == 1 ///
 										& (earning/21.7) < 24

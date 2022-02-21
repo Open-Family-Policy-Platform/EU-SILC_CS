@@ -43,8 +43,7 @@ replace pt_dur = (90/7) + (10/7)		 	if country == "SE" & year == 2019 & pt_eli =
 */
 
 
-replace pt_ben1 = 0.776*earning 		if country == "SE" & year == 2019 & pt_eli == 1 ///
-										& (earning/21.7) >= 23.48
+replace pt_ben1 = 0.776*earning 		if country == "SE" & year == 2019 & pt_eli == 1 
 
 replace pt_ben1 = 23.48 * 21.7			if country == "SE" & year == 2019 & pt_eli == 1 ///
 										& (earning/21.7) < 23.48
@@ -60,8 +59,7 @@ replace pt_ben1 = ((0.776 * (32053.20/12)) * (10/(90+10)))	+ ((0.776 * (42737.50
 	
 	
 	
-replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2019 & pt_eli == 1 ///
-										& (earning/21.7) >= 23.48
+replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2019 & pt_eli == 1 
 
 replace pt_ben2 = 23.48*21.7			if country == "SE" & year == 2019 & pt_eli == 1 ///
 										& (earning/21.7) < 23.48
