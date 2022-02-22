@@ -35,42 +35,42 @@ replace pl_dur = (150+150)/7	if country == "SE" & year == 2018 & parstat == 1
 
 		- for 195 calendar days (includes 90 non-transferable leave = > 150 days transferable): 
 			- 77.6% earning => for 105 calendar days
-			- minimum: €26/day
-			- ceiling: €46,803 for the duration of benefits
-		- for 45 days: €19/day
-	-> all others: €26/day
+			- minimum: €25.60/day
+			- ceiling: €45,852 for the duration of benefits
+		- for 45 days: €18/day
+	-> all others: €25.60/day
  */
  
 
 
 
-replace pl_ben1 = (((0.776*earning) * (105/30)) + ((19*30) *  (45/30))) / (150/30)	///	
+replace pl_ben1 = (((0.776*earning) * (105/30)) + ((18*30) *  (45/30))) / (150/30)	///	
 									if country == "SE" & year == 2018 & pl_eli == 1 ///
-									& earning/30 >= 26 & pl_dur != . 
+									& earning/30 >= 25.60 & pl_dur != . 
 
 * minimum
-replace pl_ben1 = (((26*30) * (105/30)) + ((19*30) *  (45/30))) / (150/30) ///
+replace pl_ben1 = (((25.60*30) * (105/30)) + ((18*30) *  (45/30))) / (150/30) ///
 									if country == "SE" & year == 2018 & pl_eli == 1 ///
 									& earning/30 < 26 & earning != 0 & pl_dur != . 
 
 * ceiling
-replace pl_ben1 = (((46803/12) * (105/30)) + (((19*30) *  (45/30)))) / (150/30)	///
+replace pl_ben1 = (((46803/12) * (105/30)) + (((18*30) *  (45/30)))) / (150/30)	///
 									if country == "SE" & year == 2018 & pl_eli == 1 ///
 									& earning*12 >= 46803 & pl_dur != . 
 
 * all others									
-replace pl_ben1 = 26*30				if country == "SE" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 25.60*30				if country == "SE" & year == 2018 & pl_eli == 1 ///
 									& earning == 0 & pl_dur != . 
 									
 
 								
 replace pl_ben2 = 0.776*earning		if country == "SE" & year == 2018 & pl_eli == 1 ///
-									& earning/30 >= 26 & pl_dur != .
+									& earning/30 >= 25.60 & pl_dur != .
 									
-replace pl_ben2 = 46803/12			if country == "SE" & year == 2018 & pl_eli == 1 ///
-									& earning*12 >= 46803 & pl_dur != .
+replace pl_ben2 = 45852/12			if country == "SE" & year == 2018 & pl_eli == 1 ///
+									& earning*12 >= 45852 & pl_dur != .
 									
-replace pl_ben2 = 26*30				if country == "SE" & year == 2018 & pl_eli == 1 ///
+replace pl_ben2 = 25.60*30				if country == "SE" & year == 2018 & pl_eli == 1 ///
 									& earning == 0 & pl_dur != . 
 									
 
