@@ -32,16 +32,17 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2018 & pl_eli == 1 //
 
 
 * BENEFIT (monthly)
-/* 	-> choice of leave until child is 1: 100%
-		-> ceiling: €1,617.40/month (coded)
-	-> choice of leave until child is 2: not coded
-		- 70% earnings until child is 1, ceiling: €1,132.18/month
-		- 40% of earnings for the rest of the leave, ceiling: €646.98/month */
-		
+/* 	-> choice of leave until child is 1: 100% (coded)
+	-> choice of leave until child is 2: (not coded)
+		- 70% earnings until child is 1
+		- 40% of earnings for the rest of the leave
+	-> ceiling: €1,379/month 
+	-> source: LP&R 2017
+	
 replace pl_ben1 = earning 		if country == "LT" & year == 2018 & pl_eli == 1
 								
-replace pl_ben1 = 1617.40 		if country == "LT" & year == 2018 & pl_eli == 1 ///
-								& pl_ben1 >= 1617.40
+replace pl_ben1 = 1379	 		if country == "LT" & year == 2018 & pl_eli == 1 ///
+								& pl_ben1 >= 1379
 
 
 replace pl_ben2 = pl_ben1		if country == "LT" & year == 2018 & pl_eli == 1
