@@ -24,7 +24,10 @@ rename gender p_gender
 rename earning p_earning
 rename rx010 p_age
 rename econ_status p_econ_status
-rename estatus* p_estatus*
+rename duremp p_duremp
+rename dursemp p_dursemp
+rename duredu p_duredu
+rename unemp_dur p_unemp_dur
 
 gen partner_id_new = person_id
 gen person_id_new = partner_id
@@ -34,18 +37,9 @@ drop partner_id person_id
 rename partner_id_new partner_id
 rename person_id_new person_id
 
-* partner's duration of employment
-egen p_duremp = anycount(p_estatus*), values(1) // own calculation depending on the dataset; in months
-
-* duration of partner's self-employment 
-egen p_dursemp = anycount(p_estatus*), values(2)	
-
-* collapse earning from employment and self-employment
-gen p_earning_yg = py010g + py050g 	
-
 
 keep year country hh_id person_id partner_id p_gender p_earning p_age ///
- p_econ_status p_estatus* p_duremp p_dursemp p_earning_yg 
+ p_econ_status p_duremp p_dursemp p_earning
 
 save eusilc_fempartner.dta, replace
 
@@ -69,7 +63,10 @@ rename gender p_gender
 rename earning p_earning
 rename rx010 p_age
 rename econ_status p_econ_status
-rename estatus* p_estatus*
+rename duremp p_duremp
+rename dursemp p_duredu
+rename duredu p_dursemp
+rename unemp_dur p_unemp_dur
 
 gen partner_id_new = person_id
 gen person_id_new = partner_id
@@ -80,18 +77,8 @@ rename partner_id_new partner_id
 rename person_id_new person_id
 
 
-* partner's duration of employment
-egen p_duremp = anycount(p_estatus*), values(1) // own calculation depending on the dataset; in months
-
-* duration of partner's self-employment 
-egen p_dursemp = anycount(p_estatus*), values(2)	
-
-* collapse earning from employment and self-employment
-gen p_earning_yg = py010g + py050g 	
-
-
 keep year country hh_id person_id partner_id p_gender p_earning p_age ///
-p_econ_status p_estatus* p_duremp p_dursemp p_earning_yg 
+p_econ_status p_duremp p_dursemp p_earning
 
 save eusilc_malepartner.dta, replace
 
