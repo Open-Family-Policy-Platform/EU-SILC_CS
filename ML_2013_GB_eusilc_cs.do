@@ -5,28 +5,28 @@
 
 * ELIGIBILITY
 /*	-> employed (statutory maternity pay), self-employed (maternity allowance): 
-		- for 26 weeks before childbirth 
-		- earning at least €127/week
+		- for 26 weeks into the 15th week before due date
+		- earning at least €35/week (maternity alllowance; statutory maternity pay has condition of €127/week)
 	-> further restrictions for entitlement to cash benefits
 	
 	-> part of ML can be shared with the father (shared parental leave) if:
 		- mother: 
 			- employed by the same employer for at least 26 weeks 
 		- father/partner:
-			- employed or self-employed for at least 26 weeks
+			- employed or self-employed for at least 26 weeks (coded) into the 15th week before due date (not coded)
 			- earned at least €127 (coded) in total during 13 weeks (not coded) within 66 weeks (not coded) before the birth
 	-> single fathers are not entitled to shared parental leave because it is 
 	   dependent on the mother's economic status
 */
 
 replace ml_eli = 1 			if country == "GB" & year == 2013 & gender == 1 ///
-							& inlist(econ_status,1,2) & (earning/4.3) >= 127 ///
+							& inlist(econ_status,1,2) & (earning/4.3) >= 35 ///
 							& (duremp+dursemp) >= 26/4.3
 
 * father's eligibility for shared parental leave 
 replace ml_eli = 1 			if country == "GB" & year == 2013 & gender == 2 ///
 							& inlist(econ_status,1,2) & (duremp+dursemp) >= 26/4.3 ///
-							& (earning/4.3) >= 127 & p_econ_status == 1 ///
+							& (earning/4.3) >= 35 & p_econ_status == 1 ///
 							& (p_duremp+p_dursemp) >= 26/4.3
 							
 replace ml_eli = 0 			if ml_eli == . & country == "GB" & year == 2013 & gender == 1
@@ -76,41 +76,42 @@ replace ml_dur2 = 35		if country == "GB" & year == 2013 & ml_eli == 1 ///
 
 
 * statutory maternity pay
-gen ml_bena = 0.9 * earning			if country == "GB" & year == 2013 & ml_eli == 1
-gen ml_benb = (160 * 4.3)			if country == "GB" & year == 2013 & ml_eli == 1 
 
-									
-	* under ceiling
-replace ml_ben1 = (ml_bena * (39/52))		if country == "GB" & year == 2013 & ml_eli == 1 ///
-											& (earning*0.9)/4.3 < 160 & ml_dur2 == 52
+replace ml_ben1 = (0.9 * earning) * ((6+33)/52) 		if country == "GB" & year == 2013 & ml_eli == 1 ///
+														& econ_status == 1 & duremp >= 26/4.3 ///
+														& (earning/4.3) >= 127 & gender == 1
+
 
 	* above ceiling
-replace ml_ben1 = (ml_bena * (6/52)) + (ml_benb * ((39-6)/52))		///
-											if country == "GB" & year == 2013 & ml_eli == 1 ///
-											& (earning*0.9)/4.3 >= 160 & ml_dur2 == 52
-
-
-
-* maternity allowance	
-	* under ceiling
-replace ml_ben1 = ml_bena		if country == "GB" & year == 2013 & ml_eli == 1 ///
-								& (earning*0.9)/4.3 < 160 & ml_dur2 == 39	
-	
-	
+replace ml_ben1 = ((0.9 * earning) * (6/52)) + ((160 * 4.3) * (33/52)) 	if country == "GB" & year == 2013 ///
+																		& ml_eli == 1 & (0.9*earning) >= (160*4.3)
+																		
+* maternity allowance 
+replace ml_ben1 = (0.9 * earning) 		if country == "GB" & year == 2013 & ml_eli == 1 ///
+										& inlist(econ_status,1,2) & ml_dur2 == . ///
+										& (earning/4.3) >= 37 & (earning/4.3) < 127 & gender == 1 
+										
 	* above ceiling
-replace ml_ben1 = ml_benb		if country == "GB" & year == 2013 & ml_eli == 1 ///
-								& (earning*0.9)/4.3 >= 160 & ml_dur2 == 39
+replace ml_ben1 = 160 * 4.3				if country == "GB" & year == 2013 & ml_eli == 1 ///
+										& inlist(econ_status,1,2) & ml_dur2 == . ///
+										& (earning/4.3) >= 37 & (earning/4.3) < 127 & gender == 1 & (0.9*earning) >= (160*4.3)
+
+
 	
 	
 	
 
 * statutory maternity pay - 1st month										
-replace ml_ben2 = ml_bena 				if country == "GB" & year == 2013 & ml_eli == 1 ///
-										&  ml_dur2 == 52
+replace ml_ben2 = 0.9 * earning 			if country == "GB" & year == 2013 & ml_eli == 1 & gender == 1
+											
+replace ml_ben2 = 160 * 4.3 				if country == "GB" & year == 2013 & ml_eli == 1 ///
+											& inlist(econ_status,1,2) & ml_dur2 == . ///
+											& (earning/4.3) >= 37 & (earning/4.3) < 127 & gender == 1 & (0.9*earning) >= (160*4.3)
 										
-replace ml_ben2 = ml_ben1 				if country == "GB" & year == 2013 & ml_eli == 1 ///
-										& ml_dur2 == 39							
-										
+replace ml_ben2 = ml_ben1 					if country == "GB" & year == 2013 & ml_eli == 1 ///
+											& ml_dur2 == 39							
+		
+		
 										
 
 										
@@ -121,4 +122,4 @@ foreach x in 1 2 {
 	
 }
 
-drop ml_bena ml_benb
+
