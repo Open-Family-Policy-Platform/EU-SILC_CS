@@ -40,21 +40,21 @@ replace pl_ben1 = 0 		if country == "ES" & year == 2019 & pl_eli == 1
 
 * Basque country
 replace pl_ben1 = 277.08	if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg < 20000 & gender == 1
+							& region == "ES21" & earning < 20000/12 & gender == 1
 replace pl_ben1 = 277.08	if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg < 20000 & gender == 2 & parstat == 1
+							& region == "ES21" & earning < 20000/12 & gender == 2 & parstat == 1
 							
 replace pl_ben1 = 232.92	if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg >= 20000 & gender == 1
-eplace pl_ben1 = 232.92	if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg >= 20000 & gender == 2 & parstat == 1
+							& region == "ES21" & earning >= 20000/12 & gender == 1
+replace pl_ben1 = 232.92	if country == "ES" & year == 2019 & pl_eli == 1 ///
+							& region == "ES21" & earning >= 20000/12 & gender == 2 & parstat == 1
 
 * La Rioja							
 replace pl_ben1 = 250		if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES23" & (earning_yg + p_earning_yg) < 40000 & gender == 1
+							& region == "ES23" & (earning + p_earning) < 40000/12 & gender == 1
 							
 replace pl_ben1 = 250		if country == "ES" & year == 2019 & pl_eli == 1 ///
-							& region == "ES23" & (earning_yg + p_earning_yg) < 40000 & gender == 2 & parstat == 1
+							& region == "ES23" & (earning + p_earning) < 40000/12 & gender == 2 & parstat == 1
 
 							
 replace pl_ben2 = pl_ben1		if country == "ES" & year == 2019 & pl_eli == 1

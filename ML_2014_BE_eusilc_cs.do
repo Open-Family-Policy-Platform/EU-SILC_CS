@@ -83,6 +83,9 @@ replace ml_ben2 = 0.82 * earning ///
 						if country == "BE" & year == 2014 & gender == 1 ///
 						& econ_status == 1 & ml_ben2 == . & ml_eli == 1
 			
+replace ml_ben2 = 440.5*4.3 ///
+						if country == "BE" & year == 2014 & gender == 1 ///
+						& econ_status == 2 & ml_ben2 == . & ml_eli == 1
 
 
 

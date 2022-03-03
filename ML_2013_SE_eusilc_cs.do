@@ -47,8 +47,8 @@ replace ml_ben1 = 0.776*earning 		if country == "SE" & year == 2013 & ml_eli == 
 										& (earning/30) >= 25
 replace ml_ben1 = 26*30					if country == "SE" & year == 2013 & ml_eli == 1 ///
 										& ml_ben1 < 26*30
-replace ml_ben1 = 0.776*51116			if country == "SE" & year == 2013 & ml_eli == 1 ///
-										& earning >= 51116
+replace ml_ben1 = 51116/12			if country == "SE" & year == 2013 & ml_eli == 1 ///
+										& earning >= 51116/12
 
 									
 replace ml_ben2 = ml_ben1 			if country == "SE" & year == 2013 & ml_eli == 1

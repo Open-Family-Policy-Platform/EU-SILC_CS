@@ -10,12 +10,12 @@
 replace pt_eli = 1 		if country == "FI" & year == 2013 & gender == 2 
 						
 
-replace pt_eli = 0 if pt_eli == . & country == "FI" & year == 2013 & gender == 2
+replace pt_eli = 0 		if pt_eli == . & country == "FI" & year == 2013 & gender == 2
 
 
 * DURATION (weeks)
 /* -> 54 days */ 
-replace pt_dur = 54/6 if country == "FI" & year == 2013 & pt_eli == 1 
+replace pt_dur = 54/6 	if country == "FI" & year == 2013 & pt_eli == 1 
 
 
 * BENEFIT (monthly)
@@ -81,6 +81,6 @@ foreach x in 1 2 {
 
 replace pt_dur = 0 if pt_eli == 0 & country == "FI" & year == 2013			
 			
-drop pt_bena pt_benb
+drop pt_bena pt_benb pt_benc pt_bend
 
 

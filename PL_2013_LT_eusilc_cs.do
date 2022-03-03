@@ -40,8 +40,9 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2013 & pl_eli == 1 //
 		-> ceiling: €1,379/month (coded)
 	-> choice of leave until child is 2: 70%
 		-> ceiling: €965.30/month 
+*/
 		
-replace pl_ben1 = 0.7*earning 		if country == "LT" & year == 2013 & pl_eli == 1
+replace pl_ben1 = earning 		if country == "LT" & year == 2013 & pl_eli == 1
 								
 replace pl_ben1 = 1379	 		if country == "LT" & year == 2013 & pl_eli == 1 ///
 								& pl_ben1 >= 1379

@@ -26,14 +26,14 @@ replace pl_dur = 12			if country == "DE" & year == 2014 & pl_eli == 1 ///
 
 
 * BENEFIT (monthly)
-/*	-> employed, self-employed: 67%
+/*	-> employed, self-employed: 65%
 	-> minimum: €300/month 
 	-> maximum: €1,800/month
 	-> non-working: €300/month
 	-> source: LP&R 2014
 	*/
 
-replace pl_ben1 = 0.67 * earning	if country == "DE" & year == 2014 & pl_eli == 1 ///
+replace pl_ben1 = 0.65 * earning	if country == "DE" & year == 2014 & pl_eli == 1 ///
 									& pl_ben1 == . & inlist(econ_status,1,2)
 
 * minimum

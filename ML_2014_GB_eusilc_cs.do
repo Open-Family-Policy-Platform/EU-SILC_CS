@@ -13,7 +13,7 @@
 		- mother: 
 			- employed by the same employer for at least 26 weeks 
 		- father/partner:
-			- employed or self-employed for at least 26 weeks into the 15th week before due date
+			- employed or self-employed for at least 26 weeks (coded) into the 15th week before due date (not coded)
 			- earned at least €139 (coded) in total during 15 weeks (not coded) before the birth
 	-> single fathers are not entitled to shared parental leave because it is 
 	   dependent on the mother's economic status

@@ -37,7 +37,7 @@ replace pt_dur = (90/7) + (10/7)		 	if country == "SE" & year == 2013 & pt_eli =
 			assumed identical with the 90 days 
 	-> 90 days: 77.6% earning
 			- minimum: €26/day
-			- ceiling: €51116/year - this is an earning ceiling NOT benefit ceiling (LP&R 2013)
+			- ceiling: €51,116/year - this is an earning ceiling NOT benefit ceiling (LP&R 2013)
 */
 
 

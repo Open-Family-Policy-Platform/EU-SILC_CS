@@ -67,7 +67,7 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2015 & pl_eli == 1 ///
 		-> €20.80 daily until the child reaches 20 months of age; if other parent applies as well -> 24 months (not coded)
 		-> €26.60 daily until the child reaches 15 months of age; if other parent applies as well -> 18 months (not coded)
 		-> €33 daily until the child reaches 12 months of age (coded); if other parent applies as well -> 14 months (not coded)
-		-> 80% of earnings until the child reaches 12 months of age (coded); if other parent applies as well -> 14 months (not coded)
+		-> 80% of earnings until the child reaches 12 months of age (coded); if other parent applies as well -> 14 months (coded)
 			- only available to employed parents
 			
 	-> income-related benefit is coded for all employed eligible women

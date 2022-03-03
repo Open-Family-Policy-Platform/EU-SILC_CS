@@ -10,7 +10,7 @@
 replace pt_eli = 1 		if country == "FI" & year == 2014 & gender == 2 
 						
 
-replace pt_eli = 0 if pt_eli == . & country == "FI" & year == 2014 & gender == 2
+replace pt_eli = 0 		if pt_eli == . & country == "FI" & year == 2014 & gender == 2
 
 
 * DURATION (weeks)

@@ -38,7 +38,7 @@ replace pt_ben1 = 173.84 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & ye
 
 * maximum 
 replace pt_ben1 = (2016.86/12) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2014 ///
-															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= 2016.86
+															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= (2016.86/12)
 
 
 

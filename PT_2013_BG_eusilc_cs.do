@@ -32,12 +32,12 @@ replace pt_ben1 = ((earning * 0.9) * (15/21.7)) + (earning * ((21.7-15)/21.7)) /
 
 
 * minimum
-replace pt_ben1 = 235.16 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2013 ///
+replace pt_ben1 = 158.50 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2013 ///
 															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) < 158.50 
 
 * maximum 
-replace pt_ben1 = 1329.18 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2013 ///
-															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= 1899.03
+replace pt_ben1 = (1899.03/12) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2013 ///
+															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= (1899.03/12)
 
 
 

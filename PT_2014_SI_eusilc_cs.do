@@ -25,7 +25,7 @@ replace pt_eli = 0 			if country == "SI" & year == 2014 & gender == 2 ///
 /*	-> 90 calendar days in total
 */
 
-replace pt_dur = 70/7 	if country == "SI" & year == 2014 & pt_eli == 1
+replace pt_dur = 90/7 	if country == "SI" & year == 2014 & pt_eli == 1
 
 
 * BENEFIT (monthly)

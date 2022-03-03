@@ -136,3 +136,6 @@ foreach x in 1 2 {
 }
 
 replace pl_dur = 0 	if pl_eli == 0 & country == "FI" & year == 2014
+
+drop pl_bena pl_benb pl_benc pl_bend 
+

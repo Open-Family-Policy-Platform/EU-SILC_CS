@@ -44,14 +44,14 @@ replace pl_dur = 4 		if country == "HR" & year == 2015 & pl_eli == 1 ///
 replace pl_ben1 = earning 		if country == "HR" & year == 2015 & pl_eli == 1 ///
 								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & gender == 1
 								
-replace pl_ben1 = (earning * (2/4)) + (439*0.5) * (2/4)) if country == "HR" & year == 2015 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & gender == 2
+replace pl_ben1 = (earning * (2/4)) + ((439*0.5) * (2/4)) 		if country == "HR" & year == 2015 & pl_eli == 1 ///
+																& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & gender == 2
 
 replace pl_ben1 = 351 	if country == "HR" & year == 2015 & pl_eli == 1 ///
 						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & earning > 351
 						
 replace pl_ben1 = 439*0.5 	if country == "HR" & year == 2015 & pl_eli == 1 ///
-						& pl_ben1 == . & pl_eli == 1
+							& pl_ben1 == . & pl_eli == 1
 						
 
 						

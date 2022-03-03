@@ -1,4 +1,4 @@
-/* ML_2013_RO_eusilc_cs */
+ /* ML_2013_RO_eusilc_cs */
 
 * ROMANIA - 2013
 
@@ -33,7 +33,7 @@ replace ml_dur2 = (63+63)-(6*5)/5	if country == "RO" & year == 2013 & ml_eli == 
 
 
 * BENEFIT (monthly)
-/*	-> 85% of average gross earnings 
+/*	-> 85% of average gross earnings, no ceiling
 	-> it is unclear how are benefits calculated for unemployed women 
 		and w. with no income => not coded */
 

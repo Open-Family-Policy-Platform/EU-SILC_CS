@@ -42,7 +42,7 @@ replace pl_dur = 52 		if country == "PL" & year == 2013 & pl_eli == 1 ///
 /*	-> flat-rate benefit: €96/month if household income per capita doesn't exceed €132/month (LP&R 2013; not coded)
  */
  
-replace pl_ben1 = 95				if country == "PL" & year == 2013 & pl_eli == 1 
+replace pl_ben1 = 0				if country == "PL" & year == 2013 & pl_eli == 1 
 									
 replace pl_ben2 = pl_ben1			if country == "PL" & year == 2013 & pl_eli == 1
 

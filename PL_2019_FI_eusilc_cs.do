@@ -137,4 +137,4 @@ foreach x in 1 2 {
 
 replace pl_dur = 0 	if pl_eli == 0 & country == "FI" & year == 2019
 
-drop pt_bena pt_benb pt_benc pt_bend
+drop pl_bena pl_benb pl_benc pl_bend

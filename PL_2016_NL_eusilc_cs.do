@@ -14,7 +14,7 @@ replace pl_eli = 0 		if pl_eli == . & country == "NL" & year == 2016
 * DURATION (weeks)
 /* -> 26 times the number of weekly working hours per parent per child
 */
-replace pl_dur = 26 * whours if country == "NL" & year == 2016 & pl_eli == 1
+replace pl_dur = (26 * whours)/40 if country == "NL" & year == 2016 & pl_eli == 1
 
 
 * BENEFIT (monthly)
