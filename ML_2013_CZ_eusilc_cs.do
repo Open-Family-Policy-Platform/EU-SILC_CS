@@ -102,4 +102,4 @@ foreach x in 1 2 {
 
 
 
-drop dab1 dab2 dab3
+drop dab dab1 dab2 dab3
