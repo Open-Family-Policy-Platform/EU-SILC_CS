@@ -30,17 +30,22 @@ replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2013 & gender == 1 & 
 
 
 * BENEFIT (monthly)
-/*	-> 90% earning 
-The amount cannot be lower than minimu wage and cannot exceed avg. net remuneration. 
-LP&R 2013 info does not exist for Bulgaria. Values of benefits are not sourced.
+/*	-> 90% earning
+	-> minimum: € 158.50 (source: Eurostat, EARN_MW_CUR, 2013-S2)
+	-> ceiling: € 1,329.18/month (average net renumeration; information wasn't found => value from 2017)
 */ 
 
 replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2013 ///
 										& gender == 1 & ml_eli == 1 
+										
+replace ml_ben1 = 158.50				if country == "BG" & year == 2013 ///
+										& gender == 1 & ml_eli == 1 & ml_ben1 < 158.50
+										
+replace ml_ben1 = 1329.18 				if country == "BG" & year == 2013 ///
+										& gender == 1 & ml_eli == 1 & ml_ben1 >=  1329.18
 				
 				
 replace ml_ben2 = ml_ben1 	if country == "BG" & year == 2013 & gender == 1 & ml_eli == 1
-
 
 foreach x in 1 2 {
     replace ml_dur`x' = 0 	if ml_eli == 0 & country == "BG" & year == 2013
