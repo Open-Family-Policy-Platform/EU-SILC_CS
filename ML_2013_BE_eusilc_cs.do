@@ -46,14 +46,15 @@ replace ml_dur2 = 8-1 	if country == "BE" & year == 2013 & gender == 1 ///
 * BENEFIT (monthly)
 /* 	-> employed (MISSOC 01/07/2013): 
 		-> first 30 days = 82% earnings, no ceiling 
-		-> rest of leave = 75% earnings, ceiling €98.70/day.	
+		-> rest of leave = 75% earnings, ceiling €98.70/day.
 		
 	-> unemployed (M2013): 
 		-> first month = unemployment benefit + 19% of previous earnings with a ceiling €133.0/day
 		-> rest = unemployment benefit + 15% with a ceiling €133.0/day
 		-> not coded (EU-SILC unemployment benefit - household level data)
+		
 	-> self-employed (LP&R 2014):
-		-> €440.5/week; MISSOC 2013 only refers to a flat-rate benefit but doesn't include the value => use value from 2014
+		-> €440.5/week; MISSOC 2013 only refers to a flat-rate benefit but doesn't include the value => use value from 2015
 */
 
 gen ceiling = (0.75*earning) 		// for the purpose of ceiling calculation
