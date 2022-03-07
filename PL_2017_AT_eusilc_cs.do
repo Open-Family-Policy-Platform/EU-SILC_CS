@@ -62,13 +62,13 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2018 & pl_eli == 1 ///
 
 * BENEFIT (monthly)
 /*	-> benefit is a family entitlement but among working parents it calculated 
-		from one parents income => we assume parents will use earnings of the parent 
-		with higher earnings
+		from one parents income 
 	-> employed: 80% of earnings (parent who claims the benefits)
 		- ceiling: €66/day
 			- paid for 365 days after childbirth
 			- paid for 426 days after childbirth if both parents claim the benefit (not coded)
 	-> all other parents: €33.88/day (most generous option corresponding with the coded leave duration)
+	
 */
 
 
