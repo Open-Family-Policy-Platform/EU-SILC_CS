@@ -1,7 +1,7 @@
-/* PL_2018_HR_eusilc_cs */
+/* PL_2017_HR_eusilc_cs */
 
 
-* CROATIA - 2018
+* CROATIA - 2017
 
 * ELIGIBILITY
 /*	-> all parents but conditions and benefits differ by categories
@@ -22,44 +22,44 @@
 		-> permanent resident for at least 5 years (not coded)
 */
 
-replace pl_eli = 1 		if country == "HR" & year == 2018
-replace pl_eli = 0 		if pl_eli == . & country == "HR" & year == 2018
+replace pl_eli = 1 		if country == "HR" & year == 2017
+replace pl_eli = 0 		if pl_eli == . & country == "HR" & year == 2017
 
 
 
 * DURATION (weeks)
-/*	-> employed/self-employed:  4 months/parent/child
+/*	-> employed/self-employed:  4 months/parent/child until child is 8 years old
 	-> for everyone else: from 6th to 12th month of child's age
-   Source: MISSOC 01/07/2018										*/
+   Source: MISSOC 01/07/2017										*/
    
-replace pl_dur = 4 		if country == "HR" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 4 		if country == "HR" & year == 2017 & pl_eli == 1 ///
 						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 
 						
 						
-replace pl_dur = 6 		if country == "HR" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 6 		if country == "HR" & year == 2017 & pl_eli == 1 ///
 						& pl_dur == . 
 				
 
 
 * BENEFIT (monthly)
 /*	-> Employed & self-employd: 100%
-		-> ceiling = €541/month
-	-> All others: €315/month
+		-> ceiling = €530/month
+	-> All others: €309/month
 */
 
-replace pl_ben1 = earning 		if country == "HR" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = earning 		if country == "HR" & year == 2017 & pl_eli == 1 ///
 								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
 
-replace pl_ben1 = 541 	if country == "HR" & year == 2018 & pl_eli == 1 ///
-						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & earning > 541
+replace pl_ben1 = 530 	if country == "HR" & year == 2017 & pl_eli == 1 ///
+						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & earning > 530
 
 
-replace pl_ben1 = 315 	if country == "HR" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 309 	if country == "HR" & year == 2017 & pl_eli == 1 ///
 						& pl_ben1 == . 
  
 
  foreach x in 1 2 {
-	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "HR" & year == 2018
+	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "HR" & year == 2017
 }
 
-replace pl_dur = 0 	if pl_eli == 0 & country == "HR" & year == 2018
+replace pl_dur = 0 	if pl_eli == 0 & country == "HR" & year == 2017
