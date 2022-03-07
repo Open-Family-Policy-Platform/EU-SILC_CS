@@ -1,13 +1,13 @@
-/* PL_2018_AT_eusilc_cs */
+/* PL_2017_AT_eusilc_cs */
 
-* AUSTRIA - 2018
+* AUSTRIA - 2017
 
 * ELIGIBILITY
 /*	-> parental leave: employed, individual entitlement
 	-> parental benefit: all parents, family entitlement
 */
-replace pl_eli = 1 	if country == "AT" & year == 2018 
-replace pl_eli = 0 	if pl_eli == . & country == "AT" & year == 2018
+replace pl_eli = 1 	if country == "AT" & year == 2017 
+replace pl_eli = 0 	if pl_eli == . & country == "AT" & year == 2017
 
 
 
@@ -31,29 +31,29 @@ replace pl_eli = 0 	if pl_eli == . & country == "AT" & year == 2018
 * employed   
 	* eligible for ML
 	* and cohabiting
-replace pl_dur = (365/7) - ml_dur2 	if country == "AT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = (365/7) - ml_dur2 	if country == "AT" & year == 2017 & pl_eli == 1 ///
 									& gender == 1 & (econ_status == 1 | p_econ_status == 1) ///
 									& parstat == 2 & ml_eli == 1
 	* and single
-replace pl_dur = (365/7) - ml_dur2 	if country == "AT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = (365/7) - ml_dur2 	if country == "AT" & year == 2017 & pl_eli == 1 ///
 									& gender == 1 & econ_status == 1 & parstat == 1 & ml_eli == 1 & pl_dur == .
 
 
 
 	* not eligible for ML
 	* and cohabiting
-replace pl_dur = (365/7) 	if country == "AT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = (365/7) 	if country == "AT" & year == 2017 & pl_eli == 1 ///
 							& gender == 1 & (econ_status == 1 | p_econ_status == 1) ///
 							& parstat == 2 & ml_eli != 1 & pl_dur == .
 	* and single
-replace pl_dur = (365/7) 	if country == "AT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = (365/7) 	if country == "AT" & year == 2017 & pl_eli == 1 ///
 							& econ_status == 1 & parstat == 1 & ml_eli != 1 & pl_dur == . 
 
 		
 
 		
 * all other women
- replace pl_dur = (365/7) 	if country == "AT" & year == 2018 & pl_eli == 1 ///
+ replace pl_dur = (365/7) 	if country == "AT" & year == 2017 & pl_eli == 1 ///
 							& gender == 1 & econ_status != 1 & pl_dur == . 
 
 
@@ -73,48 +73,48 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2018 & pl_eli == 1 ///
 
 
  ** employed & single
-replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2018 & pl_eli == 1 /// 
+replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2017 & pl_eli == 1 /// 
 									& econ_status == 1 & parstat == 1 ///
 									& (earning*0.8) < (66*21.7) 
 									
-replace pl_ben1 = 66 * 21.7			if country == "AT" & year == 2018 & pl_eli == 1 /// 
+replace pl_ben1 = 66 * 21.7			if country == "AT" & year == 2017 & pl_eli == 1 /// 
 									& econ_status == 1 & parstat == 1 ///
 									& pl_ben1 >= (66*21.7)								
  
  ** not employed & single
-replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2018 & pl_eli == 1 /// 
+replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2017 & pl_eli == 1 /// 
 									& inrange(econ_status,2,4) & parstat == 1
  
  
  
  ** cohabiting -> asssigned to a woman
 	* employed, woman higher earning
-replace pl_ben1 = 0.8 * earning		if country == "AT" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 0.8 * earning		if country == "AT" & year == 2017 & pl_eli == 1 ///
 									& econ_status == 1 & earning > p_earning & pl_ben1 == . ///
 									& gender == 1 & parstat == 2 & p_earning != .
 									
 	* employed, man higher earning
-replace pl_ben1 = 0.8 * p_earning	if country == "AT" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 0.8 * p_earning	if country == "AT" & year == 2017 & pl_eli == 1 ///
 									& p_econ_status == 1 & earning < p_earning & pl_ben1 == . ///
 									& gender == 1 & parstat == 2 & p_earning != .
 									
 									
 	* neither of the partners is employed										
-replace pl_ben1 = 33.88 * 21.7 		if country == "AT" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 33.88 * 21.7 		if country == "AT" & year == 2017 & pl_eli == 1 ///
 									& inrange(econ_status,2,4) & !inlist(p_econ_status,.,1) & pl_ben1 == . ///
 									& gender == 1
 
 									
 	* employed, partner's earning is missing	
-replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2018 & pl_eli == 1 /// 
+replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2017 & pl_eli == 1 /// 
 									& econ_status == 1 & parstat == 2 & p_earning == .
 									
 	* not employed
-replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2018 & pl_eli == 1 /// 
+replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2017 & pl_eli == 1 /// 
 									& inrange(econ_status,2,4) & parstat == 2 & pl_ben1 == .
 									
 	* ceiling 
-replace pl_ben1 = 66 * 21.7 		if country == "AT" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 66 * 21.7 		if country == "AT" & year == 2017 & pl_eli == 1 ///
 									& pl_ben1 > (66*21.7) & pl_ben1 != (33.88 * 21.7)
 									
 
@@ -122,13 +122,13 @@ replace pl_ben1 = 66 * 21.7 		if country == "AT" & year == 2018 & pl_eli == 1 //
  
  
  
-replace pl_ben2 = pl_ben1		if country == "AT" & year == 2018 & pl_eli == 1
+replace pl_ben2 = pl_ben1		if country == "AT" & year == 2017 & pl_eli == 1
 
 
 foreach x in 1 2 {
-	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "AT" & year == 2018
+	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "AT" & year == 2017
 }
 
-replace pl_dur = 0 	if pl_eli == 0 & country == "AT" & year == 2018
+replace pl_dur = 0 	if pl_eli == 0 & country == "AT" & year == 2017
 
 
