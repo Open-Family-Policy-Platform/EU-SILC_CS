@@ -1,14 +1,14 @@
-/* PL_2018_IT_eusilc_cs */
+/* PL_2017_IT_eusilc_cs */
 
 
-* ITALY - 2018
+* ITALY - 2017
 
 * ELIGIBILITY
 /*	-> employed
-	-> self-employed (LP&R 2018) 	
+	-> self-employed (LP&R 2017) 	
 */
-replace pl_eli = 1 			if country == "IT" & year == 2018 & inlist(econ_status,1,2)
-replace pl_eli =  0			if pl_eli == . & country == "IT" & year == 2018
+replace pl_eli = 1 			if country == "IT" & year == 2017 & inlist(econ_status,1,2)
+replace pl_eli =  0			if pl_eli == . & country == "IT" & year == 2017
 
 
 * DURATION (weeks)
@@ -25,40 +25,40 @@ replace pl_eli =  0			if pl_eli == . & country == "IT" & year == 2018
 
 
 * single
-replace pl_dur = 10 	if country == "IT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 10 	if country == "IT" & year == 2017 & pl_eli == 1 ///
 						& parstat == 1
 						
 * self-employed
-replace pl_dur = 3 		if country == "IT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 3 		if country == "IT" & year == 2017 & pl_eli == 1 ///
 						& econ_status == 2 
 							
 * couples
 	* woman employed
-replace pl_dur = 6 		if country == "IT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 6 		if country == "IT" & year == 2017 & pl_eli == 1 ///
 						& econ_status == 1 & parstat == 2 & gender == 1 
 
 	* woman employed (above) & man employed (code)
-replace pl_dur = 4 		if country == "IT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 4 		if country == "IT" & year == 2017 & pl_eli == 1 ///
 						& p_econ_status == 1 & parstat == 2 & gender == 2 ///
 						& econ_status == 1
 						
 	* woman employed (code) & man not eligible
-replace pl_dur = 10		if country == "IT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 10		if country == "IT" & year == 2017 & pl_eli == 1 ///
 						& econ_status == 1 & parstat == 2 & gender == 1 ///
 						& !inlist(p_econ_status,1,2)						
 
 	* woman employed (code) & man self-employed
-replace pl_dur = 7		if country == "IT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 7		if country == "IT" & year == 2017 & pl_eli == 1 ///
 						& econ_status == 1 & parstat == 2 & gender == 1 ///
 						& p_econ_status == 2
 
 	* woman self-employed (above) & man employed (code)						
-replace pl_dur = 7		if country == "IT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 7		if country == "IT" & year == 2017 & pl_eli == 1 ///
 						& econ_status == 1 & parstat == 2 & gender == 2 ///
 						& p_econ_status == 2					
 
 	* woman not eligible & man employed (man)
-replace pl_dur = 10		if country == "IT" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 10		if country == "IT" & year == 2017 & pl_eli == 1 ///
 						& econ_status == 1 & parstat == 2 & gender == 2 ///
 						& !inlist(p_econ_status,1,2)
 						
@@ -70,12 +70,12 @@ replace pl_dur = 10		if country == "IT" & year == 2018 & pl_eli == 1 ///
 /*	-> 30% of earnings (coded) if the child is under 6 years old (not coded)
 	-> unpaid if the child is between 6 and 12 years old (not coded) 	*/
 	
-replace pl_ben1 = 0.3*earning 		if country == "IT" & year == 2018 & pl_eli == 1
-replace pl_ben2 = pl_ben1			if country == "IT" & year == 2018 & pl_eli == 1
+replace pl_ben1 = 0.3*earning 		if country == "IT" & year == 2017 & pl_eli == 1
+replace pl_ben2 = pl_ben1			if country == "IT" & year == 2017 & pl_eli == 1
 
 
 foreach x in 1 2 {
-	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "IT" & year == 2018
+	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "IT" & year == 2017
 }
 
-replace pl_dur = 0 	if pl_eli == 0 & country == "IT" & year == 2018
+replace pl_dur = 0 	if pl_eli == 0 & country == "IT" & year == 2017
