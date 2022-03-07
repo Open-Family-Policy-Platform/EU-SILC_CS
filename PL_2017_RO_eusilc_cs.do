@@ -1,6 +1,6 @@
-/* PL_2018_RO_eusilc_cs */
+/* PL_2017_RO_eusilc_cs */
 
-* ROMANIA - 2018
+* ROMANIA - 2017
 
 * ELIGIBILITY
 /*	-> all residents: 12 months taxable personal income (coded) within the last 2 years (not coded)
@@ -8,9 +8,9 @@
 					such data is provided at HH level in EU-SILC => not coded
 */
 
-replace pl_eli = 1 			if country == "RO" & year == 2018 & duremp + dursemp >= 12
+replace pl_eli = 1 			if country == "RO" & year == 2017 & duremp + dursemp >= 12
 
-replace pl_eli =  0			if pl_eli == . & country == "RO" & year == 2018
+replace pl_eli =  0			if pl_eli == . & country == "RO" & year == 2017
 
 
 * DURATION (weeks)
@@ -18,11 +18,11 @@ replace pl_eli =  0			if pl_eli == . & country == "RO" & year == 2018
 	-> until child is 2 years old 	*/
 
 * women	
-replace pl_dur =  (2*52) - ml_dur2		if country == "RO" & year == 2018 & pl_eli == 1 ///
+replace pl_dur =  (2*52) - ml_dur2		if country == "RO" & year == 2017 & pl_eli == 1 ///
 										& gender == 1 
 
 * single men
-replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2018 & pl_eli == 1 ///
+replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2017 & pl_eli == 1 ///
 												& gender == 2 & parstat == 1
 
 
@@ -32,21 +32,21 @@ replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2018 & p
 	-> no ceiling	*/
 	
 	* women
-replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2017 & pl_eli == 1 ///
 									& gender == 1
 	
-replace pl_ben1 = 0.85*317	 			if country == "RO" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 0.85*317	 			if country == "RO" & year == 2017 & pl_eli == 1 ///
 									& pl_ben1 < 0.85*317 & gender == 1
 									
 	* single men
-replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2017 & pl_eli == 1 ///
 									& gender == 2 & parstat == 1
 
-replace pl_ben1 = 0.85*317	 			if country == "RO" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 0.85*317	 			if country == "RO" & year == 2017 & pl_eli == 1 ///
 									& pl_ben1 < 0.85*317 & gender == 2 & parstat == 1							
 			
 
-replace pl_ben2 = pl_ben1		if country == "RO" & year == 2018 & pl_eli == 1
+replace pl_ben2 = pl_ben1		if country == "RO" & year == 2017 & pl_eli == 1
 
 
 
@@ -54,7 +54,7 @@ replace pl_ben2 = pl_ben1		if country == "RO" & year == 2018 & pl_eli == 1
 
 foreach x in 1 2 {
     
-	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "RO" & year == 2018
+	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "RO" & year == 2017
 }
 
-replace pl_dur = 0 	if country == "RO" & year == 2018 & pl_eli == 0
+replace pl_dur = 0 	if country == "RO" & year == 2017 & pl_eli == 0
