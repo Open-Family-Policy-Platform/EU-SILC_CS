@@ -1,4 +1,4 @@
-/* PL_2018_NO_eusilc_cs */
+/* PL_2017_NO_eusilc_cs */
 
 /*	Norway doesn't recognise ML and PT but only PL with individual entitlements for mother
 	and father, and family entitlement. 
@@ -7,7 +7,7 @@
 	Accessed: 01/04/2021
 */
 
-* NORWAY - 2018
+* NORWAY - 2017
 
 * ELIGIBILITY
 /*	-> compulsory social insurance for employed & self-employed
@@ -17,8 +17,8 @@
 			but EU-SILC collects this information on a HH level => not coded 
 */
 
-replace pl_eli = 1 			if country == "NO" & year == 2018 & (duremp + dursemp) >= 6
-replace pl_eli = 0			if pl_eli == . & country == "NO" & year == 2018
+replace pl_eli = 1 			if country == "NO" & year == 2017 & (duremp + dursemp) >= 6
+replace pl_eli = 0			if pl_eli == . & country == "NO" & year == 2017
 
 
 * DURATION (weeks)
@@ -30,10 +30,10 @@ replace pl_eli = 0			if pl_eli == . & country == "NO" & year == 2018
 */
 
 	* women
-replace pl_dur = 19 		if country == "NO" & year == 2018 & pl_eli == 1 & gender == 1
+replace pl_dur = 19 		if country == "NO" & year == 2017 & pl_eli == 1 & gender == 1
 
 	* single men
-replace pl_dur = 19 		if country == "NO" & year == 2018 & pl_eli == 1 & gender == 2 & parstat == 1
+replace pl_dur = 19 		if country == "NO" & year == 2017 & pl_eli == 1 & gender == 2 & parstat == 1
 
 
 
@@ -45,27 +45,27 @@ replace pl_dur = 19 		if country == "NO" & year == 2018 & pl_eli == 1 & gender =
 */
 
 	* women
-replace pl_ben1 = earning 		if country == "NO" & year == 2018 & pl_eli == 1 & gender ==1
-replace pl_ben1 = 68542/12		if country == "NO" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = earning 		if country == "NO" & year == 2017 & pl_eli == 1 & gender ==1
+replace pl_ben1 = 68542/12		if country == "NO" & year == 2017 & pl_eli == 1 ///
 								& pl_ben1 >= (68542/12) & gender == 1
-replace pl_ben1 = 8862/11		if country == "NO" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 8862/11		if country == "NO" & year == 2017 & pl_eli == 1 ///
 								& pl_ben1 < 8862/11 & gender == 1
 
 	* single men
-replace pl_ben1 = earning 		if country == "NO" & year == 2018 & pl_eli == 1 & gender == 2 & parstat == 1
-replace pl_ben1 = 68542/12		if country == "NO" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = earning 		if country == "NO" & year == 2017 & pl_eli == 1 & gender == 2 & parstat == 1
+replace pl_ben1 = 68542/12		if country == "NO" & year == 2017 & pl_eli == 1 ///
 								& pl_ben1 >= (68542/12) & gender == 2 & parstat == 1
-replace pl_ben1 = 8862/11		if country == "NO" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = 8862/11		if country == "NO" & year == 2017 & pl_eli == 1 ///
 								& pl_ben1 < 8862/11 & gender == 2 & parstat == 1
 
 
-replace pl_ben2 = pl_ben1		if country == "NO" & year == 2018 & pl_eli == 1
+replace pl_ben2 = pl_ben1		if country == "NO" & year == 2017 & pl_eli == 1
 
 
 
 
 foreach x in 1 2 {
-	replace pl_ben`x' = 0 	if country == "NO" & year == 2018 & pl_eli == 0	
+	replace pl_ben`x' = 0 	if country == "NO" & year == 2017 & pl_eli == 0	
 }
 
-replace pl_dur = 0 	if country == "NO" & year == 2018 & pl_eli == 0
+replace pl_dur = 0 	if country == "NO" & year == 2017 & pl_eli == 0
