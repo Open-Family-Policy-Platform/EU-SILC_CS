@@ -26,7 +26,7 @@ cd "$DATA"
 global CODE "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/EU-SILC" 
 
 
-foreach x of numlist 4/9 {
+foreach x of numlist 3/9 {
 	
 	use SILC201`x'_ver_2021_04, clear 
 	
@@ -61,7 +61,8 @@ append using SILC2019_ver_2021_04
 */
 
 
-use SILC2014_standard, clear 
+use SILC2013_standard, clear 
+append using SILC2014_standard
 append using SILC2015_standard
 append using SILC2016_standard
 append using SILC2017_standard
@@ -71,7 +72,7 @@ append using SILC2019_standard
 save eusilc_merged, replace
 
 
-foreach x of numlist 4/9 {
+foreach x of numlist 3/9 {
 	
 	erase "$DATA/SILC201`x'_standard.dta"
 }
@@ -89,12 +90,13 @@ drop if gender == p_gender
 
 save eusilc_partners, replace
 
+
+
 *** Select SAMPLE ***
 run "$CODE/SD_sample_eusilc_cs.do"
 
 *** Number of children per household ***
 run "$CODE/SD_nchild_eusilc_cs.do"
-
 
 
 
@@ -111,6 +113,7 @@ run "$CODE/SD_ML_vars.do"
 
 * Run ML_year_country_eusilc_cs.do 
 foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
+	run "$CODE/ML_2013_`x'_eusilc_cs.do"
 	run "$CODE/ML_2014_`x'_eusilc_cs.do"
 	run "$CODE/ML_2015_`x'_eusilc_cs.do"
 	run "$CODE/ML_2016_`x'_eusilc_cs.do"
@@ -119,6 +122,7 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 	run "$CODE/ML_2019_`x'_eusilc_cs.do"
 }
 
+save eusilc_ofpp_ml, replace
 
 *** Run policy coding for PATERNITY LEAVE (PT) ***
 
@@ -127,16 +131,17 @@ run "$CODE/SD_PT_vars.do"
 
 * Run PT_year_country_eusilc_cs.do
 foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
+	run "$CODE/PT_2013_`x'_eusilc_cs.do"
 	run "$CODE/PT_2014_`x'_eusilc_cs.do"
 	run "$CODE/PT_2015_`x'_eusilc_cs.do"
 	run "$CODE/PT_2016_`x'_eusilc_cs.do"
-	//run "$CODE/PT_2017_`x'_eusilc_cs.do"
+	run "$CODE/PT_2017_`x'_eusilc_cs.do"
 	run "$CODE/PT_2018_`x'_eusilc_cs.do"
 	run "$CODE/PT_2019_`x'_eusilc_cs.do"
 }
 
 
-
+save eusilc_ofpp_mlpt, replace
 
 *** Run policy coding for PARENTAL LEAVE (PL) ***
 
@@ -145,6 +150,7 @@ run "$CODE/SD_PL_vars.do"
 
 * Run PL_year_country_eusilc_cs.do
 foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
+	run "$CODE/PL_2013_`x'_eusilc_cs.do"
 	run "$CODE/PL_2014_`x'_eusilc_cs.do"
 	run "$CODE/PL_2015_`x'_eusilc_cs.do"
 	run "$CODE/PL_2016_`x'_eusilc_cs.do"
@@ -153,4 +159,4 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 	run "$CODE/PL_2019_`x'_eusilc_cs.do"
 }
 
-
+save eusilc_ofpp_complete, replace
