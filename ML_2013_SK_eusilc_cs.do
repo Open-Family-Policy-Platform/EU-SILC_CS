@@ -44,7 +44,7 @@ replace ml_dur2 = 37-6		if country == "SK" & year == 2013 & ml_eli == 1 ///
 replace ml_dur2 = 31		if country == "SK" & year == 2013 & ml_eli == 1 ///
 							& gender == 2 & parstat == 1
 
-
+							
 * BENEFIT (monthly)
 /*	-> 65% average earnings
 	-> ceiling: monthly ceiling 1.5-times of national average monthly wage (€889).
