@@ -154,7 +154,7 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 	run "$CODE/PL_2014_`x'_eusilc_cs.do"
 	run "$CODE/PL_2015_`x'_eusilc_cs.do"
 	run "$CODE/PL_2016_`x'_eusilc_cs.do"
-	//run "$CODE/PL_2017_`x'_eusilc_cs.do"
+	run "$CODE/PL_2017_`x'_eusilc_cs.do"
 	run "$CODE/PL_2018_`x'_eusilc_cs.do"
 	run "$CODE/PL_2019_`x'_eusilc_cs.do"
 }
