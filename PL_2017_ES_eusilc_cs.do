@@ -41,13 +41,13 @@ replace pl_ben1 = 0 		if country == "ES" & year == 2017 & pl_eli == 1
 
 * Basque country
 replace pl_ben1 = 271.25	if country == "ES" & year == 2017 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg < 20000
+							& region == "ES21" & earning * 12 < 20000
 replace pl_ben1 = 228		if country == "ES" & year == 2017 & pl_eli == 1 ///
-							& region == "ES21" & earning_yg >= 20000	
+							& region == "ES21" & earning * 12 >= 20000	
 
 * La Rioja							
 replace pl_ben1 = 250		if country == "ES" & year == 2017 & pl_eli == 1 ///
-							& region == "ES23" & (earning_yg + p_earning_yg) < 40000							
+							& region == "ES23" & earning * 12 < 40000							
 
 							
 replace pl_ben2 = pl_ben1		if country == "ES" & year == 2017 & pl_eli == 1
