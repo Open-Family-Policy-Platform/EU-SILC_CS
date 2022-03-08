@@ -36,7 +36,7 @@ replace pl_eli = 0 		if pl_eli == . & country == "CZ" & year == 2017
 
 /* daily assessment base (source: MISSOC 2017, IV. Maternity/Paternity):
 	
-	-> up to €36/day = 100% daily earning
+	-> up to €36/day = 107 daily earning
 	-> €36 - €54/day = 60% daily earning
 	-> €54/day = 30% daily earning  
 	-> earning over €107/day are not taken into account
@@ -45,66 +45,44 @@ replace pl_eli = 0 		if pl_eli == . & country == "CZ" & year == 2017
 			Here only DAB for partner's variables (p_*)
 */
 
-* daily earning < 36
-gen p_dab = p_earning/21.7 				if country == "CZ" & year == 2017 ///
-										& (p_earning/21.7) < 36 & parstat == 2 ///
-										& econ_status != 1 & p_econ_status == 1
+** DAILY ASSESSMENT BASE:
+* daily earning < €36
+gen dab = earning/21.7 				if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& earning/21.7 < 36
 
 * daily earning between €36 and €54
-gen p_dab1 = 36 							if country == "CZ" & year == 2017 ///
-											& inrange(p_earning/21.7,36,54) & parstat == 2 ///
-											& econ_status != 1 & p_econ_status == 1
-											
-gen p_dab2 = ((p_earning/21.7) - 36)*0.6 	if country == "CZ" & year == 2017 ///
-											& inrange(p_earning/21.7,36,54) & parstat == 2 ///
-											& econ_status != 1 & p_econ_status == 1
-											 
-replace p_dab = p_dab1 + p_dab2 			if country == "CZ" & year == 2017 ///
-											& inrange(p_earning/21.7,36,54) & p_dab == .  ///
-											& parstat == 2 & econ_status != 1 & p_econ_status == 1
-drop p_dab1 p_dab2
-
+gen dab1 = 36					if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& inrange(earning/21.7,36,54)
+gen dab2 = ((earning/21.7) - 36)*0.6 	if country == "CZ" & year == 2017 & ml_eli == 1 ///
+										& inrange(earning/21.7,36,54)
+replace dab = dab1 + dab2 				if country == "CZ" & year == 2017 & ml_eli == 1 ///
+										& inrange(earning/21.7,36,54) & dab == .
+drop dab1 dab2
 										
 * daily earning between €54 and €107										
-gen p_dab1 = 36 						if country == "CZ" & year == 2017  ///
-										& inrange(p_earning/21.7,54,107) ///
-										& parstat == 2 & econ_status != 1 & p_econ_status == 1
-										
-gen p_dab2 = (54 - 36)*0.6 				if country == "CZ" & year == 2017 ///
-										& inrange(p_earning/21.7,54,107) ///
-										& parstat == 2 & econ_status != 1 & p_econ_status == 1
-										
-gen p_dab3 = ((p_earning/21.7) - 54)*0.3 	if country == "CZ" & year == 2017 ///
-											& inrange(p_earning/21.7,54,107) & parstat == 2 ///
-											& econ_status != 1 & p_econ_status == 1
+gen dab1 = 36 						if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& inrange(earning/21.7,54,107)
+gen dab2 = (54 - 36)*0.6 			if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& inrange(earning/21.7,54,107)
+gen dab3 = ((earning/21.7) - 54)*0.3 	if country == "CZ" & year == 2017 & ml_eli == 1 ///
+										& inrange(earning/21.7,54,107)
 
-										
-replace p_dab = p_dab1 + p_dab2 + p_dab3  		if country == "CZ" & year == 2017 ///
-												& inrange(p_earning/21.7,54,107)  ///
-												& p_dab == . & parstat == 2 & econ_status != 1 ///
-												& p_econ_status == 1
-drop p_dab1 p_dab2 p_dab3 
-
+replace dab = dab1 + dab2 + dab3  	if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& inrange(earning/21.7,54,107) & dab == .									
+drop dab1 dab2 dab3 
 
 * daily earning over €107
-gen p_dab1 = 36 						if country == "CZ" & year == 2017  ///
-										& p_earning/21.7 > 107 ///
-										& parstat == 2 & econ_status != 1  & p_econ_status == 1
+gen dab1 = 36 						if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& earning/21.7 > 107
+gen dab2 = (54 - 36)*0.6 			if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& earning/21.7 > 107
 										
-gen p_dab2 = (54 - 36)*0.6 				if country == "CZ" & year == 2017 ///
-										& p_earning/21.7 > 107 & parstat == 2 ///
-										& econ_status != 1 & p_econ_status == 1
-										
-gen p_dab3 = (107 - 54)*0.3			 	if country == "CZ" & year == 2017 ///
-										& p_earning/21.7 > 107  & parstat == 2 ///
-										& econ_status != 1 & p_econ_status == 1
+gen dab3 = (107 - 54)*0.3 			if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& earning/21.7 > 107
 
-										
-replace p_dab = p_dab1 + p_dab2 + p_dab3  		if country == "CZ" & year == 2017 ///
-												& p_earning/21.7 > 107   ///
-												& p_dab == . & parstat == 2 & econ_status != 1 ///
-												& p_econ_status == 1
-drop p_dab1 p_dab2 p_dab3 
+replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2017 & ml_eli == 1 ///
+									& earning/21.7 > 107 & dab == . 										
+		
 
 
 
@@ -157,49 +135,41 @@ replace pl_dur = 208 		if country == "CZ" & year == 2017 & pl_eli == 1 ///
 /* For explanation see "Duration (weeks)" above. 
    pl_ben2/3 refer to the most generous benefit 		*/
 
-* SINGLE
-	* not employed
-replace pl_ben1 = 289 					if country == "CZ" & year == 2017 & pl_eli == 1 ///
-										& econ_status != 1 & parstat == 1
-										
-	* employed, below ceiling
-replace pl_ben1 = 0.7 * (21.7*dab)		if country == "CZ" & year == 2017 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 1 & earning/21.7 < 437
-										
-	* employed, above ceiling
-replace pl_ben1 = 437					if country == "CZ" & year == 2017 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 1 & earning/21.7 >= 437
+* not employed
+	* women
+replace pl_ben1 = (289 * (10/48)) + (140 * ((48-10)/48)) 				if country == "CZ" & year == 2017 & pl_eli == 1 ///
+																		& econ_status != 1 & gender == 1
+																		
+	* single men
+replace pl_ben1 = (289 * (10/48)) + (140 * ((48-10)/48)) 				if country == "CZ" & year == 2017 & pl_eli == 1 ///
+																		& econ_status != 1 & gender == 2 & parstat == 1
+																		
 
-	
-		
-* COUPLE (assigned to women)
-	* neither employed
-replace pl_ben1 = 289 					if country == "CZ" & year == 2017 & pl_eli == 1 ///
-										& econ_status != 1 & !inlist(p_econ_status,.,1) & parstat == 2
-										
-	* woman not employed, man employed, below ceiling
-replace pl_ben1 =  0.7 * (21.7*p_dab)	if country == "CZ" & year == 2017 & pl_eli == 1 ///
-										& econ_status != 1 & p_econ_status == 1 & parstat == 2 ///
-										& p_earning/21.7 < 437
-	
-	* woman not employed, man employed, above ceiling
-replace pl_ben1 =  437					if country == "CZ" & year == 2017 & pl_eli == 1 ///
-										& econ_status != 1 & p_econ_status == 1 & parstat == 2 ///
-										& p_earning/21.7 >= 437	
-										
-	* woman employed, below ceiling
-replace pl_ben1 =  0.7 * (21.7*dab)	if country == "CZ" & year == 2017 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 2 ///
-										& earning/21.7 < 437
-	
-	* above ceiling
-replace pl_ben1 =  437					if country == "CZ" & year == 2017 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 2 ///
-										& earning/21.7 >= 437
-	
+* employed
+	* women
+replace pl_ben1 = 0.7 * (21.7*dab)			if country == "CZ" & year == 2017 & pl_eli == 1 ///
+											& econ_status == 1 & gender == 1
+											
+	* women - above ceiling
+replace pl_ben1 = 437						if country == "CZ" & year == 2017 & pl_eli == 1 ///
+											& econ_status == 1 & gender == 1 & (0.7 * (21.7*dab)) >= 437
+											
+	* single men
+replace pl_ben1 = 0.7 * (21.7*dab)			if country == "CZ" & year == 2017 & pl_eli == 1 ///
+											& econ_status == 1 & gender == 2 & parstat == 1
+											
+	* single men - above ceiling
+replace pl_ben1 = 437						if country == "CZ" & year == 2017 & pl_eli == 1 ///
+											& econ_status == 1 & gender == 2 & (0.7 * (21.7*dab)) >= 437 ///
+											& parstat == 1
+
+							
 
 replace pl_ben2 = pl_ben1 				if country == "CZ" & year == 2017 & pl_eli == 1 
-
+replace pl_ben2 = 289					if country == "CZ" & year == 2017 & pl_eli == 1 ///
+										& econ_status != 1 
+			
+			
 foreach x in 1 2 {
 	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "CZ" & year == 2017
 }
