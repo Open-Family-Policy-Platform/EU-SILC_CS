@@ -54,7 +54,7 @@ replace pl_ben1 = (((25.60*30) * (105/30)) + ((18*30) *  (45/30))) / (150/30) //
 									& earning/30 < 26 & earning != 0 & pl_dur != . 
 
 * ceiling
-replace pl_ben1 = (((46803/12) * (105/30)) + (((18*30) *  (45/30)))) / (150/30)	///
+replace pl_ben1 = (((45852/12) * (105/30)) + (((18*30) *  (45/30)))) / (150/30)	///
 									if country == "SE" & year == 2017 & pl_eli == 1 ///
 									& earning*12 >= 46803 & pl_dur != . 
 
@@ -73,7 +73,8 @@ replace pl_ben2 = 45852/12			if country == "SE" & year == 2017 & pl_eli == 1 ///
 replace pl_ben2 = 25.60*30				if country == "SE" & year == 2017 & pl_eli == 1 ///
 									& earning == 0 & pl_dur != . 
 									
-
+replace pl_ben2 = 25.60*30				if country == "SE" & year == 2017 & pl_eli == 1 ///
+									& earning/30 < 26 & earning != 0 & pl_dur != . 
 
 
 foreach x in 1 2 {

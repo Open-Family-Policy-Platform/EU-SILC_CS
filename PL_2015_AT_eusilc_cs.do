@@ -77,7 +77,7 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2015 & pl_eli == 1 ///
 
 ** employed 
 replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2015 & pl_eli == 1 /// 
-									& econ_status == 1 & parstat == 1 
+									& econ_status == 1
 									
 									
 

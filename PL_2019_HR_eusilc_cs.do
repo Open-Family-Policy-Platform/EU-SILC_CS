@@ -58,6 +58,9 @@ replace pl_ben1 = 315 	if country == "HR" & year == 2019 & pl_eli == 1 ///
 						& pl_ben1 == . 
  
 
+replace pl_ben2 = pl_ben1   	if country == "HR" & year == 2019 & pl_eli == 1 
+						 
+ 
  foreach x in 1 2 {
 	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "HR" & year == 2019
 }

@@ -24,7 +24,7 @@ replace pl_dur =  52 - ml_dur2		if country == "LV" & year == 2013 & pl_eli == 1 
 									
 * women not eligible for maternity leave
 replace pl_dur = 2*52			if country == "LV" & year == 2013 & pl_eli == 1 ///
-									& inlist(econ_status,1,2) & gender == 1 & ml_eli != 1
+									& inlist(econ_status,3,4) & gender == 1 & ml_eli != 1
 
 * single men, eligible for maternity leave
 replace pl_dur = 52 - ml_dur2		if country == "LV" & year == 2013 & pl_eli == 1 ///
@@ -33,7 +33,7 @@ replace pl_dur = 52 - ml_dur2		if country == "LV" & year == 2013 & pl_eli == 1 /
 									
 * single men, not eligible for maternity leave
 replace pl_dur = 2 * 52 			if country == "LV" & year == 2013 & pl_eli == 1 ///
-									& inlist(econ_status,1,2) & gender == 2 & parstat == 1 ///
+									& inlist(econ_status,3,4) & gender == 2 & parstat == 1 ///
 									& ml_eli != 1
 
 

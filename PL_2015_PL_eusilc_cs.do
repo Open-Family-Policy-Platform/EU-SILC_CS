@@ -8,7 +8,8 @@
 			- voluntarily insured self-employed (not coded)
 */
 	
-replace pl_eli = 1 			if country == "PL" & year == 2015 
+replace pl_eli = 1 			if country == "PL" & year == 2015 & gender == 2 ///
+						& econ_status == 1
 replace pl_eli = 0			if pl_eli == . & country == "PL" & year == 2015
 
 

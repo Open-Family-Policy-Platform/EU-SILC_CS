@@ -72,8 +72,9 @@ replace pl_ben2 = 46972/12			if country == "SE" & year == 2016 & pl_eli == 1 ///
 									
 replace pl_ben2 = 27*30				if country == "SE" & year == 2016 & pl_eli == 1 ///
 									& earning == 0 & pl_dur != . 
-									
 
+replace pl_ben2 = 27*30				if country == "SE" & year == 2016 & pl_eli == 1 ///
+									& earning/30 < 27 & earning != 0 & pl_dur != . 									
 
 
 foreach x in 1 2 {

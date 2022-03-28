@@ -21,7 +21,8 @@ replace pl_eli =  0			if pl_eli == . & country == "LT" & year == 2017
 
 * women	
 replace pl_dur = 52-ml_dur2 		if country == "LT" & year == 2017 & pl_eli == 1 ///
-									& gender == 1
+									& gender == 1 & ml_eli == 1
+							
 
 * single men
 replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2017 & pl_eli == 1 ///
@@ -38,6 +39,7 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2017 & pl_eli == 1 //
 		- 40% of earnings for the rest of the leave
 	-> ceiling: €1,379/month 
 	-> source: LP&R 2017
+*/
 	
 replace pl_ben1 = earning 		if country == "LT" & year == 2017 & pl_eli == 1
 								

@@ -73,6 +73,8 @@ replace pl_ben2 = 46803/12			if country == "SE" & year == 2018 & pl_eli == 1 ///
 replace pl_ben2 = 26*30				if country == "SE" & year == 2018 & pl_eli == 1 ///
 									& earning == 0 & pl_dur != . 
 									
+replace pl_ben2 = 26*30				if country == "SE" & year == 2018 & pl_eli == 1 ///
+									& earning/30 < 26 & earning != 0 & pl_dur != . 
 
 
 

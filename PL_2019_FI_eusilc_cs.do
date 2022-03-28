@@ -127,7 +127,7 @@ replace pl_ben1 = pl_bena + pl_benc + pl_bend 		if country == "FI" ///
 							
 							
 							
-replace pl_ben2 = pl_ben1 	if country == "FI" & year == 2019 & gender == 2 & pl_eli == 1
+replace pl_ben2 = pl_ben1 	if country == "FI" & year == 2019 & pl_eli == 1
 						
 
 
