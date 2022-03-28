@@ -1,29 +1,21 @@
-/* 
-
-This code runs the OPEN FAMILY POLICY PROGRAM (OFPP)
-
- */
-
- /*
-*** Merge raw EU-SILC data
-run "$CODE/SD_merge_eusilc_cs.do"
-
-*/
+***********************************************
+*** 	OPEN FAMILY POLICY PROGRAM (OFPP) 	***
+***********************************************
 
 clear all
 
 *** Data directory
-//global DATA "[enter your directory]" 
-
-global DATA "/Users/alzbeta/Documents/Data/EU-SILC_merged" 
+global DATA "[YOUR DIRECTORY]" 
 
 cd "$DATA"
 
 
 *** Code directory
-//global CODE "[enter your directory]" 
+global CODE "[YOUR DIRECTORY]" 
 
-global CODE "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/EU-SILC" 
+
+*** Convert original .csv file into .dta & create labels
+run "$CODE/SD_merge_eusilc_cs.do"
 
 
 foreach x of numlist 3/9 {
@@ -41,24 +33,16 @@ foreach x of numlist 3/9 {
 	replace country = "GR" if country == "EL"
 	replace country = "GB" if country == "UK"
 	
+	*** Create Unique ID's ***
 	run "$CODE/SD_uid_eusilc.do"
+	*** Standardize EU-SILC variables to work with OFPP
 	run "$CODE/SD_standard_eusilc.do"
 
 	save SILC201`x'_standard, replace
 	
 }
 	
-	
 
-
-/*
-use SILC2014_ver_2021_04, clear 
-append using SILC2015_ver_2021_04
-append using SILC2016_ver_2021_04
-append using SILC2017_ver_2021_04
-append using SILC2018_ver_2021_04
-append using SILC2019_ver_2021_04
-*/
 
 
 use SILC2013_standard, clear 
@@ -74,6 +58,7 @@ save eusilc_merged, replace
 
 foreach x of numlist 3/9 {
 	
+	*** Delet redundant files ***
 	erase "$DATA/SILC201`x'_standard.dta"
 }
 
@@ -160,3 +145,8 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 }
 
 save eusilc_ofpp_complete, replace
+
+
+*** Erase redundant files ***
+//erase "$DATA/eusilc_ofpp_ml.dta"
+//erase "$DATA/eusilc_ofpp_mlpt.dta"

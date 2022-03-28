@@ -5,10 +5,10 @@
 clear all
 
 * enter your path to the folder with the downloaded EU-SILC files ("Cross")
-global csv_path "/Users/alzbeta/Documents/Data/EU-SILCnov2021/Cross"
+global csv_path "[YOUR DIRECTORY]"
 
 * destination for the .log and .dta files created via adjusted EU-SILC setup files in the "Setup_ver_2021_04" folder
-global log "/Users/alzbeta/Documents/Data/EUSILC_test"
+global log "[YOUR DIRECTORY]"
 
 
 
@@ -16,11 +16,11 @@ global log "/Users/alzbeta/Documents/Data/EUSILC_test"
 * create log files with var labels
 * transforms .csv files to .dta 
 
-forval x = 2010/2019 { // !!!! <- adjust years !!!
+forval x = 2013/2019 { 
 	
 	foreach y in p r h d {
 		
-		run "$csv_path/Setup_ver_2021_04/`x'_cross_eu_silc_`y'_ver_2021_04.do"
+		run "$csv_path/`x'_cross_eu_silc_`y'_ver_2021_04.do" // <- copy the "`x'_cross_eu_silc_`y'_ver_2021_04.do" files into the "$csv_path" directory
 	}
 }
 
@@ -29,14 +29,14 @@ forval x = 2010/2019 { // !!!! <- adjust years !!!
 * Merge files (r,p,h,d) for each year
 * format of the final data files: SILC`year'_ver_2021_04.dta (e.g. SILC2014_ver_2021_04.dta)
 
-local time "10 11 12 13 14 15 16 17 18 19" // <- !!! adjust years !!!
+local time "13 14 15 16 17 18 19" 
 
 foreach t of local time {
 noisily: display "Preparing EU-SILC 20`t'" 
 	
-	global datapath "/Users/alzbeta/Documents/Data/EUSILC_test" // <- folder where the .dta files are stored (should be the same as in "global log" above)
+	global datapath "[YOUR DIRECTORY]" // <- folder where the .dta files are stored (should be the same as in "global log" above)
 	
-	global outpath "/Users/alzbeta/Documents/Data/EU-SILC_merged" // <- destination of the merged .dta files
+	global outpath "[YOUR DIRECTORY]" // <- destination of the merged .dta files
 	cd "${datapath}" 
 
 	local prefix "eusilc_20`t'_"
