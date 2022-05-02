@@ -6,10 +6,12 @@
 * ELIGIBILITY
 /*	-> proportional benefits: compulsorily insured employed parents
 			- voluntarily insured self-employed (not coded)
-	-> flat-rate benefits: everyone else 	*/
+	*/
 	
-replace pl_eli = 1 			if country == "PL" & year == 2013 
+replace pl_eli = 1 			if country == "PL" & year == 2013 & duremp >= 6
 replace pl_eli = 0			if pl_eli == . & country == "PL" & year == 2013
+
+
 
 
 * DURATION (weeks)
@@ -21,21 +23,12 @@ replace pl_eli = 0			if pl_eli == . & country == "PL" & year == 2013
 	-> 52 weeks for everyone else 			
 */
 
-replace pl_dur = 35 		if country == "PL" & year == 2013 & pl_eli == 1 ///
-							& gender == 1 & econ_status == 1
+replace pl_dur = (36*4.3) 		if country == "PL" & year == 2013 & pl_eli == 1 ///
+							& gender == 1 
 							
-replace pl_dur = 1 		if country == "PL" & year == 2013 & pl_eli == 1 ///
-							& gender == 2 & econ_status == 1 & parstat == 2
-							
-replace pl_dur = 52 		if country == "PL" & year == 2013 & pl_eli == 1 ///
-							& gender == 1 & inrange(econ_status,2,4)
-							
-
 * single men
-replace pl_dur = 35 		if country == "PL" & year == 2013 & pl_eli == 1 ///
+replace pl_dur = (36*4.3) 		if country == "PL" & year == 2013 & pl_eli == 1 ///
 							& gender == 2 & parstat == 1 & econ_status == 1
-replace pl_dur = 52 		if country == "PL" & year == 2013 & pl_eli == 1 ///
-							& gender == 2 & parstat == 1 & inrange(econ_status,2,4)
 
 							
 * BENEFIT (monthly)

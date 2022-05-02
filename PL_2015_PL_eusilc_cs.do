@@ -8,8 +8,7 @@
 			- voluntarily insured self-employed (not coded)
 */
 	
-replace pl_eli = 1 			if country == "PL" & year == 2015 & gender == 2 ///
-						& econ_status == 1
+replace pl_eli = 1 			if country == "PL" & year == 2015 & econ_status == 1
 replace pl_eli = 0			if pl_eli == . & country == "PL" & year == 2015
 
 
@@ -25,7 +24,6 @@ replace pl_dur = 26 		if country == "PL" & year == 2015 & pl_eli == 1 ///
 * single men
 replace pl_dur = 26 		if country == "PL" & year == 2015 & pl_eli == 1 ///
 							& gender == 2 & parstat == 1 & econ_status == 1
-
 
 							
 * BENEFIT (monthly)
