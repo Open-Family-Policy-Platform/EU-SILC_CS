@@ -14,6 +14,7 @@ replace pl_eli =  0			if pl_eli == . & country == "IT" & year == 2019
 
 * DURATION (weeks)
 /*	-> employed: 6 months/parent/child
+	-> leave is not transferable
 	-> the total leave cannot be longer than 10 months (not coded) => in couples 6 months assigned to woman,
 		4 month to man
 		-> when mother is not entitled, the whole leave is assigned to the cohabiting man

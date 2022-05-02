@@ -15,7 +15,8 @@ replace pl_eli = 0 		if pl_eli == . & country == "BE" & year == 2019
 
 
 * DURATION (weeks)
-/*	-> 4 months 
+/*	-> 4 months/parent/child
+	-> non-transferable
 	-> until child is 12 years old (not coded) 		*/
 	
 replace pl_dur = 4 * 4.3 	if country == "BE" & year == 2019 & pl_eli == 1

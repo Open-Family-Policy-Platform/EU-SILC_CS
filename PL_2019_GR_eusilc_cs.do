@@ -3,6 +3,11 @@
 
 * GREECE - 2019
 
+/*** NOTE: 	Greece has two separate schemes for private and public sector. 
+			EU-SILC doesn't contain information on whether respondents are employed
+			in a private or a public sector => all respondents are coded as private 
+			sector employees.
+*/
 * ELIGIBILITY
 /*	-> employed
 	-> 12 months employment (coded) with the same employer (not coded) 	*/
@@ -12,7 +17,8 @@ replace pl_eli = 1 			if country == "GR" & year == 2019 & econ_status == 1 ///
 replace pl_eli = 0 			if pl_eli == . & country == "GR" & year == 2019
 
 * DURATION (weeks)
-/*	-> 4 months/parent  */
+/*	-> 4 months/parent/child
+	-> non-transferable*/
 replace pl_dur = 4 		if country == "GR" & year == 2019 & pl_eli == 1
 
 
