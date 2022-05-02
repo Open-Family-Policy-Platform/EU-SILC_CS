@@ -7,16 +7,17 @@ clear all
 *** Data directory
 global DATA "[YOUR DIRECTORY]" 
 
+
 cd "$DATA"
 
 
 *** Code directory
 global CODE "[YOUR DIRECTORY]" 
 
-
 *** Convert original .csv file into .dta & create labels
 run "$CODE/SD_merge_eusilc_cs.do"
 
+cd "$DATA"
 
 foreach x of numlist 3/9 {
 	

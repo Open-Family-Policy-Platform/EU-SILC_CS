@@ -7,9 +7,9 @@ clear all
 * enter your path to the folder with the downloaded EU-SILC files ("Cross")
 global csv_path "[YOUR DIRECTORY]"
 
+
 * destination for the .log and .dta files created via adjusted EU-SILC setup files in the "Setup_ver_2021_04" folder
 global log "[YOUR DIRECTORY]"
-
 
 
 
@@ -37,6 +37,7 @@ noisily: display "Preparing EU-SILC 20`t'"
 	global datapath "[YOUR DIRECTORY]" // <- folder where the .dta files are stored (should be the same as in "global log" above)
 	
 	global outpath "[YOUR DIRECTORY]" // <- destination of the merged .dta files
+	
 	cd "${datapath}" 
 
 	local prefix "eusilc_20`t'_"
