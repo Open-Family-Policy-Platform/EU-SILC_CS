@@ -33,16 +33,11 @@ replace ml_dur2 = (63+63)-(6*5)/5	if country == "RO" & year == 2010 & ml_eli == 
 
 
 * BENEFIT (monthly)
-/*	-> 85% of average gross earnings 
-	-> ceiling: 85% of 12x the minimum gross wage (according to LP&R 2010 - no ceiling)
-		-> minimum wage (Eurostat): €407.45
+/*	-> 75% of average gross earnings 
 	-> it is unclear how are benefits calculated for unemployed women 
 		and w. with no income => not coded */
 
-replace ml_ben1 = 0.85*earning 		if country == "RO" & year == 2010 & ml_eli == 1
-
-replace ml_ben1 = 0.85*(12*407.45)	if country == "RO" & year == 2010 & ml_eli == 1 ///
-									& ml_ben1 > 0.85*(12*407.45)
+replace ml_ben1 = 0.75*earning 		if country == "RO" & year == 2010 & ml_eli == 1
 
 
 replace ml_ben2 = ml_ben1 			if country == "RO" & year == 2010 & ml_eli == 1
