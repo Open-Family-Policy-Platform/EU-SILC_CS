@@ -13,8 +13,8 @@ replace pt_eli = 0 		if pt_eli == . & country == "PL" & year == 2010 & gender ==
 
 
 * DURATION (weeks)
-/*	-> 2 weeks */
-replace pt_dur = 2 	if country == "PL" & year == 2010 & pt_eli == 1
+/*	-> 1 week */
+replace pt_dur = 1 	if country == "PL" & year == 2010 & pt_eli == 1
 
 
 * BENEFIT (monthly)
