@@ -23,40 +23,40 @@ replace pl_eli = 0			if pl_eli == . & country == "NO" & year == 2010
 
 * DURATION (weeks)
 /*	-> parents can choose between 2 options for the whole parental leave:
-		- 49 weeks on 100% earning
-		- 59 weeks on 80% earning
-	-> joint right share: 19 weeks (remainder from 15 weeks reserved to mother and 15 weeks to father) 
+		- 46 weeks on 100% earning
+		- 56 weeks on 80% earning
+	-> joint right share: 27 weeks (remainder from 9 weeks reserved to mother and 10 weeks to father) 
 			-> assigned to mother
 */
 
 	* women
-replace pl_dur = 19 		if country == "NO" & year == 2010 & pl_eli == 1 & gender == 1
+replace pl_dur = 27 		if country == "NO" & year == 2010 & pl_eli == 1 & gender == 1
 
 	* single men
-replace pl_dur = 19 		if country == "NO" & year == 2010 & pl_eli == 1 & gender == 2 & parstat == 1
+replace pl_dur = 27 		if country == "NO" & year == 2010 & pl_eli == 1 & gender == 2 & parstat == 1
 
 
 
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> ceiling: €59,685/year  
-	-> minimum: maternity grant - €4,943 for the whole period (11 months)
+	-> ceiling: €56,413/year  
+	-> minimum: maternity grant - €4,383 for the whole period (11 months)
 */
 
 	* women
 replace pl_ben1 = earning 		if country == "NO" & year == 2010 & pl_eli == 1 & gender ==1
-replace pl_ben1 = 59685/12		if country == "NO" & year == 2010 & pl_eli == 1 ///
-								& pl_ben1 >= 59685/12 & gender == 1
-replace pl_ben1 = 4943/11		if country == "NO" & year == 2010 & pl_eli == 1 ///
-								& pl_ben1 < 4943/11 & gender == 1
+replace pl_ben1 = 56413/12		if country == "NO" & year == 2010 & pl_eli == 1 ///
+								& pl_ben1 >= 56413/12 & gender == 1
+replace pl_ben1 = 4383/11		if country == "NO" & year == 2010 & pl_eli == 1 ///
+								& pl_ben1 < 4383/11 & gender == 1
 
 	* single men
 replace pl_ben1 = earning 		if country == "NO" & year == 2010 & pl_eli == 1 & gender == 2 & parstat == 1
-replace pl_ben1 = 59685/12		if country == "NO" & year == 2010 & pl_eli == 1 ///
-								& pl_ben1 >= 59685/12 & gender == 2 & parstat == 1
-replace pl_ben1 = 4943/11		if country == "NO" & year == 2010 & pl_eli == 1 ///
-								& pl_ben1 < 4943/11 & gender == 2 & parstat == 1
+replace pl_ben1 = 56413/12		if country == "NO" & year == 2010 & pl_eli == 1 ///
+								& pl_ben1 >= 56413/12 & gender == 2 & parstat == 1
+replace pl_ben1 = 4383/11		if country == "NO" & year == 2010 & pl_eli == 1 ///
+								& pl_ben1 < 4383/11 & gender == 2 & parstat == 1
 
 
 replace pl_ben2 = pl_ben1		if country == "NO" & year == 2010 & pl_eli == 1
