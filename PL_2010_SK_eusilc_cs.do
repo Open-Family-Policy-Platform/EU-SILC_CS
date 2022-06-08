@@ -35,9 +35,9 @@ replace pl_dur = (3*52)					if country == "SK" & year == 2010 & pl_eli == 1 ///
 
 
 * BENEFIT (monthly)
-/*	-> €203.20/month  (per family) */
+/*	-> €164.22/month  (per family) */
 
-replace pl_ben1 = 203.20		if country == "SK" & year == 2010 & pl_eli == 1 & pl_dur != . 
+replace pl_ben1 = 164.22		if country == "SK" & year == 2010 & pl_eli == 1 & pl_dur != . 
 
 								
 replace pl_ben2 = pl_ben1		if country == "SK" & year == 2010 & pl_eli == 1
