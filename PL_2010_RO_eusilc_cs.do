@@ -27,25 +27,28 @@ replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2010 & p
 
 
 * BENEFIT (monthly)
-/*	-> 85% earning (net, but coded gross), no ceiling
-	-> minimum: €276/month (LP&R 2010)
+/*	-> 85% earning (net, but coded gross)
+	-> ceiling: €921/month (MISSOC 2010)
+	-> minimum: €138/month (MISSOC 2010)
 */
 	
 	* women
 replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2010 & pl_eli == 1 ///
 									& gender == 1
 
-replace pl_ben1 = 276		 		if country == "RO" & year == 2010 & pl_eli == 1 ///
-									& pl_ben1 < 271 & gender == 1
-
+replace pl_ben1 = 138		 		if country == "RO" & year == 2010 & pl_eli == 1 ///
+									& pl_ben1 < 138 & gender == 1
+replace pl_ben1 = 921			if country == "RO" & year == 2010 & pl_eli == 1 ///
+									& pl_ben1 > 921 & gender == 1
 									
 	* single men
 replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2010 & pl_eli == 1 ///
 									& gender == 2 & parstat == 1
 
-replace pl_ben1 = 276		 		if country == "RO" & year == 2010 & pl_eli == 1 ///
-									& pl_ben1 < 276 & gender == 2 & parstat == 1
-			
+replace pl_ben1 = 138		 		if country == "RO" & year == 2010 & pl_eli == 1 ///
+									& pl_ben1 < 138 & gender == 2 & parstat == 1
+replace pl_ben1 = 921		 		if country == "RO" & year == 2010 & pl_eli == 1 ///
+									& pl_ben1 > 921 & gender == 2 & parstat == 1		
 
 replace pl_ben2 = pl_ben1		if country == "RO" & year == 2010 & pl_eli == 1
 
