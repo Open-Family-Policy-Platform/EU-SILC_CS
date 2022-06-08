@@ -23,32 +23,32 @@ replace ml_eli = 0 			if ml_eli == . & country == "SE" & year == 2010 & gender =
 
 
 * DURATION (weeks)
-/*	-> total: 90 calendar days 
+/*	-> total: 60 calendar days 
 	-> prenatal: non-compulsory 2 weeks 	
 	-> single fathers: entitled to the whole share 	
 */
 
 replace ml_dur1 = 0 		if country == "SE" & year == 2010 & ml_eli == 1
 
-replace ml_dur2 = 90/7 		if country == "SE" & year == 2010 & ml_eli == 1
+replace ml_dur2 = 60/7 		if country == "SE" & year == 2010 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> eligible for earning related benefit: min. income €27/day (coded) for 240 calendar days (not coded) before childbirth
-		- for 195 calendar days (includes 90 non-transferable leave): 77.6% earning
-			- minimum: €27/day
-			- ceiling: €46,972/month - this is an earning ceiling NOT benefit ceiling (LP&R 2010)
+/*	-> eligible for earning related benefit: min. income €19/day (coded) for 240 calendar days (not coded) before childbirth
+		- for 195 calendar days (includes 60 non-transferable leave): 80% earning
+			- minimum: €19/day
+			- ceiling: €44,158/month - this is an earning ceiling NOT benefit ceiling (LP&R 2010)
 		- for 45 days: €19/day (only applicable for pl_ben)
-	-> all others: €27/day
+	-> all others: €19/day
  */
 
  
-replace ml_ben1 = 0.776*earning 		if country == "SE" & year == 2010 & ml_eli == 1 ///
-										& (earning/30) >= 26
-replace ml_ben1 = 27*30					if country == "SE" & year == 2010 & ml_eli == 1 ///
-										& ml_ben1 < 27*30
-replace ml_ben1 = 0.776*46972			if country == "SE" & year == 2010 & ml_eli == 1 ///
-										& earning >= 46972
+replace ml_ben1 = 0.80*earning 			if country == "SE" & year == 2010 & ml_eli == 1 ///
+										& (earning/30) >= 18
+replace ml_ben1 = 19*30					if country == "SE" & year == 2010 & ml_eli == 1 ///
+										& ml_ben1 < 19*30
+replace ml_ben1 = 0.80*44158			if country == "SE" & year == 2010 & ml_eli == 1 ///
+										& earning >= 44158
 
 									
 replace ml_ben2 = ml_ben1 			if country == "SE" & year == 2010 & ml_eli == 1
