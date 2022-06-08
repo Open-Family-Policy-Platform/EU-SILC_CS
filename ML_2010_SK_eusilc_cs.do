@@ -21,7 +21,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "SK" & year == 2010 & gender =
 
 
 * DURATION (weeks)
-/*	-> total: 34 weeks obligatory 
+/*	-> total: 28 weeks obligatory 
 	-> prenatal: 6 weeks 	
 	-> single mother: 37 weeks
 	-> single father: 31 weeks 
@@ -34,7 +34,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "SK" & year == 2010 & gender =
 replace ml_dur1 = 6 		if country == "SK" & year == 2010 & ml_eli == 1 & gender == 1
 
 * cohabiting women
-replace ml_dur2 = 34-6 		if country == "SK" & year == 2010 & ml_eli == 1 ///
+replace ml_dur2 = 28-6 		if country == "SK" & year == 2010 & ml_eli == 1 ///
 							& gender == 1 & parstat == 2
 * single women
 replace ml_dur2 = 37-6		if country == "SK" & year == 2010 & ml_eli == 1 ///
@@ -46,13 +46,13 @@ replace ml_dur2 = 31		if country == "SK" & year == 2010 & ml_eli == 1 ///
 
 
 * BENEFIT (monthly)
-/*	-> 70% average earnings
+/*	-> 55% average earnings
 	-> ceiling: monthly ceiling 1.5-times of national average monthly wage (€889).
 	
 	source: Statistical Office of the Slovak Republic, Average monthly wage of employee 
 		in economy of the SR in the 3rd quarter of 2010, shorturl.at/stvAT , accessed 30.12.2021 */
 	
-replace ml_ben1 = 0.70*earning 		if country == "SK" & year == 2010 & ml_eli == 1
+replace ml_ben1 = 0.55*earning 		if country == "SK" & year == 2010 & ml_eli == 1
 replace ml_ben1 = 1.5*889		if country == "SK" & year == 2010 & ml_eli == 1 ///
 									& ml_ben1 >= (1.5*889)
 
