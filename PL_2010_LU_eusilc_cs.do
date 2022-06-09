@@ -31,7 +31,7 @@ replace pl_dur = 6*4.3 		if country == "LU" & year == 2010 & pl_eli == 1
 
 
 * BENEFIT (monthly)
-/*	flat-rate: €1,788/month  	*/
+/*	flat-rate: €1,778/month  	*/
 		
 replace pl_ben1 = 1778 		if country == "LU" & year == 2010 & pl_eli == 1
 replace pl_ben2 = pl_ben1		if country == "LU" & year == 2010 & pl_eli == 1
