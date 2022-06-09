@@ -30,9 +30,9 @@ replace ml_dur2 = 42/7					if country == "LV" & year == 2010 & ml_eli == 1 & gen
 
 
 * BENEFIT (monthly)
-/*	-> 80% gross earnings, no ceiling */
+/*	-> 100% gross earnings, no ceiling */
 
-replace ml_ben1 = 0.8*earning 		if country == "LV" & year == 2010 & ml_eli == 1
+replace ml_ben1 = earning 		if country == "LV" & year == 2010 & ml_eli == 1
 replace ml_ben2 = ml_ben1 			if country == "LV" & year == 2010 & ml_eli == 1
 
 
