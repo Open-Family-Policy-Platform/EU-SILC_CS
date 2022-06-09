@@ -4,27 +4,30 @@
 * LITHUANIA - 2010
 
 * ELIGIBILITY
-/*	-> employed, self-employed for 12 months (coded) in past 2 years (not coded)
+/*	-> employed, for 12 months (coded) in past 2 years (not coded)
+		-> the condition does not apply for parents younger than 26
 	-> family entitlement => in couples assigned to women
 */
 
-replace pl_eli = 1 			if country == "LT" & year == 2010 & inlist(econ_status,1,2) ///
-							& (duremp+dursemp) >= 12
+replace pl_eli = 1 			if country == "LT" & year == 2010 & econ_status == 1 ///
+							& duremp >= 12
+							
+replace pl_eli = 1			if country == "LT" & year == 2010 & econ_status == 1 ///
+							& age <= 26
 
 							
 replace pl_eli =  0			if pl_eli == . & country == "LT" & year == 2010
 
 
 * DURATION (weeks)
-/*	-> parents can choose the duration of leave => affects benefits
-	-> more generous option coded (until child is 1)		*/
+/*	-> maximum 2 years from the year of birth		*/
 
 * women	
-replace pl_dur = 52-ml_dur2 		if country == "LT" & year == 2010 & pl_eli == 1 ///
+replace pl_dur = 104-ml_dur2 		if country == "LT" & year == 2010 & pl_eli == 1 ///
 									& gender == 1
 
 * single men
-replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2010 & pl_eli == 1 ///
+replace pl_dur = 104-pt_dur 			if country == "LT" & year == 2010 & pl_eli == 1 ///
 									& gender == 2 & parstat == 1
 									
 
@@ -33,14 +36,15 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2010 & pl_eli == 1 //
 
 * BENEFIT (monthly)
 /* 	-> choice of leave until child is 1: 100%
-		-> ceiling: €1,379/month (coded)
-	-> choice of leave until child is 2: not coded
-		- 70% earnings until child is 1, ceiling: €965,30/month
-		- 40% of earnings for the rest of the leave, ceiling: €551,6/month */
+	-> choice of leave until child is 2: 
+		- 85% for the 2nd year 
+	-> minimum: 1/3 of the insured income
+	-> ceiling: 5 times the national average insured income
+*/
 		
 replace pl_ben1 = earning 		if country == "LT" & year == 2010 & pl_eli == 1
 								
-replace pl_ben1 = 1379	 		if country == "LT" & year == 2010 & pl_eli == 1 ///
+//replace pl_ben1 = 1379	 		if country == "LT" & year == 2010 & pl_eli == 1 ///
 								& pl_ben1 >= 1379
 
 
