@@ -1,0 +1,30 @@
+/* PT_2010_LV_eusilc_cs */
+
+* LATVIA - 2010
+
+* ELIGIBILITY
+/*	-> employed
+	-> self-employed 	*/
+	
+replace pt_eli = 1 		if country == "LV" & year == 2010 & gender == 2 & inlist(econ_status,1,2)
+replace pt_eli = 0 		if pt_eli == . & country == "LV" & year == 2010 & gender == 2
+
+* DURATION (weeks)
+/*	-> 10 calendar days to be taken after childbirth */
+
+replace pt_dur = 10/7 	if country == "LV" & year == 2010 & pt_eli == 1
+
+
+* BENEFIT (monthly)
+/*	-> 100% earnings, no ceiling */
+
+replace pt_ben1 = earning 	if country == "LV" & year == 2010 & pt_eli == 1
+						
+replace pt_ben2 = pt_ben1 	if country == "LV" & year == 2010 & pt_eli == 1
+
+
+foreach x in 1 2 {
+	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "LV" & year == 2010
+}
+
+replace pt_dur = 0 if pt_eli == 0 & country == "LV" & year == 2010
