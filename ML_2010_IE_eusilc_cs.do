@@ -31,13 +31,23 @@ replace ml_dur2 = 26+16-2 		if country == "IE" & year == 2010 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 26 weeks: €230/week
+/*	-> 26 weeks: 80% of average weekly earnings.
+	-> minimum: €225.80/week
+	-> ceiling: €270/week
 	-> 16 weeks: unpaid 	*/
 	
-replace ml_ben1 = ((230*4.3) * (26/(26+16)))  	if country == "IE" & year == 2010 & ml_eli == 1
+replace ml_ben1 = ((earning * 0.8) * (26/(26+16))) 	if country == "IE" & year == 2010 & ml_eli == 1
+
+* minimum
+replace ml_ben1 = ((225.80 * 4.3) * (26/(26+16)))  	if country == "IE" & year == 2010 & ml_eli == 1 & ((earning * 0.8)/4.3) < 225.80
+
+* maximum
+replace ml_ben1 = ((270 * 4.3) * (26/(26+16)))  	if country == "IE" & year == 2010 & ml_eli == 1 & ((earning * 0.8)/4.3) >= 270
 
 
-replace ml_ben2 = 230*4.3 		if country == "IE" & year == 2010 & ml_eli == 1
+replace ml_ben2 = (earning * 0.8) 	if country == "IE" & year == 2010 & ml_eli == 1
+replace ml_ben2 = (225.80 * 4.3)		if country == "IE" & year == 2010 & ml_eli == 1 & ((earning * 0.8)/4.3) < 225.80
+replace ml_ben2 = (270 * 4.3)		if country == "IE" & year == 2010 & ml_eli == 1 & ((earning * 0.8)/4.3) >= 270
 
 
 foreach x in 1 2 {
