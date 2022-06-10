@@ -33,7 +33,7 @@ replace pl_dur = 52-pt_dur 			if country == "LT" & year == 2011 & pl_eli == 1 //
 
 * BENEFIT (monthly)
 /* 	-> choice of leave until child is 1: 100%
-		-> ceiling: €1,379/month (coded)
+		-> ceiling: €1,379/month
 	-> choice of leave until child is 2: not coded
 		- 70% earnings until child is 1, ceiling: €965,30/month
 		- 40% of earnings for the rest of the leave, ceiling: €551,6/month */
