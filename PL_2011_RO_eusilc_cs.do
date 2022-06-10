@@ -27,24 +27,32 @@ replace pl_dur = 2*52 - pt_dur - ml_dur2 		if country == "RO" & year == 2011 & p
 
 
 * BENEFIT (monthly)
-/*	-> 85% earning (net, but coded gross), no ceiling
-	-> minimum: €276/month (LP&R 2011)
+/*	-> 75% earning (net, but coded gross)
+	-> ceiling until child is 1 year old: €802/month (6.8*RSI (RSI = €118.33), MISSOC 2011)
+	-> ceiling until child is 2 years old: €283/month (2.4*RSI)
+		-> the age of the child is ignored, ceiling coded as for the first year
+	-> minimum: €142/month (1.2*RSI)
 */
 	
 	* women
-replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2011 & pl_eli == 1 ///
+replace pl_ben1 = 0.75*earning 		if country == "RO" & year == 2011 & pl_eli == 1 ///
 									& gender == 1
 
-replace pl_ben1 = 276		 		if country == "RO" & year == 2011 & pl_eli == 1 ///
-									& pl_ben1 < 271 & gender == 1
+replace pl_ben1 = 142		 		if country == "RO" & year == 2011 & pl_eli == 1 ///
+									& pl_ben1 < 142 & gender == 1
+replace pl_ben1 = 802				if country == "RO" & year == 2011 & pl_eli == 1 ///
+									& pl_ben1 >= 802 & gender == 1 
 
-									
+
 	* single men
-replace pl_ben1 = 0.85*earning 		if country == "RO" & year == 2011 & pl_eli == 1 ///
+replace pl_ben1 = 0.75*earning 		if country == "RO" & year == 2011 & pl_eli == 1 ///
 									& gender == 2 & parstat == 1
 
-replace pl_ben1 = 276		 		if country == "RO" & year == 2011 & pl_eli == 1 ///
-									& pl_ben1 < 276 & gender == 2 & parstat == 1
+replace pl_ben1 = 142		 		if country == "RO" & year == 2011 & pl_eli == 1 ///
+									& pl_ben1 < 142 & gender == 2 & parstat == 1
+									
+replace pl_ben1 = 802				if country == "RO" & year == 2011 & pl_eli == 1 ///
+									& pl_ben1 >= 802 & gender == 2 & parstat == 1
 			
 
 replace pl_ben2 = pl_ben1		if country == "RO" & year == 2011 & pl_eli == 1
@@ -55,7 +63,7 @@ replace pl_ben2 = pl_ben1		if country == "RO" & year == 2011 & pl_eli == 1
 
 foreach x in 1 2 {
     
-	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "RO" & year == 2011
+	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "RO" & year == 2014
 }
 
-replace pl_dur = 0 	if country == "RO" & year == 2011 & pl_eli == 0
+replace pl_dur = 0 	if country == "RO" & year == 2014 & pl_eli == 0
