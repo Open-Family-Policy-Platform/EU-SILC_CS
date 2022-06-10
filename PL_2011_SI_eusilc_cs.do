@@ -4,44 +4,38 @@
 * SLOVENIA - 2011
 
 * ELIGIBILITY
-/*	-> employed, self-employed	
-	-> all other residents (different benefits) 		
-	-> individual right 	
+/*	-> employed, self-employed			
+	-> family right => assigned to the woman	
 */
 	
-replace pl_eli = 1 			if country == "SI" & year == 2011 
+replace pl_eli = 1 			if country == "SI" & year == 2011 & gender == 1
 replace pl_eli =  0			if pl_eli == . & country == "SI" & year == 2011
 
 
 * DURATION (weeks)
-/*	-> 130 calendar days
-	-> mother can transfer 100 days to the father (not coded)
-	-> father can transfer 130 days to the mother (not coded) 	
-	-> for inactive residents: 365 calendar days */
+/*	-> 260 calendar days
+*/
 	
-replace pl_dur = 130/7 		if country == "SI" & year == 2011 & pl_eli == 1 ///
-							& inlist(econ_status,1,2)
-replace pl_dur = 365/7 		if country == "SI" & year == 2011 & pl_eli == 1 ///
-							& inlist(econ_status,3,4)							
+replace pl_dur = 260/7 		if country == "SI" & year == 2011 & pl_eli == 1 ///
+							& inlist(econ_status,1,2) 
 
 
 * BENEFIT (monthly)
-/*	-> employed, self-employed: 90% earning
-	-> ceiling: €2,863/month (LP&R 2011)
-	-> minimum: €790.73/month 
-	-> all other residents: €252.04/month 	*/
+/*	-> employed, self-employed: 100% earning
+	-> ceiling: €3,741/month (LP&R 2011)
+	-> minimum: €411/month (55% - 105% of minimum wage based on period insured in the past 3 years. No insured period at all, --> 55%) 
+*/
 
-replace pl_ben1 = 0.9*earning 		if country == "SI" & year == 2011 & pl_eli == 1 ///
+replace pl_ben1 = earning 			if country == "SI" & year == 2011 & pl_eli == 1 ///
 									& inlist(econ_status,1,2)
 
-replace pl_ben1 = 790.73 			if country == "SI" & year == 2011 & pl_eli == 1 ///
-									& inlist(econ_status,1,2) & pl_ben1 < 790.73
-									
-replace pl_ben1 = 2863	 			if country == "SI" & year == 2011 & pl_eli == 1 ///
-									& inlist(econ_status,1,2) & pl_ben1 >= 2863
-									
-replace pl_ben1 = 252.04	 		if country == "SI" & year == 2011 & pl_eli == 1 ///
-									& inlist(econ_status,3,4)
+replace pl_ben1 = 411				if country == "SI" & year == 2011 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 < 411
+
+replace pl_ben1 = 3741				if country == "SI" & year == 2011 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 > 3741
+
+
 
 
 									
