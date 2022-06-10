@@ -12,10 +12,10 @@ replace pl_eli = 0 			if pl_eli == . & country == "IE" & year == 2011
 
 
 * DURATION (weeks)
-/*	-> 18 weeks
+/*	-> 14 weeks
 	-> before child's 8th birthday (not coded)
 */
-replace pl_dur = 18 		if country == "IE" & year == 2011 & pl_eli == 1
+replace pl_dur = 14 		if country == "IE" & year == 2011 & pl_eli == 1
 
 
 * BENEFIT (monthly)
