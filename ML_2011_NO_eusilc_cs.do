@@ -39,19 +39,19 @@ replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2011 & gender =
 
 * DURATION (weeks)
 /*	-> prenatal: 3 weeks compulsory
-	-> total: 15 weeks
+	-> total: 9 weeks
 	-> postnatal: 6 weeks compulsory for mother (non-transferable) 	
 	-> father, when mother is not eligible: 6 weeks
 	-> single father: 12 weeks
 	-> parents can choose between 2 options for the whole leave:
-		- 49 weeks on 100% earning
-		- 59 weeks on 80% earning
+		- 47 weeks on 100% earning
+		- 57 weeks on 80% earning
 */
 
 replace ml_dur1 = 3 		if country == "NO" & year == 2011 & ml_eli == 1 & gender == 1
 
 * both partners are eligible
-replace ml_dur2 = 15-3 		if country == "NO" & year == 2011 & ml_eli == 1 & gender == 1 ///
+replace ml_dur2 = 9-3 		if country == "NO" & year == 2011 & ml_eli == 1 & gender == 1 ///
 							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
 
 * only man is eligible
@@ -67,15 +67,15 @@ replace ml_dur2 = 12		if country == "NO" & year == 2011 & gender == 2 ///
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> ceiling: €59,685/year
-	-> minimum: maternity grant - €4,943 for the whole period (11 months)
+	-> ceiling: €55,785/year
+	-> minimum: maternity grant - €4,500 for the whole period (11 months)
 */
 	
 replace ml_ben1 = earning 		if country == "NO" & year == 2011 & ml_eli == 1
-replace ml_ben1 = 59685/12			if country == "NO" & year == 2011 & ml_eli == 1 ///
-								& ml_ben1 >= 59685/12
-replace ml_ben1 = 4943/11			if country == "NO" & year == 2011 & ml_eli == 1 ///
-								& ml_ben1 < 4943/11
+replace ml_ben1 = 55785/12			if country == "NO" & year == 2011 & ml_eli == 1 ///
+								& ml_ben1 >= 55785/12
+replace ml_ben1 = 4500/11			if country == "NO" & year == 2011 & ml_eli == 1 ///
+								& ml_ben1 < 4500/11
 
 
 replace ml_ben2 = ml_ben1 		if country == "NO" & year == 2011 & ml_eli == 1
