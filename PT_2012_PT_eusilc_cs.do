@@ -18,11 +18,11 @@ replace pt_eli = 1 		if country == "PT" & year == 2012 & gender == 2 ///
 replace pt_eli = 0 		if pt_eli == . & country == "PT" & year == 2012 & gender == 2
 
 * DURATION (weeks)
-/*	-> 25 working days (LP&R 2012), 15 days are obligatory 
+/*	-> 20 working days (LP&R 2012), 10 days are obligatory 
 	-> LP&R 2012: single parents cannot use the other parent's entitlement => 
 		father's share is not assigned to single woman 	*/
 
-replace pt_dur = 25/5 	if country == "PT" & year == 2012 & pt_eli == 1
+replace pt_dur = 20/5 	if country == "PT" & year == 2012 & pt_eli == 1
 
 
 * BENEFIT (monthly)
