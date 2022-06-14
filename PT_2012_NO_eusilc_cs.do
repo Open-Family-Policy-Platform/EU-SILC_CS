@@ -37,34 +37,34 @@ replace pt_eli = 0 			if pt_eli == . & country == "NO" & year == 2012 & gender =
 
 
 * DURATION (weeks)
-/*	-> 15 weeks
+/*	-> 12 weeks
 	-> mother, when father is not eligible: 15 weeks
-	-> single mother: 15 weeks
+	-> single mother: 15 weeks (???)
 	-> parents can choose between 2 options for the whole parental leave:
-		- 49 weeks on 100% earning
-		- 59 weeks on 80% earning
+		- 47 weeks on 100% earning
+		- 57 weeks on 80% earning
 */
 
 
-replace pt_dur = 15 		if country == "NO" & year == 2012 & pt_eli == 1 
+replace pt_dur = 12 		if country == "NO" & year == 2012 & pt_eli == 1 
 
 
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> ceiling: €59,685/year 
-	-> minimum: maternity grant - €4,943 for the whole period (11 months)
+	-> ceiling: €65,051/year 
+	-> minimum: maternity grant - €4,655 for the whole period (11 months)
 */
 
 replace pt_ben1 = earning 		if country == "NO" & year == 2012 & pt_eli == 1
 
 * ceiling
-replace pt_ben1 = 59685/12			if country == "NO" & year == 2012 & pt_eli == 1 ///
-									& pt_ben1 >= 59685/12
+replace pt_ben1 = 65051/12			if country == "NO" & year == 2012 & pt_eli == 1 ///
+									& pt_ben1 >= 65051/12
 
 * minimum
-replace pt_ben1 = 4943/11			if country == "NO" & year == 2012 & pt_eli == 1 ///
-									& pt_ben1 < 4943/11
+replace pt_ben1 = 4655/11			if country == "NO" & year == 2012 & pt_eli == 1 ///
+									& pt_ben1 < 4655/11
 
 
 replace pt_ben2 = ml_ben1 		if country == "NO" & year == 2012 & pt_eli == 1
