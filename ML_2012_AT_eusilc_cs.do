@@ -3,9 +3,10 @@
 * AUSTRIA - 2012
 
 * ELIGIBILITY
-/* -> Employed: earnings at least €415.72/month  
-   -> Self-employed: if voluntarily insured => not coded.
-   -> Unemployed: if receive unemployment benefits/completed 3 months of 
+/* 
+	-> Employed: earnings at least €415.72/month  
+	-> Self-employed: if voluntarily insured => not coded.
+	-> Unemployed: if receive unemployment benefits/completed 3 months of 
 	continuous  employment		
 	
 	-> leave is not transferable => single fathers are assumed to be ineligible
@@ -20,7 +21,8 @@ replace ml_eli = 0 		if ml_eli == . & country == "AT" & year == 2012 & gender ==
 
 
 * DURATION (weeks)
-/*	-> total: 16 weeks
+/*	
+	-> total: 16 weeks
 	-> prenatal: 8 weeks
 	-> postnatal: 8	weeks		 */
 	
@@ -30,9 +32,10 @@ replace ml_dur2 = 8 	if country == "AT" & year == 2012 & gender == 1 & ml_eli ==
 
 
 * BENEFIT (monthly)
-/*	-> 100% earnings, no ceiling
-	-> marginally employed, self-insured: €8.91/day (not coded) 
-	-> self-employed: €52.96/day	(not coded; LP&R 2012)		
+/*	
+	-> 100% earnings, no ceiling
+	-> marginally employed, self-insured: €8.22/day (not coded) 
+	-> self-employed: €26.97/day	(not coded; LP&R 2012)		
 	-> unemployed: 180% of unemployment benefits (not coded)
 */
 	
