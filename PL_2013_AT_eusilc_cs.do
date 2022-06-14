@@ -3,7 +3,7 @@
 * AUSTRIA - 2013
 
 * ELIGIBILITY
-/*	-> parental leave: employed, individual entitlement
+/*	-> parental leave: employed, family entitlement (until child is 2 years old)
 	-> parental benefit: all parents, family entitlement
 */
 replace pl_eli = 1 	if country == "AT" & year == 2013 

@@ -3,7 +3,7 @@
 * AUSTRIA - 2017
 
 * ELIGIBILITY
-/*	-> parental leave: employed, individual entitlement
+/*	-> parental leave: employed, family entitlement (until child is 2 years old)
 	-> parental benefit: all parents, family entitlement
 */
 replace pl_eli = 1 	if country == "AT" & year == 2017 
@@ -19,13 +19,18 @@ replace pl_eli = 0 	if pl_eli == . & country == "AT" & year == 2017
 	-> benefit family entitlement => father can claim if mother is not eligible 
 	-> partnership bonus: 2 months if both parents share at least 60:40 (not coded)
 		- €500 (not coded)
+		-> MISSOC 2017: the partner is entitled to 61 days of parental leave benefit that 
+				are non-transferable
 	-> Benefits are family entitlement => all entitlements assigned to the woman for 
 		cohabiting couples. For single individuals they are asigned to the individual. 
 	-> The duration of leave (365 days) is for after the birth of the child => 
 		the period of postnatal maternity leave is deduced for women who would be 
 		eligible for maternity leave. 	
 		
-	-> NOTE: if missing values on partner's economic status or earning => women's information is used
+	-> each parent can defer 3 months of PL until the child is 7 years old
+	-> the benefits can only be claimed for the youngest child (i.e. if there are more children
+	for whom the parents are eligible for PL benefit, they can only claim the benefit once)
+		
 */
 
 * employed   
@@ -69,57 +74,22 @@ replace pl_dur = (365/7) 	if country == "AT" & year == 2017 & pl_eli == 1 ///
 			- paid for 426 days after childbirth if both parents claim the benefit (not coded)
 	-> all other parents: €33.88/day (most generous option corresponding with the coded leave duration)
 	
+	-> NOTE: only the income of the parent who receives the benefit is considered! (MISSOC 2017)
+	
 */
 
 
- ** employed & single
+ ** employed 
 replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2017 & pl_eli == 1 /// 
-									& econ_status == 1 & parstat == 1 ///
-									& (earning*0.8) < (66*21.7) 
+									& econ_status == 1 
+									
 									
 replace pl_ben1 = 66 * 21.7			if country == "AT" & year == 2017 & pl_eli == 1 /// 
-									& econ_status == 1 & parstat == 1 ///
-									& pl_ben1 >= (66*21.7)								
+									& econ_status == 1 & pl_ben1 >= (66*21.7)								
  
- ** not employed & single
+ ** not employed 
 replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2017 & pl_eli == 1 /// 
-									& inrange(econ_status,2,4) & parstat == 1
- 
- 
- 
- ** cohabiting -> asssigned to a woman
-	* employed, woman higher earning
-replace pl_ben1 = 0.8 * earning		if country == "AT" & year == 2017 & pl_eli == 1 ///
-									& econ_status == 1 & earning > p_earning & pl_ben1 == . ///
-									& gender == 1 & parstat == 2 & p_earning != .
-									
-	* employed, man higher earning
-replace pl_ben1 = 0.8 * p_earning	if country == "AT" & year == 2017 & pl_eli == 1 ///
-									& p_econ_status == 1 & earning < p_earning & pl_ben1 == . ///
-									& gender == 1 & parstat == 2 & p_earning != .
-									
-									
-	* neither of the partners is employed										
-replace pl_ben1 = 33.88 * 21.7 		if country == "AT" & year == 2017 & pl_eli == 1 ///
-									& inrange(econ_status,2,4) & !inlist(p_econ_status,.,1) & pl_ben1 == . ///
-									& gender == 1
-
-									
-	* employed, partner's earning is missing	
-replace pl_ben1 = 0.8 * earning 	if country == "AT" & year == 2017 & pl_eli == 1 /// 
-									& econ_status == 1 & parstat == 2 & p_earning == .
-									
-	* not employed
-replace pl_ben1 = 33.88 * 21.7	 	if country == "AT" & year == 2017 & pl_eli == 1 /// 
-									& inrange(econ_status,2,4) & parstat == 2 & pl_ben1 == .
-									
-	* ceiling 
-replace pl_ben1 = 66 * 21.7 		if country == "AT" & year == 2017 & pl_eli == 1 ///
-									& pl_ben1 > (66*21.7) & pl_ben1 != (33.88 * 21.7)
-									
-
-
- 
+									& inrange(econ_status,2,4) 
  
  
 replace pl_ben2 = pl_ben1		if country == "AT" & year == 2017 & pl_eli == 1
