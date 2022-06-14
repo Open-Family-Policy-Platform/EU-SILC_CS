@@ -8,7 +8,7 @@
 */
 
 * ELIGIBILITY
-replace pt_eli = 0 if country == "AT" & year == 2013 & gender == 2 
+replace pt_eli = .a if country == "AT" & year == 2013 & gender == 2 
 
 * DURATION (weeks)
 replace pt_dur = .a if country == "AT" & year == 2013 & gender == 2
