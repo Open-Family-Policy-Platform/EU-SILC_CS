@@ -5,10 +5,13 @@
 
 
 * ELIGIBILITY
-/*	-> employed
-	-> self-emloyed (separate system)
+/*	-> compulsory social insurance for employed and self-employed:
+		-> employed
+		-> self-emloyed (separate system)
+		-> conditions: 6 months of paid contributions
+	
 	-> unemployed with unemployment benefit
-	-> source: LP&R 2012
+	
 	
 	-> ML is not transferable but can be turned into parental leave if mother dies 
 		or during woman's hospitalization => it is assumed that this does not apply 
@@ -16,7 +19,7 @@
 */
 
 replace ml_eli = 1 		if country == "BE" & year == 2012 & gender == 1 ///
-						& inrange(econ_status,1,3) 
+						& inrange(econ_status,1,3) & (duremp+dursemp) >= 6 
 replace ml_eli = 0 		if ml_eli == . & country == "BE" & year == 2012 & gender == 1
 
 
@@ -44,15 +47,17 @@ replace ml_dur2 = 8-1 	if country == "BE" & year == 2012 & gender == 1 ///
 
 
 * BENEFIT (monthly)
-/* 	-> employed (MISSOC 01/07/2012): 
+/* 	
+	-> public sector: 100% earning (LP&R 2012)
+	-> private sector:  
 		-> first 30 days = 82% earnings, no ceiling 
-		-> rest of leave = 75% earnings, ceiling €133.00/day.			
-	-> unemployed (M2012): 
-		-> first month = unemployment benefit + 19% of previous earnings with a ceiling €133.0/day
-		-> rest = unemployment benefit + 15% with a ceiling €133.0/day
-		-> not coded (EU-SILC unemployment benefit - household level data)
-	-> self-employed (LP&R 2012):
-		-> €440.5/week
+		-> rest of leave = 75% earnings, ceiling €94.87/day (LP&R 2011)
+		
+	-> unemployed: no information available in MISSOC or LP&R 
+	
+		
+	-> self-employed (MISSOC self-employed, 1/7/2011):
+		-> €390.88/week
 */
 
 gen ceiling = (0.75*earning) 		// for the purpose of ceiling calculation
@@ -61,20 +66,20 @@ gen ceiling = (0.75*earning) 		// for the purpose of ceiling calculation
 replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((0.75*earning)/4.3) * (15 - (30/5)))) / 15) * 4.3 /// 
 						if country == "BE" & year == 2012 & gender == 1 ///
 						& econ_status == 1 & ml_ben1 == . & ml_eli == 1 ///
-						& ceiling <= 133.0*21.7
+						& ceiling <= 94.87*21.7
 
 
 						
 * above ceiling						
-replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((133.0 * 5) * (15 - (30/5))))) / 15) * 4.3 ///
+replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((94.87 * 5) * (15 - (30/5))))) / 15) * 4.3 ///
 						if country == "BE" & year == 2012 & gender == 1 ///
 						& econ_status == 1 & ml_ben1 == . & ml_eli == 1 ///
-						& ceiling > 133.0*21.7
+						& ceiling > 94.87*21.7
 				
 
 	
 * self-employed
-replace ml_ben1 = 440.5 * 4.3 		if country == "BE" & year == 2012 ///
+replace ml_ben1 = 390.88 * 4.3 		if country == "BE" & year == 2012 ///
 									& gender == 1 & econ_status == 2 ///
 									& ml_ben1 == . & ml_eli == 1
 
@@ -85,7 +90,7 @@ replace ml_ben2 = 0.82 * earning ///
 						& econ_status == 1 & ml_ben2 == . & ml_eli == 1
 			
 
-replace ml_ben2 = 440.5*4.3 ///
+replace ml_ben2 = 390.88*4.3 ///
 						if country == "BE" & year == 2012 & gender == 1 ///
 						& econ_status == 2 & ml_ben2 == . & ml_eli == 1
 

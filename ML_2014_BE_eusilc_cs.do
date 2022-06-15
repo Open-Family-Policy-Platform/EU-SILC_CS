@@ -5,10 +5,13 @@
 
 
 * ELIGIBILITY
-/*	-> employed
-	-> self-emloyed (separate system)
+/*	-> compulsory social insurance for employed and self-employed:
+		-> employed
+		-> self-emloyed (separate system)
+		-> conditions: 6 months of paid contributions
+	
 	-> unemployed with unemployment benefit
-	-> source: LP&R 2014
+	
 	
 	-> ML is not transferable but can be turned into parental leave if mother dies 
 		or during woman's hospitalization => it is assumed that this does not apply 
@@ -16,7 +19,7 @@
 */
 
 replace ml_eli = 1 		if country == "BE" & year == 2014 & gender == 1 ///
-						& inrange(econ_status,1,3) 
+						& inrange(econ_status,1,3) & (duremp+dursemp) >= 6 
 replace ml_eli = 0 		if ml_eli == . & country == "BE" & year == 2014 & gender == 1
 
 
@@ -44,14 +47,16 @@ replace ml_dur2 = 8-1 	if country == "BE" & year == 2014 & gender == 1 ///
 
 
 * BENEFIT (monthly)
-/* 	-> employed (MISSOC 01/07/2014): 
+/* 	
+	-> public sector: 100% earning (LP&R 2014)
+	-> private sector: 
 		-> first 30 days = 82% earnings, no ceiling 
-		-> rest of leave = 75% earnings, ceiling €98.70/day.	
-	-> self-employed:
-		-> entitled to flat-rate benefit (MISSOC 2014)
-		-> the value of the flat-rate benefit is not available => coded as in 2015: €440.5/week
-	-> unemployed (M2014): 
-		-> Special regulations for unemployed workers (not coded)
+		-> rest of leave = 75% earnings, ceiling €98.70/day (LP&R 2014)	
+		
+	-> unemployed: no information available in MISSOC or LP&R 
+		
+	-> self-employed: data not available in 2014 => data from 2015
+		-> €440.5/week
 
 */
 

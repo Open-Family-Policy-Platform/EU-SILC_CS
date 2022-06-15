@@ -5,10 +5,13 @@
 
 
 * ELIGIBILITY
-/*	-> employed
-	-> self-emloyed (separate system)
+/*	-> compulsory social insurance for employed and self-employed:
+		-> employed
+		-> self-emloyed (separate system)
+		-> conditions: 120 days of paid contributions
+	
 	-> unemployed with unemployment benefit
-	-> source: LP&R 2015
+	
 	
 	-> ML is not transferable but can be turned into parental leave if mother dies 
 		or during woman's hospitalization => it is assumed that this does not apply 
@@ -16,7 +19,7 @@
 */
 
 replace ml_eli = 1 		if country == "BE" & year == 2015 & gender == 1 ///
-						& inrange(econ_status,1,3) 
+						& inrange(econ_status,1,3) & (duremp+dursemp) >= 120/21.7
 replace ml_eli = 0 		if ml_eli == . & country == "BE" & year == 2015 & gender == 1
 
 
@@ -44,13 +47,17 @@ replace ml_dur2 = 8-1 	if country == "BE" & year == 2015 & gender == 1 ///
 
 
 * BENEFIT (monthly)
-/* 	-> employed (MISSOC 01/07/2015): 
+/* 	
+	-> public sector: 100% earning (LP&R 2015)
+	-> private sector: 
 		-> first 30 days = 82% earnings, no ceiling 
-		-> rest of leave = 75% earnings, ceiling €133.00/day.			
-	-> unemployed (M2015): 
+		-> rest of leave = 75% earnings, ceiling €133.00/day.
+		
+	-> unemployed (LP&R 2015): 
 		-> first month = unemployment benefit + 19% of previous earnings with a ceiling €133.0/day
 		-> rest = unemployment benefit + 15% with a ceiling €133.0/day
 		-> not coded (EU-SILC unemployment benefit - household level data)
+		
 	-> self-employed (LP&R 2015):
 		-> €440.5/week
 */

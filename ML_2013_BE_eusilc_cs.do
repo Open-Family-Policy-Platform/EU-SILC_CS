@@ -5,10 +5,13 @@
 
 
 * ELIGIBILITY
-/*	-> employed
-	-> self-emloyed (separate system)
+/*	-> compulsory social insurance for employed and self-employed:
+		-> employed
+		-> self-emloyed (separate system)
+		-> conditions: 6 months of paid contributions
+	
 	-> unemployed with unemployment benefit
-	-> source: LP&R 2013
+	
 	
 	-> ML is not transferable but can be turned into parental leave if mother dies 
 		or during woman's hospitalization => it is assumed that this does not apply 
@@ -16,7 +19,7 @@
 */
 
 replace ml_eli = 1 		if country == "BE" & year == 2013 & gender == 1 ///
-						& inrange(econ_status,1,3) 
+						& inrange(econ_status,1,3) & (duremp+dursemp) >= 6 
 replace ml_eli = 0 		if ml_eli == . & country == "BE" & year == 2013 & gender == 1
 
 
@@ -44,17 +47,16 @@ replace ml_dur2 = 8-1 	if country == "BE" & year == 2013 & gender == 1 ///
 
 
 * BENEFIT (monthly)
-/* 	-> employed (MISSOC 01/07/2013): 
+/* 	
+	-> public sector: 100% earning (LP&R 2013)
+	-> private sector:  
 		-> first 30 days = 82% earnings, no ceiling 
-		-> rest of leave = 75% earnings, ceiling €98.70/day.
+		-> rest of leave = 75% earnings, ceiling €98.70/day (LP&R 2013)
 		
-	-> unemployed (M2013): 
-		-> first month = unemployment benefit + 19% of previous earnings with a ceiling €133.0/day
-		-> rest = unemployment benefit + 15% with a ceiling €133.0/day
-		-> not coded (EU-SILC unemployment benefit - household level data)
+	-> unemployed: no information available in MISSOC or LP&R 
 		
-	-> self-employed (LP&R 2014):
-		-> €440.5/week; MISSOC 2013 only refers to a flat-rate benefit but doesn't include the value => use value from 2015
+	-> self-employed (MISSOC self-employed 1/1/2013):
+		-> €440.5/week
 */
 
 gen ceiling = (0.75*earning) 		// for the purpose of ceiling calculation
