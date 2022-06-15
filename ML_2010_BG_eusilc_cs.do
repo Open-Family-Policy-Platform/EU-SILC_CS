@@ -5,7 +5,6 @@
 
 * ELIGIBILITY
 /*	-> employed (compulsorily insured): 12 months of insurance
-	-> Self-employed can be insured voluntarily => not coded
 	
 	-> mother can transfer the leave to father after 6 months
 		- can be used until child is 1 year old
@@ -31,8 +30,6 @@ replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2010 & gender == 1 & 
 
 * BENEFIT (monthly)
 /*	-> 90% earning 
-The amount cannot be lower than minimu wage and cannot exceed avg. net remuneration. 
-LP&R 2010 info does not exist for Bulgaria. Values of benefits are not sourced.
 */ 
 
 replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2010 ///

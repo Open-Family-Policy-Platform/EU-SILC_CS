@@ -31,9 +31,7 @@ replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2011 & gender == 1 & 
 
 * BENEFIT (monthly)
 /*	-> 90% earning 
-The amount cannot be lower than minimu wage and cannot exceed avg. net remuneration. 
-LP&R 2011 info does not exist for Bulgaria. Values of benefits are not sourced.
-*/ 
+*/
 
 replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2011 ///
 										& gender == 1 & ml_eli == 1 

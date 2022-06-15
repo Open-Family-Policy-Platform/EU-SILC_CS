@@ -31,8 +31,8 @@ replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2013 & gender == 1 & 
 
 * BENEFIT (monthly)
 /*	-> 90% earning
-	-> minimum: € 158.50 (source: Eurostat, EARN_MW_CUR, 2013-S2)
-	-> ceiling: € 1,329.18/month (average net renumeration; information wasn't found => value from 2017)
+	-> minimum: statutory minimum wage => € 158.50 (source: Eurostat, EARN_MW_CUR, 2013-S2)
+	-> ceiling: average net renumeration => € 1,329.18/month (average net renumeration; information wasn't found => value from 2017)
 */ 
 
 replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2013 ///
