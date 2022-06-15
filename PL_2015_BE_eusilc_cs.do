@@ -14,17 +14,18 @@ replace pl_eli = 0 		if pl_eli == . & country == "BE" & year == 2015
 
 
 * DURATION (weeks)
-/*	-> 4 months 
+/*	-> 4 months/parent/child 
 	-> until child is 12 years old (not coded) 		*/
 	
 replace pl_dur = 4 * 4.3 	if country == "BE" & year == 2015 & pl_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> full-time workers: €707.08/month 
+/*	-> full-time work interruption: €771.33/month 
+	-> part-time work interruption: €385.66 /month 
 */
 
-replace pl_ben1 = 707.08 		if country == "BE" & year == 2015 & pl_eli == 1 ///
+replace pl_ben1 = 771.33 		if country == "BE" & year == 2015 & pl_eli == 1 ///
 								& pl_ben1 == . 
 			
 

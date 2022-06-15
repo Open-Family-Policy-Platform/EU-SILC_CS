@@ -15,14 +15,15 @@ replace pl_eli = 0 		if pl_eli == . & country == "BE" & year == 2011
 
 * DURATION (weeks)
 /*	-> 3 months/parent/child 
+	-> until child is 12 years old (not coded)
 */
 	
 replace pl_dur = 3 * 4.3 	if country == "BE" & year == 2011 & pl_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> full-time workers: €684.94/month 
-	-> Flanders: additional €160/month until child is 1 year old (LP&R 2011)
+/*	-> full-time work interruption: €684.94/month 
+	-> part-time work interruption: €342.46/month
 */
 
 replace pl_ben1 = 684.94 		if country == "BE" & year == 2011 & pl_eli == 1 ///

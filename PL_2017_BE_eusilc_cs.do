@@ -6,7 +6,11 @@
 * ELIGIBILITY
 /*	-> private sector: employees, 12 months (coded) of employement in last 15 months with the same employer (not 
 		coded)
-	-> public sector: employees (not coded; LP&R 2017)						*/
+	-> public sector: employees (not coded; LP&R 2017)						
+
+	-> individual non-transferable right (MISSOC 2017)
+	-> parents may take their leave simultaneously (MISSOC 2017)
+*/
    
 replace pl_eli = 1 		if country == "BE" & year == 2017 & pl_eli == . ///
 						& econ_status == 1 & duremp >= 12 
@@ -14,15 +18,28 @@ replace pl_eli = 0 		if pl_eli == . & country == "BE" & year == 2017
 
 
 * DURATION (weeks)
-/*	-> 4 months 
+/*	-> 4 months/parent/child 
 	-> until child is 12 years old (not coded) 		*/
 	
 replace pl_dur = 4 * 4.3 	if country == "BE" & year == 2017 & pl_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> full-time workers (not single): €818.56/month 
-	-> single parent: €1,129.61/month
+/*	
+	-> 	the amoount of benefits vary depending on whether the parent is a single parent,
+		what is the total work interruption (full, half-time, 1/5) and whether the recipient of the benefit is 
+		above or below 50 years old. (MISSOC 2017)
+	-> 	only information on full-time interruption is coded
+	-> 	only values for recipients under 50 are coded
+	
+	-> full-time work interruption: €818.56/month 
+	-> full-time work interruption - single parent: €1,129.61/month
+	
+	-> half-time work interruption: €409.27/month
+	-> half-time work interruption - single parent: €564.80/month
+	
+	
+	
 */
 
 * single parent
