@@ -32,7 +32,7 @@ replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2019 & gender == 1 & 
 * BENEFIT (monthly)
 /*	-> 90% earning 
 	-> minimum: statutory minimum wage => €286.33/month (source: Eurostat, EARN_MW_CUR, 2019-S2; minimum wage)
-	-> ceiling: average net renumeration =>  €1,329.36/month
+	-> ceiling: average net renumeration =>  € 3,046.51/year (Eurostat: Annual net earnings, online data code: EARN_NT_NET)
 
 	-> the minimum and maximum values of benefit are sourced from LP&R 2019. 
 */ 
@@ -42,9 +42,9 @@ replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2019 ///
 replace ml_ben1 = 286.33 				if country == "BG" & year == 2019 ///
 										& gender == 1 & ml_eli == 1 ///
 										& ml_ben1 < 286.33
-replace ml_ben1 = 1329.36 				if country == "BG" & year == 2019 /// 
+replace ml_ben1 = 3046.51/12 				if country == "BG" & year == 2019 /// 
 										& gender == 1 & ml_eli == 1 ///
-										& ml_ben1 > 1329.36
+										& ml_ben1 > (3046.51/12)
 				
 				
 replace ml_ben2 = ml_ben1 	if country == "BG" & year == 2019 & gender == 1 & ml_eli == 1

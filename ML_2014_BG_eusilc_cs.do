@@ -32,7 +32,7 @@ replace ml_dur2 = (410-45)/7 	if country == "BG" & year == 2014 & gender == 1 & 
 * BENEFIT (monthly)
 /*	-> 90% earning 
 	-> minimum: statutory minimum wage => € 173.84 (source: Eurostat, EARN_MW_CUR, 2014-S2)
-	-> ceiling: average net renumeration => € 1,329.18/month (average net renumeration; information wasn't found => value from 2017)
+	-> ceiling: average net renumeration => € 2,016.86/year (Eurostat: Annual net earnings, online data code: EARN_NT_NET)
 
 	
 */ 
@@ -43,8 +43,8 @@ replace ml_ben1 = earning * 0.9 		if country == "BG" & year == 2014 ///
 replace ml_ben1 = 173.84				if country == "BG" & year == 2014 ///
 										& gender == 1 & ml_eli == 1 & ml_ben1 < 173.84
 										
-replace ml_ben1 = 1329.18 				if country == "BG" & year == 2014 ///
-										& gender == 1 & ml_eli == 1 & ml_ben1 >=  1329.18
+replace ml_ben1 = 2016.86/12 				if country == "BG" & year == 2014 ///
+										& gender == 1 & ml_eli == 1 & ml_ben1 >=  (2016.86/12)
 				
 				
 replace ml_ben2 = ml_ben1 	if country == "BG" & year == 2014 & gender == 1 & ml_eli == 1

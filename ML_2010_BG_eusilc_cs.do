@@ -4,17 +4,18 @@
 * BULGARIA - 2010
 
 * ELIGIBILITY
-/*	-> employed (compulsorily insured): 12 months of insurance
-	
-	-> mother can transfer the leave to father after 6 months
-		- can be used until child is 1 year old
-		- father must be employed for at least 12 months (not coded)
-		- single father is not automatically entitled since the mother's consent is required => not coded
+/*	-> 	parents who took pregnancy and childbirth benefit are entitled to 
+			a "benefit for raising a small child"
+			=> the eligibility condition is identical with maternity leave
+			
+		-> 	if the child is placed in a childcare, the parent is no longer
+			entitled to the benefit
+			
+		-> family entitlement => assigned to women
 */
 
-replace ml_eli = 1 		if country == "BG" & year == 2010 & gender == 1 ///
+replace pl_eli = 1  	if country == "BG" & year == 2019 & gender == 1 ///
 						& econ_status == 1 & duremp >= 12
-					
 						
 replace ml_eli = 0 		if ml_eli == . & country == "BG" & year == 2010 & gender == 1
 
