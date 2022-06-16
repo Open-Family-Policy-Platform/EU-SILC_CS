@@ -5,11 +5,14 @@
 
 * ELIGIBILITY
 /*	-> Employed: at least 12 months of insurance.
-	-> self-employed: voluntarily insured => not coded! 
+	-> self-employed: voluntarily insured => not coded!
+	
+	-> 	from the 6th month of the child's age, the mother can transfer her maternity
+		leave to the father (until the child is 1); mother's permission is required => not coded
 */
    
 replace pt_eli = 1 if country == "BG" & year == 2016 & gender == 2 ///
-				& econ_status == 1 & duremp == 12
+				& econ_status == 1 & duremp >= 12
 replace pt_eli = 0 if pt_eli == . & country == "BG" & year == 2016 & gender == 2
 
 
@@ -22,9 +25,8 @@ replace pt_dur = 15/5 if country == "BG" & year == 2016 & pt_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 90% earning 
-	-> minimum: €235.16 for the duration of PT 
-	-> ceiling: €1,329.18 for the duration of PT
-	The minimum and maximum values of benefit are sourced from LP&R 2016. 
+	-> minimum: statutory minimum wage; €214.75 (source: Eurostat, Minimum wages, code: EARN_MW_CUR) 
+	-> ceiling: average net income; annual net earnings = €2,344.52 (source: Eurostat, Annual net earnings, code: EARN_NT_NET)
 */
 
 	
@@ -34,12 +36,12 @@ replace pt_ben1 = ((earning * 0.9) * (15/21.7)) + (earning * ((21.7-15)/21.7)) /
 	
 	
 * minimum
-replace pt_ben1 = 235.16 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2016 ///
-															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) < 235.16
+replace pt_ben1 = (214.75 * (15/21.7)) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2016 ///
+															& pt_eli == 1 & (earning * 0.9) < 214.75
  
 * maximum 
-replace pt_ben1 = 1329.18 + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2016 ///
-															& pt_eli == 1 & ((earning * 0.9) * (15/21.7)) >= 1329.18
+replace pt_ben1 = ((2344.52/12) * (15/21.7)) + (earning * ((21.7-15)/21.7)) 	if country == "BG" & year == 2016 ///
+															& pt_eli == 1 & (earning * 0.9) >= (2344.52/12)
 										
 
 									

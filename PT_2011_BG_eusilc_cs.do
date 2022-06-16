@@ -6,10 +6,13 @@
 * ELIGIBILITY
 /*	-> Employed: at least 12 months of insurance.
 	-> self-employed: voluntarily insured => not coded! 
+	
+	-> 	from the 6th month of the child's age, the mother can transfer her maternity
+		leave to the father (until the child is 1); mother's permission is required => not coded
 */
    
 replace pt_eli = 1 if country == "BG" & year == 2011 & gender == 2 ///
-				& econ_status == 1 & duremp == 12
+				& econ_status == 1 & duremp >= 12
 replace pt_eli = 0 if pt_eli == . & country == "BG" & year == 2011 & gender == 2
 
 
