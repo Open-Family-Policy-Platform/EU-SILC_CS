@@ -4,39 +4,39 @@
 * BULGARIA - 2012
 
 * ELIGIBILITY
-/* 	-> Parental leave is specifically designed for women (LP&R 2012)
-	-> All women are entitled to a cash benefit. 
-	
-	-> single father is not automatically entitled - mother's consent is required => not coded
-   Source: MISSOC 01/07/2012										*/
+/* -> 	parents who took pregnancy and childbirth benefit are entitled to 
+			a "benefit for raising a small child"
+			=> the eligibility condition is identical with maternity leave
+			-> employed for at least 12 months before childbirth
+			
+		-> 	if the child is placed in a childcare, the parent is no longer
+			entitled to the benefit
+			
+		-> family entitlement => assigned to women
+*/
 
-replace pl_eli = 1 	if country == "BG" & year == 2012 & gender == 1
+replace pl_eli = 1  	if country == "BG" & year == 2011 & gender == 1 ///
+						& econ_status == 1 & duremp >= 12
 replace pl_eli = 0 	if pl_eli == . & country == "BG" & year == 2012 
 
 
 * DURATION (weeks)
-/*	-> employed for at least 12 months: until child is 2 (coded: minus postnatal ML)
-	-> all other women: until child is 1 year old			
-	Source: MISSOC 01/07/2012										
+/*	-> 1st, 2nd, 3rd child: until the child is 2 years old
+	-> 4th + children: 6 months (not coded)
 */
    
 replace pl_dur = (2*52) - ml_dur2 		if country == "BG" & year == 2012 & pl_eli == 1 ///
 										& gender == 1 & econ_status == 1 & duremp >= 12 ///
 										& ml_eli == 1
-replace pl_dur = 52 		if country == "BG" & year == 2012 & pl_eli == 1 ///
-							& gender == 1 & pl_dur == . & pl_eli == 1
 
 
 
 * BENEFIT (monthly)
-/*	-> women employed for at least 12 months: €174/month
-	-> all other women: €51/month
-	Source: MISSOC 01/07/2012*/
+/*	-> €123/month
+	Source: MISSOC 01/07/2011*/
    
-replace pl_ben1 = 174	 if country == "BG" & year == 2012 & pl_eli == 1 ///
-						 & gender == 1 & econ_status == 1 & duremp >= 12
-replace pl_ben1 = 51	 if country == "BG" & year == 2012 & pl_eli == 1 ///
-						 & gender == 1 & pl_ben1 == . & pl_eli == 1 
+replace pl_ben1 =  123	 if country == "BG" & year == 2012 & pl_eli == 1 ///
+						 & gender == 1 
 
 
 replace pl_ben2 = pl_ben1 	if country == "BG" & year == 2012 & pl_eli == 1 ///
