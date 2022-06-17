@@ -4,22 +4,12 @@
 * CROATIA - 2010
 
 * ELIGIBILITY
-/*	-> all parents but conditions and benefits differ by categories
-	-> parental leave is an individual partially transferable (2 months) entitlement
-
-	-> employed: parental leave
-		-> working for 12 consecutive months or 18 months (coded in pl_dur) with interruption during past 2 years (not coded)
-	-> self-employed: parental leave
-		-> working for 12 consecutive months or 18 months (coded in pl_dur) with interruption during past 2 years (not coded)
-	-> unemployed: parental exeption from work
-		-> permanent resident for at least 3 years (not coded)
-		-> compulsory health insurance (not coded)
-		-> registered as unemployed for at least 9 uninterrupted months or 12 months with interruptions
-			in the last 2 years before childbirth (not coded because the benefits are identical as for inactive;
-			it is assumed that unemployed ineligible for the parental exeption from work will be eligible for 
-			parental care for a child)
-	-> inactive: parental care for a child
-		-> permanent resident for at least 5 years (not coded)
+/*	
+	-> 	source: LP&R 2010
+	-> 	employed, self-employed (parental leave; income-related benefit)
+	-> 	non-working (parental exemption form work; flat-rate benefit)
+	
+	-> 	individual trasferable right
 */
 
 replace pl_eli = 1 		if country == "HR" & year == 2010
@@ -28,34 +18,62 @@ replace pl_eli = 0 		if pl_eli == . & country == "HR" & year == 2010
 
 
 * DURATION (weeks)
-/*	-> employed/self-employed:  4 months/parent/child
-	-> for everyone else: from 6th to 12th month of child's age
-   Source: MISSOC 01/07/2010										*/
+/*	-> employed/self-employed: 
+		-> 1st and 2nd child:
+			-> 3 months/parent/child
+			-> individual transferable right
+		-> 3rd+ child:
+			-> 30 months in total (15 months/parent)
+		
+	-> non-working: 
+		-> 1st and 2nd child:
+			-> from 6th to 12th month of child's age (assigned to women; unclear whether it is still
+				and individul transferable right and how much is assigned to each parent)
+		-> 3rd+ child:
+			-> until child is 3 years old (assigned to women; unclear whether it is still
+				and individul transferable right and how much is assigned to each parent)
+ */
    
-replace pl_dur = 4 		if country == "HR" & year == 2010 & pl_eli == 1 ///
-						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 
+replace pl_dur = 3*4.3 		if country == "HR" & year == 2010 & pl_eli == 1 ///
+							& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 ///
+							& childc <= 2
 						
+replace pl_dur = 15/4.3 		if country == "HR" & year == 2010 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 ///
+								& childc > 2 
+
 						
-replace pl_dur = 6 		if country == "HR" & year == 2010 & pl_eli == 1 ///
-						& pl_dur == . 
+replace pl_dur = 6*4.3 		if country == "HR" & year == 2010 & pl_eli == 1 ///
+							& pl_dur == . & childc <= 2 & gender == 1
 				
+replace pl_dur = (3*52) - ml_dur2 		if country == "HR" & year == 2010 & pl_eli == 1 ///
+										& pl_dur == . & childc > 2 & gender == 1
 
 
 * BENEFIT (monthly)
-/*	-> Employed & self-employd: 100%
-		-> ceiling = €565/month
-	-> All others: €225.22/month
+/*	-> Employed & self-employd: 
+		-> first 6 months: 
+			-> 100%
+			-> ceiling: 80% of the budgetary base rate (€460/month)
+	-> non-working: 
+		-> 50% of the budgetary base rate
 */
 
-replace pl_ben1 = earning 		if country == "HR" & year == 2010 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
+* working
+replace pl_ben1 = earning  		if country == "HR" & year == 2010 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 
+								
+	* ceiling
+replace pl_ben1 = 0.8*460 		if country == "HR" & year == 2010 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 ///
+								& pl_ben1 > (0.8*460)
+								
+* non-working
+replace pl_ben1 = 0.5*460	 	if country == "HR" & year == 2010 & pl_eli == 1 ///
+								& pl_ben1 == . 
+								
 
-replace pl_ben1 = 565 	if country == "HR" & year == 2010 & pl_eli == 1 ///
-						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & earning > 565
-
-
-replace pl_ben1 = 225.22 	if country == "HR" & year == 2010 & pl_eli == 1 ///
-						& pl_ben1 == . 
+replace pl_ben2 = pl_ben1 		if country == "HR" & year == 2010 & pl_eli == 1
  
 
  foreach x in 1 2 {
