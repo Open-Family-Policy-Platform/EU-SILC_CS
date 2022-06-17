@@ -2,7 +2,12 @@
 
 * CROATIA - 2010
 
-/*	Croatia doesn't have a stratutory right to paternity leave.  */
+/*	Croatia doesn't have a stratutory right to paternity leave.  
+
+	-> 	70 days after the childbirth, mother can transfer the rest of her maternity 
+		leave on the father (until the child is 6 months old). Mother forgoes her
+		maternity leave => not coded as paternity leave.
+*/
 
 
 * ELIGIBILITY
