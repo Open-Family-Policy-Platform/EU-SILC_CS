@@ -9,9 +9,7 @@
 	-> unemployed (exemption from work)
 	-> inactive (maternity child care)		
 	
-	-> mother can transfer 3 months to father. The transfer is not automatic, 
-		mother needs to agree => it is assumed that single father is not automatically
-		entitled to the leave (not coded)
+	
 */
 replace ml_eli = 1 		if country == "HR" & year == 2010 & gender == 1 ///
 						& inrange(econ_status,1,4) 
@@ -40,12 +38,12 @@ replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2010 & ml_eli == 1
 
 * BENEFIT (monthly)
 /*	-> employed, self-employed & insured for  12 consecutive months (coded) or for 18 non-consecutive
-		months over the course of 2 years before birth (not coded) = 100%
-	-> those who do not fulfill this requirement = €221/month	*/
+		months over the course of 2 years before birth (not coded): 100% earnings, no ceiling
+	-> those who do not fulfill this requirement: half of the budgetary base rate, which was €460 (LP&R 2010) 	*/
 	
 replace ml_ben1 = earning 		if country == "HR" & year == 2010 & gender == 1 ///
 								& ml_eli == 1 & (duremp+dursemp) >= 12 & earning != 0
-replace ml_ben1 = 221			if country == "HR" & year == 2010 & gender == 1 ///
+replace ml_ben1 = 460/2			if country == "HR" & year == 2010 & gender == 1 ///
 								& ml_eli == 1 & ml_ben1 == .
 								
 

@@ -9,9 +9,10 @@
 	-> unemployed (exemption from work)
 	-> inactive (maternity child care)		
 	
-	-> mother can transfer 3 months to father. The transfer is not automatic, 
-		mother needs to agree => it is assumed that single father is not automatically
-		entitled to the leave (not coded)
+	-> 	mother can transfer 3 months to father (father can take maternity leave
+		from the 71st day after childbirth until child is 6 months old). 
+		The transfer is not automatic, mother needs to agree => it is assumed 
+		that single father is not automatically entitled to the leave (not coded)
 */
 replace ml_eli = 1 		if country == "HR" & year == 2019 & gender == 1 ///
 						& inrange(econ_status,1,4) 
@@ -23,10 +24,10 @@ replace ml_eli = 0 		if ml_eli == . & country == "HR" & year == 2019 ///
 * DURATION (weeks)
 /*	-> employed, self-employed:	
 		-> prenatal: 28 days
-		-> postnatal: until child is 6 months old		
+		-> postnatal: until child is 6 months old (70 days are compulsory)		
 	-> unemployed, inactive:
 		-> prenatal: 0 days
-		-> postnatal: until child is 6 months old
+		-> postnatal: until child is 6 months old (70 days are compulsory)
 */
 	
 replace ml_dur1 = 28/5 		if country == "HR" & year == 2019 & ml_eli == 1 ///
