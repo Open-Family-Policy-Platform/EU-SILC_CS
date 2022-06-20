@@ -48,26 +48,62 @@ replace pl_dur = (3*52) - ml_dur2 		if country == "HR" & year == 2019 & pl_eli =
 
 
 * BENEFIT (monthly)
-/*	-> Employed & self-employd: 100%
-		-> ceiling = €540/month
-	-> All others: €315/month
+/*	-> Employed & self-employd: 
+		-> <= 2 children:
+			-> first 6 months:
+				-> 100% 
+				-> ceiling: €540/month (MISSOC 1/7/2019)
+			-> after:
+				-> 70%
+				-> ceiling: €540/month (MISSOC 1/7/2019)
+				-> NOT CODED - will affect the benefit of that parent who use the benefit second
+				
+		-> 3+ children:
+			-> first 6 months:
+				-> 100% 
+				-> ceiling: €540/month (MISSOC 1/7/2019)
+			-> after that: 
+				-> €315/month for 24 months
+		
+	-> unemployed & inactive:
+		-> €315/month
 */
 
+* for 1-2 children
 replace pl_ben1 = earning 		if country == "HR" & year == 2019 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 ///
+								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & gender == 1 ///
+								& childc <= 2
+								
+replace pl_ben1 = 540 			if country == "HR" & year == 2019 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & pl_ben1 > 530 ///
 								& childc <= 2
 
-replace pl_ben1 = 540 	if country == "HR" & year == 2019 & pl_eli == 1 ///
-						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & earning >= 540 ///
-						& childc <= 2
-
-
-replace pl_ben1 = 315 	if country == "HR" & year == 2019 & pl_eli == 1 ///
-						& pl_ben1 == . 
- 
-
+								
+* for 3+ children
+eplace pl_ben1 = ((earning * (6/30)) + (315 * 24)) / 30 		if country == "HR" & year == 2019 & pl_eli == 1 ///
+																& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & gender == 1 ///
+																& childc > 2
+								
+replace pl_ben1 = ((540 * 6) + (315 * 24)) / 30			if country == "HR" & year == 2019 & pl_eli == 1 ///
+														& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & pl_ben1 > 530 ///
+														& childc > 2
+								
+								
+* non-working								
+replace pl_ben1 = 315 			if country == "HR" & year == 2019 & pl_eli == 1 ///
+								& pl_ben1 == . & pl_eli == 1
+						
+						
+						
 replace pl_ben2 = pl_ben1   	if country == "HR" & year == 2019 & pl_eli == 1 
-						 
+replace pl_ben2 = earning 		if country == "HR" & year == 2019 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & gender == 1 ///
+								& childc > 2
+replace pl_ben2 = 540 			if country == "HR" & year == 2019 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & pl_ben1 > 530 ///
+								& childc > 2		
+						
+						
  
  foreach x in 1 2 {
 	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "HR" & year == 2019

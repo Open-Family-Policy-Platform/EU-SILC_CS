@@ -52,7 +52,6 @@ replace pl_dur = (3*52) - ml_dur2 		if country == "HR" & year == 2010 & pl_eli =
 
 * BENEFIT (monthly)
 /*	-> Employed & self-employd: 
-		-> first 6 months: 
 			-> 100%
 			-> ceiling: 80% of the budgetary base rate (€460/month)
 	-> non-working: 
