@@ -5,7 +5,7 @@
 
 * ELIGIBILITY
 /*	-> 	no statutory entitlement */
-replace pt_eli = 0 		if country == "CZ" & year == 2013 & gender == 2
+replace pt_eli = .a 		if country == "CZ" & year == 2013 & gender == 2
 
 * DURATION (weeks)
 replace pt_dur = .a if country == "CZ" & year == 2013 & gender == 2

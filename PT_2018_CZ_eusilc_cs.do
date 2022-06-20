@@ -11,8 +11,10 @@ replace pt_eli = 0 		if pt_eli == . & country == "CZ" & year == 2018 & gender ==
 
 
 * DURATION (weeks)
-/*	-> 7 days */
-replace pt_dur = 7/5  	if country == "CZ" & year == 2018 & gender == 2 & pt_eli == 1 // MISSOC 01/07/2018
+/*	-> 1 week 
+	-> can be taken within 6 months from the childbirth
+*/
+replace pt_dur = 1  	if country == "CZ" & year == 2018 & gender == 2 & pt_eli == 1 // MISSOC 01/07/2018
 
 
 * BENEFIT (monthly)
@@ -69,11 +71,11 @@ replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2018 & pt_eli == 
 									
 * Benefits
 
-replace pt_ben1 = ((dab * 0.7) * pt_dur) + (earning * ((21.7 - 7)/21.7))	///
+replace pt_ben1 = ((dab * 0.7) * pt_dur) + (earning * ((4.3 - 1)/4.3))	///
 							if country == "CZ" & year == 2018 & pt_eli == 1
 							
 							
-replace pt_ben1 = (47 * pt_dur) + (earning * ((21.7 - 7)/21.7))	///
+replace pt_ben1 = (47 * pt_dur) + (earning * ((4.3 - 1)/4.3))	///
 							if country == "CZ" & year == 2018 & pt_eli == 1 ///
 							& dab*0.7 >= 47 & pt_eli == 1
 
