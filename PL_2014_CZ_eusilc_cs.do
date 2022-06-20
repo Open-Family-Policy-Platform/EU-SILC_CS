@@ -87,12 +87,13 @@ replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2014 & ml_eli == 
 
 
 *** DURATION
-/* -> maximum amount of benefit for the whole period: €8,013
+/* -> maximum amount of benefit for the whole period: €8,012
    
 	-> if at least one of the parents has social insurance:
 		-> 70% of the daily assessment base (dab)
 		-> ceiling: €419/month 
-		-> If neither of the parents have social insurance: €277/month
+		-> If neither of the parents have social insurance:
+				- €277/month until child is 10 months old, €138 until child is 48 months old => duration 4 years
 	-> social insurance compulsory only for employees
 */	
 									
@@ -107,19 +108,19 @@ replace pl_dur = 4*52					if country == "CZ" & year == 2014 & pl_eli == 1 ///
 										
 * employed
 	* women
-replace pl_dur = (8013 / ((0.7*dab)*21.7)) * 4.3 		if country == "CZ" & year == 2014 & pl_eli == 1 ///
+replace pl_dur = (8012 / ((0.7*dab)*21.7)) * 4.3 		if country == "CZ" & year == 2014 & pl_eli == 1 ///
 														& econ_status == 1 & gender == 1 & pl_dur == . 
 												
 	* women - above ceiling
-replace pl_dur = (8013 / 419) * 4.3 					if country == "CZ" & year == 2014 & pl_eli == 1 ///
+replace pl_dur = (8012 / 419) * 4.3 					if country == "CZ" & year == 2014 & pl_eli == 1 ///
 														& econ_status == 1 & gender == 1 & (0.7 * (21.7*dab)) >= 419	
 
 	* single men
-replace pl_dur = (8013 / ((0.7*dab)*21.7)) * 4.3 		if country == "CZ" & year == 2014 & pl_eli == 1 ///
+replace pl_dur = (8012 / ((0.7*dab)*21.7)) * 4.3 		if country == "CZ" & year == 2014 & pl_eli == 1 ///
 														& econ_status == 1 & gender == 2 & pl_dur == . & parstat == 1
 														
 	* single men - above ceiling
-replace pl_dur = (8013 / 419) * 4.3 					if country == "CZ" & year == 2014 & pl_eli == 1 ///
+replace pl_dur = (8012 / 419) * 4.3 					if country == "CZ" & year == 2014 & pl_eli == 1 ///
 														& econ_status == 1 & gender == 2 & (0.7 * (21.7*dab)) >= 419 & parstat == 1												
 			
 	* duration longer than 4 years

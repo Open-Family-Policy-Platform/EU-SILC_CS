@@ -15,7 +15,7 @@ replace pl_eli = 0 		if pl_eli == . & country == "CZ" & year == 2013
 * DURATION (weeks)
 /*	-> parents choose the monthly benefit amount (determines also the duration of PL) 
 
-	-> maximum amount of benefit for the whole period: €8,458
+	-> maximum amount of benefit for the whole period: €8,541
    
 	-> 70% of the daily assessment base
 	-> ceiling: €442/month 
@@ -88,12 +88,13 @@ replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2013 & ml_eli == 
 *** DURATION
 /* 	-> not working: until child is 4 years old
 	-> working: parents can choose the monthly amount of benefits -> determines the duration of benefit payment
-			-> maximum amount of benefit for the whole period: €8,458
+			-> maximum amount of benefit for the whole period: €8,541
    
-	-> if at least one of the parents has social insurance:
+	-> if at least one of the parents has social insurance (the code only uses the information about mother):
 		-> 70% of the daily assessment base (dab)
 		-> ceiling: €442/month 
-		-> If neither of the parents have social insurance: €292/month
+		-> If neither of the parents have social insurance:
+			- €292/month until child is 10 months old, €146 until child is 48 months old => duration 4 years
 	-> social insurance compulsory only for employees
 	
 	-> the duration for working parents is calculated based on the most generous benefits (70% of the daily asssessment base up to a ceiling)

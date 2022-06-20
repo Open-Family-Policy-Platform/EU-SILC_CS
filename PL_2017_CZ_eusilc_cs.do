@@ -5,7 +5,7 @@
 
 * ELIGIBILITY
 /*	-> cash benefits are available to all residents
-	-> all employees are entitled to parental leave 
+	-> all employees are entitled to parental leave (until child is 3 years old)
 */
 	
 replace pl_eli = 1 		if country == "CZ" & year == 2017 
@@ -22,7 +22,7 @@ replace pl_eli = 0 		if pl_eli == . & country == "CZ" & year == 2017
 	-> The benefit is calculated from the higher daily assessment base (if man's dab is higher, it is calculated
    from his daily assessment base; if woman's dab is higher, it is calculated from hers).
 	-> If neither of the parents have social insurance:
-		- €292/month
+		- €289/month until child is 10 months old, €144 until child is 48 months old => duration 4 years
 		
 	-> the most generous benefit is coded
    
@@ -137,11 +137,11 @@ replace pl_dur = 208 		if country == "CZ" & year == 2017 & pl_eli == 1 ///
 
 * not employed
 	* women
-replace pl_ben1 = (289 * (10/48)) + (140 * ((48-10)/48)) 				if country == "CZ" & year == 2017 & pl_eli == 1 ///
+replace pl_ben1 = (289 * (10/48)) + (144 * ((48-10)/48)) 				if country == "CZ" & year == 2017 & pl_eli == 1 ///
 																		& econ_status != 1 & gender == 1
 																		
 	* single men
-replace pl_ben1 = (289 * (10/48)) + (140 * ((48-10)/48)) 				if country == "CZ" & year == 2017 & pl_eli == 1 ///
+replace pl_ben1 = (289 * (10/48)) + (144 * ((48-10)/48)) 				if country == "CZ" & year == 2017 & pl_eli == 1 ///
 																		& econ_status != 1 & gender == 2 & parstat == 1
 																		
 
