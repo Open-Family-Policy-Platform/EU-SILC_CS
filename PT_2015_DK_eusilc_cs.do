@@ -5,19 +5,23 @@
 
 
 * ELIGIBILITY
-/* -> employed
-	-> self-employed
+/* 	-> employed (coded): at least 120 hours in 13 weeks before birth 
+	-> self-employed: for at least 6 months (coded) during 12 months before birth (not coded)
 	-> unemployed (from unemployment insurance)	
 	-> students (extra student grant; pl031 == 6; LP&R 2015)
 	
 */
 replace pt_eli = 1 		if country == "DK" & year == 2015 & gender == 2 ///
-						& inlist(econ_status,1,2,3) 
+						& inlist(econ_status,1,3)
+						
+replace pt_eli = 1 		if country == "DK" & year == 2015 & gender == 2 ///
+						& econ_status == 2 & dursemp >= 6
 						
 replace pt_eli = 1	 	if country == "DK" & year == 2015 & gender == 2 ///
 						& pl031 == 6						
-						
+										
 replace pt_eli = 0 		if pt_eli == . & country == "DK" & year == 2015 & gender == 2
+
 
 
 * DURATION (weeks)
