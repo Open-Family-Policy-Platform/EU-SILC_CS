@@ -26,8 +26,8 @@ replace ml_dur2 = (140-30)/7 		if country == "EE" & year == 2019 & gender == 1 &
 
 
 * BENEFIT (monthly)
-/*	-> employed, self-employed: 100% earnings paid during the previous calendar year (LP&R 2019)
-	-> employed, self-employed who didn't work in the previous calendar year: €540/month 	
+/*	-> employed, self-employed: 100% earnings paid during the previous calendar year 
+	-> employed, self-employed who didn't work in the previous calendar year: €540/month (LP&R 2019)	
 */
 
 * employed	
