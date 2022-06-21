@@ -4,8 +4,8 @@
 * DENMARK - 2019
 
 * ELIGIBILITY
-/*	-> employed 
-	-> self-employed
+/*	-> employed (coded): at least 120 hours in 13 weeks before birth 
+	-> self-employed: for at least 6 months (coded) during 12 months before birth (not coded)
 	-> unemployed (from unemployment insurance)	
 	-> students (extra student grant; pl031 == 6; LP&R 2019)
 	
@@ -13,7 +13,10 @@
 		the sources provide no indication that this is the case => not coded for single fathers
 */
 replace ml_eli = 1	 	if country == "DK" & year == 2019 & gender == 1 ///
-						& inlist(econ_status,1,2,3) 
+						& inlist(econ_status,1,3)
+						
+replace ml_eli = 1 		if country == "DK" & year == 2019 & gender == 1 ///
+						& econ_status == 2 & dursemp >= 6
 						
 replace ml_eli = 1	 	if country == "DK" & year == 2019 & gender == 1 ///
 						& pl031 == 6
@@ -22,13 +25,15 @@ replace ml_eli = 0 		if ml_eli == . & country == "DK" & year == 2019 & gender ==
 
 
 * DURATION (weeks)
-/*	-> combined entitlement for mother and father (MISSOC 01/07/2019)
+/*	-> combined entitlement for mother and father (MISSOC 01/07/2019) covering 
+		maternity, paternity and parental leave
 	-> prenatal: 4 weeks
-	-> postnatal: 14 weeks but 2 are for the father => coded as 12 weeks 	*/
+	-> postnatal: 14 weeks 	
+*/
 	
 replace ml_dur1 = 4 	if country == "DK" & year == 2019 & ml_eli == 1
 
-replace ml_dur2 = 12 	if country == "DK" & year == 2019 & ml_eli == 1
+replace ml_dur2 = 14 	if country == "DK" & year == 2019 & ml_eli == 1
 
 
 * BENEFIT (monthly)
@@ -41,7 +46,7 @@ replace ml_ben1 = earning 		if country == "DK" & year == 2019 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & earning < 583*4.3
 
 replace ml_ben1 = 583*4.3		if country == "DK" & year == 2019 & ml_eli == 1 ///
-								& inlist(econ_status,1,2) & ml_ben1 >= 583*4.3 
+								& inlist(econ_status,1,2) & ml_ben1 >= 505*4.3 
 								
 
 replace ml_ben2 = ml_ben1 if country == "DK" & year == 2019 & ml_eli == 1
