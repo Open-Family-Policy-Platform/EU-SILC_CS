@@ -29,20 +29,24 @@ replace ml_dur2 = (105-30)/6 if country == "FI" & year == 2013 & gender == 1 & m
 
 * BENEFIT 
 /* first 56 days:
-	-> €23.77/day if unemployed (income group 56a)
+	-> €23.77/day if unemployed or earnings are less than €10,189/year (income group 56a)
 	-> 90% of earnings below €54,552/year (IG 56b)
 	-> 32.5% of earnings above €54,552/year (IG 56c)
 
 remaining 49 days:
 	-> €23.77/day if unemployed or earnings are less than €10,189/year (income group 49a)
-	-> 70% on earnings between €10,189/year and €35,458/year (IG 49b)
+	-> 70% on earnings between €10,189/year and €35,457/year (IG 49b)
 	-> 40% on earnings between €35,458/year and €54,552/year (IG 49c)
 	-> 25% on earnings above €54,552/year   (IG 49d) 						*/ 
 
-* Income group (IG) 56a
-gen ml_ben56 = 23.77 * 21.7 		if country == "FI" & year == 2013 ///
+* Income group (IG) 56a & 49a
+gen ml_ben1 = 22.13 * 21.7 		if country == "FI" & year == 2013 ///
 									& gender == 1 & ml_eli == 1 ///
 									& inlist(econ_status,3,4)
+
+replace ml_ben1 = 22.13 * 21.7 		if country == "FI" & year == 2013 ///
+									& gender == 1 & ml_eli == 1 ///
+									& inlist(econ_status,1,2) & (earning*12) < 10189	
 
 
 * IG 56b			
@@ -55,7 +59,7 @@ gen ml_ben56a = (54552/12) * 0.9 	if country == "FI" & year == 2013 ///
 									& gender == 1 & (earning*12) > 54552 ///
 									& ml_eli == 1
 									
-gen ml_ben56b = (earning - (57183/12)) * 0.325 		if country == "FI" & year == 2013 ///
+gen ml_ben56b = (earning - (54552/12)) * 0.325 		if country == "FI" & year == 2013 ///
 													& gender == 1 ///
 													& (earning*12) > 54552 & ml_eli == 1
 	
@@ -66,13 +70,6 @@ replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2013 ///
 												& (earning*12) > 54552 & ml_eli == 1
 
 
-* IG 49a
-gen ml_ben49 = 23.77 * 21.7 		if country == "FI" & year == 2013 & gender == 1 ///
-									& ml_eli == 1 & inlist(econ_status,3,4)
-
-
-replace ml_ben49 = 23.77 * 21.7 		if country == "FI" & year == 2013 & gender == 1 ///
-									& ml_eli == 1 & (earning*12) < 10189
 
 * IG 49b - annual earnings under €35,458
 replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2013 & gender == 1 ///

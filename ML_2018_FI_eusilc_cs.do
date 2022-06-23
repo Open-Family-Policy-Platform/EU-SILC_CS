@@ -47,7 +47,7 @@ gen ml_ben56 = 24.64 * 21.7 		if country == "FI" & year == 2018 ///
 
 replace ml_ben56 = 24.64 * 21.7 		if country == "FI" & year == 2018 ///
 									& gender == 1 & ml_eli == 1 ///
-									& (earning*12) < 8215
+									& (earning*12) < 8215 & inlist(econ_status,1,2)
 
 * IG 56b			
 replace ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2018 ///
@@ -76,7 +76,7 @@ gen ml_ben49 = 24.64 * 21.7 		if country == "FI" & year == 2018 & gender == 1 //
 
 
 replace ml_ben49 = 24.64 * 21.7 		if country == "FI" & year == 2018 & gender == 1 ///
-									& ml_eli == 1 & (earning*12) < 10562
+									& ml_eli == 1 & (earning*12) < 10562 & inlist(econ_status,1,2)
 
 * IG 49b - annual earnings under €37,167
 replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2018 & gender == 1 ///

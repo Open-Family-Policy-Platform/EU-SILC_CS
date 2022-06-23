@@ -30,7 +30,7 @@ replace ml_dur2 = (105-30)/6 if country == "FI" & year == 2015 & gender == 1 & m
 
 * BENEFIT 
 /* first 56 days:
-	-> €24.02/day if unemployed or earnings are less than €8,010/year (income group 56a)
+	-> €24.02/day if unemployed or earnings are less than €8,010/year (income group 56a; LP&R 2015)
 	-> 90% of earnings between €8,010/year and €56,032/year (IG 56b)
 	-> 32.5% of earnings above €56,032/year (IG 56c)
 
@@ -40,7 +40,7 @@ remaining 49 days:
 	-> 40% on earnings between €36,420 /year and €56,032/year (IG 49c)
 	-> 25% on earnings above €56,032/year   (IG 49d) 						*/ 
 
-* Income group (IG) 56a
+* Income group (IG) 56a 
 gen ml_ben56 = 24.02 * 21.7 		if country == "FI" & year == 2015 ///
 									& gender == 1 & ml_eli == 1 ///
 									& inlist(econ_status,3,4)
@@ -48,7 +48,7 @@ gen ml_ben56 = 24.02 * 21.7 		if country == "FI" & year == 2015 ///
 
 replace ml_ben56 = 24.02 * 21.7 		if country == "FI" & year == 2015 ///
 									& gender == 1 & ml_eli == 1 ///
-									& (earning*12) < 8010
+									& (earning*12) < 8010 & inlist(econ_status,1,2)
 
 * IG 56b			
 replace ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2015 ///
@@ -60,7 +60,7 @@ gen ml_ben56a = (56032/12) * 0.9 	if country == "FI" & year == 2015 ///
 									& gender == 1 & (earning*12) > 56032 ///
 									& ml_eli == 1
 									
-gen ml_ben56b = (earning - (57183/12)) * 0.325 		if country == "FI" & year == 2015 ///
+gen ml_ben56b = (earning - (56032/12)) * 0.325 		if country == "FI" & year == 2015 ///
 													& gender == 1 ///
 													& (earning*12) > 56032 & ml_eli == 1
 	
@@ -77,7 +77,7 @@ gen ml_ben49 = 24.02 * 21.7 		if country == "FI" & year == 2015 & gender == 1 //
 
 
 replace ml_ben49 = 24.02 * 21.7 		if country == "FI" & year == 2015 & gender == 1 ///
-									& ml_eli == 1 & (earning*12) < 10297
+									& ml_eli == 1 & (earning*12) < 10297 & inlist(econ_status,1,2)
 
 * IG 49b - annual earnings under €36420
 replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2015 & gender == 1 ///
