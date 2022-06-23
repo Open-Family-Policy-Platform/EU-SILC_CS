@@ -3,8 +3,8 @@
 
 * Finland - 2018 
 
-* ELIGIBILITY (MISSOC 01/07/2018)
-/*	-> all residents (women)
+* ELIGIBILITY 
+/*	-> all residents (at least 180 days of residency - not coded)
 	-> non-residents: 4 months of employment or self-employment (not coded)
 	-> ML can be transferred to father in case of death or illness => it is assumed that 
 		this does not apply to cases where the mother abandoned her child (not coded)
@@ -27,7 +27,7 @@ replace ml_dur2 = (105-30)/6 if country == "FI" & year == 2018 & gender == 1 & m
 
 
 
-* BENEFIT (monthly; LP&R 2018)
+* BENEFIT 
 /* first 56 days:
 	-> €24.64/day if unemployed or earnings are less than €8,215/year (income group 56a)
 	-> 90% of earnings between €8,215/year and €57,183/year (IG 56b)
@@ -42,7 +42,7 @@ remaining 49 days:
 * Income group (IG) 56a
 gen ml_ben56 = 24.64 * 21.7 		if country == "FI" & year == 2018 ///
 									& gender == 1 & ml_eli == 1 ///
-									& econ_status == 3
+									& inlist(econ_status,3,4)
 
 
 replace ml_ben56 = 24.64 * 21.7 		if country == "FI" & year == 2018 ///
@@ -72,7 +72,7 @@ replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2018 ///
 
 * IG 49a
 gen ml_ben49 = 24.64 * 21.7 		if country == "FI" & year == 2018 & gender == 1 ///
-									& ml_eli == 1 & econ_status == 3
+									& ml_eli == 1 & inlist(econ_status,3,4)
 
 
 replace ml_ben49 = 24.64 * 21.7 		if country == "FI" & year == 2018 & gender == 1 ///

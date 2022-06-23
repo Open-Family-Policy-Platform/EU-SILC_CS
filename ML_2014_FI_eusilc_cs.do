@@ -3,7 +3,7 @@
 
 * Finland - 2014 
 
-* ELIGIBILITY (MISSOC 01/07/2014)
+* ELIGIBILITY 
 /*	-> all residents (women)
 	-> non-residents: 4 months of employment or self-employment (not coded)
 	-> ML can be transferred to father in case of death or illness => it is assumed that 
@@ -27,10 +27,10 @@ replace ml_dur2 = (105-30)/6 if country == "FI" & year == 2014 & gender == 1 & m
 
 
 
-* BENEFIT (monthly; LP&R 2014)
+* BENEFIT 
 /* first 56 days:
-	-> €23.92/day if unemployed or earnings are less than €10,253/year (income group 56a)
-	-> 90% of earnings between €10,253/year and €55,498/year (IG 56b)
+	-> €23.92/day if unemployed (income group 56a)
+	-> 90% of earnings below €55,498/year (IG 56b)
 	-> 32.5% of earnings above €55,498/year (IG 56c)
 
 remaining 49 days:
@@ -42,37 +42,34 @@ remaining 49 days:
 * Income group (IG) 56a
 gen ml_ben56 = 23.92 * 21.7 		if country == "FI" & year == 2014 ///
 									& gender == 1 & ml_eli == 1 ///
-									& econ_status == 3
+									& inlist(econ_status,3,4)
 
 
-replace ml_ben56 = 23.92 * 21.7 		if country == "FI" & year == 2014 ///
-									& gender == 1 & ml_eli == 1 ///
-									& (earning*12) < 10253
 
 * IG 56b			
 replace ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2014 ///
 									& gender == 1 & ml_eli == 1 & ml_ben56 == . ///
-									& inrange((earning*12),10253,55498)
+									& (earning*12) < 55498
 
 * IG 56c			
 gen ml_ben56a = (55498/12) * 0.9 	if country == "FI" & year == 2014 ///
-									& gender == 1 & (earning*12) > 55498 ///
+									& gender == 1 & (earning*12) >= 55498 ///
 									& ml_eli == 1
 									
 gen ml_ben56b = (earning - (57183/12)) * 0.325 		if country == "FI" & year == 2014 ///
 													& gender == 1 ///
-													& (earning*12) > 55498 & ml_eli == 1
+													& (earning*12) >= 55498 & ml_eli == 1
 	
 	
 replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2014 ///
 												& gender == 1 & ml_eli == 1 ///
 												& ml_ben56 == . ///
-												& (earning*12) > 55498 & ml_eli == 1
+												& (earning*12) >= 55498 & ml_eli == 1
 
 
 * IG 49a
 gen ml_ben49 = 23.92 * 21.7 		if country == "FI" & year == 2014 & gender == 1 ///
-									& ml_eli == 1 & econ_status == 3
+									& ml_eli == 1 & inlist(econ_status,3,4)
 
 
 replace ml_ben49 = 23.92 * 21.7 		if country == "FI" & year == 2014 & gender == 1 ///
