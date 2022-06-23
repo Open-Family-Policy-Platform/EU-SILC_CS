@@ -6,6 +6,7 @@
 * ELIGIBILITY
 /*	-> all residents
 	-> non-residents: 4 months of employment or self-employment (not coded)
+	-> family entitlement
  */
 replace pl_eli = 1 			if country == "FI" & year == 2016 
 			
@@ -13,7 +14,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FI" & year == 2016
 
 
 * DURATION (weeks)
-/* 	-> family entitlement 
+/* 	
 	-> 158 days 
 	-> couples: assigned to women
 */

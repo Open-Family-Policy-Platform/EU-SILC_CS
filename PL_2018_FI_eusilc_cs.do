@@ -6,6 +6,7 @@
 * ELIGIBILITY
 /*	-> all residents
 	-> non-residents: 4 months of employment or self-employment (not coded)
+	-> family entitlement
  */
 replace pl_eli = 1 			if country == "FI" & year == 2018 
 			
@@ -13,7 +14,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FI" & year == 2018
 
 
 * DURATION (weeks)
-/* 	-> family entitlement 
+/* 	
 	-> 158 days 
 	-> couples: assigned to women
 */
@@ -49,7 +50,7 @@ replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2018 & gender == 
 gen pl_bena = (37168/12) * 0.7 		if country == "FI" & year == 2018 & gender == 1 ///
 									& pl_eli == 1 & earning*12 >= 37168
 			
-gen pl_benb = (earning - (37862/12)) * 0.4 		///
+gen pl_benb = (earning - (37168/12)) * 0.4 		///
 									if country == "FI" & year == 2018	///
 									& gender == 1 & pl_eli == 1 ///
 									& inrange((earning*12),37168,57183)
@@ -95,7 +96,7 @@ replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2018 & gender == 
 replace pl_bena = (37168/12) * 0.7 		if country == "FI" & year == 2018 & gender == 2 ///
 									& pl_eli == 1 & earning*12 >= 37168 & parstat == 1
 			
-replace pl_benb = (earning - (37862/12)) * 0.4 		///
+replace pl_benb = (earning - (37168/12)) * 0.4 		///
 									if country == "FI" & year == 2018	///
 									& gender == 2 & pl_eli == 1 ///
 									& inrange((earning*12),37168,57183) & parstat == 1

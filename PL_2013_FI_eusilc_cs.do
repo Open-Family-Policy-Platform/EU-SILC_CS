@@ -6,6 +6,7 @@
 * ELIGIBILITY
 /*	-> all residents
 	-> non-residents: 4 months of employment or self-employment (not coded)
+	-> family entitlement
  */
 replace pl_eli = 1 			if country == "FI" & year == 2013 
 			
@@ -13,7 +14,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FI" & year == 2013
 
 
 * DURATION (weeks)
-/* 	-> family entitlement 
+/* 	
 	-> 158 days 
 	-> couples: assigned to women
 */
@@ -31,7 +32,7 @@ replace pl_dur = 158/21.7 		if country == "FI" & year == 2013 & pl_eli == 1 ///
 /*	-> €23.77/day if unemployed or earnings are less than €10,189/year (income group a)
 	-> 70% on earnings between €10,189/year and €35,458/year (IG b)
 	-> 40% on earnings between €35,458/year and €56,443/year (IG c)
-	-> 25% on earnings above €56,443/year   (IG d) 		*/
+	-> 25% on earnings above €54,552/year   (IG d) 		*/
 
 
 * WOMEN 

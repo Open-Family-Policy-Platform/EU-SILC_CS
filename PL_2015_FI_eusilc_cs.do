@@ -6,6 +6,7 @@
 * ELIGIBILITY
 /*	-> all residents
 	-> non-residents: 4 months of employment or self-employment (not coded)
+	-> family entitlement
  */
 replace pl_eli = 1 			if country == "FI" & year == 2015 
 			
@@ -13,7 +14,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FI" & year == 2015
 
 
 * DURATION (weeks)
-/* 	-> family entitlement 
+/* 	
 	-> 158 days 
 	-> couples: assigned to women
 */
@@ -28,7 +29,7 @@ replace pl_dur = 158/21.7 		if country == "FI" & year == 2015 & pl_eli == 1 ///
 
 
 * BENEFIT (monthly)
-/*	-> €24.02/day if unemployed or earnings are less than €9,610/year (IG 24a)
+/*	-> €24.02/day if unemployed or earnings are less than €10,297/year (IG 24a)
 	-> 70% on earnings between €10,297/year and €36,420/year (IG 24b)
 	-> 40% on earnings between €36,420/year and €56,032/year (IG 24c)
 	-> 25% on earnings above €56,032/year 		*/
@@ -46,17 +47,17 @@ replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2015 & gender == 
 
 									
 * IGc 
-gen pl_bena = (36687/12) * 0.7 		if country == "FI" & year == 2015 & gender == 1 ///
-									& pl_eli == 1 & earning*12 >= 36687
+gen pl_bena = (36420/12) * 0.7 		if country == "FI" & year == 2015 & gender == 1 ///
+									& pl_eli == 1 & earning*12 >= 36420
 			
-gen pl_benb = (earning - (36687/12)) * 0.4 		///
+gen pl_benb = (earning - (36420/12)) * 0.4 		///
 									if country == "FI" & year == 2015	///
 									& gender == 1 & pl_eli == 1 ///
-									& inrange((earning*12),36687,56032)
+									& inrange((earning*12),36420,56032)
 
 replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
 												& year == 2015	& gender == 1 ///
-												& pl_eli == 1 & inrange((earning*12),36687,56032)			
+												& pl_eli == 1 & inrange((earning*12),36420,56032)			
 
 																								
 												
@@ -92,17 +93,17 @@ replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2015 & gender == 
 
 									
 * IGc 
-replace pl_bena = (36687/12) * 0.7 		if country == "FI" & year == 2015 & gender == 2 ///
-									& pl_eli == 1 & earning*12 >= 36687 & parstat == 1
+replace pl_bena = (36420/12) * 0.7 		if country == "FI" & year == 2015 & gender == 2 ///
+									& pl_eli == 1 & earning*12 >= 36420 & parstat == 1
 			
-replace pl_benb = (earning - (36687/12)) * 0.4 		///
+replace pl_benb = (earning - (36420/12)) * 0.4 		///
 									if country == "FI" & year == 2015	///
 									& gender == 2 & pl_eli == 1 ///
-									& inrange((earning*12),36687,56032) & parstat == 1
+									& inrange((earning*12),36420,56032) & parstat == 1
 
 replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
 												& year == 2015	& gender == 2 ///
-												& pl_eli == 1 & inrange((earning*12),36687,56032) ///
+												& pl_eli == 1 & inrange((earning*12),36420,56032) ///
 												& parstat == 1
 
 																								

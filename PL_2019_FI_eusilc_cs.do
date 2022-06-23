@@ -6,6 +6,7 @@
 * ELIGIBILITY
 /*	-> all residents
 	-> non-residents: 4 months of employment or self-employment (not coded)
+	-> family entitlement
  */
 replace pl_eli = 1 			if country == "FI" & year == 2019 
 			
@@ -13,7 +14,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FI" & year == 2019
 
 
 * DURATION (weeks)
-/* 	-> family entitlement 
+/* 	
 	-> 158 days 
 	-> couples: assigned to women
 */
@@ -46,17 +47,17 @@ replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2019 & gender == 
 
 									
 * IGc 
-gen pl_bena = (37861/12) * 0.7 		if country == "FI" & year == 2019 & gender == 1 ///
+gen pl_bena = (37862/12) * 0.7 		if country == "FI" & year == 2019 & gender == 1 ///
 									& pl_eli == 1 & earning*12 >= 37861
 			
 gen pl_benb = (earning - (37862/12)) * 0.4 		///
 									if country == "FI" & year == 2019	///
 									& gender == 1 & pl_eli == 1 ///
-									& inrange((earning*12),37861,58252)
+									& inrange((earning*12),37862,58252)
 
 replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
 												& year == 2019	& gender == 1 ///
-												& pl_eli == 1 & inrange((earning*12),37861,58252)			
+												& pl_eli == 1 & inrange((earning*12),37862,58252)			
 
 																								
 												
@@ -92,17 +93,17 @@ replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2019 & gender == 
 
 									
 * IGc 
-replace pl_bena = (37861/12) * 0.7 		if country == "FI" & year == 2019 & gender == 2 ///
+replace pl_bena = (37862/12) * 0.7 		if country == "FI" & year == 2019 & gender == 2 ///
 									& pl_eli == 1 & earning*12 >= 37861 & parstat == 1
 			
 replace pl_benb = (earning - (37862/12)) * 0.4 		///
 									if country == "FI" & year == 2019	///
 									& gender == 2 & pl_eli == 1 ///
-									& inrange((earning*12),37861,58252) & parstat == 1
+									& inrange((earning*12),37862,58252) & parstat == 1
 
 replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
 												& year == 2019	& gender == 2 ///
-												& pl_eli == 1 & inrange((earning*12),37861,58252) ///
+												& pl_eli == 1 & inrange((earning*12),37862,58252) ///
 												& parstat == 1
 
 																								

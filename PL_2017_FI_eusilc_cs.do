@@ -6,6 +6,7 @@
 * ELIGIBILITY
 /*	-> all residents
 	-> non-residents: 4 months of employment or self-employment (not coded)
+	-> family entitlement
  */
 replace pl_eli = 1 			if country == "FI" & year == 2017 
 			
@@ -13,7 +14,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FI" & year == 2017
 
 
 * DURATION (weeks)
-/* 	-> family entitlement 
+/* 	 
 	-> 158 days 
 	-> couples: assigned to women
 */
@@ -29,7 +30,7 @@ replace pl_dur = 158/21.7 		if country == "FI" & year == 2017 & pl_eli == 1 ///
 
 * BENEFIT (monthly)
 /*	-> €23.73/day if unemployed or earnings are less than €10,562/year (income group a)
-	-> 70% on earnings between €10,425/year and €36,686/year (IG b)
+	-> 70% on earnings between €10,425/year and €37,167/year (IG b)
 	-> 40% on earnings between €37,168/year and €56,443/year (IG c)
 	-> 25% on earnings above €56,443/year   (IG d) 		*/
 
@@ -42,21 +43,21 @@ replace pl_ben1 = 23.73 * 21.7 			if country == "FI" & year == 2017 & gender == 
 
 * IGb
 replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2017 & gender == 1 ///
-										& pl_eli == 1 & inrange((earning*12),10425,36686)
+										& pl_eli == 1 & inrange((earning*12),10425,37167)
 
 									
 * IGc 
-gen pl_bena = (36686/12) * 0.7 		if country == "FI" & year == 2017 & gender == 1 ///
-									& pl_eli == 1 & earning*12 >= 36686
+gen pl_bena = (37168/12) * 0.7 		if country == "FI" & year == 2017 & gender == 1 ///
+									& pl_eli == 1 & earning*12 >= 37167
 			
-gen pl_benb = (earning - (37862/12)) * 0.4 		///
+gen pl_benb = (earning - (37168/12)) * 0.4 		///
 									if country == "FI" & year == 2017	///
 									& gender == 1 & pl_eli == 1 ///
-									& inrange((earning*12),36686,56443 )
+									& inrange((earning*12),37168,56443 )
 
 replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
 												& year == 2017	& gender == 1 ///
-												& pl_eli == 1 & inrange((earning*12),36686,56443 )			
+												& pl_eli == 1 & inrange((earning*12),37167,56443 )			
 
 																								
 												
@@ -87,22 +88,22 @@ replace pl_ben1 = 23.73 * 21.7 			if country == "FI" & year == 2017 & gender == 
 
 * IGb
 replace pl_ben1 = earning * 0.7 		if country == "FI" & year == 2017 & gender == 2 ///
-										& pl_eli == 1 & inrange((earning*12),10425,36686) ///
+										& pl_eli == 1 & inrange((earning*12),10425,37167) ///
 										 & parstat == 1
 
 									
 * IGc 
-replace pl_bena = (36686/12) * 0.7 		if country == "FI" & year == 2017 & gender == 2 ///
-									& pl_eli == 1 & earning*12 >= 36686 & parstat == 1
+replace pl_bena = (37168/12) * 0.7 		if country == "FI" & year == 2017 & gender == 2 ///
+									& pl_eli == 1 & earning*12 >= 37167 & parstat == 1
 			
-replace pl_benb = (earning - (37862/12)) * 0.4 		///
+replace pl_benb = (earning - (37168/12)) * 0.4 		///
 									if country == "FI" & year == 2017	///
 									& gender == 2 & pl_eli == 1 ///
-									& inrange((earning*12),36686,56443 ) & parstat == 1
+									& inrange((earning*12),37168,56443 ) & parstat == 1
 
 replace pl_ben1 = pl_bena + pl_benb 		if country == "FI" ///
 												& year == 2017	& gender == 2 ///
-												& pl_eli == 1 & inrange((earning*12),36686,56443 ) ///
+												& pl_eli == 1 & inrange((earning*12),37168,56443 ) ///
 												& parstat == 1
 
 																								
