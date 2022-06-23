@@ -11,7 +11,9 @@ replace pt_eli = 0 		if pt_eli == . & country == "EE" & year == 2014
 
 
 * DURATION (weeks)
-/*	-> 10 woring days */
+/*	-> 10 working days 
+	-> must be taken within 2 months after childbirth
+	*/
 
 replace pt_dur = 10/5 	if country == "EE" & year == 2014 & pt_eli == 1
 
@@ -22,7 +24,7 @@ replace pt_dur = 10/5 	if country == "EE" & year == 2014 & pt_eli == 1
 	-> average gross monthly salary, 2014: €1,005 (Source: Statistics Estonia, 
 
 	https://www.stat.ee/en/find-statistics/statistics-theme/work-life/wages-and-salaries-and-labour-costs/average-monthly-gross-wages-and-salaries
-	accessed 3/02/2021		*/
+	accessed 23/06/2022		*/
 	
 replace pt_ben1 = earning 	if country == "EE" & year == 2014 & pt_eli == 1
 							

@@ -12,7 +12,9 @@ replace pt_eli = 0 		if pt_eli == . & country == "EE" & year == 2019
 
 
 * DURATION (weeks)
-/*	-> 10 woring days */
+/*	-> 10 working days 
+	-> must be taken within 2 months after childbirth
+*/
 
 replace pt_dur = 10/5 	if country == "EE" & year == 2019 & pt_eli == 1
 
