@@ -3,8 +3,9 @@
 * ESTONIA - 2011
 
 * ELIGIBILITY
-/*	-> all residents 
-	-> only one parent receives the benefit (i.e. family entitlement)
+/*	-> all residents are entitled to benefit
+	-> family entitlement
+	-> only one parent receives the benefit 
 */
 replace pl_eli = 1	 		if country == "EE" & year == 2011 
 replace pl_eli = 0 			if pl_eli == . & country == "EE" & year == 2011
@@ -14,7 +15,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "EE" & year == 2011
 /*	-> until child is 3 years old
 	-> family entitlement => assigned to women
 	-> women eligible for ML => postnatal ML deducted from PL duration
-	-> unemployed and inactive parent: benefits paid until child is 18 months old 	
+	-> unemployed and inactive parent: benefits paid until child is 18 months old (LP&R)
 */
 
 * women	
@@ -36,32 +37,77 @@ replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2011 ///
 
 
 * BENEFIT (monthly)
-/*	-> 100% earnings
-	-> minimum: €430/month
-	-> maximum: €2,724.36/month		
-	-> unemployed and inactive parent: €390
+/*	-> parental benefit:
+		-> eligible for ML: 
+			-> 435 days (LP&R 2011)
+			-> 100% earnings
+			-> minimum: €278/month
+			-> maximum: €2,157/month	
+		-> not eligible for ML: 
+			-> 575 days (MISSOC 2011)
+			-> €278/month (LP&R 2011)
+	
+	-> child care allowance:
+		-> from the end of parental benefit until child is 3 years old
+		-> €76.7/month
 */
 
-replace pl_ben1 = earning 	if country == "EE" & year == 2011 & pl_eli == 1 ///
-							& gender == 1 
+* women
+replace pl_ben1 = (earning * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2011 & pl_eli == 1 ///
+																			& gender == 1 
+																			
+* single men							
+replace pl_ben1 = (earning * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2011 & pl_eli == 1 ///
+																			& gender == 2 & parstat == 1
+																			
+	* minimum 
+replace pl_ben1 = (278 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2011 & pl_eli == 1 ///
+																			& earnings < 278 & pl_ben1 != . & pl_ben1 != .
 
-replace pl_ben1 = earning 	if country == "EE" & year == 2011 & pl_eli == 1 ///
-							& gender == 2 & parstat == 1
-								
-replace pl_ben1 = 430		if country == "EE" & year == 2011 & pl_eli == 1 ///
-							& pl_ben1 < 430 & pl_ben1 != . & pl_ben1 != .
+	* maximum
+replace pl_ben1 = (2157	* (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2011 & pl_eli == 1 ///
+																			& earnings >= 2157 & pl_ben1 != . 
 							
-replace pl_ben1 = 2724.36	if country == "EE" & year == 2011 & pl_eli == 1 ///
-							& pl_ben1 >= 2724.36 & pl_ben1 != . 
-							
-							
-replace pl_ben1 = 390 		if country == "EE" & year == 2011 & pl_eli == 1 ///
-							& inlist(econ_status,3,4) & gender == 1
+																			
 
-replace pl_ben1 = 390 		if country == "EE" & year == 2011 & pl_eli == 1 ///
-							& inlist(econ_status,3,4) & gender == 2 & parstat == 1							
+* not eligible for maternity leave
+	* women
+replace pl_ben1 = (278 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2011 & pl_eli == 1 ///
+																			& inlist(econ_status,3,4) & gender == 1
+	* single men
+replace pl_ben1 = (278 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2011 & pl_eli == 1 ///
+																			& inlist(econ_status,3,4) & gender == 2 & parstat == 1							
 
-replace pl_ben2 = pl_ben1 		if country == "EE" & year == 2011 & pl_eli == 1 
+
+	
+	
+* women
+replace pl_ben2 = earning  		if country == "EE" & year == 2011 & pl_eli == 1 ///
+								& gender == 1 
+																			
+* single men							
+replace pl_ben2 = earning  		if country == "EE" & year == 2011 & pl_eli == 1 ///
+								& gender == 2 & parstat == 1
+																			
+	* minimum 
+replace pl_ben2 = 278 			if country == "EE" & year == 2011 & pl_eli == 1 ///
+								& earnings < 278 & pl_ben2 != . & pl_ben1 != .
+
+	* maximum
+replace pl_ben2 = 2157	 		if country == "EE" & year == 2011 & pl_eli == 1 ///
+								& earnings >= 2157 & pl_ben1 != . 
+							
+																			
+
+* not eligible for maternity leave
+	* women
+replace pl_ben2 = 	278  		if country == "EE" & year == 2011 & pl_eli == 1 ///
+								& inlist(econ_status,3,4) & gender == 1
+	* single men
+replace pl_ben2 = 278	 		if country == "EE" & year == 2011 & pl_eli == 1 ///
+								& inlist(econ_status,3,4) & gender == 2 & parstat == 1							
+																			
+
 
 							
 							
