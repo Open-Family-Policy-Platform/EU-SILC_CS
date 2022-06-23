@@ -19,17 +19,20 @@ replace pt_dur = 54/6 if country == "FI" & year == 2015 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*		-> €24.02/day if unemployed or earnings are less than €9,610/year (IG 24a)
-		-> 70% on earnings between €10,297/year and €36,420/year (IG 24b)
-		-> 40% on earnings between €36,420/year and €56,032/year (IG 24c)
-		-> 25% on earnings above €56,032/year
+/*	-> €24.02/day if unemployed or earnings are less than €10,297/year (income group IGa)
+	-> 70% on earnings between €10,297/year and 36,420/year (IGb)
+	-> 40% on earnings between €36,420 /year and €56,032/year (IGc)
+	-> 25% on earnings above €56,032/year   (IGd) 
 								
 */
 
 
 * IGa
 replace pt_ben1 = 24.02 * 21.7 			if country == "FI" & year == 2015 & gender == 2 ///
-									& pt_eli == 1 
+									& pt_eli == 1 & inlist(econ_status,3,4)
+									
+replace pt_ben1 = 24.02 * 21.7 			if country == "FI" & year == 2015 & gender == 2 ///
+									& pt_eli == 1 & inlist(econ_status,1,2) & (earning*12) < 10297
 
 
 									

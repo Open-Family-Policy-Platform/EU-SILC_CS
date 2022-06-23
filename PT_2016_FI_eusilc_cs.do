@@ -28,8 +28,11 @@ replace pt_dur = 54/6 if country == "FI" & year == 2016 & pt_eli == 1
 
 * IGa
 replace pt_ben1 = 23.93 * 21.7 			if country == "FI" & year == 2016 & gender == 2 ///
-									& pt_eli == 1 
-
+									& pt_eli == 1 & inlist(econ_status,3,4)
+									
+replace pt_ben1 = 23.93 * 21.7 			if country == "FI" & year == 2016 & gender == 2 ///
+									& pt_eli == 1 & inlist(econ_status,1,2) & (earning*12) < 10258
+									
 
 									
 * IGb

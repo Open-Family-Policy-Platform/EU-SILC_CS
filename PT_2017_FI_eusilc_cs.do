@@ -22,50 +22,50 @@ replace pt_dur = 54/6 if country == "FI" & year == 2017 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> €23.73/day if unemployed or earnings are less than €1,426/year (income group a)
-	-> 70% on earnings between €1,426/year and €37,113/year (IG b)
-	-> 40% on earnings between €37,113/year and €57,101/year (IG c)
-	-> 25% on earnings above €57,101/year   (IG d) 									
+/*	-> €23.73/day if unemployed or earnings are less than €10,562/year (income group 49a)
+	-> 70% on earnings between €10,562/year and €37,167/year (IG 49b)
+	-> 40% on earnings between €37,168/year and €56,443/year (IG 49c)
+	-> 25% on earnings above €56,443/year   (IG 49d) 									
 */
 
 
 * IGa
 gen pt_ben = 23.73 * 21.7 			if country == "FI" & year == 2017 & gender == 2 ///
-									& pt_eli == 1 & (earning*12) < 1426
+									& pt_eli == 1 & (earning*12) < 10562
 
 * IGb
 replace pt_ben = earning * 0.7 		if country == "FI" & year == 2017 & gender == 2 ///
 									& pt_eli == 1 & pt_ben == . ///
-									& inrange((earning*12),1426,37167)
+									& inrange((earning*12),10562,37167)
 
 * IGc 
-gen pt_bena = (37113/12) * 0.7 		if country == "FI" & year == 2017 & gender == 2 ///
-									& pt_eli == 1 & (earning*12) > 37113
+gen pt_bena = (37167/12) * 0.7 		if country == "FI" & year == 2017 & gender == 2 ///
+									& pt_eli == 1 & (earning*12) > 37167
 			
-gen pt_benb = (((earning*12) - 37113) / 12) * 0.4 		///
+gen pt_benb = (((earning*12) - 37167) / 12) * 0.4 		///
 									if country == "FI" & year == 2017	///
 									& gender == 2 & pt_eli == 1 ///
-									& inrange((earning*12),37113,57101)
+									& inrange((earning*12),37167,56443)
 
 replace pt_ben = pt_bena + pt_benb 		if country == "FI" ///
 												& year == 2017	& gender == 2 ///
 												& pt_eli == 1 & pt_ben == . ///
-												& inrange((earning*12),37113,57101)			
+												& inrange((earning*12),37167,56443)			
 			
 * IGd	
-gen pt_benc = (57101/12) * 0.4			if country == "FI" ///
+gen pt_benc = (56443/12) * 0.4			if country == "FI" ///
 													& year == 2017	& gender == 2 ///
-													& pt_eli == 1 & (earning*12) > 57101
+													& pt_eli == 1 & (earning*12) > 56443
 	
-gen pt_bend = (((earning*12) - 57101) / 12) * 0.25 		///
+gen pt_bend = (((earning*12) - 56443) / 12) * 0.25 		///
 									if country == "FI" & year == 2017	///
 									& gender == 2 & pt_eli == 1 ///
-									& (earning*12) > 57101
+									& (earning*12) > 56443
 			
 
 replace pt_ben = pt_bena + pt_benc + pt_bend 		if country == "FI" ///
 							& year == 2017	& gender == 2 & pt_eli == 1 & pt_ben == . ///
-							& (earning*12) > 57101
+							& (earning*12) > 56443
 
 
 

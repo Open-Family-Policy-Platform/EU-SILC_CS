@@ -19,39 +19,41 @@ replace pt_dur = 54/6 	if country == "FI" & year == 2013 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> €23.77/day if unemployed or earnings are less than €10,189/year (income group a)
-	-> 70% on earnings between €10,189/year and €35,458/year (IG b)
-	-> 40% on earnings between €35,458/year and €54,552/year (IG c)
-	-> 25% on earnings above €54,552/year   (IG d) 									
+/*	-> €23.77/day if unemployed or earnings are less than €10,189/year  (income group 49a)
+	-> 70% on earnings between €10,189/year and  €35,458/year (IG 49b)
+	-> 40% on earnings between €35,458/year and €54,552/year (IG 49c)
+	-> 25% on earnings above €54,552/year   (IG 49d)						
 */
 
 
 * IGa
 replace pt_ben1 = 23.77 * 21.7 			if country == "FI" & year == 2013 & gender == 2 ///
-									& pt_eli == 1 
+									& pt_eli == 1 & inlist(econ_status,3,4)
 
+replace pt_ben1 = 23.77 * 21.7 			if country == "FI" & year == 2013 & gender == 2 ///
+									& pt_eli == 1 & inlist(econ_status,1,2) & (earning*12) < 10189
 
 									
 * IGb
 replace pt_ben1 = earning * 0.7 	if country == "FI" & year == 2013 & gender == 2 ///
-									& pt_eli == 1 & inrange((earning*12),10189,35458)
+									& pt_eli == 1 & inrange((earning*12),10189,35458) & pt_ben1 == .
 
 									
 									
 									
 * IGc 
-gen pt_bena = (36687/12) * 0.7 		if country == "FI" & year == 2013 & gender == 2 ///
-									& pt_eli == 1 & (earning*12) > 36687
+gen pt_bena = (35458/12) * 0.7 		if country == "FI" & year == 2013 & gender == 2 ///
+									& pt_eli == 1 & (earning*12) > 35458
 			
-gen pt_benb = (earning - (36687/12)) * 0.4 		///
+gen pt_benb = (earning - (35458/12)) * 0.4 		///
 									if country == "FI" & year == 2013	///
 									& gender == 2 & pt_eli == 1 ///
-									& inrange((earning*12),36687,54552)
+									& inrange((earning*12),35458,54552)
 															
 
 replace pt_ben1 = pt_bena + pt_benb 		if country == "FI" ///
 												& year == 2013	& gender == 2 ///
-												& pt_eli == 1 & inrange((earning*12),36687,54552)			
+												& pt_eli == 1 & inrange((earning*12),35458,54552)			
 			
 
 

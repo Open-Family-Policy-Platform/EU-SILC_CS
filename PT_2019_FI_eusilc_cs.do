@@ -28,8 +28,10 @@ replace pt_dur = 54/6 if country == "FI" & year == 2019 & pt_eli == 1
 
 * IGa
 replace pt_ben1 = 27.86 * 21.7 			if country == "FI" & year == 2019 & gender == 2 ///
-										& pt_eli == 1 
+										& pt_eli == 1 & inrange(econ_status,3,4)
 									
+replace pt_ben1 = 27.86 * 21.7 			if country == "FI" & year == 2019 & gender == 2 ///
+										& pt_eli == 1 & inrange(econ_status,1,2) & (earning*12) < 11942
 
 * IGb
 replace pt_ben1 = earning * 0.7 		if country == "FI" & year == 2019 & gender == 2 ///
@@ -66,7 +68,7 @@ gen pt_bend = (earning - (58252/12)) * 0.25  		///
 
 replace pt_ben1 = pt_bena + pt_benc + pt_bend 		if country == "FI" ///
 							& year == 2019	& gender == 2 & pt_eli == 1 ///
-							& (earning*12) >= 57183 
+							& (earning*12) >= 58252 
 
 							
 replace pt_ben2 = pt_ben1 	if country == "FI" & year == 2019 & gender == 2 & pt_eli == 1
