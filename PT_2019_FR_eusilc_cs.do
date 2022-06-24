@@ -22,7 +22,7 @@ replace pt_dur = 11/5 	if country == "FR" & year == 2019 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 100%
+/*	
 	-> 100%
 	-> minimum: €9.53/day
 	-> ceiling: €87.71/ day
