@@ -4,18 +4,26 @@
 * FRANCE - 2015
 
 * ELIGIBILITY
-/*	-> employed (parental leave)
-	-> benefits are available to all parents 	*/
+/*	
+	-> 1 January 2015 - COLCA replaced by PreParE (LP&R 2015); the eligibility conditions remained the same
+	-> employed if they worked ...
+		-> 1st child: 2 years (coded) prior the childbirth
+		-> 2nd child: 2 years (coded) in the 4 years prior the childbirth (not coded)
+		-> 3rd+ child: 2 years (coded) in the 5 years prior the childbirth (not coded)
+		
+		-> 2 types of benefits:
+			-> PreParE - shared provision of child education
+			-> COLCA: families with at least 3 chidlren can opt for COLCA - higher benefit for 12 months (not coded)
+*/
 	
-replace pl_eli = 1 			if country == "FR" & year == 2015 
+replace pl_eli = 1 			if country == "FR" & year == 2015 & duremp >= 24 
 replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2015
 
 
 * DURATION (weeks)
-/*	-> each parent is entitled to 24 months
-	-> the total leave per child cannot exceed their 3rd birthday => larger share of leave assigned to woman 
-	-> first child: 6 months of benefits/parent 
-	-> 2+ children: 24 months/parent, max. total period 36 months
+/*	
+	-> 1st child: 6 months of benefits/parent (coded) 
+	-> 2nd+ child: 24 months/parent until the child is 3 years old (LP&R 2015)
 		=> mother assigned 24 months, father 12 months 
 */
 
@@ -47,11 +55,12 @@ replace pl_dur = 2*52	 				if country == "FR" & year == 2015 ///
 								
 
 * BENEFIT (monthly)
-/*	-> €396.00/month for full-time leave
-	-> lower income parents: €576/month (lower income not specified => not coded) 
+/*	-> PreParE: €390.52/month for full-time leave
+	-> COLCA: €638.34/month (not coded)
+	
 */
 
-replace pl_ben1 = 396.00 		if country == "FR" & year == 2015 & pl_eli == 1
+replace pl_ben1 = 390.52 		if country == "FR" & year == 2015 & pl_eli == 1
 replace pl_ben2 = pl_ben1 		if country == "FR" & year == 2015 & pl_eli == 1
 
 

@@ -4,18 +4,21 @@
 * FRANCE - 2019
 
 * ELIGIBILITY
-/*	-> employed (parental leave)
-	-> benefits are available to all parents 	*/
+/*	-> 1 January 2015 - COLCA replaced by PreParE (LP&R 2015); the eligibility conditions remained the same
+	-> employed if they worked ...
+		-> 1st child: 2 years (coded) prior the childbirth
+		-> 2nd child: 2 years (coded) in the 4 years prior the childbirth (not coded)
+		-> 3rd+ child: 2 years (coded) in the 5 years prior the childbirth (not coded)
+		
+*/
 	
-replace pl_eli = 1 			if country == "FR" & year == 2019 
+replace pl_eli = 1 			if country == "FR" & year == 2019 & duremp >= 24
 replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2019
 
 
 * DURATION (weeks)
-/*	-> each parent is entitled to 24 months
-	-> the total leave per child cannot exceed their 3rd birthday => larger share of leave assigned to woman 
-	-> first child: 6 months of benefits/parent 
-	-> 2+ children: 24 months/parent, max. total period 36 months
+/*	-> 1st child: 6 months of benefits/parent (coded) 
+	-> 2nd+ child: 24 months/parent until the child is 3 years old (LP&R 2015)
 		=> mother assigned 24 months, father 12 months 
 */
 
@@ -48,7 +51,7 @@ replace pl_dur = 2*52	 				if country == "FR" & year == 2019 ///
 
 * BENEFIT (monthly)
 /*	-> €397.20/month for full-time leave
-	-> lower income parents: supplementary means-tested allowance (lower income not specified => not coded; LP&R 2019) 
+	 
 */
 
 replace pl_ben1 = 397.20		if country == "FR" & year == 2019 & pl_eli == 1
