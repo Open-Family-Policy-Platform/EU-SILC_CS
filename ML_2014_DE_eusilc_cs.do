@@ -5,8 +5,8 @@
 
 * ELIGIBILITY
 /*	-> employed
-	-> self-employed if voluntarily insured (not coded)
-	-> unemployed 
+	-> unemployed are entitled to benefit (LP&R 2014)
+	
 	-> the leave is not transferable to father => 
 		it is assumed that single fathers are not entitled to this portion of leave
 */

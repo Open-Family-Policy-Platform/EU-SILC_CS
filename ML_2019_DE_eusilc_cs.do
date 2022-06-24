@@ -5,15 +5,18 @@
 
 * ELIGIBILITY
 /*	-> employed
-	-> self-employed if voluntarily insured (not coded)
-	-> unemployed 
-	
+	-> unemployed are entitled to benefit (LP&R 2019)
+	-> self-employed (LP&R 2019)
+	-> students (not coded)
+	-> voluntary workers (not coded)
+	-> asylum seekers (not coded)
+
 	-> the leave is not transferable to father => 
 		it is assumed that single fathers are not entitled to this portion of leave
 */
 	
 replace ml_eli = 1 			if country == "DE" & year == 2019 & gender == 1 ///
-							& inlist(econ_status,1,3)
+							& inlist(econ_status,1,2,3)
 replace ml_eli = 0 			if ml_eli == . & country == "DE" & year == 2019 & gender == 1
 
 
