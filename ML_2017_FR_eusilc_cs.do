@@ -32,8 +32,8 @@ replace ml_dur2 = 26-3 		if country == "FR" & year == 2017 & gender == 1 ///
 
 * BENEFIT (monthly)
 /*	-> 100%
-	-> minimum: €9.39/day
-	-> ceiling: €86/ day
+	-> minimum: €9.29/day
+	-> ceiling: €84.90/ day
 	-> no ceiling in public sector (not coded; LP&R 2017)
 	-> source: MISSOC 01/07/2017
 */ 
@@ -42,12 +42,12 @@ replace ml_ben1 = earning 			if country == "FR" & year == 2017 & ml_eli == 1 ///
 									& ml_ben1 == .
 
 * minimum
-replace ml_ben1 = 9.39 * 21.7		if country == "FR" & year == 2017  ///
-									& ml_eli == 1 & ml_ben1 < 9.39*21.7
+replace ml_ben1 = 9.29 * 21.7		if country == "FR" & year == 2017  ///
+									& ml_eli == 1 & ml_ben1 < 9.29*21.7
 		
 * maximum
-replace ml_ben1 = 86 * 21.7			if country == "FR" & year == 2017  ///
-									& ml_eli == 1 & ml_ben1 >= 86*21.7
+replace ml_ben1 = 84.90 * 21.7			if country == "FR" & year == 2017  ///
+									& ml_eli == 1 & ml_ben1 >= 84.90*21.7
 		
 
 
