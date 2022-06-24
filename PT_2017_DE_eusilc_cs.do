@@ -9,7 +9,7 @@ date created: 27/09/2021
 * ELIGIBILITY
 /* No statutory right to paternity leave (LP&R 2018) */
 
-replace pt_eli = 0 		if  country == "DE" & year == 2017 & gender == 2
+replace pt_eli = .a 		if  country == "DE" & year == 2017 & gender == 2
 
 * DURATION (weeks)
 replace pt_dur = .a 	if country == "DE" & year == 2017 & pt_eli == 1

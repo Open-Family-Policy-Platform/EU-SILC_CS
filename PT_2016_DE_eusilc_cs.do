@@ -6,7 +6,7 @@
 /* No statutory right to paternity leave (LP&R 2016) */
 
 //replace pt_eli = 1 		if country == "DE" & year == 2016 & gender == 2 
-replace pt_eli = 0 		if  country == "DE" & year == 2016 & gender == 2
+replace pt_eli = .a 		if  country == "DE" & year == 2016 & gender == 2
 
 * DURATION (weeks)
 replace pt_dur = .a 	if country == "DE" & year == 2016 & pt_eli == 1
