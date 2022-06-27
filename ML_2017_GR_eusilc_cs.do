@@ -3,6 +3,11 @@
 
 * GREECE - 2017
 
+/* NOTE: 	Maternity leave is different for employees in private and public sector. 
+			The following code refers to maternity leave for private sector employees.
+*/
+
+
 * ELIGIBILITY
 /*	-> employed
 	-> self-employed
