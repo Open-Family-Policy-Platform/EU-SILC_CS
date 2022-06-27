@@ -4,7 +4,10 @@
 * HUNGARY - 2018
 
 * ELIGIBILITY
-/*	-> all parents are eligible to some parental leave benefits 	
+/*	-> all parents are eligible for parental leave benefits 
+	-> 2 types of benefits (LP&R 2010):
+		-> GYES: for non-insured parents 
+		-> GYED: for insured parents (same eligibility as for ML)
 	-> family entitlement 
 */
 
@@ -13,7 +16,10 @@ replace pl_eli = 0 			if pl_eli == . & country == "HU" & year == 2018
 
 
 * DURATION (weeks)
-/*	-> until child is 3 years old		*/
+/*	-> GYED: until child is 2 years old
+	-> GYES: 
+		-> until child is 3 years old
+		-> from the end of GYED until child is 3 years old	*/
 
 * mothers eligible for ML
 replace pl_dur = (3*52) - ml_dur2 		if country == "HU" & year == 2018 & pl_eli == 1 ///
@@ -35,7 +41,8 @@ replace pl_dur = (3*52)					if country == "HU" & year == 2018 & pl_eli == 1 ///
 * BENEFIT (monthly)
 /*	-> employed, self-employed compulsorily insured for at least 365 days (coded)
 		in past 2 years (not coded) with the same employer (not coded): 
-		-> for 2 years: 70% earning, ceiling: €842/month (MISSOC 2018; GYED)
+		-> for 2 years: 70% earning
+			-> ceiling: €842/month (MISSOC 2018; GYED)
 		-> for 1 year: €87/month (GYES)
 		
 	-> female tertiary education students or women who completed at least 2 semesters

@@ -4,8 +4,11 @@
 * HUNGARY - 2013
 
 * ELIGIBILITY
-/*	-> all parents are eligible to some parental leave benefits 	
-	-> family entitlement 
+/*	-> all parents are eligible for parental leave benefits 
+	-> 2 types of benefits (LP&R 2010):
+		-> GYES: for non-insured parents 
+		-> GYED: for insured parents (same eligibility as for ML)
+	-> family entitlement  
 */
 
 replace pl_eli = 1 			if country == "HU" & year == 2013 
@@ -13,7 +16,10 @@ replace pl_eli = 0 			if pl_eli == . & country == "HU" & year == 2013
 
 
 * DURATION (weeks)
-/*	-> until child is 3 years old		*/
+/*	-> GYED: until child is 2 years old
+	-> GYES: 
+		-> until child is 3 years old
+		-> from the end of GYED until child is 3 years old	*/
 
 * mothers eligible for ML
 replace pl_dur = (3*52) - ml_dur2 		if country == "HU" & year == 2013 & pl_eli == 1 ///
@@ -35,15 +41,15 @@ replace pl_dur = (3*52)					if country == "HU" & year == 2013 & pl_eli == 1 ///
 * BENEFIT (monthly)
 /*	-> employed, self-employed compulsorily insured for at least 365 days (coded)
 		in past 2 years (not coded) with the same employer (not coded): 
-		-> for 2 years: 70% earning, ceiling: €478/month (MISSOC 2013; GYED)
-		-> for 1 year: €99/month (GYES)
+		-> for 2 years: 70% earning
+			-> ceiling: €467/month (MISSOC 2013; GYED)
+		-> for 1 year: €97/month (GYES)
 		
-	
 	-> family entitlement: all assigned to women
 */
 
 * GYES
-gen pl_gyes = 99 		if country == "HU" & year == 2013 & pl_eli == 1
+gen pl_gyes = 97 		if country == "HU" & year == 2013 & pl_eli == 1
 replace pl_gyes = . 	if country == "HU" & year == 2013 & pl_eli == 1 ///
 						& parstat == 2 & gender == 2 			// family entitlement => in couples assign all to women
 
@@ -52,19 +58,19 @@ replace pl_gyes = . 	if country == "HU" & year == 2013 & pl_eli == 1 ///
 	* women
 gen pl_gyed = 0.7*earning 		if country == "HU" & year == 2013 & pl_eli == 1 ///
 								& ml_eli == 1 & inlist(econ_status,1,2) ///
-								& earning < 478 & gender == 1
+								& earning < 467 & gender == 1
 							
-replace pl_gyed = 478		 	if country == "HU" & year == 2013 & pl_eli == 1 ///
+replace pl_gyed = 467		 	if country == "HU" & year == 2013 & pl_eli == 1 ///
 								& ml_eli == 1 & inlist(econ_status,1,2) ///
-								& earning >= 478 & gender == 1
+								& earning >= 467 & gender == 1
 								
 	* single men
 replace pl_gyed = 0.7*earning 	if country == "HU" & year == 2013 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & earning < 478 ///
+								& inlist(econ_status,1,2) & earning < 467 ///
 								& gender == 2 & parstat == 1
 							
-replace pl_gyed = 478		 	if country == "HU" & year == 2013 & pl_eli == 1 ///
-								& inlist(econ_status,1,2) & earning >= 478 ///
+replace pl_gyed = 467		 	if country == "HU" & year == 2013 & pl_eli == 1 ///
+								& inlist(econ_status,1,2) & earning >= 467 ///
 								& gender == 2 & parstat == 1
 
 replace pl_gyed = 0 			if pl_gyed == . & gender == 1 & country == "HU" & year == 2013

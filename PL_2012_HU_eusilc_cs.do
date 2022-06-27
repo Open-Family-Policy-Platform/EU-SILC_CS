@@ -4,7 +4,10 @@
 * HUNGARY - 2012
 
 * ELIGIBILITY
-/*	-> all parents are eligible to some parental leave benefits 	
+/*	-> all parents are eligible for parental leave benefits 
+	-> 2 types of benefits (LP&R 2010):
+		-> GYES: for non-insured parents 
+		-> GYED: for insured parents (same eligibility as for ML)
 	-> family entitlement 
 */
 
@@ -13,7 +16,10 @@ replace pl_eli = 0 			if pl_eli == . & country == "HU" & year == 2012
 
 
 * DURATION (weeks)
-/*	-> until child is 3 years old		*/
+/*	-> GYED: until child is 2 years old
+	-> GYES: 
+		-> until child is 3 years old
+		-> from the end of GYED until child is 3 years old		*/
 
 * mothers eligible for ML
 replace pl_dur = (3*52) - ml_dur2 		if country == "HU" & year == 2012 & pl_eli == 1 ///
@@ -35,21 +41,16 @@ replace pl_dur = (3*52)					if country == "HU" & year == 2012 & pl_eli == 1 ///
 * BENEFIT (monthly)
 /*	-> employed, self-employed compulsorily insured for at least 365 days (coded)
 		in past 2 years (not coded) with the same employer (not coded): 
-		-> for 2 years: 70% earning, ceiling: €456/month (MISSOC 2012; GYED)
-		-> for 1 year: €96/month (GYES)
+		-> for 2 years: 70% earning
+			-> ceiling: €456/month (MISSOC 2012; GYED)
+		-> for 1 year: €100/month (GYES)
 		
-	-> female tertiary education students or women who completed at least 2 semesters
-		of tertiary education in past 2 years:
-		-> undergraduate, for 1 year: €407/monthly
-		-> MA, PhD, for 1 year: €350/month
-		-> for 2 years: €90/month
-		-> not coded (EU-SILC doesn't recognise)
 	
 	-> family entitlement: all assigned to women
 */
 
 * GYES
-gen pl_gyes = 96 		if country == "HU" & year == 2012 & pl_eli == 1
+gen pl_gyes = 100 		if country == "HU" & year == 2012 & pl_eli == 1
 replace pl_gyes = . 	if country == "HU" & year == 2012 & pl_eli == 1 ///
 						& parstat == 2 & gender == 2 			// family entitlement => in couples assign all to women
 
