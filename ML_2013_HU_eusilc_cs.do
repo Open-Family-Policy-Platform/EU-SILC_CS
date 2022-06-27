@@ -20,12 +20,12 @@ replace ml_eli = 0 			if ml_eli == . & country == "HU" & year == 2013 & gender =
 
 
 * DURATION (weeks)
-/*	-> prenatal: 2 weeks are compulsory (up to 4 weeks possible)
+/*	-> prenatal: up to 4 weeks (from 2014, 2 obligatory prenatal weeks are mentioned but not in earlier years)
 	-> total: 24 weeks 		*/
 	
-replace ml_dur1 = 2 		if country == "HU" & year == 2013 & ml_eli == 1
+replace ml_dur1 = 4 		if country == "HU" & year == 2013 & ml_eli == 1
 
-replace ml_dur2 = 24-2 		if country == "HU" & year == 2013 & ml_eli == 1
+replace ml_dur2 = 24-4 		if country == "HU" & year == 2013 & ml_eli == 1
 
 
 * BENEFIT (monthly)

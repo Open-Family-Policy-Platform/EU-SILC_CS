@@ -20,7 +20,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "HU" & year == 2017 & gender =
 
 
 * DURATION (weeks)
-/*	-> prenatal: 2 weeks are compulsory (up to 4 weeks possible)
+/*	-> prenatal: 2 weeks are compulsory (up to 4 weeks possible; LP&R 2017)
 	-> total: 24 weeks 		*/
 	
 replace ml_dur1 = 2 		if country == "HU" & year == 2017 & ml_eli == 1
