@@ -4,7 +4,7 @@
 * HUNGARY - 2010
 
 * ELIGIBILITY
-/*	-> employed  */
+/*	-> employed  (LP&R 2010) */
 	
 replace pt_eli = 1 		if country == "HU" & year == 2010 & gender == 2 ///
 						& econ_status == 1
@@ -13,8 +13,8 @@ replace pt_eli = 1 		if country == "HU" & year == 2010 & gender == 2 ///
 replace pt_eli = 0 		if pt_eli == . & country == "HU" & year == 2010 & gender == 2
 
 * DURATION (weeks)
-/*	-> 5 working days (LP&R 2010)
-	-> 7 working days for twins (not coded; MISSOC 2010)*/
+/*	-> 5 working days to be taken during first 2 months after childbirth (LP&R 2010)
+*/
 	
 replace pt_dur = 5/5 	if country == "HU" & year == 2010 & pt_eli == 1
 
