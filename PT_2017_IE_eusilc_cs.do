@@ -1,8 +1,4 @@
-/* PT_2017_IE_eusilc_cs
-
-date created: 29/09/2021
-
-*/
+/* PT_2017_IE_eusilc_cs */
 
 * IRELAND - 2017
 
