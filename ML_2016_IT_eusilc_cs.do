@@ -42,7 +42,7 @@ replace ml_dur2 = 3*4.3			if country == "IT" & year == 2016 & ml_eli == 1 & gend
 
 * BENEFIT (monthly)
 /*	-> 80% earning, no ceiling  
-	-> public sector employees are entitled to 100% for the first 30 days, no ceiling => not coded */
+*/
 
 replace ml_ben1 = 0.8*earning 		if country == "IT" & year == 2016 & ml_eli == 1
 
