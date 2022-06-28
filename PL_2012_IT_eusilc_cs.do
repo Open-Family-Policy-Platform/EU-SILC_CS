@@ -5,9 +5,9 @@
 
 * ELIGIBILITY
 /*	-> employed
-	-> self-employed (LP&R 2012) 	
+	-> self-employed: voluntarily insured (not coded) 	
 */
-replace pl_eli = 1 			if country == "IT" & year == 2012 & inlist(econ_status,1,2)
+replace pl_eli = 1 			if country == "IT" & year == 2012 & econ_status == 1
 replace pl_eli =  0			if pl_eli == . & country == "IT" & year == 2012
 
 
@@ -68,7 +68,9 @@ replace pl_dur = 10		if country == "IT" & year == 2012 & pl_eli == 1 ///
 						
 * BENEFIT (monthly)
 /*	-> 30% of earnings (coded) if the child is under 3 years old (not coded)
-	-> unpaid if the child is between 3 and 8 years old (not coded) 	*/
+	-> unpaid if the child is between 3 and 8 years old (not coded) 
+		-> 30% if annual earnings are under €14,891.50
+	*/
 	
 replace pl_ben1 = 0.3*earning 		if country == "IT" & year == 2012 & pl_eli == 1
 replace pl_ben2 = pl_ben1			if country == "IT" & year == 2012 & pl_eli == 1

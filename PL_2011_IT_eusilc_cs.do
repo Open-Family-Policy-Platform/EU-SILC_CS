@@ -5,14 +5,14 @@
 
 * ELIGIBILITY
 /*	-> employed
-	-> self-employed (LP&R 2011) 	
+	-> self-employed: voluntarily insured (not coded)
 */
-replace pl_eli = 1 			if country == "IT" & year == 2011 & inlist(econ_status,1,2)
+replace pl_eli = 1 			if country == "IT" & year == 2011 & econ_status == 1
 replace pl_eli =  0			if pl_eli == . & country == "IT" & year == 2011
 
 
 * DURATION (weeks)
-/*	-> employed: 6 months/parent/child
+/*	-> employed: 6 months/parent/child (LP&R 2011)
 	-> between the two parents no longer than 10 months (not coded) => in couples 6 months assigned to woman,
 		4 month to man
 		-> when mother is not entitled, the whole leave is assigned to the cohabiting man
@@ -68,7 +68,9 @@ replace pl_dur = 10		if country == "IT" & year == 2011 & pl_eli == 1 ///
 						
 * BENEFIT (monthly)
 /*	-> 30% of earnings (coded) if the child is under 3 years old (not coded)
-	-> unpaid if the child is between 3 and 8 years old (not coded) 	*/
+	-> unpaid if the child is between 3 and 8 years old (not coded) 
+		-> 30% if annual earnings are under €14,891.50
+*/
 	
 replace pl_ben1 = 0.3*earning 		if country == "IT" & year == 2011 & pl_eli == 1
 replace pl_ben2 = pl_ben1			if country == "IT" & year == 2011 & pl_eli == 1

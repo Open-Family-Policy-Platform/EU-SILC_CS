@@ -5,14 +5,14 @@
 
 * ELIGIBILITY
 /*	-> employed
-	-> self-employed (LP&R 2010) 	
+	-> self-employed: voluntarily insured (not coded)
 */
-replace pl_eli = 1 			if country == "IT" & year == 2010 & inlist(econ_status,1,2)
+replace pl_eli = 1 			if country == "IT" & year == 2010 & econ_status == 1
 replace pl_eli =  0			if pl_eli == . & country == "IT" & year == 2010
 
 
 * DURATION (weeks)
-/*	-> employed: 6 months/parent/child
+/*	-> employed: 6 months/parent/child (LP&R 2010)
 	-> between the two parents no longer than 10 months (not coded) => in couples 6 months assigned to woman,
 		4 month to man
 		-> when mother is not entitled, the whole leave is assigned to the cohabiting man
