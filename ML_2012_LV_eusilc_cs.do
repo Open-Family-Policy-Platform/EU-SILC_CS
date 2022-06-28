@@ -5,18 +5,17 @@
 * ELIGIBILITY
 /*	-> employed
 	-> self-employed
-				*/
+*/
 	
 replace ml_eli = 1 			if country == "LV" & year == 2012 & gender == 1 ///
 							& inlist(econ_status,1,2) 
-
 							
 replace ml_eli = 0 			if ml_eli == . & country == "LV" & year == 2012 & gender == 1
 
 
 * DURATION (weeks)
 /*	-> total: 112 calendar days
-	*/
+*/
 
 replace ml_dur1 = 0		if country == "LV" & year == 2012 & ml_eli == 1
 
