@@ -11,10 +11,10 @@
 */
 	
 replace ml_eli = 1 			if country == "IE" & year == 2010 & gender == 1 ///
-							& econ_status == 1 & duremp >= 9
+							& econ_status == 1 & (duremp+dursemp) >= 9
 							
 replace ml_eli = 1 			if country == "IE" & year == 2010 & gender == 1 ///
-							& econ_status == 2 & dursemp >= 12
+							& econ_status == 2 & (duremp+dursemp) >= 12
 							
 replace ml_eli = 0 			if ml_eli == . & country == "IE" & year == 2010 & gender == 1
 
