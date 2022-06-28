@@ -21,7 +21,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "IE" & year == 2013 & gender =
 
 * DURATION (weeks)
 /*	-> 26 weeks paid leave
-	-> 16 weeks unpaid leave
+	-> 16 weeks unpaid leave (LP&R 2013)
 	-> prenatal leave: 2 weeks
 */
 	
