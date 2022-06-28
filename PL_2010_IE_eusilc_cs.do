@@ -13,6 +13,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "IE" & year == 2010
 
 * DURATION (weeks)
 /*	-> 14 weeks/parent/child
+	-> leave is non-transferable
 	-> before child's 8th birthday (not coded)
 */
 replace pl_dur = 14 		if country == "IE" & year == 2010 & pl_eli == 1

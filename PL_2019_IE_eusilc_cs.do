@@ -1,6 +1,5 @@
 /* PL_2019_IE_eusilc_cs */
 
-
 * IRELAND - 2019
 
 * ELIGIBILITY
