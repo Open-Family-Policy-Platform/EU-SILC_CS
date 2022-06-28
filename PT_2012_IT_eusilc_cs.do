@@ -3,8 +3,6 @@
 
 * ITALY - 2012
 
-No paternity leave at all! (only under circumstances: mother's death/severe illness, child being left by mother.)
-
 * ELIGIBILITY
 /*	no statutory right to paternity leave  		*/
 		

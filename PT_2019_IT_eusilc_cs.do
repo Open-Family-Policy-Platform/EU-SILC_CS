@@ -13,9 +13,10 @@ replace pt_eli = 0 		if pt_eli == . & country == "IT" & year == 2019 & gender ==
 
 
 * DURATION (weeks)
-/*	-> 4 days */
+/*	-> 5 days (compulsory) 
+	-> to be used within 5 month after childbirth */
 
-replace pt_dur = 4/5 	if country == "IT" & year == 2019 & pt_eli == 1
+replace pt_dur = 5/5 	if country == "IT" & year == 2019 & pt_eli == 1
 
 
 * BENEFIT (monthly)

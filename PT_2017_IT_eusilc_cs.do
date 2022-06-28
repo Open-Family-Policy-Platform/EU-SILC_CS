@@ -1,8 +1,5 @@
-/* PT_2017_IT_eusilc_cs
+/* PT_2017_IT_eusilc_cs */
 
-date created: 27/09/2021
-
-*/
 
 * ITALY - 2017
 

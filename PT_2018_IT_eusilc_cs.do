@@ -13,7 +13,8 @@ replace pt_eli = 0 		if pt_eli == . & country == "IT" & year == 2018 & gender ==
 
 
 * DURATION (weeks)
-/*	-> 4 days */
+/*	-> 4 days 
+	-> mother can transfer 3 days from her ML (not coded)*/
 
 replace pt_dur = 4/5 	if country == "IT" & year == 2018 & pt_eli == 1
 
