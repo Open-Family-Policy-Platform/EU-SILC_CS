@@ -4,9 +4,14 @@
 * LATVIA - 2014
 
 * ELIGIBILITY
-/*	-> all residents are eligible
-	-> benefits differ based on the economic activity 
-	-> leave benefits are family entitlement => assigned to women 	*/
+/*	-> 2 types of benefits:
+		-> parental benefit
+			-> employed
+			-> self-employed
+		-> childraisin allowance:
+			-> all residents
+
+	-> leave benefits are family entitlement => assigned to women 		*/
 	
 replace pl_eli = 1 			if country == "LV" & year == 2014 
 replace pl_eli =  0			if pl_eli == . & country == "LV" & year == 2014
@@ -14,9 +19,9 @@ replace pl_eli =  0			if pl_eli == . & country == "LV" & year == 2014
 
 
 * DURATION (weeks)
-/*	-> employed, self-employed: until the child is 1 or 1.5 (can choose)
-		=> more generous option coded (1 year = higher benefit)
-	-> unemployed, inactive: until child is 2		*/
+/*	-> parental benefit: until the child is 1 
+	-> childraising allowance: until child is 2	
+		-> available to all parents 	*/
 
 * women	eligible for maternity leave
 replace pl_dur =  52 - ml_dur2		if country == "LV" & year == 2014 & pl_eli == 1 ///
@@ -36,8 +41,9 @@ replace pl_dur = 2*52 				if country == "LV" & year == 2014 & pl_eli == 1 ///
 
 * BENEFIT (monthly)
 /*	-> employed, self-employed: 70% of gross earnings till child is 1.
-	-> minimum: €171/month
-	-> non-working: €171/month until child is 1.5; €42.69/month until child is 2 */
+		-> minimum: €171/month
+	-> non-working: €171/month until child is 1
+		-> €42.69/month until child is 2 */
 	
 * women, employed or self-employed
 replace pl_ben1 = 0.7 * earning 		if country == "LV" & year == 2014 & pl_eli == 1 ///

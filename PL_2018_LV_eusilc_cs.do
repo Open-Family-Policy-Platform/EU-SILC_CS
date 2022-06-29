@@ -4,8 +4,13 @@
 * LATVIA - 2018
 
 * ELIGIBILITY
-/*	-> all residents are eligible
-	-> benefits differ based on the economic activity 
+/*	-> 2 types of benefits:
+		-> parental benefit
+			-> employed
+			-> self-employed
+		-> childraisin allowance:
+			-> all residents
+
 	-> leave benefits are family entitlement => assigned to women 	*/
 	
 replace pl_eli = 1 			if country == "LV" & year == 2018 
@@ -13,9 +18,10 @@ replace pl_eli =  0			if pl_eli == . & country == "LV" & year == 2018
 
 
 * DURATION (weeks)
-/*	-> employed, self-employed: until the child is 1 or 1.5 (can choose)
-		=> more generous option coded (1 year = higher benefit)
-	-> unemployed, inactive: until child is 2		*/
+/*	-> parental benefit: until the child is 1 (coded) or 1.5 (not coded)
+		-> per month benefit is more generous for the 1-year long option => coded
+	-> childraising allowance: until child is 2	
+		-> available to all parents 			*/
 
 * women	eligible for maternity leave
 replace pl_dur =  52 - ml_dur2		if country == "LV" & year == 2018 & pl_eli == 1 ///
@@ -37,7 +43,9 @@ replace pl_dur = 2*52 				if country == "LV" & year == 2018 & pl_eli == 1 ///
 /*	-> employed, self-employed: 
 		- option till 1 year: 60% of gross earnings
 		- option till 1.5 years: 43.75% of gross earnings (not coded)
-	-> non-working: €171/month until child is 1.5; €42.69/month until child is 2 */
+	-> non-working: 
+		-> €171/month until child is 1.5
+		-> €42.69/month until child is 2 */
 	
 * women, employed or self-employed
 replace pl_ben1 = 0.6* earning 		if country == "LV" & year == 2018 & pl_eli == 1 ///
