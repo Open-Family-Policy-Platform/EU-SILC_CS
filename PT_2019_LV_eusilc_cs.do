@@ -1,6 +1,5 @@
 /* PT_2019_LV_eusilc_cs */
 
-
 * LATVIA - 2019
 
 * ELIGIBILITY
