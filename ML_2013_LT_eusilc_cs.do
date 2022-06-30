@@ -5,12 +5,17 @@
 
 * ELIGIBILITY
 /*	-> employed, self-employed: for 12 months (coded) during past 2 years (not coded) 
+		-> the condition of 12 months is not required for mothers under 26 (MISSOC 07/2013)
 	-> the leave is non-transferable => it is assumed that father is not entitled 
 		if mother abandons the child
 */
 
 replace ml_eli = 1 			if country == "LT" & year == 2013 & gender == 1 ///
-							& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
+							& econ_status == 1 & (duremp+dursemp) >= 12 & age >= 26
+							
+replace ml_eli = 1 			if country == "LT" & year == 2013 & gender == 1 ///
+							& econ_status == 1 & age < 26
+
 
 						
 replace ml_eli = 0 			if ml_eli == . & country == "LT" & year == 2013 & gender == 1
