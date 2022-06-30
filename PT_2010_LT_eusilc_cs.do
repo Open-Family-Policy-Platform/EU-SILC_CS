@@ -5,6 +5,7 @@
 
 * ELIGIBILITY
 /*	-> employed: for 12 months (coded) during past 2 years (not coded) 
+	-> self-employed: voluntarily insured (not coded)
 		-> the condition doesn't apply for fathers under 26 (MISSOC 07/2010)
 */
 

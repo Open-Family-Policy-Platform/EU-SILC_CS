@@ -10,7 +10,7 @@ date created: 27/09/2021
 /*	-> employed, self-employed: for 12 months (coded) during past 2 years (not coded) */
 
 replace pt_eli = 1 		if country == "LT" & year == 2017 & gender == 2 ///
-						& econ_status == 1 & duremp >= 12
+						& econ_status == 1 & (duremp+dursemp) >= 12
 replace pt_eli = 1 		if country == "LT" & year == 2017 & gender == 2 ///
 						& econ_status == 2 & dursemp >= 12
 

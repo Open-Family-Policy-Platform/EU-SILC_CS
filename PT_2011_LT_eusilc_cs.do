@@ -4,10 +4,13 @@
 * LITHUANIA - 2011
 
 * ELIGIBILITY
-/*	-> employed, self-employed: for 12 months (coded) during past 2 years (not coded) */
+/*	-> employed: for 12 months (coded) during past 2 years (not coded) 
+		-> the condition doesn't apply for fathers under 26 (MISSOC 07/2011) */
 
 replace pt_eli = 1 		if country == "LT" & year == 2011 & gender == 2 ///
-						& inlist(econ_status,1,2) & (duremp+dursemp) >= 12
+						& econ_status == 1 & duremp >= 12
+replace pt_eli = 1 		if country == "LT" & year == 2011 & gender == 2 ///
+						& econ_status == 1 & age < 26
 
 
 replace pt_eli = 0 		if pt_eli == . & country == "LT" & year == 2011 & gender == 2
