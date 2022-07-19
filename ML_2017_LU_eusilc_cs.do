@@ -28,7 +28,7 @@ replace ml_dur2 = 12 		if country == "LU" & year == 2017 & ml_eli == 1
 * BENEFIT (monthly)
 /*	-> 100% earning
 	-> minimum: €1998.59 gross/month
-	-> maximum: €9,9923.95 gross/month 		*/
+	-> maximum: €9,992.95 gross/month 		*/
 
 replace ml_ben1 = earning 		if country == "LU" & year == 2017 & ml_eli == 1
 replace ml_ben1 = 1998.59  		if country == "LU" & year == 2017 & ml_eli == 1 ///
