@@ -21,8 +21,7 @@ replace pl_eli =  0			if pl_eli == . & country == "LU" & year == 2010
 * DURATION (weeks)
 /*	-> parents can choose between 4 and 6 months of FT leave
 		- the duration does not affect the monthly benefits => 6 months coded 
-		- the duration does not affect the monthly benefits => 6 months coded 
-	
+		
 	-> first parental leave must be taken immediately after maternity leave (not coded)
 	-> second parental leave can be taken anytime until child is 6 years old (not coded)
 	
