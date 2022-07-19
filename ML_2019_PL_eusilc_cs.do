@@ -29,10 +29,11 @@ replace ml_dur2 = 20 		if country == "PL" & year == 2019 & ml_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-		- women may choose between 100% and 80% (LP&R 2019)
-		- the choice will determine the duration of parental leave (100% more generous 
-		in a short run, 80% more generous in a long run => 80% coded), less generous 
-		cash benefits imply longer parental leave
+		- women may choose between 100% and 80% (LP&R 2015)
+		- the choice determines the benefit of parental leave
+			-> 100% ML replacement rate => 100% for the dirst 6 weeks & 60% for the remaining 26 weeks (not coded)
+			-> 80% ML replacement rate => 80% parental leave replacement rate (coded)
+			
 	-> minimum: €232/month
 */	
 	

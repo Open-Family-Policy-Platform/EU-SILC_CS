@@ -15,22 +15,22 @@ replace ml_eli = 0 			if ml_eli == . & country == "PL" & year == 2015 & gender =
 
 
 * DURATION (weeks)
-/*	-> total: 20 weeks (coded as postnatal)
+/*	-> total: 26 weeks (coded; ML and additional ML; LP&R 2015)
 	-> prenatal: 6 weeks, not compulsory (not coded)
-	-> postnatal: 14 weeks (not coded) 			
+				
 */
 	
 replace ml_dur1 = 0 		if country == "PL" & year == 2015 & ml_eli == 1
 
-replace ml_dur2 = 20 		if country == "PL" & year == 2015 & ml_eli == 1
+replace ml_dur2 = 26 		if country == "PL" & year == 2015 & ml_eli == 1
 
 
 * BENEFIT (monthly)
 /*	-> 100% earning, no ceiling
 		- women may choose between 100% and 80% (LP&R 2015)
-		- the choice will determine the duration of parental leave (100% more generous 
-		in a short run, 80% more generous in a long run => 80% coded), less generous 
-    cash benefits imply longer parental leave
+		- the choice determines the benefit of parental leave
+			-> 100% ML replacement rate => 60% parental leave replacement rate (not coded)
+			-> 80% ML replacement rate => 80% parental leave replacement rate (coded)
 	*/
 
 	

@@ -15,17 +15,17 @@ replace ml_eli = 0 			if ml_eli == . & country == "PL" & year == 2012 & gender =
 
 
 * DURATION (weeks)
-/*	-> total: 20 weeks (coded as postnatal)
-	-> prenatal: 2 weeks, not compulsory (if taken, then 18 weeks after birth. not coded)	
+/*	-> total: 24 weeks (coded; ML and additional ML; LP&r 2012)
+	-> prenatal: 2 weeks, not compulsory (not coded)	
 */
 	
 replace ml_dur1 = 0 		if country == "PL" & year == 2012 & ml_eli == 1
 
-replace ml_dur2 = 20 		if country == "PL" & year == 2012 & ml_eli == 1
+replace ml_dur2 = 24 		if country == "PL" & year == 2012 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 100% earning
+/*	-> 100% earning, no ceiling */
 	
 replace ml_ben1 = earning 		if country == "PL" & year == 2012 & ml_eli == 1
 
