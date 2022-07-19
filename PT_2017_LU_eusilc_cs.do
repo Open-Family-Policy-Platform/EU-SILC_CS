@@ -1,8 +1,4 @@
-/* PT_2017_LU_eusilc_cs
-
-date created: 29/09/2021
-
-*/
+/* PT_2017_LU_eusilc_cs */
 
 * LUXEMBOURG - 2017
 

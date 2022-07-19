@@ -2,8 +2,6 @@
 
 
 * LUXEMBOURG - 2012
-
-* NO STATUTORY ENTITLEMENT FOR PATERNITY LEAVE!
 	
 * ELIGIBILITY
 /*	-> no statutory entitlement to paternity leave
@@ -11,24 +9,24 @@
 */
 
 replace pt_eli = 1 		if country == "LU" & year == 2012 & gender == 2 & econ_status == 1
-replace pt_eli = 0 		if pt_eli == . & country == "LU" & year == 2012 & gender == 2
+replace pt_eli = 0 		if pt_eli == . & country == "LU" & year == 2012 & gender == 2
 
 
-* DURATION (weeks)
+* DURATION (weeks)
 /*	-> 2 days */
-replace pt_dur = 2/5 	if country == "LU" & year == 2012 & pt_eli == 1
+replace pt_dur = 2/5	if country == "LU" & year == 2012 & pt_eli == 1
 
 
-* BENEFIT (monthly)
+* BENEFIT (monthly)	
 /*	-> 100% 	*/
-	
-replace pt_ben1 = earning 	if country == "LU" & year == 2012 & pt_eli == 1
+
+replace pt_ben1 = earning	if country == "LU" & year == 2012 & pt_eli == 1
 
 
-replace pt_ben2 = pt_ben1 	if country == "LU" & year == 2012 & pt_eli == 1
+replace pt_ben2 = pt_ben1	if country == "LU" & year == 2012 & pt_eli == 1
 
 foreach x in 1 2 {
-	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "LU" & year == 2012
+	replace pt_ben`x' = .0 if pt_eli == 0 & country == "LU" & year == 2012
 }
 
-replace pt_dur = 0 if pt_eli == 0 & country == "LU" & year == 2012
+replace pt_dur = .0if pt_eli == 0 & country == "LU" & year == 2012

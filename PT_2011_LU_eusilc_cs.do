@@ -2,8 +2,6 @@
 
 
 * LUXEMBOURG - 2011
-
-* NO STATUTORY ENTITLEMENT FOR PATERNITY LEAVE!
 	
 * ELIGIBILITY
 /*	-> no statutory entitlement to paternity leave
