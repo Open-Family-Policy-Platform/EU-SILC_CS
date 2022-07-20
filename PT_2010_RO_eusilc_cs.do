@@ -5,6 +5,9 @@
 * ELIGIBILITY
 /*	-> employed
 	-> self-employed 
+	
+	-> introduced in 1999 (source: Dohotariu, A. (2018) Parental leave provision
+		in Romania between inherited tendencies and legislative adjustments. Symposion, 5(1), 41-57.)
 */
 
 replace pt_eli = 1 		if country == "RO" & year == 2010 & gender == 2 ///
