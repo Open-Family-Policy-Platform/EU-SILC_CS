@@ -12,6 +12,7 @@
 	
 replace ml_eli = 1 			if country == "RO" & year == 2018 & gender == 1
 
+* single men
 replace ml_eli = 1			if country == "RO" & year == 2018 & gender == 2 ///
 							& parstat == 1
 											
@@ -24,6 +25,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "RO" & year == 2018 & gender =
 	
 replace ml_dur1 = 0 			if country == "RO" & year == 2018 & ml_eli == 1
 
+* single men
 replace ml_dur2 = (63+63)/5 	if country == "RO" & year == 2018 & ml_eli == 1 ///
 								& gender == 1
 
@@ -41,6 +43,7 @@ replace ml_dur2 = (63+63)-(6*5)/5	if country == "RO" & year == 2018 & ml_eli == 
 
 replace ml_ben1 = 0.85*earning 		if country == "RO" & year == 2018 & ml_eli == 1
 
+* ceiling
 replace ml_ben1 = 0.85*(12*407.45)	if country == "RO" & year == 2018 & ml_eli == 1 ///
 									& ml_ben1 > 0.85*(12*407.45)
 

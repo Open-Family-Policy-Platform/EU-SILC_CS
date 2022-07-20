@@ -3,7 +3,7 @@
 * ROMANIA - 2010
 
 * ELIGIBILITY
-/*	-> employed, self-employed: insured for at least 1 month during past 12 months 
+/*	-> employed, self-employed: insured for at least 1 month during past 12 months (not coded)
 	-> unemployed: if unemployed for less than 9 months 
 	-> women with no income
 	
@@ -12,6 +12,7 @@
 	
 replace ml_eli = 1 			if country == "RO" & year == 2010 & gender == 1
 
+* single father
 replace ml_eli = 1			if country == "RO" & year == 2010 & gender == 2 ///
 							& parstat == 1
 											
@@ -27,6 +28,7 @@ replace ml_dur1 = 0 			if country == "RO" & year == 2010 & ml_eli == 1
 replace ml_dur2 = (63+63)/5 	if country == "RO" & year == 2010 & ml_eli == 1 ///
 								& gender == 1
 
+* single men								
 replace ml_dur2 = (63+63)-(6*5)/5	if country == "RO" & year == 2010 & ml_eli == 1 ///
 									& gender == 2 & parstat == 1
 

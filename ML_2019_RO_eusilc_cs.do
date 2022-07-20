@@ -45,6 +45,7 @@ replace ml_dur2 = ((63+63)-(6*5))/5	if country == "RO" & year == 2019 & ml_eli =
 
 replace ml_ben1 = 0.85*earning 		if country == "RO" & year == 2019 & ml_eli == 1
 
+* ceiling
 replace ml_ben1 = 0.85*(12*439.35)	if country == "RO" & year == 2019 & ml_eli == 1 ///
 									& ml_ben1 > 0.85*(12*439.35)
 
