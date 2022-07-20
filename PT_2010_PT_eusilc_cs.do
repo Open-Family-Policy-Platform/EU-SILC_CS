@@ -18,7 +18,7 @@ replace pt_eli = 1 		if country == "PT" & year == 2010 & gender == 2 ///
 replace pt_eli = 0 		if pt_eli == . & country == "PT" & year == 2010 & gender == 2
 
 * DURATION (weeks)
-/*	-> 20 working days (LP&R 2010), 10 days are obligatory 
+/*	-> 20 working days (LP&R 2010), 10 days are obligatory, within the first month after birth
 	-> LP&R 2010: single parents cannot use the other parent's entitlement => 
 		father's share is not assigned to single woman 	*/
 

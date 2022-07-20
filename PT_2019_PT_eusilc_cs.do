@@ -19,7 +19,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "PT" & year == 2019 & gender ==
 
 
 * DURATION (weeks)
-/*	-> 25 working days (LP&R 2019), 15 days are obligatory 
+/*	-> 25 working days (LP&R 2019), 15 days are obligatory, within the first month after birth 
 	-> LP&R 2019: single parents cannot use the other parent's entitlement => 
 		father's share is not assigned to single mother 	*/
 

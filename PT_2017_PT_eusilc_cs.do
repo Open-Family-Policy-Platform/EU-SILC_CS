@@ -1,9 +1,4 @@
-/* PT_2017_PT_eusilc_cs
-
-date created: 29/09/2021
-
-
-*/
+/* PT_2017_PT_eusilc_cs */
 
 * PORTUGAL - 2017
 
@@ -21,7 +16,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "PT" & year == 2017 & gender ==
 
 
 * DURATION (weeks)
-/*	-> 25 working days (LP&R 2017), 15 days are obligatory 
+/*	-> 25 working days (LP&R 2017), 15 days are obligatory, within the first month after birth 
 	-> LP&R 2017: single parents cannot use the other parent's entitlement => 
 		mother's share is not assigned to single men 	*/
 
