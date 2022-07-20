@@ -7,6 +7,8 @@
 /*	-> pooled rights (i.e. individual and family rights to leave)
 		- total leave: 120 or 150 (parents' choice)
 		- ML refers to the leave reserved for mother
+		- if parents share the initial parental leave => additional 30 days (=> more generous benefits; not coded)
+		
 	-> compulsorily social insurance for employed and self-employed 
 		- 6 months of work before childbirth	
 		

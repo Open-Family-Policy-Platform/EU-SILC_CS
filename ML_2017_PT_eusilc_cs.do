@@ -6,6 +6,8 @@
 /*	-> pooled rights (i.e. individual and family rights to leave)
 		- total leave: 120 or 150 (parents' choice)
 		- ML refers to the leave reserved for mother
+		- if parents share the initial parental leave => additional 30 days (=> more generous benefits; not coded)
+		
 	-> compulsorily social insurance for employed and self-employed 
 		- 6 months of work before childbirth	
 	-> transferable to father only if the mother dies or is incapacitated => 
@@ -31,12 +33,12 @@ replace ml_dur2 = 6 		if country == "PT" & year == 2017 & ml_eli == 1
 * BENEFIT (monthly)
 /*	-> benefits are identical for all types of leave (reserved for mother, father, shared leave)
 	-> influenced by parents' choice of duration (120 or 150 days) and whether leave is shared 
-	-> 120 days: 100% earning
+	-> 120 days: 100% earning (coded)
 	-> 150 days, not shared: 80% earning
 	-> 150 days, shared: 100% earning
 	-> 180 days, shared: 83% earning 
 	-> minimum: €428.90/month 
-	-> most generous option coded (100%)*/
+*/
 
 replace ml_ben1 = earning 		if country == "PT" & year == 2017 & ml_eli == 1
 replace ml_ben1 = 428.90		if country == "PT" & year == 2017 & ml_eli == 1 ///
