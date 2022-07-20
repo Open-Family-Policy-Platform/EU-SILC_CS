@@ -8,7 +8,7 @@
 					such data is provided at HH level in EU-SILC => not coded
 */
 
-replace pl_eli = 1 			if country == "RO" & year == 2010 & duremp + dursemp >= 12
+replace pl_eli = 1 			if country == "RO" & year == 2010 & (duremp + dursemp) >= 12
 
 replace pl_eli =  0			if pl_eli == . & country == "RO" & year == 2010
 
