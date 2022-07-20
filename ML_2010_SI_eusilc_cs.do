@@ -8,6 +8,7 @@
 	-> unemployed, inactive if they were compulsorily insured for at least 12 months (coded)
 		over the past 3 years (not coded; LP&R 2010)
 	-> benefits for unemployed and inactive people are not clearly specified in the sources => not coded
+	
 	-> single fathers are eligible (if mother abandoned the child)
 */
 	
@@ -27,13 +28,13 @@ replace ml_eli = 0 			if ml_eli == . & country == "SI" & year == 2010 & gender =
 
 * DURATION (weeks)
 /*	-> total: 105 calendar days
-	-> prenatal: 28 days, not compulsory => coded 0 
+	-> prenatal: 28 days
 	-> single father: 80 days (LP&R 2010)
 */
 	
-replace ml_dur1 = 0 			if country == "SI" & year == 2010 & ml_eli == 1
+replace ml_dur1 = 28 			if country == "SI" & year == 2010 & ml_eli == 1
 
-replace ml_dur2 = 105/7 		if country == "SI" & year == 2010 & ml_eli == 1 ///
+replace ml_dur2 = (105-28)/7 		if country == "SI" & year == 2010 & ml_eli == 1 ///
 								& gender == 1
 replace ml_dur2 = 80/7			if country == "SI" & year == 2010 & ml_eli == 1 ///
 								& gender == 2 & parstat == 1

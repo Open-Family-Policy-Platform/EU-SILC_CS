@@ -27,7 +27,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "SI" & year == 2016 & gender =
 
 * DURATION (weeks)
 /*	-> total: 105 calendar days
-	-> prenatal: 28 days, not compulsory => coded 0 
+	-> prenatal: 28 days, 15 days must be used before and/or after childbirth (not coded) 
 	-> single father: 80 days (LP&R 2016)
 */
 	
