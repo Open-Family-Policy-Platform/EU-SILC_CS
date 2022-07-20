@@ -24,17 +24,18 @@ replace pt_eli = 0 			if country == "SI" & year == 2017 & gender == 2 ///
 							& pt_eli == .
 
 * DURATION (weeks)
-/*	-> 30 calendar days */
+/*	-> 50 calendar days */
 
-replace pt_dur = 30/7 	if country == "SI" & year == 2017 & pt_eli == 1
+replace pt_dur = 50/7 	if country == "SI" & year == 2017 & pt_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> 90% earnings
+/*	-> 90% earnings for 25 days
+	-> 25 days unpaid
 	-> ceiling: €2,863/month (LP&R 2017) 	
 	-> minimum: €842.79/month (LP&R 2017)		*/
 
-replace pt_ben1 = 0.9*earning 	 	if country == "SI" & year == 2017 & pt_eli == 1 
+replace pt_ben1 = (0.9*earning) * (25/50) 	 	if country == "SI" & year == 2017 & pt_eli == 1 
 replace pt_ben1 = 842.79	 	 	if country == "SI" & year == 2017 & pt_eli == 1 ///
 									& pt_ben1 < 842.79
 replace pt_ben1 = 2863		 	 	if country == "SI" & year == 2017 & pt_eli == 1 ///

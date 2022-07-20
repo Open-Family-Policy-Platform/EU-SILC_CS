@@ -30,12 +30,12 @@ replace pt_dur = 90/7 	if country == "SI" & year == 2010 & pt_eli == 1
 	-> 75 days unpaid
 	-> ceiling: €3,876/month (LP&R 2010) 	
 	-> minimum: €404/month (LP&R 2010)
-	-> remaining 75 days: €162/month		*/
+	-> remaining 75 days: unpaid		*/
 
-replace pt_ben1 = earning * (15/90) + 162 * (75/90)		 if country == "SI" & year == 2010 & pt_eli == 1 
-replace pt_ben1 = 404 * (15/90) + 162 * (75/90)	 	 	 if country == "SI" & year == 2010 & pt_eli == 1 ///
-									& earning < 404
-replace pt_ben1 = 3876 + 162 * (75/90)		 	 	 if country == "SI" & year == 2010 & pt_eli == 1 ///
+replace pt_ben1 = earning * (15/90) 		 if country == "SI" & year == 2010 & pt_eli == 1 
+replace pt_ben1 = 404 * (15/90) 	 	 	 if country == "SI" & year == 2010 & pt_eli == 1 ///
+											& earning < 404
+replace pt_ben1 = 3876 		 	 	 if country == "SI" & year == 2010 & pt_eli == 1 ///
 									& earning > 3876
 
 

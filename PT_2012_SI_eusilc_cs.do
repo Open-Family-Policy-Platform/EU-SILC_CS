@@ -29,13 +29,13 @@ replace pt_dur = 90/7 	if country == "SI" & year == 2012 & pt_eli == 1
 /*	-> 100% earnings for 15 days
 	-> ceiling: €3,865/month (LP&R 2012) 	
 	-> minimum: €420/month (LP&R 2012)
-	-> flat-rate benefit of €169/month for remaining 75 days
+	-> 75 days unpaid
 */
 
-replace pt_ben1 = earning * (15/90) + 169 * (75/90)		if country == "SI" & year == 2012 & pt_eli == 1 
-replace pt_ben1 = 420 * (15/90) + 169 * (75/90)	 		if country == "SI" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = earning * (15/90) 		if country == "SI" & year == 2012 & pt_eli == 1 
+replace pt_ben1 = 420 * (15/90)  		if country == "SI" & year == 2012 & pt_eli == 1 ///
 									& earning < 420
-replace pt_ben1 = 3865 + 169 * (75/90) 	 			if country == "SI" & year == 2012 & pt_eli == 1 ///
+replace pt_ben1 = 3865 	 			if country == "SI" & year == 2012 & pt_eli == 1 ///
 									& earning > 3865
 
 
