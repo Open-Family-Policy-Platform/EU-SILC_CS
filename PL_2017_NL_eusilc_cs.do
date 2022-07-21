@@ -12,7 +12,7 @@ replace pl_eli = 0 		if pl_eli == . & country == "NL" & year == 2017
 
 
 * DURATION (weeks)
-/* -> 26 times the number of weeklyl working hours per parent per child
+/* -> 26 times the number of weekly working hours per parent per child
 */
 replace pl_dur = (26 * whours)/40 if country == "NL" & year == 2017 & pl_eli == 1
 
