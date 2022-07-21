@@ -27,10 +27,13 @@ replace pl_dur = (3*52) - pt_dur 		if country == "ES" & year == 2011 & pl_eli ==
 * BENEFIT (monthly)
 /*	-> unpaid
 	-> regional variation (LP&R 2011):
-		- Basque country: €271.25/month if earning 
+		- Basque country: €291/month if earning 
 						  NUTS2 region code ES21
 		- La Rioja: €250/month if family income < €40,000/year
 					NUTS2 region code ES23 
+		- Castilla-León: €532.51/month if family income < €30,000/year
+		- Navarre: €417.27 for second child for one year 
+		- Castilla-La Mancha: €600/month for women up to €3,000/year; men €900/month up to €7,000/year
 
 */
 		
@@ -38,14 +41,25 @@ replace pl_dur = (3*52) - pt_dur 		if country == "ES" & year == 2011 & pl_eli ==
 replace pl_ben1 = 0 		if country == "ES" & year == 2011 & pl_eli == 1
 
 * Basque country
-replace pl_ben1 = 271.25	if country == "ES" & year == 2011 & pl_eli == 1 ///
-							& region == "ES21" 	
-
+replace pl_ben1 = 291		if country == "ES" & year == 2011 & pl_eli == 1 ///
+							& region == "ES21" & gender == 1						
+							
 * La Rioja							
 replace pl_ben1 = 250		if country == "ES" & year == 2011 & pl_eli == 1 ///
-							& region == "ES23" & (earning_yg + p_earning_yg) < 40000							
-
+							& region == "ES23" & (earning_yg + p_earning_yg) < 40000 & gender == 1
 							
+* Castilla-León
+replace pl_ben1 = 532.51		if country == "ES" & year == 2011 & pl_eli == 1 ///
+							& region == "ES41" & (earning_yg + p_earning_yg) < 30000 & gender == 1
+							
+* Navarre
+replace pl_ben1 = 417.27		if country == "ES" & year == 2011 & pl_eli == 1 ///
+							& region == "ES22" & gender == 1 & nchild >= 2
+							
+* Castilla-La Mancha
+replace pl_ben1 = 600	if country == "ES" & year == 2011 & pl_eli == 1 ///
+							& region == "ES42" & gender == 1
+						
 replace pl_ben2 = pl_ben1		if country == "ES" & year == 2011 & pl_eli == 1
 
 

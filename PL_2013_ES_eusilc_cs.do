@@ -31,6 +31,7 @@ replace pl_dur = (3*52) - pt_dur 		if country == "ES" & year == 2013 & pl_eli ==
 						  NUTS2 region code ES21
 		- La Rioja: €250/month if family income < €40,000/year
 					NUTS2 region code ES23 
+		- Navarre: €396.31 for second child for one year 
 
 */
 		
@@ -53,6 +54,14 @@ replace pl_ben1 = 250		if country == "ES" & year == 2013 & pl_eli == 1 ///
 							& region == "ES23" & (earning + p_earning) < 40000/12 ///
 							& gender == 2 & parstat == 1
 
+* Navarre
+replace pl_ben1 = 396.31		if country == "ES" & year == 2012 & pl_eli == 1 ///
+								& region == "ES22" & gender == 1 & nchild >= 2
+							
+	* single men
+replace pl_ben1 = 396.31		if country == "ES" & year == 2012 & pl_eli == 1 ///
+								& region == "ES22" & gender == 2 & parstat == 1 & nchild >= 2
+							
 							
 replace pl_ben2 = pl_ben1		if country == "ES" & year == 2013 & pl_eli == 1
 
