@@ -14,10 +14,9 @@ replace pt_eli = 0 		if pt_eli == . & country == "ES" & year == 2012 & gender ==
 
 
 * DURATION (weeks)
-/*	-> employed only: 2 days (birth leave) + 13 days (paternity leave)
+/*	-> 15 days (LP&R 2012)
 */
-replace pt_dur = 15/5 		if country == "ES" & year == 2012 & pt_eli == 1 ///
-								& econ_status == 1
+replace pt_dur = 15/5 		if country == "ES" & year == 2012 & pt_eli == 1 
 
 
 * BENEFIT (monthly)

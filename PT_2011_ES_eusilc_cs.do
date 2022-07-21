@@ -14,25 +14,20 @@ replace pt_eli = 0 		if pt_eli == . & country == "ES" & year == 2011 & gender ==
 
 
 * DURATION (weeks)
-/*	-> employed only: 2 days (birth leave) + 4 weeks (paternity leave)
-	-> self-employed: 4 weeks
+/*	-> 15 days (LP&R 2011)
 */
-replace pt_dur = (2/5) + 4 		if country == "ES" & year == 2011 & pt_eli == 1 ///
-								& econ_status == 1
-
-replace pt_dur = 4 				if country == "ES" & year == 2011 & pt_eli == 1 ///
-								& econ_status == 2
+replace pt_dur = 15/5 		if country == "ES" & year == 2011 & pt_eli == 1 
 
 
 * BENEFIT (monthly)
 /*	-> 100%
-	-> ceiling: €3,803.70/month
+	-> ceiling: €3,230 0/month
 */
 
 replace pt_ben1 = earning 	if country == "ES" & year == 2011 & pt_eli == 1
 
-replace pt_ben1 = 3803 		if country == "ES" & year == 2011 & pt_eli == 1 ///
-							& pt_ben1 > 3803.7
+replace pt_ben1 = 3230 		if country == "ES" & year == 2011 & pt_eli == 1 ///
+							& pt_ben1 > 3230
 
 replace pt_ben2 = pt_ben1 	if country == "ES" & year == 2011 & pt_eli == 1
 

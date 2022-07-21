@@ -14,14 +14,9 @@ replace pt_eli = 0 		if pt_eli == . & country == "ES" & year == 2015 & gender ==
 
 
 * DURATION (weeks)
-/*	-> employed only: 2 days (birth leave) + 4 weeks (paternity leave)
-	-> self-employed: 4 weeks
+/*	-> 15 days (LP&R 2015)
 */
-replace pt_dur = (2/5) + 4 		if country == "ES" & year == 2015 & pt_eli == 1 ///
-								& econ_status == 1
-
-replace pt_dur = 4 				if country == "ES" & year == 2015 & pt_eli == 1 ///
-								& econ_status == 2
+replace pt_dur = 15/5	 		if country == "ES" & year == 2015 & pt_eli == 1 
 
 
 * BENEFIT (monthly)
