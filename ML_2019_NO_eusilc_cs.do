@@ -12,63 +12,33 @@
 * NORWAY - 2019
 
 * ELIGIBILITY
-/*	-> any economic activity if they were employed or self-employed for at least 6 months (coded)
-		during 10 months (not coded) before birth (compulsory social insurance for employed & self-employed) 
-		- receipt of sickness, unemployment or parental leave benefit counts towards the 6 months
-			but EU-SILC collects this information on a HH level => not coded 
-		- applies to: mothers, fathers whose female partner doesn't fulfill the conditions, single father
+/*	-> employed, self-employed: worked for at least 6 months (coded) during 10 months (not coded) before birth
+	-> inactive women: maternity grant
 */
 
-* only woman is eligibile
-replace ml_eli = 1 			if country == "NO" & year == 2019 & gender == 1 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
+replace ml_eli = 1 			if country == "NO" & year == 2015 & gender == 1 
 
-* both partners are eligible
-replace ml_eli = 1 			if country == "NO" & year == 2019 & gender == 1 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
-
-* only man is eligible							
-replace ml_eli = 1 			if country == "NO" & year == 2019 & gender == 2 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
-
-* single man							
-replace ml_eli = 1			if country == "NO" & year == 2019 & gender == 2 ///
-							& (duremp + dursemp) >= 6  & parstat == 1
-
-
-replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2019 & gender == 1
+replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2015 & gender == 1
 
 
 * DURATION (weeks)
-/*	-> prenatal: 3 weeks compulsory
-	-> total: 15 weeks
-	-> postnatal: 6 weeks compulsory for mother (non-transferable) 	
-	-> father when mother is not eligible: 6 weeks
-	-> single father: 12 weeks
-	-> parents can choose between 2 options for the whole leave:
-		- 49 weeks on 100% earning 
-		- 59 weeks on 80% earning
+/*	
+	-> mother's quota: 15 weeks
+		-> prenatal: 3 weeks 
+		-> postnatal: 12 weeks 
+
 */
 
-replace ml_dur1 = 3 		if country == "NO" & year == 2019 & ml_eli == 1 & gender == 1
+replace ml_dur1 = 3 		if country == "NO" & year == 2015 & ml_eli == 1 & gender == 1
 
-* both partners are eligible
-replace ml_dur2 = 15-3 		if country == "NO" & year == 2019 & ml_eli == 1 & gender == 1 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) >= 6
-
-* only man is eligible
-replace ml_dur2 = 6 		if country == "NO" & year == 2019 & gender == 2 ///
-							& (duremp + dursemp) >= 6  & (p_duremp + p_dursemp) < 6
-
-* single man
-replace ml_dur2 = 12		if country == "NO" & year == 2019 & gender == 2 ///
-							& (duremp + dursemp) >= 6  & parstat == 1
-
+replace ml_dur2 = 12 		if country == "NO" & year == 2015 & ml_eli == 1 & gender == 1
 							
-							
+										
 
 * BENEFIT (monthly)
-/*	-> 100% earning
+/*	-> parents can choose between 2 options for the whole leave:
+		- 46 weeks on 100% earning (coded)
+		- 56 weeks on 80% earning
 	-> ceiling: €61,868/year 
 	-> minimum: maternity grant - €8,585 for the whole period (11 months)
 */
