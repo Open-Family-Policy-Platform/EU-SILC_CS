@@ -37,7 +37,7 @@ replace ml_dur2 = 60/7 		if country == "SE" & year == 2011 & ml_eli == 1
 /*	-> eligible for earning related benefit: min. income €20/day (coded) for 240 calendar days (not coded) before childbirth
 		- for 195 calendar days (includes 60 non-transferable leave): 80% earning
 			- minimum: €20/day
-			- ceiling: €47,340/year 
+			- ceiling: €46,889/year 
 		- for 45 days: €20/day (only applicable for pl_ben)
 		
 	-> all others: €20/day
@@ -50,8 +50,8 @@ replace ml_ben1 = 20*30					if country == "SE" & year == 2011 & ml_eli == 1 ///
 										& ml_ben1 == . 
 
 		
-replace ml_ben1 = 47340/12			if country == "SE" & year == 2011 & ml_eli == 1 ///
-										& earning >= 47340/12
+replace ml_ben1 = 46889/12			if country == "SE" & year == 2011 & ml_eli == 1 ///
+										& earning >= 46889/12
 
 									
 replace ml_ben2 = ml_ben1 			if country == "SE" & year == 2011 & ml_eli == 1
