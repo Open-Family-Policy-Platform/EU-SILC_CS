@@ -28,22 +28,23 @@ replace ml_eli = 0 			if ml_eli == . & country == "IS" & year == 2010 & gender =
 */
 replace ml_dur1 = 0	 			if country == "IS" & year == 2010 & ml_eli == 1 
 
+
 replace ml_dur2 = 3*4.3 		if country == "IS" & year == 2010 & ml_eli == 1 
 
 
 
 
 
-
 * BENEFIT (monthly)
-/*	-> employed, self-employed: active for 6 months prior to birth
+/*	-> parental benefit:
+		->employed, self-employed: active for 6 months prior to birth
 			- employed for at least 25% of full time (10 hours/week for 40 hours/week full-time employment) 
 			- 80% of earning up to €1,265 per month, and 75% earning of remuneration beyond €1,265/month
 			- ceiling: €1,898/month 
 			- minimum: €520/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
 					   €720/month  if worked between 50% and 100% FT (i.e. more than 20 hours/week)
 					   
-	-> those not fulfilling the conditions: 
+	-> those not fulfilling the conditions - maternity grant: 
 		- students: €720/month
 		- working less than 25% FT: €314/month
 */
