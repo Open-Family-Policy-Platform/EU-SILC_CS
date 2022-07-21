@@ -10,11 +10,8 @@
 * NORWAY - 2017
 
 * ELIGIBILITY
-/*	-> compulsory social insurance for employed & self-employed
-	-> any economic activity if they were employed or self-employed for at least 6 months (coded)
-		during 10 months before birth (not coded) 
-		- receipt of sickness, unemployment or parental leave benefit counts towards the 6 months
-			but EU-SILC collects this information on a HH level => not coded 
+/*	-> employed, self-employed: worked for at least 6 months (coded) during 10 months (not coded) before birth
+	-> inactive women: maternity grant
 */
 
 replace pl_eli = 1 			if country == "NO" & year == 2017 & (duremp + dursemp) >= 6
@@ -25,38 +22,38 @@ replace pl_eli = 0			if pl_eli == . & country == "NO" & year == 2017
 /*	-> parents can choose between 2 options for the whole parental leave:
 		- 49 weeks on 100% earning
 		- 59 weeks on 80% earning
-	-> joint right share: 19 weeks (remainder from 15 weeks reserved to mother and 15 weeks to father) 
+	-> joint right share: 29 weeks (remainder from 10 weeks reserved to mother and 10 weeks to father) 
 			-> assigned to mother
 */
 
 	* women
-replace pl_dur = 19 		if country == "NO" & year == 2017 & pl_eli == 1 & gender == 1
+replace pl_dur = 29 		if country == "NO" & year == 2017 & pl_eli == 1 & gender == 1
 
 	* single men
-replace pl_dur = 19 		if country == "NO" & year == 2017 & pl_eli == 1 & gender == 2 & parstat == 1
+replace pl_dur = 29 		if country == "NO" & year == 2017 & pl_eli == 1 & gender == 2 & parstat == 1
 
 
 
 
 * BENEFIT (monthly)
 /*	-> 100% earning
-	-> ceiling: €68,542/year
-	-> minimum: maternity grant - €8,862 for the whole period (11 months)
+	-> ceiling: €60,367/year
+	-> maternity grant - €6,567 for the whole period (11 months)
 */
 
 	* women
 replace pl_ben1 = earning 		if country == "NO" & year == 2017 & pl_eli == 1 & gender ==1
-replace pl_ben1 = 68542/12		if country == "NO" & year == 2017 & pl_eli == 1 ///
-								& pl_ben1 >= (68542/12) & gender == 1
-replace pl_ben1 = 8862/11		if country == "NO" & year == 2017 & pl_eli == 1 ///
-								& pl_ben1 < 8862/11 & gender == 1
+replace pl_ben1 = 60367/12		if country == "NO" & year == 2017 & pl_eli == 1 ///
+								& pl_ben1 >= (60367/12) & gender == 1
+replace pl_ben1 = 6567/11		if country == "NO" & year == 2017 & pl_eli == 1 ///
+								& pl_ben1 < 6567/11 & gender == 1
 
 	* single men
 replace pl_ben1 = earning 		if country == "NO" & year == 2017 & pl_eli == 1 & gender == 2 & parstat == 1
-replace pl_ben1 = 68542/12		if country == "NO" & year == 2017 & pl_eli == 1 ///
-								& pl_ben1 >= (68542/12) & gender == 2 & parstat == 1
-replace pl_ben1 = 8862/11		if country == "NO" & year == 2017 & pl_eli == 1 ///
-								& pl_ben1 < 8862/11 & gender == 2 & parstat == 1
+replace pl_ben1 = 60367/12		if country == "NO" & year == 2017 & pl_eli == 1 ///
+								& pl_ben1 >= (60367/12) & gender == 2 & parstat == 1
+replace pl_ben1 = 6567/11		if country == "NO" & year == 2017 & pl_eli == 1 ///
+								& pl_ben1 < 6567/11 & gender == 2 & parstat == 1
 
 
 replace pl_ben2 = pl_ben1		if country == "NO" & year == 2017 & pl_eli == 1

@@ -10,11 +10,8 @@
 * NORWAY - 2014
 
 * ELIGIBILITY
-/*	-> compulsory social insurance for employed & self-employed
-	-> any economic activity if they were employed or self-employed for at least 6 months (coded)
-		during 10 months before birth (not coded) 
-		- receipt of sickness, unemployment or parental leave benefit counts towards the 6 months
-			but EU-SILC collects this information on a HH level => not coded 
+/*	-> employed, self-employed: worked for at least 6 months (coded) during 10 months (not coded) before birth
+	-> inactive women: maternity grant
 */
 
 replace pl_eli = 1 			if country == "NO" & year == 2014 & (duremp + dursemp) >= 6
@@ -25,15 +22,15 @@ replace pl_eli = 0			if pl_eli == . & country == "NO" & year == 2014
 /*	-> parents can choose between 2 options for the whole parental leave:
 		- 49 weeks on 100% earning
 		- 59 weeks on 80% earning
-	-> joint right share: 19 weeks (remainder from 15 weeks reserved to mother and 15 weeks to father) 
+	-> joint right share: 29 weeks (remainder from 10 weeks reserved to mother and 1 weeks to father) 
 			-> assigned to mother
 */
 
 	* women
-replace pl_dur = 19 		if country == "NO" & year == 2014 & pl_eli == 1 & gender == 1
+replace pl_dur = 29 		if country == "NO" & year == 2014 & pl_eli == 1 & gender == 1
 
 	* single men
-replace pl_dur = 19 		if country == "NO" & year == 2014 & pl_eli == 1 & gender == 2 & parstat == 1
+replace pl_dur = 29 		if country == "NO" & year == 2014 & pl_eli == 1 & gender == 2 & parstat == 1
 
 
 
@@ -41,7 +38,7 @@ replace pl_dur = 19 		if country == "NO" & year == 2014 & pl_eli == 1 & gender =
 * BENEFIT (monthly)
 /*	-> 100% earning
 	-> ceiling: €63,363/year  
-	-> minimum: maternity grant - €4,631 for the whole period (11 months)
+	-> maternity grant - €4,631 for the whole period (11 months)
 */
 
 	* women

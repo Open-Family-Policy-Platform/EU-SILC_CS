@@ -10,11 +10,8 @@
 * NORWAY - 2010
 
 * ELIGIBILITY
-/*	-> compulsory social insurance for employed & self-employed
-	-> any economic activity if they were employed or self-employed for at least 6 months (coded)
-		during 10 months before birth (not coded) 
-		- receipt of sickness, unemployment or parental leave benefit counts towards the 6 months
-			but EU-SILC collects this information on a HH level => not coded 
+/*	-> employed, self-employed: worked for at least 6 months (coded) during 10 months (not coded) before birth
+	-> inactive women: maternity grant
 */
 
 replace pl_eli = 1 			if country == "NO" & year == 2010 & (duremp + dursemp) >= 6
@@ -23,9 +20,9 @@ replace pl_eli = 0			if pl_eli == . & country == "NO" & year == 2010
 
 * DURATION (weeks)
 /*	-> parents can choose between 2 options for the whole parental leave:
-		- 46 weeks on 100% earning
+		- 46 weeks on 100% earning (coded)
 		- 56 weeks on 80% earning
-	-> joint right share: 27 weeks (remainder from 9 weeks reserved to mother and 10 weeks to father) 
+	-> joint right share: 27 weeks (remainder from 9 weeks reserved for mother and 10 weeks for father) 
 			-> assigned to mother
 */
 
@@ -41,7 +38,7 @@ replace pl_dur = 27 		if country == "NO" & year == 2010 & pl_eli == 1 & gender =
 * BENEFIT (monthly)
 /*	-> 100% earning
 	-> ceiling: €56,413/year  
-	-> minimum: maternity grant - €4,383 for the whole period (11 months)
+	-> maternity grant - €4,383 for the whole period (11 months)
 */
 
 	* women
