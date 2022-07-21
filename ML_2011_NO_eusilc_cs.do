@@ -3,8 +3,7 @@
 /*	Norway doesn't recognise ML and PT but only PL with individual entitlements for mother
 	and father, and family entitlement. 
 	The information here refers to the individual entitlement for mothers (mother's quota).
-	Additional source: https://familie.nav.no/om-foreldrepenger#hvor-lenge-kan-du-fa-foreldrepenger
-	Accessed: 01/04/2021
+	
 */
 
 * NORWAY - 2011
