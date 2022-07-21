@@ -21,7 +21,8 @@ replace pl_eli =  0			if pl_eli == . & country == "IS" & year == 2011
 */
 replace pl_dur = 3*4.3 		if country == "IS" & year == 2011 & pl_eli == 1 ///
 							& gender == 1 
-							
+
+* single men
 replace pl_dur = 3*4.3		if country == "IS" & year == 2011 & pl_eli == 1 ///
 							& gender == 2 & parstat == 1
 
