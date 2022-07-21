@@ -51,7 +51,7 @@ replace ml_dur2 = 90/7 		if country == "SE" & year == 2019 & ml_eli == 1
 replace ml_ben1 = 0.776*earning 		if country == "SE" & year == 2019 & ml_eli == 1 ///
 										& (earning/30) >= 23.48
 replace ml_ben1 = 23.48*30				if country == "SE" & year == 2019 & ml_eli == 1 ///
-										& ml_ben1 < 23.48 * 30
+										& ml_ben1 == . 
 replace ml_ben1 = 42737.50/12			if country == "SE" & year == 2019 & ml_eli == 1 ///
 										& earning >= (42737.50/12)
 
