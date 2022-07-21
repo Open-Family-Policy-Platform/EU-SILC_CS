@@ -24,7 +24,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "SE" & year == 2010 & gender =
 
 * DURATION (weeks)
 /*	-> total: 60 calendar days 
-	-> prenatal: non-compulsory 2 weeks 	
+	-> prenatal: non-compulsory 2 weeks (not coded)	
 	-> single fathers: entitled to the whole share 	
 */
 
@@ -35,20 +35,21 @@ replace ml_dur2 = 60/7 		if country == "SE" & year == 2010 & ml_eli == 1
 
 * BENEFIT (monthly)
 /*	-> eligible for earning related benefit: min. income €19/day (coded) for 240 calendar days (not coded) before childbirth
-		- for 195 calendar days (includes 60 non-transferable leave): 80% earning
+		- for 390 calendar days (includes 60 non-transferable leave): 80% earning
 			- minimum: €19/day
-			- ceiling: €44,158/month - this is an earning ceiling NOT benefit ceiling (LP&R 2010)
-		- for 45 days: €19/day (only applicable for pl_ben)
+			- ceiling: €44,158/year 
+		
+	
 	-> all others: €19/day
  */
 
  
 replace ml_ben1 = 0.80*earning 			if country == "SE" & year == 2010 & ml_eli == 1 ///
-										& (earning/30) >= 18
+										& (earning/30) >= 19
 replace ml_ben1 = 19*30					if country == "SE" & year == 2010 & ml_eli == 1 ///
-										& ml_ben1 < 19*30
-replace ml_ben1 = 0.80*44158			if country == "SE" & year == 2010 & ml_eli == 1 ///
-										& earning >= 44158
+										& ml_ben1 == . 
+replace ml_ben1 = 44158/12				if country == "SE" & year == 2010 & ml_eli == 1 ///
+										& earning >= (44158/12)
 
 									
 replace ml_ben2 = ml_ben1 			if country == "SE" & year == 2010 & ml_eli == 1
