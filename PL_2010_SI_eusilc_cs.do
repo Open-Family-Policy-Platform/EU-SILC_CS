@@ -5,40 +5,52 @@
 
 * ELIGIBILITY
 /*	-> employed, self-employed	
-	-> all other residents (different benefits) 		
-	-> individual right 	
+	-> family right => assigned to the women (in couples)	
 */
 	
-replace pl_eli = 1 			if country == "SI" & year == 2010 
+replace pl_eli = 1 			if country == "SI" & year == 2010 & inlist(econ_status,1,2)
+ 
 replace pl_eli =  0			if pl_eli == . & country == "SI" & year == 2010
 
 
 * DURATION (weeks)
-/*	-> 130 calendar days
-	-> mother can transfer 100 days to the father (not coded)
-	-> father can transfer 130 days to the mother (not coded) 	
-	-> for inactive residents: 365 calendar days */
-	
-replace pl_dur = 130/7 		if country == "SI" & year == 2010 & pl_eli == 1 ///
-							& inlist(econ_status,1,2)
-replace pl_dur = 365/7 		if country == "SI" & year == 2010 & pl_eli == 1 ///
-							& inlist(econ_status,3,4)							
+/*	-> 260 calendar days
+ */
+
+* women
+replace pl_dur = 260/7 		if country == "SI" & year == 2010 & pl_eli == 1 ///
+							& inlist(econ_status,1,2) & gender == 1
+
+* single men
+replace pl_dur = 260/7 		if country == "SI" & year == 2010 & pl_eli == 1 ///
+							& inlist(econ_status,1,2) & gender == 2 & parstat == 1
 
 
 * BENEFIT (monthly)
-/*	-> employed, self-employed: 100% earning, no ceiling
-	-> minimum: €404/month 
-	-> all other residents: €252.04/month 	*/
+/*	-> employed, self-employed: 100% earning
+	-> ceiling: €3,876/month (LP&R 2010) 	
+	-> minimum: €404/month (LP&R 2010)
+*/
 
+* women
 replace pl_ben1 = earning 			if country == "SI" & year == 2010 & pl_eli == 1 ///
-									& inlist(econ_status,1,2)
+									& inlist(econ_status,1,2) & gender == 1
+									
+replace pl_ben1 = 3876 				if country == "SI" & year == 2010 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 > 3876 & gender == 1
 
 replace pl_ben1 = 404				if country == "SI" & year == 2010 & pl_eli == 1 ///
-									& inlist(econ_status,1,2) & pl_ben1 < 404
-									
-replace pl_ben1 = 252.04	 		if country == "SI" & year == 2010 & pl_eli == 1 ///
-									& inlist(econ_status,3,4)
+									& inlist(econ_status,1,2) & pl_ben1 < 404 & gender == 1
 
+* single men
+replace pl_ben1 = earning 			if country == "SI" & year == 2010 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & gender == 2 & parstat == 1
+									
+replace pl_ben1 = 3876 				if country == "SI" & year == 2010 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 > 3876 & gender == 2 & parstat == 1
+
+replace pl_ben1 = 404				if country == "SI" & year == 2010 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 < 404 & gender == 2 & parstat == 1
 
 									
 replace pl_ben2 = pl_ben1			if country == "SI" & year == 2010 & pl_eli == 1

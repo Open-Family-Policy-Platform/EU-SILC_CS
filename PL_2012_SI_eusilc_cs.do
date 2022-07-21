@@ -4,44 +4,52 @@
 * SLOVENIA - 2012
 
 * ELIGIBILITY
-/*	-> employed, self-employed	
-	-> all other residents (different benefits) 		
-	-> individual right 	
+/*	-> employed, self-employed			
+	-> family right => assigned to the women	
 */
 	
-replace pl_eli = 1 			if country == "SI" & year == 2012 
+replace pl_eli = 1 			if country == "SI" & year == 2012 & gender == 1 & inlist(econ_status,1,2)
 replace pl_eli =  0			if pl_eli == . & country == "SI" & year == 2012
 
 
 * DURATION (weeks)
-/*	-> 130 calendar days
-	-> mother can transfer 100 days to the father (not coded)
-	-> father can transfer 130 days to the mother (not coded) 	
-	-> for inactive residents: 365 calendar days */
+/*	-> 260 calendar days
+*/
 	
-replace pl_dur = 130/7 		if country == "SI" & year == 2012 & pl_eli == 1 ///
-							& inlist(econ_status,1,2)
-replace pl_dur = 365/7 		if country == "SI" & year == 2012 & pl_eli == 1 ///
-							& inlist(econ_status,3,4)							
+* women
+replace pl_dur = 260/7 		if country == "SI" & year == 2012 & pl_eli == 1 ///
+							& inlist(econ_status,1,2) & gender == 1
 
+* single men
+replace pl_dur = 260/7 		if country == "SI" & year == 2012 & pl_eli == 1 ///
+							& inlist(econ_status,1,2) & gender == 2 & parstat == 1
 
 * BENEFIT (monthly)
 /*	-> employed, self-employed: 100% earning
-	-> ceiling: €3,865/month (LP&R 2012)
-	-> minimum: €420/month 
-	-> all other residents: €252.04/month 	*/
+	-> ceiling: €3,865/month (LP&R 2012) 	
+	-> minimum: €420/month (LP&R 2012) 
+*/
 
+* women
 replace pl_ben1 = earning 			if country == "SI" & year == 2012 & pl_eli == 1 ///
-									& inlist(econ_status,1,2)
+									& inlist(econ_status,1,2) & gender == 1
+									
+replace pl_ben1 = 3865 				if country == "SI" & year == 2012 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 > 3865 & gender == 1
 
-replace pl_ben1 = 420 				if country == "SI" & year == 2012 & pl_eli == 1 ///
-									& inlist(econ_status,1,2) & pl_ben1 < 420
+replace pl_ben1 = 420				if country == "SI" & year == 2012 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 < 420 & gender == 1
+
+* single men
+replace pl_ben1 = earning 			if country == "SI" & year == 2012 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & gender == 2 & parstat == 1
 									
-replace pl_ben1 = 3865	 			if country == "SI" & year == 2012 & pl_eli == 1 ///
-									& inlist(econ_status,1,2) & pl_ben1 >= 3865
-									
-replace pl_ben1 = 252.04	 		if country == "SI" & year == 2012 & pl_eli == 1 ///
-									& inlist(econ_status,3,4)
+replace pl_ben1 = 3865 				if country == "SI" & year == 2012 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 > 3865 & gender == 2 & parstat == 1
+
+replace pl_ben1 = 420				if country == "SI" & year == 2012 & pl_eli == 1 ///
+									& inlist(econ_status,1,2) & pl_ben1 < 420 & gender == 2 & parstat == 1
+
 
 
 									
