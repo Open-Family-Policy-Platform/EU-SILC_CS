@@ -12,8 +12,8 @@ replace pt_eli = 0 		if pt_eli == . & country == "NL" & year == 2018 & gender ==
 
 
 * DURATION (weeks)
-/* Can be up to 5 days long but 3 days have to be taken from parental leave 
-=> coded as 2 days of leave */
+/* 	-> 2 days
+	-> additional 3 days can be taken from parental leave (unpaid; not coded) */
 
 replace pt_dur = 2/5 if country == "NL" & year == 2018 & pt_eli == 1  // LP&R 2018
 
