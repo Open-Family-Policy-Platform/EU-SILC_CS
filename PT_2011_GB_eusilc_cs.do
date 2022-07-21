@@ -24,7 +24,7 @@ replace pt_dur = 2 	if country == "GB" & year == 2011 & pt_eli == 1
 
 * BENEFIT (monthly)
 /*	-> 90% earning 
-	-> ceiling: €169/week			*/
+	-> ceiling: €142/week			*/
 
 
 
@@ -32,9 +32,9 @@ replace pt_ben1 = ((0.9 * earning) * (2/4.3)) + (earning * ((4.3-2)/4.3)) ///
 								if country == "GB" & year == 2011 & pt_eli == 1
 								
 * above ceiling
-replace pt_ben1 = (169*2) + (earning * ((4.3-2)/4.3)) ///
+replace pt_ben1 = (142*2) + (earning * ((4.3-2)/4.3)) ///
 								if country == "GB" & year == 2011 & pt_eli == 1 ///
-								& ((0.9*earning)/4.3) > 169
+								& ((0.9*earning)/4.3) > 142
 
 	
 
