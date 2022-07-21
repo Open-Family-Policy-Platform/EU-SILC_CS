@@ -33,8 +33,8 @@ replace pt_dur = 3*4.3 	if country == "IS" & year == 2013 & pt_eli == 1
 			- employed for at least 25% of full time (10 hours/week for 40 hours/week full-time employment) 
 			- 80% earning
 			- ceiling: €2,170/month 
-			- minimum: €589/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
-				   €816/month  if worked between 50% and 100% FT (i.e. more than 20 hours/week)
+			- minimum: 	€589/month 	 if worked between 25% and 49% FT (i.e. 10 and 19.6 hours/week)
+						€816/month  if worked between 50% and 100% FT (i.e. more than 20 hours/week)
 					   
 	-> those not fulfilling the conditions: 
 		- students: €816/month
