@@ -10,6 +10,8 @@
 * SWEDEN - 2018
 
 * ELIGIBILITY
+/*	-> all parents are entitled to cash benefits (vary by economic status) */
+
 replace pl_eli = 1 			if country == "SE" & year == 2018 
 replace pl_eli =  0			if pl_eli == . & country == "SE" & year == 2018
 
@@ -23,7 +25,7 @@ replace pl_eli =  0			if pl_eli == . & country == "SE" & year == 2018
 	-> single parents are entitled to the other parent's share (sole custody only)
 */
 
-replace pl_dur = 150/7 		if country == "SE" & year == 2018 & pl_eli == 1 
+replace pl_dur = 150/7 		if country == "SE" & year == 2018 & pl_eli == 1  
 
 	* single 
 replace pl_dur = (150+150)/7	if country == "SE" & year == 2018 & parstat == 1

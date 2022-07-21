@@ -10,6 +10,8 @@
 * SWEDEN - 2015
 
 * ELIGIBILITY
+/*	-> all parents are entitled to cash benefits (vary by economic status) */
+
 replace pl_eli = 1 			if country == "SE" & year == 2015 
 replace pl_eli =  0			if pl_eli == . & country == "SE" & year == 2015
 
@@ -33,8 +35,8 @@ replace pl_dur = (180+180)/7	if country == "SE" & year == 2015 & parstat == 1
 * BENEFIT (monthly)
 /*	-> eligible for earning related benefit: min. income €26/day for 240 calendar days before childbirth
 
-		- for 195 calendar days (includes 90 non-transferable leave = > 150 days transferable): 
-			- 77.6% earning => for 105 calendar days
+		- for 195 calendar days (includes 90 non-transferable leavee): 
+			- 77.6% earning => for 135 calendar days
 			- minimum: €24/day
 			- ceiling: €48,136 for the duration of benefits
 		- for 45 days: €19/day
@@ -44,17 +46,17 @@ replace pl_dur = (180+180)/7	if country == "SE" & year == 2015 & parstat == 1
 
 
 
-replace pl_ben1 = (((0.776*earning) * (105/30)) + ((19*30) *  (45/30))) / (150/30)	///	
+replace pl_ben1 = (((0.776*earning) * (135/30)) + ((19*30) *  (45/30))) / (180/30)	///	
 									if country == "SE" & year == 2015 & pl_eli == 1 ///
 									& earning/30 >= 24 & pl_dur != . 
 
 * minimum
-replace pl_ben1 = (((24*30) * (105/30)) + ((19*30) *  (45/30))) / (150/30) ///
+replace pl_ben1 = (((24*30) * (135/30)) + ((19*30) *  (45/30))) / (180/30) ///
 									if country == "SE" & year == 2015 & pl_eli == 1 ///
 									& earning/30 < 24 & earning != 0 & pl_dur != . 
 
 * ceiling
-replace pl_ben1 = (((48136/12) * (105/30)) + (((19*30) *  (45/30)))) / (150/30)	///
+replace pl_ben1 = (((48136/12) * (135/30)) + (((19*30) *  (45/30)))) / (180/30)	///
 									if country == "SE" & year == 2015 & pl_eli == 1 ///
 									& earning*12 >= 48136 & pl_dur != . 
 

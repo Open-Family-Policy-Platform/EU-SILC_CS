@@ -10,6 +10,8 @@
 * SWEDEN - 2012
 
 * ELIGIBILITY
+/*	-> all parents are entitled to cash benefits (vary by economic status) */
+
 replace pl_eli = 1 			if country == "SE" & year == 2012 
 replace pl_eli =  0			if pl_eli == . & country == "SE" & year == 2012
 
@@ -33,10 +35,10 @@ replace pl_dur = (180+180)/7	if country == "SE" & year == 2012 & parstat == 1
 * BENEFIT (monthly)
 /*	-> eligible for earning related benefit: min. income €26/day for 240 calendar days before childbirth
 
-		- for 195 calendar days (includes 60 non-transferable leave = > 180 days transferable): 
-			- 77.6% earning => for 105 calendar days
+		- for 195 calendar days (includes 60 non-transferable leave): 
+			- 77.6% earning => for 135 calendar days
 			- minimum: €21/day
-			- ceiling: €49,305 for the duration of benefits
+			- ceiling: €50,491 for the duration of benefits
 		- for 45 days: €20/day
 	-> all others: €27/day
  */
@@ -44,19 +46,19 @@ replace pl_dur = (180+180)/7	if country == "SE" & year == 2012 & parstat == 1
 
 
 
-replace pl_ben1 = (((0.776*earning) * (105/30)) + ((20*30) *  (45/30))) / (150/30)	///	
+replace pl_ben1 = (((0.776*earning) * (135/30)) + ((20*30) *  (45/30))) / (180/30)	///	
 									if country == "SE" & year == 2012 & pl_eli == 1 ///
 									& earning/30 >= 20 & pl_dur != . 
 
 * minimum
-replace pl_ben1 = (((21*30) * (105/30)) + ((20*30) *  (45/30))) / (150/30) ///
+replace pl_ben1 = (((21*30) * (135/30)) + ((20*30) *  (45/30))) / (180/30) ///
 									if country == "SE" & year == 2012 & pl_eli == 1 ///
 									& earning/30 < 21 & earning != 0 & pl_dur != . 
 
 * ceiling
-replace pl_ben1 = (((49305/12) * (105/30)) + (((20*30) *  (45/30)))) / (150/30)	///
+replace pl_ben1 = (((50491/12) * (135/30)) + (((20*30) *  (45/30)))) / (180/30)	///
 									if country == "SE" & year == 2012 & pl_eli == 1 ///
-									& earning*12 >= 49305 & pl_dur != . 
+									& earning*12 >= 50491 & pl_dur != . 
 
 * all others									
 replace pl_ben1 = 21*30				if country == "SE" & year == 2012 & pl_eli == 1 ///
@@ -67,8 +69,8 @@ replace pl_ben1 = 21*30				if country == "SE" & year == 2012 & pl_eli == 1 ///
 replace pl_ben2 = 0.776*earning		if country == "SE" & year == 2012 & pl_eli == 1 ///
 									& earning/30 >= 26 & pl_dur != .
 									
-replace pl_ben2 = 49305/12			if country == "SE" & year == 2012 & pl_eli == 1 ///
-									& earning*12 >= 49305 & pl_dur != .
+replace pl_ben2 = 50491/12			if country == "SE" & year == 2012 & pl_eli == 1 ///
+									& earning*12 >= 50491 & pl_dur != .
 									
 replace pl_ben2 = 21*30				if country == "SE" & year == 2012 & pl_eli == 1 ///
 									& earning == 0 & pl_dur != . 

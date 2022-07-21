@@ -10,6 +10,8 @@
 * SWEDEN - 2016
 
 * ELIGIBILITY
+/*	-> all parents are entitled to cash benefits (vary by economic status) */
+
 replace pl_eli = 1 			if country == "SE" & year == 2016 
 replace pl_eli =  0			if pl_eli == . & country == "SE" & year == 2016
 
@@ -23,7 +25,7 @@ replace pl_eli =  0			if pl_eli == . & country == "SE" & year == 2016
 	-> single parents are entitled to the other parent's share (sole custody only)
 */
 
-replace pl_dur = 150/7 		if country == "SE" & year == 2016 & pl_eli == 1 
+replace pl_dur = 150/7 		if country == "SE" & year == 2016 & pl_eli == 1  
 
 	* single 
 replace pl_dur = (150+150)/7	if country == "SE" & year == 2016 & parstat == 1
@@ -44,17 +46,17 @@ replace pl_dur = (150+150)/7	if country == "SE" & year == 2016 & parstat == 1
 
 
 
-replace pl_ben1 = (((0.776*earning) * (105/30)) + ((19*30) *  (45/30))) / (150/30)	///	
+replace pl_ben1 = (((0.776*earning) * (135/30)) + ((19*30) *  (45/30))) / (150/30)	///	
 									if country == "SE" & year == 2016 & pl_eli == 1 ///
 									& earning/30 >= 26 & pl_dur != . 
 
 * minimum
-replace pl_ben1 = (((27*30) * (105/30)) + ((19*30) *  (45/30))) / (150/30) ///
+replace pl_ben1 = (((27*30) * (135/30)) + ((19*30) *  (45/30))) / (150/30) ///
 									if country == "SE" & year == 2016 & pl_eli == 1 ///
 									& earning/30 < 27 & earning != 0 & pl_dur != . 
 
 * ceiling
-replace pl_ben1 = (((46972/12) * (105/30)) + (((19*30) *  (45/30)))) / (150/30)	///
+replace pl_ben1 = (((46972/12) * (135/30)) + (((19*30) *  (45/30)))) / (150/30)	///
 									if country == "SE" & year == 2016 & pl_eli == 1 ///
 									& earning*12 >= 46972 & pl_dur != . 
 

@@ -25,7 +25,7 @@ replace pl_eli =  0			if pl_eli == . & country == "SE" & year == 2019
 	-> single parents are entitled to the other parent's share (sole custody only)
 */
 
-replace pl_dur = 150/7 		if country == "SE" & year == 2019 & pl_eli == 1 
+replace pl_dur = 150/7 		if country == "SE" & year == 2019 & pl_eli == 1  
 
 	* single 
 replace pl_dur = (150+150)/7	if country == "SE" & year == 2019 & parstat == 1
