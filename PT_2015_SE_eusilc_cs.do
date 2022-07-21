@@ -23,7 +23,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "SE" & year == 2015 & gender ==
 
 
 * DURATION (weeks)
-/*	-> total: 60 calendar days 
+/*	-> father's quota: 60 calendar days 
 	-> leave in connection with childbirth: 10 calendar days 	
 */
 
@@ -44,7 +44,7 @@ replace pt_dur = (60/7) + (10/7)		 	if country == "SE" & year == 2015 & pt_eli =
 replace pt_ben1 = 0.776 * earning 		if country == "SE" & year == 2015 & pt_eli == 1 
 
 replace pt_ben1 = 24 * 21.7				if country == "SE" & year == 2015 & pt_eli == 1 ///
-										& (earning/21.7) < 24
+										& pt_ben1 == .
 
 replace pt_ben1 = (((0.776 * (36102)/12)) * (10/(90+10))) + ((0.776 * earning) * (90/(90+10))) ///
 										if country == "SE" & year == 2015 & pt_eli == 1 ///
@@ -60,7 +60,7 @@ replace pt_ben1 = ((0.776 * (36102/12)) * (10/(90+10)))	+ ((0.776 * (48136/12)) 
 replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2015 & pt_eli == 1 
 
 replace pt_ben2 = 24*21.7				if country == "SE" & year == 2015 & pt_eli == 1 ///
-										& (earning/21.7) < 24
+										& pt_ben2 == .
 										
 replace pt_ben2 = ((0.776 * (36102/12)) * (10/21.7)) + ((0.776 * earning) * ((21.7-10)/21.7)) ///
 										if country == "SE" & year == 2015 & pt_eli == 1 ///

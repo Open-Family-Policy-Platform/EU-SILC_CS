@@ -25,7 +25,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "SE" & year == 2019 & gender ==
 
 
 * DURATION (weeks)
-/*	-> total: 90 calendar days 
+/*	-> father's quota: 90 calendar days 
 	-> leave in connection with childbirth: 10 calendar days 	
 */
 
@@ -46,7 +46,7 @@ replace pt_dur = (90/7) + (10/7)		 	if country == "SE" & year == 2019 & pt_eli =
 replace pt_ben1 = 0.776*earning 		if country == "SE" & year == 2019 & pt_eli == 1 
 
 replace pt_ben1 = 23.48 * 21.7			if country == "SE" & year == 2019 & pt_eli == 1 ///
-										& (earning/21.7) < 23.48
+										& pt_ben1 == .
 
 replace pt_ben1 = ((0.776 * (32053.20/12)) * (10/(90+10))) + ((0.776 * earning) * (90/(90+10))) ///
 											if country == "SE" & year == 2019 & pt_eli == 1 ///
@@ -62,7 +62,7 @@ replace pt_ben1 = ((0.776 * (32053.20/12)) * (10/(90+10)))	+ ((0.776 * (42737.50
 replace pt_ben2 = 0.776*earning 		if country == "SE" & year == 2019 & pt_eli == 1 
 
 replace pt_ben2 = 23.48*21.7			if country == "SE" & year == 2019 & pt_eli == 1 ///
-										& (earning/21.7) < 23.48
+										& pt_ben2 == .
 										
 replace pt_ben2 = ((0.776 * (32053.20/12)) * (10/21.7)) + ((0.776 * earning) * ((21.7-10)/21.7)) ///
 										if country == "SE" & year == 2019 & pt_eli == 1 ///
