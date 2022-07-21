@@ -56,7 +56,7 @@ replace ml_dur2 = 52 		if country == "GB" & year == 2013 & ml_eli == 1 ///
 							& econ_status == 1 & duremp >= 26/4.3 ///
 							& (earning/4.3) >= 127 & gender == 1
 							
-replace ml_dur2 = 35		if country == "GB" & year == 2013 & ml_eli == 1 ///
+replace ml_dur2 = 39		if country == "GB" & year == 2013 & ml_eli == 1 ///
 							& inlist(econ_status,1,2) & ml_dur2 == . ///
 							& (earning/4.3) >= 35 & gender == 1
 

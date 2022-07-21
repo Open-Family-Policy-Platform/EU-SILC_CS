@@ -66,12 +66,12 @@ replace ml_dur2 = 39		if country == "GB" & year == 2014 & ml_eli == 1 ///
 /*	->  employed women who fulfil the stricter conditions (see "Duration"; statutory maternity pay):
 			- 6 weeks: 90% earnings (taxed)
 			- 33 weeks: 90% earnings (taxed)
-				- ceiling: €170/week 
+				- ceiling: €173/week 
 			- 13 weeks: unpaid
 			
 	-> employed and self-employed (maternity allowance):
 			-39 weeks: 90% earning (not taxed)
-				- ceiling: €170/week 
+				- ceiling: €173/week 
 */
 
 
@@ -83,8 +83,8 @@ replace ml_ben1 = (0.9 * earning) * ((6+33)/52) 		if country == "GB" & year == 2
 
 
 	* above ceiling
-replace ml_ben1 = ((0.9 * earning) * (6/52)) + ((170 * 4.3) * (33/52)) 	if country == "GB" & year == 2014 ///
-																		& ml_eli == 1 & (0.9*earning) >= (170*4.3)
+replace ml_ben1 = ((0.9 * earning) * (6/52)) + ((173 * 4.3) * (33/52)) 	if country == "GB" & year == 2014 ///
+																		& ml_eli == 1 & (0.9*earning) >= (173*4.3)
 																		
 * maternity allowance 
 replace ml_ben1 = (0.9 * earning) 		if country == "GB" & year == 2014 & ml_eli == 1 ///
@@ -92,9 +92,9 @@ replace ml_ben1 = (0.9 * earning) 		if country == "GB" & year == 2014 & ml_eli =
 										& (earning/4.3) >= 37 & (earning/4.3) < 139 & gender == 1 
 										
 	* above ceiling
-replace ml_ben1 = 170 * 4.3				if country == "GB" & year == 2014 & ml_eli == 1 ///
+replace ml_ben1 = 173 * 4.3				if country == "GB" & year == 2014 & ml_eli == 1 ///
 										& inlist(econ_status,1,2) & ml_dur2 == . ///
-										& (earning/4.3) >= 37 & (earning/4.3) < 139 & gender == 1 & (0.9*earning) >= (170*4.3)
+										& (earning/4.3) >= 37 & (earning/4.3) < 139 & gender == 1 & (0.9*earning) >= (173*4.3)
 
 
 	
@@ -104,9 +104,9 @@ replace ml_ben1 = 170 * 4.3				if country == "GB" & year == 2014 & ml_eli == 1 /
 * statutory maternity pay - 1st month										
 replace ml_ben2 = 0.9 * earning 			if country == "GB" & year == 2014 & ml_eli == 1 & gender == 1
 											
-replace ml_ben2 = 170 * 4.3 				if country == "GB" & year == 2014 & ml_eli == 1 ///
+replace ml_ben2 = 173 * 4.3 				if country == "GB" & year == 2014 & ml_eli == 1 ///
 											& inlist(econ_status,1,2) & ml_dur2 == . ///
-											& (earning/4.3) >= 37 & (earning/4.3) < 139 & gender == 1 & (0.9*earning) >= (170*4.3)
+											& (earning/4.3) >= 37 & (earning/4.3) < 139 & gender == 1 & (0.9*earning) >= (173*4.3)
 										
 replace ml_ben2 = ml_ben1 				if country == "GB" & year == 2014 & ml_eli == 1 ///
 										& ml_dur2 == 39							

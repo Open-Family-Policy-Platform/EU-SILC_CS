@@ -6,7 +6,7 @@
 * ELIGIBILITY
 /*	-> employed (statutory maternity pay), self-employed (maternity allowance): 
 		- for 26 weeks before childbirth 
-		- earning at least €133/week
+		- earning at least €169/week
 	-> further restrictions for entitlement to cash benefits
 	
 	-> part of ML can be shared with the father (shared parental leave) if:
@@ -14,19 +14,19 @@
 			- employed by the same employer for at least 26 weeks 
 		- father/partner:
 			- employed or self-employed for at least 26 weeks
-			- earned at least €133 (coded) in total during 26 weeks (not coded)
+			- earned at least €169 (coded) in total during 26 weeks (not coded)
 	-> single fathers are not entitled to shared parental leave because it is 
 	   dependent on the mother's economic status
 */
 
 replace ml_eli = 1 			if country == "GB" & year == 2012 & gender == 1 ///
-							& inlist(econ_status,1,2) & (earning/4.3) >= 133 ///
+							& inlist(econ_status,1,2) & (earning/4.3) >= 169 ///
 							& (duremp+dursemp) >= 26/4.3
 
 * father's eligibility for shared parental leave 
 replace ml_eli = 1 			if country == "GB" & year == 2012 & gender == 2 ///
 							& inlist(econ_status,1,2) & (duremp+dursemp) >= 26/4.3 ///
-							& (earning/4.3) >= 133 & p_econ_status == 1 ///
+							& (earning/4.3) >= 169 & p_econ_status == 1 ///
 							& (p_duremp+p_dursemp) >= 26/4.3
 							
 replace ml_eli = 0 			if ml_eli == . & country == "GB" & year == 2012 & gender == 1
