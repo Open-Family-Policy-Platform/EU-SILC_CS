@@ -12,7 +12,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "CZ" & year == 2018 & gender ==
 
 * DURATION (weeks)
 /*	-> 1 week 
-	-> can be taken within 6 months from the childbirth
+	-> can be taken within 6 weeks from the childbirth
 */
 replace pt_dur = 1  	if country == "CZ" & year == 2018 & gender == 2 & pt_eli == 1 // MISSOC 01/07/2018
 

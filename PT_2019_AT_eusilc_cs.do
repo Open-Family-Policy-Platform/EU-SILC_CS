@@ -10,7 +10,7 @@
 	for fathers (LP&R 2019). 
 	It doesn't provide job-protection during the period of leave. 
 	
-	Introduced for children born from 1.3.2019.
+	Introduced for children born from 1.3.2017.
 	
 	Source: LP&R 2019 
 */

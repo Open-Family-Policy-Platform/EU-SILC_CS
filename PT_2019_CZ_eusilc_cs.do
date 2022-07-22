@@ -12,7 +12,7 @@ replace pt_eli = 0 		if pt_eli == . & country == "CZ" & year == 2019 & gender ==
 
 * DURATION (weeks)
 /*	-> 1 week 
-	-> can be taken within 6 months from the childbirth
+	-> can be taken within 6 weeks from the childbirth
 */
 replace pt_dur = 1  	if country == "CZ" & year == 2019 & gender == 2 & pt_eli == 1 // MISSOC 01/07/2019
 
@@ -25,7 +25,7 @@ replace pt_dur = 1  	if country == "CZ" & year == 2019 & gender == 2 & pt_eli ==
 		-> €64/day = 30% daily earning  
 		-> earning overe €129/day are not taken into account
 	
-	-> 70% of daily assessment base, ceiling: €47/day 
+	-> 70% of daily assessment base, ceiling: €53/day 
 */
 
 ** DAILY ASSESSMENT BASE
@@ -71,9 +71,9 @@ replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2019 & pt_eli == 
 replace pt_ben1 = ((dab * 0.7) * 7) + (earning * ((4.3 - 1)/4.3))	///
 							if country == "CZ" & year == 2019 & pt_eli == 1
 
-replace pt_ben1 = (47 * 7) + (earning * ((4.3 - 1)/4.3)) ///
+replace pt_ben1 = (53 * 7) + (earning * ((4.3 - 1)/4.3)) ///
 							if country == "CZ" & year == 2019 & pt_eli == 1 ///
-							& dab*0.7 > 47 & pt_eli == 1
+							& dab*0.7 > 53 & pt_eli == 1
 
 
 replace pt_ben2 = pt_ben1 	if country == "CZ" & year == 2019 & pt_eli == 1
