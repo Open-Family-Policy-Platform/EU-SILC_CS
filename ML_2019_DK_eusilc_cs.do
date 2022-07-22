@@ -46,7 +46,7 @@ replace ml_ben1 = earning 		if country == "DK" & year == 2019 & ml_eli == 1 ///
 								& inlist(econ_status,1,2) & earning < 583*4.3
 
 replace ml_ben1 = 583*4.3		if country == "DK" & year == 2019 & ml_eli == 1 ///
-								& inlist(econ_status,1,2) & ml_ben1 >= 505*4.3 
+								& inlist(econ_status,1,2) & ml_ben1 >= 583*4.3 
 								
 
 replace ml_ben2 = ml_ben1 if country == "DK" & year == 2019 & ml_eli == 1

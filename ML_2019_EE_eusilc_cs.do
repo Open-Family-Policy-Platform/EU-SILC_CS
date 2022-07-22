@@ -33,7 +33,7 @@ replace ml_dur2 = (140-30)/7 		if country == "EE" & year == 2019 & gender == 1 &
 * employed	
 replace ml_ben1 = earning 		if country == "EE" & year == 2019 & ml_eli == 1 ///
 								& duremp >= 1 
-replace ml_ben1 = 500			if country == "EE" & year == 2019 & ml_eli == 1 ///
+replace ml_ben1 = 540			if country == "EE" & year == 2019 & ml_eli == 1 ///
 								& duremp == 0
 
 								
