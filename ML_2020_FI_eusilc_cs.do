@@ -34,8 +34,8 @@ replace ml_dur2 = (105-30)/6 if country == "FI" & year == 2020 & gender == 1 & m
 	-> 32.5% of earnings above €59,444/year (IG 56c; LP&R 2020)
 
 remaining 49 days:
-	-> €28.94/day if unemployed or earnings are less than €11,942/year (income group 49a; LP&R 2020)
-	-> 70% on earnings between €11,942/year and €38,636/year (IG 49b; M2020)
+	-> €28.94/day if unemployed or earnings are less than €9,649/year (income group 49a; LP&R 2020)
+	-> 70% on earnings between €9,649/year and €38,636/year (IG 49b; M2020)
 	-> 40% on earnings between €38,637/year and €59,444/year (IG 49c; M2020)
 	-> 25% on earnings above €59,444/year   (IG 49d; M2020) 						*/ 
 
@@ -72,11 +72,11 @@ gen ml_ben49 = 28.94 * 21.7 		if country == "FI" & year == 2020 & gender == 1 //
 									& ml_eli == 1 & inlist(econ_status,3,4)
 
 gen ml_ben49 = 28.94 * 21.7 		if country == "FI" & year == 2020 & gender == 1 ///
-									& ml_eli == 1 & inlist(econ_status,3,4) & (earning*12) < 11942
+									& ml_eli == 1 & inlist(econ_status,3,4) & (earning*12) < 9649
 
 * IG 49b - annual earnings under 38,636
 replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2020 & gender == 1 ///
-									& ml_eli == 1 & inrange((earning*12),11942,38636)
+									& ml_eli == 1 & inrange((earning*12),9649,38636)
 
 									
 * IG 49c - annual earnings between €38,637/year and €59,444/year

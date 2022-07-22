@@ -4,7 +4,7 @@
 * DENMARK - 2018
 
 * ELIGIBILITY
-/*	-> employed (coded): at least 120 hours in 13 weeks before birth 
+/*	-> employed (coded): at least 160 hours in 4 months before birth (not coded)
 	-> self-employed: for at least 6 months (coded) during 12 months before birth (not coded)
 	-> unemployed (from unemployment insurance)	
 	-> students (extra student grant; pl031 == 6; LP&R 2018)
