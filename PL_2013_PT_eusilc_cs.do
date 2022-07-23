@@ -68,7 +68,7 @@ replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur)
 												& gender == 1
 												
 replace pl_ben1 =  (419.22 * (pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur))		if country == "PT" & year == 2013 & pl_eli == 1	///
-																						& pl_ben1 < 419.22 & gender == 1
+																						& earning < 419.22 & gender == 1
 								
 	* single men
 replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur))	///
@@ -76,7 +76,7 @@ replace pl_ben1 =  (earning*(pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur)
 												& gender == 2 & parstat == 1
 												
 replace pl_ben1 =  (419.22 * (pl_init/pl_dur)) + ((earning*0.25)*(pl_exte/pl_dur))		if country == "PT" & year == 2013 & pl_eli == 1	///
-																						& pl_ben1 < 419.22 & gender == 2 & parstat == 1
+																						& earning < 419.22 & gender == 2 & parstat == 1
 								
 
 * cohabiting men
