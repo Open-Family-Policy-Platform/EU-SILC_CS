@@ -19,9 +19,9 @@ run "$CODE/SD_merge_eusilc_cs.do"
 
 cd "$DATA"
 
-foreach x of numlist 3/9 {
+foreach x of numlist 10/20 {
 	
-	use SILC201`x'_ver_2021_04, clear 
+	use SILC20`x'_ver_2021_04, clear 
 	
 	*** Delete Serbia, Cyprus, Malta ***
 	drop if country == "RS"
@@ -39,28 +39,33 @@ foreach x of numlist 3/9 {
 	*** Standardize EU-SILC variables to work with OFPP
 	run "$CODE/SD_standard_eusilc.do"
 
-	save SILC201`x'_standard, replace
+	save SILC20`x'_standard, replace
 	
 }
 	
 
 
 
-use SILC2013_standard, clear 
+use SILC2010_standard, clear
+append using SILC2011_standard
+append using SILC2012_standard
+append using SILC2013_standard 
 append using SILC2014_standard
 append using SILC2015_standard
 append using SILC2016_standard
 append using SILC2017_standard
 append using SILC2018_standard
 append using SILC2019_standard
+append using SILC2020_standard
+
 
 save eusilc_merged, replace
 
 
-foreach x of numlist 3/9 {
+foreach x of numlist 10/20 {
 	
 	*** Delet redundant files ***
-	erase "$DATA/SILC201`x'_standard.dta"
+	erase "$DATA/SILC20`x'_standard.dta"
 }
 
 
@@ -99,6 +104,9 @@ run "$CODE/SD_ML_vars.do"
 
 * Run ML_year_country_eusilc_cs.do 
 foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
+	run "$CODE/ML_2010_`x'_eusilc_cs.do"
+	run "$CODE/ML_2011_`x'_eusilc_cs.do"
+	run "$CODE/ML_2012_`x'_eusilc_cs.do"
 	run "$CODE/ML_2013_`x'_eusilc_cs.do"
 	run "$CODE/ML_2014_`x'_eusilc_cs.do"
 	run "$CODE/ML_2015_`x'_eusilc_cs.do"
@@ -106,6 +114,7 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 	run "$CODE/ML_2017_`x'_eusilc_cs.do"
 	run "$CODE/ML_2018_`x'_eusilc_cs.do"
 	run "$CODE/ML_2019_`x'_eusilc_cs.do"
+	run "$CODE/ML_2020_`x'_eusilc_cs.do"
 }
 
 save eusilc_ofpp_ml, replace
@@ -117,6 +126,9 @@ run "$CODE/SD_PT_vars.do"
 
 * Run PT_year_country_eusilc_cs.do
 foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
+	run "$CODE/PT_2010_`x'_eusilc_cs.do"
+	run "$CODE/PT_2011_`x'_eusilc_cs.do"
+	run "$CODE/PT_2012_`x'_eusilc_cs.do"
 	run "$CODE/PT_2013_`x'_eusilc_cs.do"
 	run "$CODE/PT_2014_`x'_eusilc_cs.do"
 	run "$CODE/PT_2015_`x'_eusilc_cs.do"
@@ -124,6 +136,7 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 	run "$CODE/PT_2017_`x'_eusilc_cs.do"
 	run "$CODE/PT_2018_`x'_eusilc_cs.do"
 	run "$CODE/PT_2019_`x'_eusilc_cs.do"
+	run "$CODE/PT_2020_`x'_eusilc_cs.do"
 }
 
 
@@ -136,6 +149,9 @@ run "$CODE/SD_PL_vars.do"
 
 * Run PL_year_country_eusilc_cs.do
 foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
+	run "$CODE/PL_2010_`x'_eusilc_cs.do"
+	run "$CODE/PL_2011_`x'_eusilc_cs.do"
+	run "$CODE/PL_2012_`x'_eusilc_cs.do"
 	run "$CODE/PL_2013_`x'_eusilc_cs.do"
 	run "$CODE/PL_2014_`x'_eusilc_cs.do"
 	run "$CODE/PL_2015_`x'_eusilc_cs.do"
@@ -143,6 +159,7 @@ foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "H
 	run "$CODE/PL_2017_`x'_eusilc_cs.do"
 	run "$CODE/PL_2018_`x'_eusilc_cs.do"
 	run "$CODE/PL_2019_`x'_eusilc_cs.do"
+	run "$CODE/PL_2020_`x'_eusilc_cs.do"
 }
 
 save eusilc_ofpp_complete, replace
