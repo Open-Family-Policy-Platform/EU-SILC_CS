@@ -36,8 +36,8 @@ replace ml_dur2 = 12 		if country == "NO" & year == 2015 & ml_eli == 1 & gender 
 
 * BENEFIT (monthly)
 /*	-> parents can choose between 2 options for the whole leave:
-		- 46 weeks on 100% earning (coded)
-		- 56 weeks on 80% earning
+		- 49 weeks on 100% earning (coded)
+		- 59 weeks on 80% earning
 	-> ceiling: €54,961/year 
 	-> minimum: maternity grant - €7,772 for the whole period (11 months)
 */

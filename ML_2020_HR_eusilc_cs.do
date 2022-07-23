@@ -40,12 +40,12 @@ replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2020 & ml_eli == 1
 
 
 * BENEFIT (monthly)
-/*	-> employed, self-employed & insured for  12 consecutive months (coded) or for 18 non-consecutive
+/*	-> employed, self-employed & insured for  9 consecutive months (coded) or for 18 non-consecutive
 		months over the course of 2 years before birth (not coded) = 100%
 	-> those who do not fulfill this requirement = €308/month	*/
 	
 replace ml_ben1 = earning 		if country == "HR" & year == 2020 & gender == 1 ///
-								& ml_eli == 1 & (duremp + dursemp) >= 12 & earning != 0
+								& ml_eli == 1 & (duremp + dursemp) >= 9 & earning != 0
 replace ml_ben1 = 308 			if country == "HR" & year == 2020 & gender == 1 ///
 								& ml_eli == 1 & ml_ben1 == .
 
