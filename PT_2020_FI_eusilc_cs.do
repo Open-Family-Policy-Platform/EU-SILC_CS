@@ -19,8 +19,8 @@ replace pt_dur = 54/6 if country == "FI" & year == 2020 & pt_eli == 1
 
 
 * BENEFIT (monthly; LP&R 2020) 
-/*	-> €28.94/day if unemptoyed or earnings are less than €9,649/year (income group IGa; LP&R 2020)
-	-> 70% on earnings between €9,649/year and €38,636/year (IGb; M2020)
+/*	-> €28.94/day if unemptoyed or earnings are less than €12,405/year (income group IGa; LP&R 2020)
+	-> 70% on earnings between €12,405/year and €38,636/year (IGb; M2020)
 	-> 40% on earnings between €38,637/year and €59,444/year (IGc; M2020)
 	-> 25% on earnings above €59,444/year   (IGd; M2020) 									
 */
@@ -31,11 +31,11 @@ replace pt_ben1 = 28.94 * 21.7 			if country == "FI" & year == 2020 & gender == 
 										& pt_eli == 1 & inrange(econ_status,3,4)
 									
 replace pt_ben1 = 28.94 * 21.7 			if country == "FI" & year == 2020 & gender == 2 ///
-										& pt_eli == 1 & inrange(econ_status,1,2) & (earning*12) < 9649
+										& pt_eli == 1 & inrange(econ_status,1,2) & (earning*12) < 12405
 
 * IGb
 replace pt_ben1 = earning * 0.7 		if country == "FI" & year == 2020 & gender == 2 ///
-										& pt_eli == 1 & inrange((earning*12),9649,38636)
+										& pt_eli == 1 & inrange((earning*12),12405,38636)
 										 
 
 									
