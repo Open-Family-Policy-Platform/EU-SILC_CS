@@ -5,23 +5,26 @@
 clear all
 
 *** Data directory
-global DATA "[YOUR DIRECTORY]" 
+global DATA "/Users/alzbeta/Documents/Data/EU-SILC/eusilc_merged_files" 
 
 
 cd "$DATA"
 
 
 *** Code directory
-global CODE "[YOUR DIRECTORY]" 
+global CODE "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/EU-SILC" 
 
 *** Convert original .csv file into .dta & create labels
-run "$CODE/SD_merge_eusilc_cs.do"
+* !!! THE FILE SHOULD BE CALLED "SETUP" AND IT SHOULD NOT BE PART OF THIS CODE - IT SHOULD BE RUN BEFORE! => DELETE
+//run "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/eu-silc_merge/SD_merge_eusilc_cs.do"
 
 cd "$DATA"
 
-foreach x of numlist 10/20 {
+* !!! if you are only interested in specific years rather than the whole period 2010-2019, adjust your selection
+
+foreach x of numlist 10/19 { // <= adjust the selection of years
 	
-	use SILC20`x'_ver_2021_04, clear 
+	use SILC20`x'_ver_2021_04, clear // "ver_2021_04" corresponds with Gesis Setup Files
 	
 	*** Delete Serbia, Cyprus, Malta ***
 	drop if country == "RS"
@@ -44,127 +47,116 @@ foreach x of numlist 10/20 {
 }
 	
 
-
-
-use SILC2010_standard, clear
-append using SILC2011_standard
-append using SILC2012_standard
-append using SILC2013_standard 
-append using SILC2014_standard
-append using SILC2015_standard
-append using SILC2016_standard
-append using SILC2017_standard
-append using SILC2018_standard
-append using SILC2019_standard
-append using SILC2020_standard
-
-
-save eusilc_merged, replace
-
-
-foreach x of numlist 10/20 {
+foreach x of numlist 10/19 {
 	
-	*** Delet redundant files ***
-	erase "$DATA/SILC20`x'_standard.dta"
+	*** Assign information about partners ***
+	
+	/* 	Uses only cohabiting respondents. 
+		Male and female respondents' data are turned into information about partners.
+		Key variables get a prefix "p_" to indicate this is information about the respondent's partner.
+		The original "partner_id" is renamed as "person_id" so the "p_" variables can be linked with 
+		the cohabiting partner.
+	*/
+					
+	use SILC20`x'_standard, clear
+		*** Male partners
+		run "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/eu-silc_merge/SD_male_partners_test_optimize"
+		save eusilc_malepartner_20`x'
+		
+	use SILC20`x'_standard, clear
+		*** Female partners
+		run "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/eu-silc_merge/SD_female_partners_test_optimize"
+		save eusilc_femalepartner_20`x'
+}
+
+foreach x of numlist 10/19 {	
+		
+		*** Merge "malepartner" and "femalepartner" with the main dataset
+		/* 	This code merges the "p_" variables with the "person_id" in the "SILC20`x'_standard" datasets
+		*/
+			use SILC20`x'_standard, clear
+			drop _merge
+			mer 1:m person_id using eusilc_femalepartner_20`x'.dta 
+			drop _merge
+			save eusilc_`x'_temp, replace
+
+			duplicates tag person_id, gen(dup)
+			drop if dup == 1
+			drop dup
+
+			mer 1:m person_id using eusilc_malepartner_20`x'.dta  , update keep(1 3 4)
+			drop _merge
+
+			duplicates tag person_id, gen(dup)
+			drop if dup == 1
+		
+		*** Delete same-sex couples *** 
+		drop if gender == p_gender
+		
+		* Create dataset of respondents with key variables about their partners
+		save eusilc_partners_20`x'
+}
+
+foreach x of numlist 10/19 {	
+		
+		use eusilc_partners_20`x'
+		
+		*** Select SAMPLE ***
+		/* 	For the purpose of the OFPP a sample needs to be selected covering 
+			the population of childbearing age. 
+		*/
+		run "$CODE/SD_sample_eusilc_cs.do"
+
+		*** Number of children per household ***
+		/* 	For the purpose of the OFPP - some countries provide different support 
+			depending on the number of children. 
+		*/
+		run "$CODE/SD_nchild_eusilc_cs.do"
+
+		save eusilc_ofpp_20`x'
+ }
+
+foreach x of numlist 10/19 {
+	
+	* Delete redundant files
+	erase eusilc_femalepartner_20`x'.dta
+	erase eusilc_malepartner_20`x'.dta
+	erase eusilc_`x'_temp.dta
+}
+
+
+**** OFPP - the following code runs the OFPP on the selected EU-SILC sample
+foreach x of numlist 10/19 {
+	
+	*** Create maternity, paternity and parental leave variables (empty)
+	use eusilc_ofpp_20`x', clear
+	run "$CODE/SD_ML_vars.do" 
+	run "$CODE/SD_PT_vars.do"
+	run "$CODE/SD_PL_vars.do"
+	
+			*** Adds values to the maternity, paternity and parental leave variables
+			foreach y in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
+			
+			*** MATERNITY LEAVE ***
+			run "$CODE/ML_20`x'_`y'_eusilc_cs.do" 
+			
+			*** PATERNITY LEAVE ***
+			run "$CODE/PT_20`x'_`y'_eusilc_cs.do"
+			
+			*** PARENTAL LEAVE ***
+			run "$CODE/PL_20`x'_`y'_eusilc_cs.do"
+			
+			
+		}	
+		
+		save eusilc_ofpp_20`x', replace
+		
+		* Delete redundant files 
+		erase "$DATA/SILC20`x'_standard.dta"
+		erase "$DATA/eusilc_partners_20`x'.dta"
+	
 }
 
 
 
-*** Assign information about partners ***
-run "$CODE/SD_partners_eusilc_cs.do"
 
-
-
-
-*** Delete same-sex couples *** 
-drop if gender == p_gender
-
-save eusilc_partners, replace
-
-
-
-*** Select SAMPLE ***
-run "$CODE/SD_sample_eusilc_cs.do"
-
-*** Number of children per household ***
-run "$CODE/SD_nchild_eusilc_cs.do"
-
-
-
-* a "doorstop" before running the estimation of family policy entitlements 
-save eusilc_ofpp, replace
-
-
-
-
-*** Run policy coding for MATERNITY LEAVE (ML) ***
-
-* Create ML variables
-run "$CODE/SD_ML_vars.do"  
-
-* Run ML_year_country_eusilc_cs.do 
-foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
-	run "$CODE/ML_2010_`x'_eusilc_cs.do"
-	run "$CODE/ML_2011_`x'_eusilc_cs.do"
-	run "$CODE/ML_2012_`x'_eusilc_cs.do"
-	run "$CODE/ML_2013_`x'_eusilc_cs.do"
-	run "$CODE/ML_2014_`x'_eusilc_cs.do"
-	run "$CODE/ML_2015_`x'_eusilc_cs.do"
-	run "$CODE/ML_2016_`x'_eusilc_cs.do"
-	run "$CODE/ML_2017_`x'_eusilc_cs.do"
-	run "$CODE/ML_2018_`x'_eusilc_cs.do"
-	run "$CODE/ML_2019_`x'_eusilc_cs.do"
-	run "$CODE/ML_2020_`x'_eusilc_cs.do"
-}
-
-save eusilc_ofpp_ml, replace
-
-*** Run policy coding for PATERNITY LEAVE (PT) ***
-
-* Create PT variables
-run "$CODE/SD_PT_vars.do"
-
-* Run PT_year_country_eusilc_cs.do
-foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
-	run "$CODE/PT_2010_`x'_eusilc_cs.do"
-	run "$CODE/PT_2011_`x'_eusilc_cs.do"
-	run "$CODE/PT_2012_`x'_eusilc_cs.do"
-	run "$CODE/PT_2013_`x'_eusilc_cs.do"
-	run "$CODE/PT_2014_`x'_eusilc_cs.do"
-	run "$CODE/PT_2015_`x'_eusilc_cs.do"
-	run "$CODE/PT_2016_`x'_eusilc_cs.do"
-	run "$CODE/PT_2017_`x'_eusilc_cs.do"
-	run "$CODE/PT_2018_`x'_eusilc_cs.do"
-	run "$CODE/PT_2019_`x'_eusilc_cs.do"
-	run "$CODE/PT_2020_`x'_eusilc_cs.do"
-}
-
-
-save eusilc_ofpp_mlpt, replace
-
-*** Run policy coding for PARENTAL LEAVE (PL) ***
-
-* Create PL variables
-run "$CODE/SD_PL_vars.do"
-
-* Run PL_year_country_eusilc_cs.do
-foreach x in "AT" "BE" "BG" "CZ" "DE" "DK" "EE" "ES" "FI" "FR" "GB" "GR" "HR" "HU" "IE" "IS" "IT" "LT" "LU" "LV" "NL" "NO" "PL" "PT" "RO" "SE" "SI" "SK" {
-	run "$CODE/PL_2010_`x'_eusilc_cs.do"
-	run "$CODE/PL_2011_`x'_eusilc_cs.do"
-	run "$CODE/PL_2012_`x'_eusilc_cs.do"
-	run "$CODE/PL_2013_`x'_eusilc_cs.do"
-	run "$CODE/PL_2014_`x'_eusilc_cs.do"
-	run "$CODE/PL_2015_`x'_eusilc_cs.do"
-	run "$CODE/PL_2016_`x'_eusilc_cs.do"
-	run "$CODE/PL_2017_`x'_eusilc_cs.do"
-	run "$CODE/PL_2018_`x'_eusilc_cs.do"
-	run "$CODE/PL_2019_`x'_eusilc_cs.do"
-	run "$CODE/PL_2020_`x'_eusilc_cs.do"
-}
-
-save eusilc_ofpp_complete, replace
-
-
-*** Erase redundant files ***
-//erase "$DATA/eusilc_ofpp_ml.dta"
-//erase "$DATA/eusilc_ofpp_mlpt.dta"
