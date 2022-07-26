@@ -14,7 +14,7 @@
 		-> family entitlement => assigned to women
 */
 
-replace pl_eli = 1  	if country == "BG" & year == 2019 & gender == 1 ///
+replace ml_eli = 1  	if country == "BG" & year == 2019 & gender == 1 ///
 						& econ_status == 1 & duremp >= 12
 						
 replace ml_eli = 0 		if ml_eli == . & country == "BG" & year == 2010 & gender == 1

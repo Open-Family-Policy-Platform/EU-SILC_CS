@@ -40,7 +40,7 @@ remaining 49 days:
 	-> 25% on earnings above €54,552/year   (IG 49d) 						*/ 
 
 * Income group (IG) 56a & 49a
-gen ml_ben1 = 22.13 * 21.7 		if country == "FI" & year == 2013 ///
+replace ml_ben1 = 22.13 * 21.7 		if country == "FI" & year == 2013 ///
 									& gender == 1 & ml_eli == 1 ///
 									& inlist(econ_status,3,4)
 
@@ -50,9 +50,8 @@ replace ml_ben1 = 22.13 * 21.7 		if country == "FI" & year == 2013 ///
 
 
 * IG 56b			
-replace ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2013 ///
-									& gender == 1 & ml_eli == 1 & ml_ben56 == . ///
-									& (earning*12) <= 54552)
+gen ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2013 ///
+									& gender == 1 & ml_eli == 1 & (earning*12) <= 54552
 
 * IG 56c			
 gen ml_ben56a = (54552/12) * 0.9 	if country == "FI" & year == 2013 ///
@@ -72,9 +71,8 @@ replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2013 ///
 
 
 * IG 49b - annual earnings under €35,458
-replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2013 & gender == 1 ///
-									& ml_eli == 1 & ml_ben49 == . ///
-									& inrange((earning*12),10189,35458)
+gen ml_ben49 = earning * 0.7 	if country == "FI" & year == 2013 & gender == 1 ///
+									& ml_eli == 1 & inrange((earning*12),10189,35458)
 
 * IG 49c - annual earnings between €35,458/year and €54,552/year
 gen ml_ben49a = (35458/12) * 0.7 	if country == "FI" & year == 2013 & gender == 1 ///

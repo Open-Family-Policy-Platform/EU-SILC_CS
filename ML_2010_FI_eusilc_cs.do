@@ -41,7 +41,7 @@ remaining 49 days:
 
 * Income group (IG) 56a & 49a
 	* non-working 
-gen ml_ben1 = 22.04 * 21.7 			if country == "FI" & year == 2010 ///
+replace ml_ben1 = 22.04 * 21.7 			if country == "FI" & year == 2010 ///
 									& gender == 1 & ml_eli == 1 ///
 									& inlist(econ_status,3,4)
 
@@ -51,8 +51,8 @@ replace ml_ben1 = 22.04 * 21.7 	if country == "FI" & year == 2010 ///
 
 
 * IG 56b			
-replace ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2010 ///
-									& gender == 1 & ml_eli == 1 & ml_ben56 == . ///
+gen ml_ben56 = (earning * 0.9) 	if country == "FI" & year == 2010 ///
+									& gender == 1 & ml_eli == 1 ///
 									& inrange((earning*12),9477,50606)
 
 * IG 56c			
@@ -74,9 +74,8 @@ replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2010 ///
 
 
 * IG 49b - annual earnings under €32,892
-replace ml_ben49 = earning * 0.7 	if country == "FI" & year == 2010 & gender == 1 ///
-									& ml_eli == 1 & ml_ben49 == . ///
-									& (earning*12) <= 32892)
+gen ml_ben49 = earning * 0.7 	if country == "FI" & year == 2010 & gender == 1 ///
+									& ml_eli == 1 & (earning*12) <= 32892
 
 * IG 49c - annual earnings between €32,893/year and €56,443/year
 gen ml_ben49a = (32893/12) * 0.7 	if country == "FI" & year == 2010 & gender == 1 ///

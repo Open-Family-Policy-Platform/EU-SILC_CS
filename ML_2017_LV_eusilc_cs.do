@@ -27,7 +27,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "LV" & year == 2017 & gender =
 replace ml_dur1 = 2 		if country == "LV" & year == 2017 & ml_eli == 1
 
 replace ml_dur2 = (112-(2*7))/7 		if country == "LV" & year == 2017 & ml_eli == 1 & gender == 1
-replace ml_dur2 = 42/7					if country == "LV" & year == 2017 & ml_eli == 1 & gender == 2 & partstat == 1
+replace ml_dur2 = 42/7					if country == "LV" & year == 2017 & ml_eli == 1 & gender == 2 & parstat == 1
 
 
 * BENEFIT (monthly)

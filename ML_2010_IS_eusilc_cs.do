@@ -70,7 +70,7 @@ replace ml_ben1 = 0.8*earning	 				if country == "IS" & year == 2010 & ml_eli ==
 										& inlist(econ_status,1,2) & whours >= 20 & earning < 1265
 										
 replace ml_ben1 = (0.8 * 1265) + (0.75 * (earning-1265)) 	if country == "IS" & year == 2010 & ml_eli == 1 ///
-										& inlist(econ_status,1,2) & whours >= 20) & earning >= 1265
+										& inlist(econ_status,1,2) & whours >= 20 & earning >= 1265
 										
 replace ml_ben1 = 720	 				if country == "IS" & year == 2010 & ml_eli == 1 ///
 										& inlist(econ_status,1,2) & whours >= 20 ///
