@@ -41,7 +41,7 @@ replace pt_ben1 = earning 		if country == "NO" & year == 2011 & pt_eli == 1
 replace pt_ben1 = 61034/12			if country == "NO" & year == 2011 & pt_eli == 1 ///
 									& pt_ben1 >= 61034/12
 
-replace pt_ben2 = ml_ben1 		if country == "NO" & year == 2011 & pt_eli == 1
+replace pt_ben2 = pt_ben1 		if country == "NO" & year == 2011 & pt_eli == 1
 
 
 

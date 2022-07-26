@@ -70,7 +70,7 @@ gen pt_bend = (earning - (50606/12)) * 0.25 		///
 									
 									
 
-replace pt_ben1 = ((pt_bena + pt_benc + pt_bend) * (18/21.7)) + (earning * ((21.7-18)/21.7) 		if country == "FI" ///
+replace pt_ben1 = ((pt_bena + pt_benc + pt_bend) * (18/21.7)) + (earning * ((21.7-18)/21.7)) 		if country == "FI" ///
 									& year == 2010	& gender == 2 & pt_eli == 1 ///
 									& (earning*12) > 50606
 

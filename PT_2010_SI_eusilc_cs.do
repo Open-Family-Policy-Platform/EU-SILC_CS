@@ -40,7 +40,7 @@ replace pt_ben1 = 3876 		 	 	 if country == "SI" & year == 2010 & pt_eli == 1 //
 
 
 replace pt_ben2 = earning * (15/21.7) 		if country == "SI" & year == 2010 & pt_eli == 1
-replace pt_ben2 = pt_ben1 			if country == "SI" & year == 2010 & pt_eli == 1 if (earning < 404 | earning > 3876)
+replace pt_ben2 = pt_ben1 			if country == "SI" & year == 2010 & pt_eli == 1 & (earning < 404 | earning > 3876)
 
 foreach x in 1 2 {
 	replace pt_ben`x' = 0 	if pt_eli == 0 & country == "SI" & year == 2010

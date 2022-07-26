@@ -40,7 +40,7 @@ replace pt_ben1 = (((0.9*earning)/4.3) * pt_dur) + ((earning/4.3)*(4.3-pt_dur)) 
  
 * minimum
 replace pt_ben1 = (235.20 * (15/21.7)) + ((earning/4.3)*(4.3-pt_dur)) 	if country == "BG" & year == 2017 ///
-															& pt_eli == 1 & (0.9*earning)/4.3) < 235.20/pt_dur
+															& pt_eli == 1 & (0.9*earning)/4.3 < 235.20/pt_dur
  
 * maximum 
 replace pt_ben1 = ((2566.37/12) * (15/21.7)) + ((earning/4.3)*(4.3-pt_dur)) 	if country == "BG" & year == 2017 ///
