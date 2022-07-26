@@ -46,15 +46,15 @@ replace pl_ben1 = 291		if country == "ES" & year == 2011 & pl_eli == 1 ///
 							
 * La Rioja							
 replace pl_ben1 = 250		if country == "ES" & year == 2011 & pl_eli == 1 ///
-							& region == "ES23" & (earning_yg + p_earning_yg) < 40000 & gender == 1
+							& region == "ES23" & (earning_yg + p_earning) < 40000 & gender == 1
 							
 * Castilla-León
 replace pl_ben1 = 532.51		if country == "ES" & year == 2011 & pl_eli == 1 ///
-							& region == "ES41" & (earning_yg + p_earning_yg) < 30000 & gender == 1
+							& region == "ES41" & (earning_yg + p_earning) < 30000 & gender == 1
 							
 * Navarre
 replace pl_ben1 = 417.27		if country == "ES" & year == 2011 & pl_eli == 1 ///
-							& region == "ES22" & gender == 1 & nchild >= 2
+							& region == "ES22" & gender == 1 & childc >= 2
 							
 * Castilla-La Mancha
 replace pl_ben1 = 600	if country == "ES" & year == 2011 & pl_eli == 1 ///

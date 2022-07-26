@@ -57,26 +57,26 @@ replace pl_ben1 = 200	if country == "ES" & year == 2010 & pl_eli == 1 ///
 							
 * La Rioja							
 replace pl_ben1 = 250		if country == "ES" & year == 2010 & pl_eli == 1 ///
-							& region == "ES23" & (earning_yg + p_earning_yg) < 40000 & gender == 1
+							& region == "ES23" & (earning_yg + p_earning) < 40000 & gender == 1
 							
 replace pl_ben1 = 250		if country == "ES" & year == 2010 & pl_eli == 1 ///
-							& region == "ES23" & (earning_yg + p_earning_yg) < 40000 ///
+							& region == "ES23" & (earning_yg + p_earning) < 40000 ///
 							& gender == 2 & parstat == 1
 							
 * Castilla-León
 replace pl_ben1 = 250		if country == "ES" & year == 2010 & pl_eli == 1 ///
-							& region == "ES41" & (earning_yg + p_earning_yg) < 30000 & gender == 1
+							& region == "ES41" & (earning_yg + p_earning) < 30000 & gender == 1
 							
 replace pl_ben1 = 250		if country == "ES" & year == 2010 & pl_eli == 1 ///
-							& region == "ES41" & (earning_yg + p_earning_yg) < 30000 ///
+							& region == "ES41" & (earning_yg + p_earning) < 30000 ///
 							& gender == 2 & parstat == 1
 							
 * Navarre
 replace pl_ben1 = 330		if country == "ES" & year == 2010 & pl_eli == 1 ///
-							& region == "ES22" & gender == 1 & nchild >= 2
+							& region == "ES22" & gender == 1 & childc >= 2
 							
 replace pl_ben1 = 330		if country == "ES" & year == 2010 & pl_eli == 1 ///
-							& region == "ES22" & gender == 2 & nchild >= 2 ///
+							& region == "ES22" & gender == 2 & childc >= 2 ///
 							& parstat == 1
 							
 * Castilla-La Mancha

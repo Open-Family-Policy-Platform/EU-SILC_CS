@@ -40,7 +40,7 @@ replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2016 ///
 /*	-> parental benefit:
 		-> eligible for ML: 
 			-> 435 days (LP&R 2016)
-			-> 100% earnings
+			-> 100% earning
 			-> minimum: €390/month
 			-> maximum: €2,724/month	
 		-> not eligible for ML: 
@@ -53,29 +53,29 @@ replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2016 ///
 */
 
 * women
-replace pl_ben1 = (earning * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 = (earning * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2016 & pl_eli == 1 ///
 																			& gender == 1 
 																			
 * single men							
-replace pl_ben1 = (earning * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 = (earning * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2016 & pl_eli == 1 ///
 																			& gender == 2 & parstat == 1
 																			
 	* minimum 
-replace pl_ben1 = (390 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2016 & pl_eli == 1 ///
-																			& earnings < 390 & pl_ben1 != . & pl_ben1 != .
+replace pl_ben1 = (390 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2016 & pl_eli == 1 ///
+																			& earning < 390 & pl_ben1 != . & pl_ben1 != .
 
 	* maximum
-replace pl_ben1 = (2724	* (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2016 & pl_eli == 1 ///
-																			& earnings >= 2724 & pl_ben1 != . 
+replace pl_ben1 = (2724	* (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2016 & pl_eli == 1 ///
+																			& earning >= 2724 & pl_ben1 != . 
 							
 																			
 
 * not eligible for maternity leave
 	* women
-replace pl_ben1 = (390 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 = (390 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2016 & pl_eli == 1 ///
 																			& inlist(econ_status,3,4) & gender == 1
 	* single men
-replace pl_ben1 = (390 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2016 & pl_eli == 1 ///
+replace pl_ben1 = (390 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2016 & pl_eli == 1 ///
 																			& inlist(econ_status,3,4) & gender == 2 & parstat == 1							
 
 
@@ -91,11 +91,11 @@ replace pl_ben2 = earning  		if country == "EE" & year == 2016 & pl_eli == 1 ///
 																			
 	* minimum 
 replace pl_ben2 = 390 			if country == "EE" & year == 2016 & pl_eli == 1 ///
-								& earnings < 390 & pl_ben2 != . & pl_ben1 != .
+								& earning < 390 & pl_ben2 != . & pl_ben1 != .
 
 	* maximum
 replace pl_ben2 = 2724	 		if country == "EE" & year == 2016 & pl_eli == 1 ///
-								& earnings >= 2724 & pl_ben1 != . 
+								& earning >= 2724 & pl_ben1 != . 
 							
 																			
 

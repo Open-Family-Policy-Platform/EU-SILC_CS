@@ -56,11 +56,11 @@ replace pl_ben1 = 250		if country == "ES" & year == 2013 & pl_eli == 1 ///
 
 * Navarre
 replace pl_ben1 = 396.31		if country == "ES" & year == 2012 & pl_eli == 1 ///
-								& region == "ES22" & gender == 1 & nchild >= 2
+								& region == "ES22" & gender == 1 & childc >= 2
 							
 	* single men
 replace pl_ben1 = 396.31		if country == "ES" & year == 2012 & pl_eli == 1 ///
-								& region == "ES22" & gender == 2 & parstat == 1 & nchild >= 2
+								& region == "ES22" & gender == 2 & parstat == 1 & childc >= 2
 							
 							
 replace pl_ben2 = pl_ben1		if country == "ES" & year == 2013 & pl_eli == 1

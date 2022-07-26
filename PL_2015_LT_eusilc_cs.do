@@ -54,7 +54,7 @@ replace pl_ben1 = 1379	 		if country == "LT" & year == 2015 & pl_eli == 1 ///
 replace pl_ben1 = earning 		if country == "LT" & year == 2015 & pl_eli == 1 & gender == 2 & parstat == 1
 								
 replace pl_ben1 = 1379	 		if country == "LT" & year == 2015 & pl_eli == 1 ///
-								& pl_ben1 >= 1379 gender == 2 & parstat == 1
+								& pl_ben1 >= 1379 & gender == 2 & parstat == 1
 								
 								
 replace pl_ben2 = pl_ben1		if country == "LT" & year == 2015 & pl_eli == 1

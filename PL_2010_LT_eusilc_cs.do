@@ -20,7 +20,7 @@ replace pl_eli =  0			if pl_eli == . & country == "LT" & year == 2010
 /*	-> until child is 3 years old		*/
 
 * women	
-replace pl_dur = (3*52)-pl_dur2 		if country == "LT" & year == 2010 & pl_eli == 1 ///
+replace pl_dur = (3*52)-ml_dur2 		if country == "LT" & year == 2010 & pl_eli == 1 ///
 									& gender == 1
 
 * single men

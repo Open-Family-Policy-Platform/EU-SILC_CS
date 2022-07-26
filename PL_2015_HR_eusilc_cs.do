@@ -82,7 +82,7 @@ replace pl_ben1 = 351 			if country == "HR" & year == 2015 & pl_eli == 1 ///
 
 								
 * for 3+ children
-eplace pl_ben1 = ((earning * (6/30)) + (219 * 24)) / 30 		if country == "HR" & year == 2015 & pl_eli == 1 ///
+replace pl_ben1 = ((earning * (6/30)) + (219 * 24)) / 30 		if country == "HR" & year == 2015 & pl_eli == 1 ///
 																& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & gender == 1 ///
 																& childc > 2
 								

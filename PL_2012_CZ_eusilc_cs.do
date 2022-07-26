@@ -36,76 +36,51 @@ replace pl_eli = 0 		if pl_eli == . & country == "CZ" & year == 2012
 
 /* daily assessment base (source: MISSOC 2012, IV. Maternity/Paternity):
 	
-	-> up to €33/day = 100% daily earning
+	-> up to €33/day = 98% daily earning
 	-> €33 - €49/day = 60% daily earning
 	-> €49 - €98/day  = 30% daily earning  
 	-> earning over €98/day are not taken into account
 	
-	NOTE: 	DAB calculated in ML section
-			Here only DAB for partner's variables (p_*)
 */
 
-* daily earning < 33
-gen p_dab = p_earning/21.7 				if country == "CZ" & year == 2012 ///
-										& (p_earning/21.7) < 33 & parstat == 2 ///
-										& econ_status != 1 & p_econ_status == 1
+** DAILY ASSESSMENT BASE:
+* daily earning < €33
+gen dab = earning/21.7 				if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& earning/21.7 < 33
 
 * daily earning between €33 and €49
-gen p_dab1 = 33 							if country == "CZ" & year == 2012 ///
-											& inrange(p_earning/21.7,33,49) & parstat == 2 ///
-											& econ_status != 1 & p_econ_status == 1
-											
-gen p_dab2 = ((p_earning/21.7) - 33)*0.6 	if country == "CZ" & year == 2012 ///
-											& inrange(p_earning/21.7,33,49) & parstat == 2 ///
-											& econ_status != 1 & p_econ_status == 1
-											 
-replace p_dab = p_dab1 + p_dab2 			if country == "CZ" & year == 2012 ///
-											& inrange(p_earning/21.7,33,49) & p_dab == .  ///
-											& parstat == 2 & econ_status != 1 & p_econ_status == 1
-drop p_dab1 p_dab2
-
+gen dab1 = 33					if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& inrange(earning/21.7,33,49)
+gen dab2 = ((earning/21.7) - 33)*0.6 	if country == "CZ" & year == 2012 & ml_eli == 1 ///
+										& inrange(earning/21.7,33,49)
+replace dab = dab1 + dab2 				if country == "CZ" & year == 2012 & ml_eli == 1 ///
+										& inrange(earning/21.7,33,49) & dab == .
+drop dab1 dab2
 										
 * daily earning between €49 and €98										
-gen p_dab1 = 33 						if country == "CZ" & year == 2012  ///
-										& inrange(p_earning/21.7,49,98) ///
-										& parstat == 2 & econ_status != 1 & p_econ_status == 1
-										
-gen p_dab2 = (49 - 33)*0.6 				if country == "CZ" & year == 2012 ///
-										& inrange(p_earning/21.7,49,98) ///
-										& parstat == 2 & econ_status != 1 & p_econ_status == 1
-										
-gen p_dab3 = ((p_earning/21.7) - 49)*0.3 	if country == "CZ" & year == 2012 ///
-											& inrange(p_earning/21.7,49,98) & parstat == 2 ///
-											& econ_status != 1 & p_econ_status == 1
+gen dab1 = 33 						if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& inrange(earning/21.7,49,98)
+gen dab2 = (49 - 33)*0.6 			if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& inrange(earning/21.7,49,98)
+gen dab3 = ((earning/21.7) - 49)*0.3 	if country == "CZ" & year == 2012 & ml_eli == 1 ///
+										& inrange(earning/21.7,49,98)
 
-										
-replace p_dab = p_dab1 + p_dab2 + p_dab3  		if country == "CZ" & year == 2012 ///
-												& inrange(p_earning/21.7,49,98)  ///
-												& p_dab == . & parstat == 2 & econ_status != 1 ///
-												& p_econ_status == 1
-drop p_dab1 p_dab2 p_dab3 
-
+replace dab = dab1 + dab2 + dab3  	if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& inrange(earning/21.7,49,98) & dab == .									
+drop dab1 dab2 dab3 
 
 * daily earning over €98
-gen p_dab1 = 33 						if country == "CZ" & year == 2012  ///
-										& p_earning/21.7 > 98 ///
-										& parstat == 2 & econ_status != 1  & p_econ_status == 1
+gen dab1 = 33 						if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& earning/21.7 > 98
+gen dab2 = (49 - 33)*0.6 			if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& earning/21.7 > 98
 										
-gen p_dab2 = (49 - 33)*0.6 				if country == "CZ" & year == 2012 ///
-										& p_earning/21.7 > 98 & parstat == 2 ///
-										& econ_status != 1 & p_econ_status == 1
-										
-gen p_dab3 = (98 - 49)*0.3			 	if country == "CZ" & year == 2012 ///
-										& p_earning/21.7 > 98  & parstat == 2 ///
-										& econ_status != 1 & p_econ_status == 1
+gen dab3 = (98 - 49)*0.3 			if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& earning/21.7 > 98
 
-										
-replace p_dab = p_dab1 + p_dab2 + p_dab3  		if country == "CZ" & year == 2012 ///
-												& p_earning/21.7 > 98   ///
-												& p_dab == . & parstat == 2 & econ_status != 1 ///
-												& p_econ_status == 1
-drop p_dab1 p_dab2 p_dab3 
-
+replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2012 & ml_eli == 1 ///
+									& earning/21.7 > 98 & dab == . 										
+			
 
 
 *** DURATION
@@ -113,52 +88,40 @@ drop p_dab1 p_dab2 p_dab3
    
 	-> if at least one of the parents has social insurance:
 		-> 70% of the daily assessment base (dab)
-		-> ceiling: €1,259/month 
+		-> ceiling: €446/month 
 		-> If neither of the parents have social insurance: €295/month
 	-> social insurance compulsory only for employees
 */	
 									
-* SINGLE (women & men)
-	* not employed (4 years)
-replace pl_dur = 4*52		if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status != 1 & parstat == 1
-
-	* employed
-replace pl_dur = (8541 / ((0.7*dab)*21.7)) * 4.3 		if country == "CZ" & year == 2012 & pl_eli == 1 ///
-														& econ_status == 1 & parstat == 1 & pl_dur == . ///
-														& earning < 446
-	* employed, above ceiling	
-replace pl_dur = (8541 / 446) * 4.3 					if country == "CZ" & year == 2012 & pl_eli == 1 ///
-														& econ_status == 1 & parstat == 1 & pl_dur == . ///
-														& earning >= 446
-
-
-* COUPLE (assigned to women)
-	* neither is working (4 years)														
-replace pl_dur = 4*52 		if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status != 1 & !inlist(p_econ_status,.,1) & parstat == 2
+* not employed
+	* women
+replace pl_dur = 4*52					if country == "CZ" & year == 2012 & pl_eli == 1 ///
+										& econ_status != 1 & gender == 1
 										
-	* woman not employed, man employed, below ceiling
-replace pl_dur = (8541/((0.7 * p_dab)*21.7)) * 4.3 	if country == "CZ" & year == 2012 & pl_eli == 1 /// 
-													& p_econ_status == 1 & !inlist(econ_status,.,1) ///
-													& parstat == 2 & ((0.7*p_dab)*21.7) < 446
-																										
-	* woman not employed, man employed, above ceiling
-replace pl_dur = (8541/446) * 4.3					if country == "CZ" & year == 2012 & pl_eli == 1 /// 
-													& p_econ_status == 1 & econ_status != 1 ///
-													& parstat == 2 & ((0.7*p_dab)*21.7) >= 446
-															
-	* woman employed, below ceiling
-replace pl_dur = (8541/((0.7 * dab)*21.7)) * 4.3 	if country == "CZ" & year == 2012 & pl_eli == 1 /// 
-													& econ_status == 1 & parstat == 2 ///
-													& ((0.7*dab)*21.7) < 446
+	* single men
+replace pl_dur = 4*52					if country == "CZ" & year == 2012 & pl_eli == 1 ///
+										& econ_status != 1 & gender == 2 & parstat == 1
+										
+* employed
+	* women
+replace pl_dur = (8541 / ((0.7*dab)*21.7)) * 4.3 		if country == "CZ" & year == 2012 & pl_eli == 1 ///
+														& econ_status == 1 & gender == 1 & pl_dur == . 
+												
+	* women - above ceiling
+replace pl_dur = (8541 / 446) * 4.3 					if country == "CZ" & year == 2012 & pl_eli == 1 ///
+														& econ_status == 1 & gender == 1 & (0.7 * (21.7*dab)) >= 446	
 
-	* woman employed, above ceiling
-replace pl_dur = (8541/446) * 4.3				 	if country == "CZ" & year == 2012 & pl_eli == 1 /// 
-													& econ_status == 1 & parstat == 2 ///
-													& ((0.7*dab)*21.7) >= 446
-	
-	
+	* single men
+replace pl_dur = (8541 / ((0.7*dab)*21.7)) * 4.3 		if country == "CZ" & year == 2012 & pl_eli == 1 ///
+														& econ_status == 1 & gender == 2 & pl_dur == . & parstat == 1
+														
+	* single men - above ceiling
+replace pl_dur = (8541 / 446) * 4.3 					if country == "CZ" & year == 2012 & pl_eli == 1 ///
+														& econ_status == 1 & gender == 2 & (0.7 * (21.7*dab)) >= 446 & parstat == 1												
+														
+	* duration longer than 4 years
+replace pl_dur = 208 		if country == "CZ" & year == 2012 & pl_eli == 1 ///
+							& pl_dur != . & pl_dur >= 208						
 	
 	
 	
@@ -168,48 +131,39 @@ replace pl_dur = (8541/446) * 4.3				 	if country == "CZ" & year == 2012 & pl_el
 /* For explanation see "Duration (weeks)" above. 
    pl_ben2/3 refer to the most generous benefit 		*/
 
-* SINGLE
-	* not employed
-replace pl_ben1 = (295 * (10/58)) + (140 * (48/58)) 					if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status != 1 & parstat == 1
-										
-	* employed, below ceiling
-replace pl_ben1 = 0.7 * (21.7*dab)		if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 1 
-										
-	* employed, above ceiling
-replace pl_ben1 = 446					if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 1 & pl_ben1 >= 446
+* not employed
+	* women
+replace pl_ben1 = (295 * (10/48)) + (148 * ((48-10)/48)) 				if country == "CZ" & year == 2012 & pl_eli == 1 ///
+																		& econ_status != 1 & gender == 1
+																		
+	* single men
+replace pl_ben1 = (295 * (10/48)) + (148 * ((48-10)/48)) 				if country == "CZ" & year == 2012 & pl_eli == 1 ///
+																		& econ_status != 1 & gender == 2 & parstat == 1
+																		
 
-	
-		
-* COUPLE (assigned to women)
-	* neither employed
-replace pl_ben1 = (295 * (10/58)) + (140 * (48/58)) 					if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status != 1 & !inlist(p_econ_status,.,1) & parstat == 2
-										
-	* woman not employed, man employed
-replace pl_ben1 =  0.7 * (21.7*p_dab)	if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status != 1 & p_econ_status == 1 & parstat == 2
-										
-	
-	* woman not employed, man employed, above ceiling
-replace pl_ben1 =  446					if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status != 1 & p_econ_status == 1 & parstat == 2 ///
-										& pl_ben1 >= 446	
-										
-	* woman employed, below ceiling
-replace pl_ben1 =  0.7 * (21.7*dab)	if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 2 
-										
-	
-	* above ceiling
-replace pl_ben1 =  446					if country == "CZ" & year == 2012 & pl_eli == 1 ///
-										& econ_status == 1 & parstat == 2 ///
-										& pl_ben1 >= 446
-	
+* employed
+	* women
+replace pl_ben1 = 0.7 * (21.7*dab)			if country == "CZ" & year == 2012 & pl_eli == 1 ///
+											& econ_status == 1 & gender == 1
+											
+	* women - above ceiling
+replace pl_ben1 = 446						if country == "CZ" & year == 2012 & pl_eli == 1 ///
+											& econ_status == 1 & gender == 1 & (0.7 * (21.7*dab)) >= 446
+											
+	* single men
+replace pl_ben1 = 0.7 * (21.7*dab)			if country == "CZ" & year == 2012 & pl_eli == 1 ///
+											& econ_status == 1 & gender == 2 & parstat == 1
+											
+	* single men - above ceiling
+replace pl_ben1 = 446						if country == "CZ" & year == 2012 & pl_eli == 1 ///
+											& econ_status == 1 & gender == 2 & (0.7 * (21.7*dab)) >= 446 ///
+											& parstat == 1
+
+							
 
 replace pl_ben2 = pl_ben1 				if country == "CZ" & year == 2012 & pl_eli == 1 
+replace pl_ben2 = 295					if country == "CZ" & year == 2012 & pl_eli == 1 ///
+										& econ_status != 1 
 
 foreach x in 1 2 {
 	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "CZ" & year == 2012

@@ -40,7 +40,7 @@ replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2019 ///
 /*	-> parental benefit:
 		-> eligible for ML: 
 			-> 435 days (LP&R 2019)
-			-> 100% earnings
+			-> 100% earning
 			-> minimum: €540/month
 			-> maximum: €3,319.8/month	
 		-> not eligible for ML: 
@@ -54,29 +54,29 @@ replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2019 ///
 */
 
 * women
-replace pl_ben1 = (earning * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2019 & pl_eli == 1 ///
+replace pl_ben1 = (earning * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2019 & pl_eli == 1 ///
 																			& gender == 1 
 																			
 * single men							
-replace pl_ben1 = (earning * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2019 & pl_eli == 1 ///
+replace pl_ben1 = (earning * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2019 & pl_eli == 1 ///
 																			& gender == 2 & parstat == 1
 																			
 	* minimum 
-replace pl_ben1 = (540 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2019 & pl_eli == 1 ///
+replace pl_ben1 = (540 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2019 & pl_eli == 1 ///
 																			& earning < 540 & pl_ben1 != . & pl_ben1 != .
 
 	* maximum
-replace pl_ben1 = (3319.8	* (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2019 & pl_eli == 1 ///
-																			& earnings >= 3319.8 & pl_ben1 != . 
+replace pl_ben1 = (3319.8	* (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2019 & pl_eli == 1 ///
+																			& earning >= 3319.8 & pl_ben1 != . 
 							
 																			
 
 * not eligible for maternity leave
 	* women
-replace pl_ben1 = (500 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2019 & pl_eli == 1 ///
+replace pl_ben1 = (500 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2019 & pl_eli == 1 ///
 																			& inlist(econ_status,3,4) & gender == 1
 	* single men
-replace pl_ben1 = (500 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2019 & pl_eli == 1 ///
+replace pl_ben1 = (500 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2019 & pl_eli == 1 ///
 																			& inlist(econ_status,3,4) & gender == 2 & parstat == 1							
 
 
@@ -92,11 +92,11 @@ replace pl_ben2 = earning  		if country == "EE" & year == 2019 & pl_eli == 1 ///
 																			
 	* minimum 
 replace pl_ben2 = 540 			if country == "EE" & year == 2019 & pl_eli == 1 ///
-								& earnings < 430 & pl_ben2 != . & pl_ben1 != .
+								& earning < 430 & pl_ben2 != . & pl_ben1 != .
 
 	* maximum
 replace pl_ben2 = 3319.8	 		if country == "EE" & year == 2019 & pl_eli == 1 ///
-								& earnings >= 3319.8 & pl_ben1 != . 
+								& earning >= 3319.8 & pl_ben1 != . 
 							
 																			
 

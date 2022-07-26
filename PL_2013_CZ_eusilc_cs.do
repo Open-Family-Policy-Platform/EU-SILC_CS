@@ -40,8 +40,6 @@ replace pl_eli = 0 		if pl_eli == . & country == "CZ" & year == 2013
 	-> €50/day = 30% daily earning  
 	-> earning over €100/day are not taken into account
 	
-	NOTE: 	DAB calculated in ML section
-			Here only DAB for partner's variables (p_*)
 */
 
 ** DAILY ASSESSMENT BASE:

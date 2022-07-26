@@ -54,29 +54,29 @@ replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2010 ///
 */
 
 * women
-replace pl_ben1 = (earning * (435/(3*365)) + (77 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2010 & pl_eli == 1 ///
+replace pl_ben1 = (earning * (435/(3*365))) + (77 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2010 & pl_eli == 1 ///
 																			& gender == 1 
 																			
 * single men							
-replace pl_ben1 = (earning * (435/(3*365)) + (77 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2010 & pl_eli == 1 ///
+replace pl_ben1 = (earning * (435/(3*365))) + (77 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2010 & pl_eli == 1 ///
 																			& gender == 2 & parstat == 1
 																			
 	* minimum 
-replace pl_ben1 = (278 * (435/(3*365)) + (77 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2010 & pl_eli == 1 ///
-																			& earnings < 278 & pl_ben1 != . & pl_ben1 != .
+replace pl_ben1 = (278 * (435/(3*365))) + (77 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2010 & pl_eli == 1 ///
+																			& earning < 278 & pl_ben1 != . & pl_ben1 != .
 
 	* maximum
-replace pl_ben1 = (2257	* (435/(3*365)) + (77 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2010 & pl_eli == 1 ///
-																			& earnings >= 2257 & pl_ben1 != . 
+replace pl_ben1 = (2257	* (435/(3*365))) + (77 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2010 & pl_eli == 1 ///
+																			& earning >= 2257 & pl_ben1 != . 
 							
 																			
 
 * not eligible for maternity leave
 	* women
-replace pl_ben1 = (220 * (435/(3*365)) + (77 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2010 & pl_eli == 1 ///
+replace pl_ben1 = (220 * (435/(3*365))) + (77 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2010 & pl_eli == 1 ///
 																			& inlist(econ_status,3,4) & gender == 1
 	* single men
-replace pl_ben1 = (220 * (435/(3*365)) + (77 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2010 & pl_eli == 1 ///
+replace pl_ben1 = (220 * (435/(3*365))) + (77 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2010 & pl_eli == 1 ///
 																			& inlist(econ_status,3,4) & gender == 2 & parstat == 1							
 
 
@@ -92,11 +92,11 @@ replace pl_ben2 = earning  		if country == "EE" & year == 2010 & pl_eli == 1 ///
 																			
 	* minimum 
 replace pl_ben2 = 278 			if country == "EE" & year == 2010 & pl_eli == 1 ///
-								& earnings < 278 & pl_ben2 != . & pl_ben1 != .
+								& earning < 278 & pl_ben2 != . & pl_ben1 != .
 
 	* maximum
 replace pl_ben2 = 2257	 		if country == "EE" & year == 2010 & pl_eli == 1 ///
-								& earnings >= 2257 & pl_ben1 != . 
+								& earning >= 2257 & pl_ben1 != . 
 							
 																			
 

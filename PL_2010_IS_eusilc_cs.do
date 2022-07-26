@@ -89,7 +89,7 @@ replace pl_ben1 = 0.8*earning	 				if country == "IS" & year == 2010 & pl_eli ==
 										& gender == 2 & parstat == 1 & earning < 1265
 										
 replace pl_ben1 = (0.8 * 1265) + (0.75 * (earning-1265)) 	if country == "IS" & year == 2010 & pl_eli == 1 ///
-										& inlist(econ_stutus,1,2) & inrange(whours,10,19) & gender == 2 & parstat == 1 & earning >= 1265
+										& inlist(econ_status,1,2) & inrange(whours,10,19) & gender == 2 & parstat == 1 & earning >= 1265
 
 replace pl_ben1 = 520	 				if country == "IS" & year == 2010 & pl_eli == 1 ///
 										& inlist(econ_status,1,2) & inrange(whours,10,19) ///
