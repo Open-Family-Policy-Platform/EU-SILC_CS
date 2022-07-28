@@ -2,6 +2,28 @@
 *** 	OPEN FAMILY POLICY PROGRAM (OFPP) 	***
 ***********************************************
 
+/*	
+	Summary of the process:
+	
+		1. 	Delete countries without policy coding
+		2. 	Rename country labels to match ISO 3166-1 aplha-2 country codes
+		3. 	Create unique identifiers for respondents 
+				- the same ID can be found in multiple countries/years, this creates unique IDs for each individual 
+		4. 	Standardize EU-SILC variables to match the OFPP coding
+		5. 	Create variables containing partner's characteristics
+				- create datasets of male and female partners
+				- link with the respondents
+		6. 	Remove same-sex couples 
+				- OFPP doesn't yet account for the variation in policy entitlements for same-sex couples
+		7. 	Identify and count children (<18 year old) in the household
+		8. 	Select a sample of respondents of childbearing age 
+				- for more detail see the OFPP Methodology Report
+		9. 	Create policy variables
+		10. Run the policy coding files to fill in the policy values for each respondent in the sample
+*/
+
+
+
 clear all
 
 *** Data directory
@@ -14,10 +36,6 @@ cd "$DATA"
 *** Code directory
 global CODE "[YOUR DIRECTORY]" 
 
-*** Convert original .csv file into .dta & create labels
-* !!! THE FILE SHOULD BE CALLED "SETUP" AND IT SHOULD NOT BE PART OF THIS CODE - IT SHOULD BE RUN BEFORE! => DELETE
-//run "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/eu-silc_merge/SD_merge_eusilc_cs.do"
-
 cd "$DATA"
 
 * SELECT YEARS BELOW if you are interested in specific years
@@ -26,7 +44,7 @@ foreach x of numlist 10/19 { // <= adjust the selection of years
 	
 	use SILC20`x'_ver_2021_04, clear // "ver_2021_04" corresponds with Gesis Setup Files
 	
-	*** Delete Serbia, Cyprus, Malta ***
+	*** Delete Serbia, Cyprus, Malta, Switzerland ***
 	drop if country == "RS"
 	drop if country == "CY"
 	drop if country == "MT"
