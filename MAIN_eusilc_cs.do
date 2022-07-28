@@ -5,14 +5,14 @@
 clear all
 
 *** Data directory
-global DATA "/Users/alzbeta/Documents/Data/EU-SILC/eusilc_merged_files" 
+global DATA "[YOUR DIRECTORY]" 
 
 
 cd "$DATA"
 
 
 *** Code directory
-global CODE "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/EU-SILC" 
+global CODE "[YOUR DIRECTORY]" 
 
 *** Convert original .csv file into .dta & create labels
 * !!! THE FILE SHOULD BE CALLED "SETUP" AND IT SHOULD NOT BE PART OF THIS CODE - IT SHOULD BE RUN BEFORE! => DELETE
@@ -20,7 +20,7 @@ global CODE "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/EU-SILC"
 
 cd "$DATA"
 
-* !!! if you are only interested in specific years rather than the whole period 2010-2019, adjust your selection
+* SELECT YEARS BELOW if you are interested in specific years
 
 foreach x of numlist 10/19 { // <= adjust the selection of years
 	
@@ -60,13 +60,13 @@ foreach x of numlist 10/19 {
 					
 	use SILC20`x'_standard, clear
 		*** Male partners
-		run "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/eu-silc_merge/SD_male_partners_test_optimize"
-		save eusilc_malepartner_20`x'
+		run "$CODE/SD_male_partners"
+		save eusilc_malepartner_20`x', replace
 		
 	use SILC20`x'_standard, clear
 		*** Female partners
-		run "/Users/alzbeta/Dropbox/WORK/Open Family Policy Platform/eu-silc_merge/SD_female_partners_test_optimize"
-		save eusilc_femalepartner_20`x'
+		run "$CODE/SD_female_partners"
+		save eusilc_femalepartner_20`x', replace
 }
 
 foreach x of numlist 10/19 {	
@@ -94,18 +94,12 @@ foreach x of numlist 10/19 {
 		drop if gender == p_gender
 		
 		* Create dataset of respondents with key variables about their partners
-		save eusilc_partners_20`x'
+		save eusilc_partners_20`x', replace
 }
 
 foreach x of numlist 10/19 {	
 		
-		use eusilc_partners_20`x'
-		
-		*** Select SAMPLE ***
-		/* 	For the purpose of the OFPP a sample needs to be selected covering 
-			the population of childbearing age. 
-		*/
-		run "$CODE/SD_sample_eusilc_cs.do"
+		use eusilc_partners_20`x'	
 
 		*** Number of children per household ***
 		/* 	For the purpose of the OFPP - some countries provide different support 
@@ -113,7 +107,13 @@ foreach x of numlist 10/19 {
 		*/
 		run "$CODE/SD_nchild_eusilc_cs.do"
 
-		save eusilc_ofpp_20`x'
+		*** Select SAMPLE ***
+		/* 	For the purpose of the OFPP a sample needs to be selected covering 
+			the population of childbearing age. 
+		*/
+		run "$CODE/SD_sample_eusilc_cs.do"
+		
+		save eusilc_prep_20`x', replace
  }
 
 foreach x of numlist 10/19 {
@@ -129,7 +129,7 @@ foreach x of numlist 10/19 {
 foreach x of numlist 10/19 {
 	
 	*** Create maternity, paternity and parental leave variables (empty)
-	use eusilc_ofpp_20`x', clear
+	use eusilc_prep_20`x', clear
 	run "$CODE/SD_ML_vars.do" 
 	run "$CODE/SD_PT_vars.do"
 	run "$CODE/SD_PL_vars.do"
@@ -154,6 +154,7 @@ foreach x of numlist 10/19 {
 		* Delete redundant files 
 		erase "$DATA/SILC20`x'_standard.dta"
 		erase "$DATA/eusilc_partners_20`x'.dta"
+		erase "$DATA/eusilc_prep_20`x'.dta"
 	
 }
 
