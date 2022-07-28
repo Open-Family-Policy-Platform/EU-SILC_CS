@@ -27,13 +27,13 @@ replace pl_eli = 0 		if pl_eli == . & country == "CZ" & year == 2010
 	-> family entitlement => in couples, all leave is assigned to woman
 */
 
-replace pl_dur = (24/4.3) - ml_dur2 	if country == "CZ" & year == 2010 & pl_eli == 1 & gender == 1 ///
+replace pl_dur = (24*4.3) - ml_dur2 	if country == "CZ" & year == 2010 & pl_eli == 1 & gender == 1 ///
 										& ml_eli == 1 & (earning/21.7) >= 15
 										
-replace pl_dur = (36/4.3) - ml_dur2 	if country == "CZ" & year == 2010 & pl_eli == 1 & gender == 1 ///
+replace pl_dur = (36*4.3) - ml_dur2 	if country == "CZ" & year == 2010 & pl_eli == 1 & gender == 1 ///
 										& ml_eli == 1 & pl_dur == . 
 										
-replace pl_dur = (48/4.3) 				if country == "CZ" & year == 2010 & pl_eli == 1 & gender == 1 ///
+replace pl_dur = (48*4.3) 				if country == "CZ" & year == 2010 & pl_eli == 1 & gender == 1 ///
 										& ml_eli == 0 & pl_dur == . 										
 	
 
