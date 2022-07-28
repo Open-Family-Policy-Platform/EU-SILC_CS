@@ -20,9 +20,9 @@ replace ml_eli = 0 			if ml_eli == . & country == "LT" & year == 2018 & gender =
 /*	-> prenatal: 70 calendar days
 	-> postnatal: 56 calendar days 	*/
 	
-replace ml_dur1 = 70/5 		if country == "LT" & year == 2018 & ml_eli == 1
+replace ml_dur1 = 70/7 		if country == "LT" & year == 2018 & ml_eli == 1
 
-replace ml_dur2 = 56/5 		if country == "LT" & year == 2018 & ml_eli == 1
+replace ml_dur2 = 56/7 		if country == "LT" & year == 2018 & ml_eli == 1
 
 
 * BENEFIT (monthly)
