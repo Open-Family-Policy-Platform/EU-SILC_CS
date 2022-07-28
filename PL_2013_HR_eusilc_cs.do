@@ -34,7 +34,7 @@ replace pl_dur = 3*4.3 		if country == "HR" & year == 2013 & pl_eli == 1 ///
 							& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 ///
 							& childc <= 2
 						
-replace pl_dur = 15/4.3 		if country == "HR" & year == 2013 & pl_eli == 1 ///
+replace pl_dur = 15*4.3 		if country == "HR" & year == 2013 & pl_eli == 1 ///
 								& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 ///
 								& childc > 2 
 						
