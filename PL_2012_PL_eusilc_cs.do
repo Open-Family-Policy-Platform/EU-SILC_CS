@@ -15,7 +15,7 @@
 					in Finland but is not coded in OFPP. For the sake of consistency, this
 					type of leave was not coded for Poland.
 */
-replace pl_eli = 0			if country == "PL" & year == 2012
+replace pl_eli = .a			if country == "PL" & year == 2012
 
 
 * DURATION (weeks)

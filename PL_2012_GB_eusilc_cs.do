@@ -15,8 +15,8 @@
 * UK - 2012
 
 * ELIGIBILITY
-replace pl_eli = 0 			if country == "GB" & year == 2012 
-replace pl_eli =  0			if pl_eli == . & country == "GB" & year == 2012
+replace pl_eli = .a 			if country == "GB" & year == 2012 
+replace pl_eli = .a			if pl_eli == . & country == "GB" & year == 2012
 
 
 * DURATION (weeks)

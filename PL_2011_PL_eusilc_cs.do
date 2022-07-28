@@ -15,7 +15,7 @@
 					in Finland but is not coded in OFPP. For the sake of consistency, this
 					type of leave was not coded for Poland.
 */
-replace pl_eli = 0			if country == "PL" & year == 2011
+replace pl_eli = .a			if country == "PL" & year == 2011
 
 
 * DURATION (weeks)
@@ -31,7 +31,7 @@ replace pl_ben2 = .a		if country == "PL" & year == 2011
 
 
 foreach x in 1 2 {
-	replace pl_ben`x' = 0 	if pl_eli == 0 & country == "PL" & year == 2011
+	replace pl_ben`x' = .a 	if pl_eli == 0 & country == "PL" & year == 2011
 }
 
-replace pl_dur = 0 	if country == "PL" & year == 2011	
+replace pl_dur = .a 	if country == "PL" & year == 2011	
