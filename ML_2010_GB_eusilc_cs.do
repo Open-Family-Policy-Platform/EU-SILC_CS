@@ -76,41 +76,34 @@ replace ml_dur2 = 39		if country == "GB" & year == 2010 & ml_eli == 1 ///
 
 
 * statutory maternity pay
-gen ml_bena = 0.9 * earning			if country == "GB" & year == 2010 & ml_eli == 1
-gen ml_benb = (152 * 4.3)			if country == "GB" & year == 2010 & ml_eli == 1 
 
+* under ceiling
+replace ml_ben1 = ((0.9 * earning) * (39/52))	if country == "GB" & year == 2010 & ml_eli == 1 ///
+												& (earning*0.9)/4.3 < 152 & ml_dur2 == 52
+
+* above ceiling 									
+replace ml_ben1 = (((0.9 * earning) * (6/52)) + ((152*4.3) * (33/52)))	if country == "GB" & year == 2010 & ml_eli == 1 ///
+												& (earning*0.9)/4.3 > 152 & ml_dur2 == 52						
 									
-	* under ceiling
-replace ml_ben1 = (ml_bena * (39/52))		if country == "GB" & year == 2010 & ml_eli == 1 ///
-											& (earning*0.9)/4.3 < 152 & ml_dur2 == 52
-
-	* above ceiling
-replace ml_ben1 = (ml_bena * (6/52)) + (ml_benb * ((39-6)/52))		///
-											if country == "GB" & year == 2010 & ml_eli == 1 ///
-											& (earning*0.9)/4.3 >= 152 & ml_dur2 == 52
-
-
 
 * maternity allowance	
 	* under ceiling
-replace ml_ben1 = ml_bena		if country == "GB" & year == 2010 & ml_eli == 1 ///
+replace ml_ben1 = (0.9 * earning)		if country == "GB" & year == 2010 & ml_eli == 1 ///
 								& (earning*0.9)/4.3 < 152 & ml_dur2 == 39	
 	
 	
 	* above ceiling
-replace ml_ben1 = ml_benb		if country == "GB" & year == 2010 & ml_eli == 1 ///
+replace ml_ben1 = (152*4.3)		if country == "GB" & year == 2010 & ml_eli == 1 ///
 								& (earning*0.9)/4.3 >= 152 & ml_dur2 == 39
 	
 	
 	
 
 * statutory maternity pay - 1st month										
-replace ml_ben2 = ml_bena 				if country == "GB" & year == 2010 & ml_eli == 1 ///
-										&  ml_dur2 == 52
+replace ml_ben2 = (0.9 * earning)			if country == "GB" & year == 2010 & ml_eli == 1 
 										
-replace ml_ben2 = ml_ben1 				if country == "GB" & year == 2010 & ml_eli == 1 ///
-										& ml_dur2 == 39							
 										
+replace ml_ben2 = (152*4.3)					if country == "GB" & year == 2010 & ml_eli == 1 
 										
 
 										
@@ -121,4 +114,4 @@ foreach x in 1 2 {
 	
 }
 
-drop ml_bena ml_benb
+
