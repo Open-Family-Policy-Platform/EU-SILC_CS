@@ -31,7 +31,7 @@ replace ml_eli = 0 			if ml_eli == . & country == "SI" & year == 2012 & gender =
 	-> single father: 80 days (LP&R 2012)
 */
 	
-replace ml_dur1 = 28 			if country == "SI" & year == 2012 & ml_eli == 1
+replace ml_dur1 = 28/7 			if country == "SI" & year == 2012 & ml_eli == 1
 
 replace ml_dur2 = (105-28)/7 		if country == "SI" & year == 2012 & ml_eli == 1 ///
 								& gender == 1
