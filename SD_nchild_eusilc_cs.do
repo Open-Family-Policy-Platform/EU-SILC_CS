@@ -15,7 +15,7 @@ Based on Mack, A. (2016) Data Handling in EU-SILC. GESIS Papers, 2016-10.
 gen child = 1 if rx010 < 18
 
 * Count the number of children per household
-egen childc = count(child), by(hh_id)
+egen childc = count(child), by(country hh_id)
 lab var childc "Number of children <18 in HH"
 
 * generate hhrank variable for descriptives
