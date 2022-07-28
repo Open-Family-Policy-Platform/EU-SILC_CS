@@ -12,9 +12,13 @@ If you have your own copy of merged EU-SILC files, don't forget to change the na
 Merge files that were used to create the **_SILC20x_ver_2021_04_** files can be found in a separately repository (EU-SILC_setup).  
 
 When you have your EU-SILC files: 
+    
     1. open **_MAIN_eusilc_cs.do_**
+    
     2. add your DATA and CODE directories
+    
     3. if you use your own merged EU-SILC files change the name of the file (app. line 45)
+    
     4. run **_MAIN_eusilc_cs.do_**
 
 
