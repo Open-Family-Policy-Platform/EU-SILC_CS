@@ -60,7 +60,7 @@ replace ml_dur2 = 8-1 	if country == "BE" & year == 2010 & gender == 1 ///
 		-> €375.72/week
 */
 
-gen ceiling = (0.75*earning) 		// for the purpose of ceiling calculation
+gen ceiling = (0.75*earning) if country == "BE" & year == 2010 & gender == 1		// for the purpose of ceiling calculation
 
 * the average for a mothly benefit (accounting for the change in rate)
 replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((0.75*earning)/4.3) * (15 - (30/5)))) / 15) * 4.3 /// 
