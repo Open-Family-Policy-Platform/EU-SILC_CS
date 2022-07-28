@@ -15,13 +15,13 @@ replace pl_eli = 0 			if pl_eli == . & country == "DE" & year == 2013
 	-> the maximum duration of leave is 12 months in total for both parents 
 	-> bonus months if both parents take some leave: 2 months (coded as father's right')
 	*/
-replace pl_dur = 12 		if country == "DE" & year == 2013 & pl_eli == 1 ///
+replace pl_dur = 52 		if country == "DE" & year == 2013 & pl_eli == 1 ///
 							& gender == 1 
-replace pl_dur = 2 			if country == "DE" & year == 2013 & pl_eli == 1 ///
+replace pl_dur = 2*4.3 			if country == "DE" & year == 2013 & pl_eli == 1 ///
 							& gender == 2 & pl_dur == .
 
 * single men
-replace pl_dur = 12			if country == "DE" & year == 2013 & pl_eli == 1 ///
+replace pl_dur = 52			if country == "DE" & year == 2013 & pl_eli == 1 ///
 							& gender == 2 & parstat == 1 & pl_dur == . 
 
 
