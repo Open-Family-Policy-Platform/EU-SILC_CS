@@ -10,9 +10,12 @@
 		-> 2nd child: 2 years (coded) in the 4 years prior the childbirth (not coded)
 		-> 3rd+ child: 2 years (coded) in the 5 years prior the childbirth (not coded)
 		
+	-> NOTE: 	the EU-SILC cross-sectional file doesn't contain data on duration of employment for more 
+				than 12 months in the income reference period => the 24 months condition cannot be fulfilled.
+				The code is written for employment of at least 12 months. 
 */
 	
-replace pl_eli = 1 			if country == "FR" & year == 2019 & duremp >= 24
+replace pl_eli = 1 			if country == "FR" & year == 2019 & duremp >= 12
 replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2019
 
 
@@ -23,7 +26,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2019
 */
 
 * men and women with one hypothetical child										
-replace pl_dur = 6 						if country == "FR" & year == 2019 ///
+replace pl_dur = 6*4.3 						if country == "FR" & year == 2019 ///
 										& childc == 0 & pl_dur == .
 
 

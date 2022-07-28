@@ -13,9 +13,14 @@
 			-> childrearing benefit (CLCA) 
 			-> COLCA: families with at least 3 chidlren can opt for COLCA - higher benefit for 12 months (not coded)
 		
-		-> benefit is a family entitlement	*/
+		-> benefit is a family entitlement	
+		
+		-> NOTE: 	the EU-SILC cross-sectional file doesn't contain data on duration of employment for more 
+					than 12 months in the income reference period => the 24 months condition cannot be fulfilled.
+					The code is written for employment of at least 12 months. 	
+*/
 	
-replace pl_eli = 1 			if country == "FR" & year == 2013 & duremp >= 24 
+replace pl_eli = 1 			if country == "FR" & year == 2013 & duremp >= 12
 replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2013
 
 
@@ -25,7 +30,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2013
 	-> assigned to mother
 */
 * men and women with one hypothetical child										
-replace pl_dur = 6 						if country == "FR" & year == 2013 ///
+replace pl_dur = 6*4.3						if country == "FR" & year == 2013 ///
 										& childc == 0 & pl_dur == . & gender == 1
 
 

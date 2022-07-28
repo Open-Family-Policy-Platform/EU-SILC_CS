@@ -23,7 +23,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2020
 */
 
 * men and women with one hypothetical child										
-replace pl_dur = 6 						if country == "FR" & year == 2020 ///
+replace pl_dur = 6*4.3 						if country == "FR" & year == 2020 ///
 										& childc == 0 & pl_dur == .
 
 

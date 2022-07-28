@@ -12,9 +12,14 @@
 		
 		-> 2 types of benefits:
 			-> PreParE - shared provision of child education
-			-> COLCA: families with at least 3 chidlren can opt for COLCA - higher benefit for 12 months (not coded)	*/
+			-> COLCA: families with at least 3 chidlren can opt for COLCA - higher benefit for 12 months (not coded)	
+
+			-> NOTE: 	the EU-SILC cross-sectional file doesn't contain data on duration of employment for more 					
+						than 12 months in the income reference period => the 24 months condition cannot be fulfilled. 
+						The code is written for employment of at least 12 months. 
+*/
 	
-replace pl_eli = 1 			if country == "FR" & year == 2016 & duremp >= 24 
+replace pl_eli = 1 			if country == "FR" & year == 2016 & duremp >= 12 
 replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2016
 
 
@@ -25,7 +30,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2016
 */
 
 * men and women with one hypothetical child										
-replace pl_dur = 6 						if country == "FR" & year == 2016 ///
+replace pl_dur = 6*4.3 						if country == "FR" & year == 2016 ///
 										& childc == 0 & pl_dur == .
 
 
