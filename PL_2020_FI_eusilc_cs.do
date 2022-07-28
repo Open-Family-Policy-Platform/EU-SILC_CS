@@ -19,11 +19,11 @@ replace pl_eli = 0 			if pl_eli == . & country == "FI" & year == 2020
 	-> couples: assigned to women
 */
    
-replace pl_dur = 158/21.7 		if country == "FI" & year == 2020 & pl_eli == 1 ///
+replace pl_dur = 158/6 		if country == "FI" & year == 2020 & pl_eli == 1 ///
 								& gender == 1
 
 * single men
-replace pl_dur = 158/21.7 		if country == "FI" & year == 2020 & pl_eli == 1 ///
+replace pl_dur = 158/6 		if country == "FI" & year == 2020 & pl_eli == 1 ///
 								& gender == 2 & parstat == 1
 
 
