@@ -6,7 +6,7 @@
 * ELIGIBILITY
 /*	no statutory right to paternity leave  		*/
 		
-replace pt_eli = 0 		if country == "IT" & year == 2012 & gender == 2 
+replace pt_eli = .a 		if country == "IT" & year == 2012 & gender == 2 
 
 
 * DURATION (weeks)

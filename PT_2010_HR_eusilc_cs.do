@@ -11,7 +11,7 @@
 
 
 * ELIGIBILITY
-replace pt_eli = 0 if country == "HR" & year == 2010 & gender == 2 
+replace pt_eli = .a if country == "HR" & year == 2010 & gender == 2 
 
 
 * DURATION (weeks)

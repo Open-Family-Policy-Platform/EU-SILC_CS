@@ -1,8 +1,4 @@
-/* PT_2017_CZ_eusilc_cs
-
-date created: 28/09/2021
-
-*/
+/* PT_2017_CZ_eusilc_cs */
 
 * Czechia - 2017
 
@@ -10,7 +6,7 @@ date created: 28/09/2021
 
 
 * ELIGIBILITY
-replace pt_eli = 0 		if country == "CZ" & year == 2017 & gender == 2 ///
+replace pt_eli = .a 		if country == "CZ" & year == 2017 & gender == 2 ///
 
 
 * DURATION (weeks)
