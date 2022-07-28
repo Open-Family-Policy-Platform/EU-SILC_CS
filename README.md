@@ -9,7 +9,7 @@ The OFPP is assuming merged EU-SILC CS files.
 
 If you have your own copy of merged EU-SILC files, don't forget to change the name of the files in "MAIN_eusilc_cs" (app. line 45). Make sure that each file only contains one year and that year is included in the name of that file. This is necessary for the OFPP to function properly. 
 
-Merge files that were used to create the **_SILC20`x'_ver_2021_04_** files can be found in a separately repository (EU-SILC_setup).  
+Merge files that were used to create the **_SILC20x_ver_2021_04_** files can be found in a separately repository (EU-SILC_setup).  
 
 When you have your EU-SILC files: 
     1. open **_MAIN_eusilc_cs.do_**
