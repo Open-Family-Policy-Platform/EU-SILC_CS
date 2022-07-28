@@ -31,12 +31,12 @@ replace ml_eli = 0 		if ml_eli == . & country == "HR" & year == 2015 ///
 */
 	
 replace ml_dur1 = 28/5 		if country == "HR" & year == 2015 & ml_eli == 1 ///
-							& inlist(econ_status,1,2)
+							& inlist(econ_status,1,2) & gender == 1
 replace ml_dur1 = 0 		if country == "HR" & year == 2015 & ml_eli == 1 ///
-							& inlist(econ_status,3,4)
+							& inlist(econ_status,3,4) & gender == 1
 							
 
-replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2015 & ml_eli == 1
+replace ml_dur2 = 6*4.3 	if country == "HR" & year == 2015 & ml_eli == 1 & gender == 1
 
 
 * BENEFIT (monthly)
