@@ -87,7 +87,8 @@ replace dab = dab1 + dab2 + dab3 	if country == "CZ" & year == 2018 & ml_eli == 
 /*	-> 70% of daily assessment base, ceiling: €47/day */
 
 replace ml_ben1 = (dab*0.7) * 21.7 		if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
-replace ml_ben1 = 47*21.7 				if ml_ben1 >= 47*21.7
+replace ml_ben1 = 47*21.7 				if country == "CZ" & year == 2018 & gender == 1 ///
+										& ml_eli == 1 & ml_ben1 >= 47*21.7
 
 
 replace ml_ben2 = ml_ben1 		if country == "CZ" & year == 2018 & gender == 1 & ml_eli == 1
