@@ -1,16 +1,21 @@
 # Open Family Policy Program (OFPP)
 
-The OFPP represents codified maternity, paternity and parental leave legislation in 28 European Countries between 2013 and 2019. It can be combined with EU-SILC cross-sectional data to create a collection of policy variables: leave eligibility, leave duration, and cash benefits. For more information about the Program see **_Methodology_report_eusilc_cs_v.0.2_** file in this Repository. 
+The OFPP is a coded maternity, paternity and parental leave legislation in 28 European Countries between 2010 and 2020. It was writtent to be combined with EU-SILC cross-sectional data to create a collection of policy variables: leave eligibility, leave duration, and cash benefits. For more information about the Program see **_Methodology_report_eusilc_cs_v.1.0_** file in this Repository. 
 
 [![DOI](https://zenodo.org/badge/399796332.svg)](https://zenodo.org/badge/latestdoi/399796332)
 
 # To run the Program:
-1. merge the original EU-SILC CS files using **_SD_merge_eusilc_cs.do_** 
-    - this step can be omitted if you already have a merged EU-SILC cross-sectional file
-3. add your DATA directory in **_MAIN_eusilc_cs.do_**
-4. add your CODE directory in **_MAIN_eusilc_cs.do_**
-5. if you already have your merged EU-SILC file, add the name of the data file into **_MAIN_eusilc_cs.do_**
-6. run **_MAIN_eusilc_cs.do_**
+The OFPP is assuming merged EU-SILC CS files. 
+
+If you have your own copy of merged EU-SILC files, don't forget to change the name of the files in "MAIN_eusilc_cs" (app. line 45). Make sure that each file only contains one year and that year is included in the name of that file. This is necessary for the OFPP to function properly. 
+
+Merge files that were used to create the **_"SILC20`x'_ver_2021_04"_** files can be found in a separately repository (EU-SILC_setup).  
+
+When you have your EU-SILC files: 
+    1. open **_MAIN_eusilc_cs.do_**
+    2. add your DATA and CODE directories
+    3. if you use your own merged EU-SILC files change the name of the file (app. line 45)
+    4. run **_MAIN_eusilc_cs.do_**
 
 
 # License 
