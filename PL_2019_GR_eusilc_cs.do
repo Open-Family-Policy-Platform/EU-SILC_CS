@@ -19,7 +19,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "GR" & year == 2019
 * DURATION (weeks)
 /*	-> 4 months/parent/child
 	-> non-transferable*/
-replace pl_dur = 4 		if country == "GR" & year == 2019 & pl_eli == 1
+replace pl_dur = 4*4.3 		if country == "GR" & year == 2019 & pl_eli == 1
 
 
 * BENEFIT (monthly)

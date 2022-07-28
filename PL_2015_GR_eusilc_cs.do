@@ -12,7 +12,7 @@ replace pl_eli = 0 			if pl_eli == . & country == "GR" & year == 2015
 
 * DURATION (weeks)
 /*	-> 4 months/parent  */
-replace pl_dur = 4 		if country == "GR" & year == 2015 & pl_eli == 1
+replace pl_dur = 4*4.3 		if country == "GR" & year == 2015 & pl_eli == 1
 
 
 * BENEFIT (monthly)
