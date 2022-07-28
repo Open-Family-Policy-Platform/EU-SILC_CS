@@ -52,7 +52,7 @@ replace pl_ben1 = 0.6* earning 		if country == "LV" & year == 2018 & pl_eli == 1
 									& inlist(econ_status,1,2) & gender == 1
 
 * women, unemployed or inactive									
-replace pl_ben1 = (171*(18/24)) + (42.69*(6/24)) 	if country == "LV" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = ((171*(18/24)) + (42.69*(6/24))) 	if country == "LV" & year == 2018 & pl_eli == 1 ///
 													& inlist(econ_status,3,4) & gender == 1	
 
 * single men, employed or self-employed
@@ -60,7 +60,7 @@ replace pl_ben1 = 0.6* earning 		if country == "LV" & year == 2018 & pl_eli == 1
 									& inlist(econ_status,1,2) & gender == 2 & parstat == 1
 									
 * single men, unemployed or inactive
-replace pl_ben1 = (171*(18/24)) + (42.69*(6/24)) 	if country == "LV" & year == 2018 & pl_eli == 1 ///
+replace pl_ben1 = ((171*(18/24)) + (42.69*(6/24))) 	if country == "LV" & year == 2018 & pl_eli == 1 ///
 													& inlist(econ_status,3,4) & gender == 2 & parstat == 1	
 
 

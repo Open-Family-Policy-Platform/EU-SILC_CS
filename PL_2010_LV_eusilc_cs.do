@@ -54,7 +54,7 @@ replace pl_ben1 = 89			if country == "LV" & year == 2010 & pl_eli == 1 ///
 									& inlist(econ_status,1,2) & gender == 1 ///
 									& pl_ben1 < 89
 * women, unemployed or inactive									
-replace pl_ben1 = (70 * (1/2)) + (42 * (1/2)) 	if country == "LV" & year == 2010 & pl_eli == 1 ///
+replace pl_ben1 = ((70 * (1/2)) + (42 * (1/2))) 	if country == "LV" & year == 2010 & pl_eli == 1 ///
 									& inlist(econ_status,1,2) & gender == 1
 
 * single men, employed or self-employed
@@ -62,7 +62,7 @@ replace pl_ben1 = 0.7 * earning 		if country == "LV" & year == 2010 & pl_eli == 
 									& inlist(econ_status,1,2) & gender == 2 & parstat == 1
 									
 * single men, unemployed or inactive
-replace pl_ben1 = (70 * (1/2)) + (42 * (1/2)) 		if country == "LV" & year == 2010 & pl_eli == 1 ///
+replace pl_ben1 = ((70 * (1/2)) + (42 * (1/2))) 		if country == "LV" & year == 2010 & pl_eli == 1 ///
 									& inlist(econ_status,1,2) & gender == 2 & parstat == 1
 replace pl_ben1 = 89			if country == "LV" & year == 2010 & pl_eli == 1 ///
 									& inlist(econ_status,1,2) & gender == 2 & parstat == 1 ///

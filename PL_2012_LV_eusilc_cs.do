@@ -46,7 +46,7 @@ replace pl_dur = 2 * 52 			if country == "LV" & year == 2012 & pl_eli == 1 ///
 		-> child under 1 year: €72/month
 		-> child 1-2: €43/month
 	
-	
+*/	
 	
 * women, employed or self-employed
 replace pl_ben1 = 0.7* earning 		if country == "LV" & year == 2012 & pl_eli == 1 ///
@@ -56,7 +56,7 @@ replace pl_ben1 = 91			if country == "LV" & year == 2012 & pl_eli == 1 ///
 									& pl_ben1 < 91
 									
 * women, unemployed/inactive
-replace pl_ben1 = (72 * (1/2)) + (43 * (1/2)) 	if country == "LV" & year == 2012 & pl_eli == 1 ///
+replace pl_ben1 = ((72 * (1/2)) + (43 * (1/2))) 	if country == "LV" & year == 2012 & pl_eli == 1 ///
 									& inlist(econ_status,1,2) & gender == 1
 * single men, employed or self-employed
 replace pl_ben1 = 0.7* earning 		if country == "LV" & year == 2012 & pl_eli == 1 ///
@@ -64,7 +64,7 @@ replace pl_ben1 = 0.7* earning 		if country == "LV" & year == 2012 & pl_eli == 1
 replace pl_ben1 = 91			if country == "LV" & year == 2012 & pl_eli == 1 ///
 									& inlist(econ_status,1,2) & gender == 2 & parstat == 1 ///
 									& pl_ben1 < 91
-replace pl_ben1 = (72 * (1/2)) + (43 * (1/2) 	if country == "LV" & year == 2012 & pl_eli == 1 ///
+replace pl_ben1 = ((72 * (1/2)) + (43 * (1/2))) 	if country == "LV" & year == 2012 & pl_eli == 1 ///
 									& inlist(econ_status,1,2) & gender == 2 & parstat == 1
 											
 replace pl_ben2 = pl_ben1 			if country == "LV" & year == 2012 & pl_eli == 1 ///
