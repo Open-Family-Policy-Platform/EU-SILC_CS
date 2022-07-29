@@ -78,12 +78,12 @@ foreach x of numlist 10/19 {
 					
 	use SILC20`x'_standard, clear
 		*** Male partners
-		run "$CODE/SD_male_partners"
+		run "$CODE/SD_male_partners_eusilc_cs"
 		save eusilc_malepartner_20`x', replace
 		
 	use SILC20`x'_standard, clear
 		*** Female partners
-		run "$CODE/SD_female_partners"
+		run "$CODE/SD_female_partners_eusilc_cs"
 		save eusilc_femalepartner_20`x', replace
 }
 
