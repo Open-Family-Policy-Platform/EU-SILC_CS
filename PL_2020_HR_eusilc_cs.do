@@ -80,7 +80,7 @@ replace pl_ben1 = 747 			if country == "HR" & year == 2020 & pl_eli == 1 ///
 
 								
 * for 3+ children
-eplace pl_ben1 = ((earning * (6/30)) + (308 * 24)) / 30 		if country == "HR" & year == 2020 & pl_eli == 1 ///
+replace pl_ben1 = ((earning * (6/30)) + (308 * 24)) / 30 		if country == "HR" & year == 2020 & pl_eli == 1 ///
 																& inlist(econ_status,1,2) & (duremp+dursemp) >= 12 & gender == 1 ///
 																& childc > 2
 								
