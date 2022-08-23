@@ -67,15 +67,15 @@ gen ceiling = (0.75*earning) 		// for the purpose of ceiling calculation
 replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((0.75*earning)/4.3) * (15 - (30/5)))) / 15) * 4.3 /// 
 						if country == "BE" & year == 2020 & gender == 1 ///
 						& econ_status == 1 & ml_ben1 == . & ml_eli == 1 ///
-						& ceiling <=  110.23*21.7
+						& ceiling <= 110.23*21.7
 
 
 						
 * above ceiling						
-replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + ((( 110.23 * 5) * (15 - (30/5))))) / 15) * 4.3 ///
+replace ml_ben1 = (((((0.82*earning) / 4.3) * (30/5)) + (((110.23 * 5) * (15 - (30/5))))) / 15) * 4.3 ///
 						if country == "BE" & year == 2020 & gender == 1 ///
 						& econ_status == 1 & ml_ben1 == . & ml_eli == 1 ///
-						& ceiling >  110.23*21.7
+						& ceiling > 110.23*21.7
 				
 
 	
