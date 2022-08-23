@@ -54,29 +54,29 @@ replace pl_dur = 18 * 4.3 		if country == "EE" & year == 2020 ///
 */
 
 * women
-replace pl_ben1 = (earning * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2020 & pl_eli == 1 ///
+replace pl_ben1 = (earning * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2020 & pl_eli == 1 ///
 																			& gender == 1 
 																			
 * single men							
-replace pl_ben1 = (earning * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2020 & pl_eli == 1 ///
+replace pl_ben1 = (earning * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 	if country == "EE" & year == 2020 & pl_eli == 1 ///
 																			& gender == 2 & parstat == 1
 																			
 	* minimum 
-replace pl_ben1 = (584 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2020 & pl_eli == 1 ///
+replace pl_ben1 = (584 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365))		if country == "EE" & year == 2020 & pl_eli == 1 ///
 																			& earning < 584 & pl_ben1 != . & pl_ben1 != .
 
 	* maximum
-replace pl_ben1 = (3548.1	* (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2020 & pl_eli == 1 ///
-																			& earnings >= 3548.1 & pl_ben1 != . 
+replace pl_ben1 = (3548.1 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2020 & pl_eli == 1 ///
+																			& earning >= 3548.1 & pl_ben1 != . 
 							
 																			
 
 * not eligible for maternity leave
 	* women
-replace pl_ben1 = (540 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2020 & pl_eli == 1 ///
+replace pl_ben1 = (540 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2020 & pl_eli == 1 ///
 																			& inlist(econ_status,3,4) & gender == 1
 	* single men
-replace pl_ben1 = (540 * (435/(3*365)) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2020 & pl_eli == 1 ///
+replace pl_ben1 = (540 * (435/(3*365))) + (76.7 * ((3*365)-435)/(3*365)) 		if country == "EE" & year == 2020 & pl_eli == 1 ///
 																			& inlist(econ_status,3,4) & gender == 2 & parstat == 1							
 
 
@@ -92,11 +92,11 @@ replace pl_ben2 = earning  		if country == "EE" & year == 2020 & pl_eli == 1 ///
 																			
 	* minimum 
 replace pl_ben2 = 584 			if country == "EE" & year == 2020 & pl_eli == 1 ///
-								& earnings < 430 & pl_ben2 != . & pl_ben1 != .
+								& earning < 430 & pl_ben2 != . & pl_ben1 != .
 
 	* maximum
 replace pl_ben2 = 3548.1	 		if country == "EE" & year == 2020 & pl_eli == 1 ///
-								& earnings >= 3548.1 & pl_ben1 != . 
+								& earning >= 3548.1 & pl_ben1 != . 
 							
 																			
 
