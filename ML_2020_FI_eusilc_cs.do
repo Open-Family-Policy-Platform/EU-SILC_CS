@@ -43,7 +43,7 @@ remaining 49 days:
 gen ml_ben56 = 28.94 * 21.7 		if country == "FI" & year == 2020 ///
 									& gender == 1 & ml_eli == 1 & inlist(econ_status,3,4)
 
-gen ml_ben56 = 28.94 * 21.7 		if country == "FI" & year == 2020 ///
+replace ml_ben56 = 28.94 * 21.7 		if country == "FI" & year == 2020 ///
 									& gender == 1 & ml_eli == 1 & inlist(econ_status,1,2) & (earning*12) < 9649
 
 * IG 56b			
@@ -71,7 +71,7 @@ replace ml_ben56 = ml_ben56a + ml_ben56b 		if country == "FI" & year == 2020 ///
 gen ml_ben49 = 28.94 * 21.7 		if country == "FI" & year == 2020 & gender == 1 ///
 									& ml_eli == 1 & inlist(econ_status,3,4)
 
-gen ml_ben49 = 28.94 * 21.7 		if country == "FI" & year == 2020 & gender == 1 ///
+replace ml_ben49 = 28.94 * 21.7 		if country == "FI" & year == 2020 & gender == 1 ///
 									& ml_eli == 1 & inlist(econ_status,3,4) & (earning*12) < 12405
 
 * IG 49b - annual earnings under 38,636
