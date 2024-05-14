@@ -6,13 +6,13 @@
 * ELIGIBILITY
 /*	-> 1 January 2015 - COLCA replaced by PreParE (LP&R 2015); the eligibility conditions remained the same
 	-> employed if they worked ...
-		-> 1st child: 2 years (coded) prior the childbirth
+		-> 1st child: 2 years (coded as 12 months) prior the childbirth
 		-> 2nd child: 2 years (coded) in the 4 years prior the childbirth (not coded)
 		-> 3rd+ child: 2 years (coded) in the 5 years prior the childbirth (not coded)
 		
 */
 	
-replace pl_eli = 1 			if country == "FR" & year == 2020 & duremp >= 24
+replace pl_eli = 1 			if country == "FR" & year == 2020 & duremp >= 12
 replace pl_eli = 0 			if pl_eli == . & country == "FR" & year == 2020
 
 
