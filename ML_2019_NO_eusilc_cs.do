@@ -15,9 +15,9 @@
 	-> inactive women: maternity grant
 */
 
-replace ml_eli = 1 			if country == "NO" & year == 2015 & gender == 1 
+replace ml_eli = 1 			if country == "NO" & year == 2019 & gender == 1 
 
-replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2015 & gender == 1
+replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2019 & gender == 1
 
 
 * DURATION (weeks)
@@ -28,9 +28,9 @@ replace ml_eli = 0 			if ml_eli == . & country == "NO" & year == 2015 & gender =
 
 */
 
-replace ml_dur1 = 3 		if country == "NO" & year == 2015 & ml_eli == 1 & gender == 1
+replace ml_dur1 = 3 		if country == "NO" & year == 2019 & ml_eli == 1 & gender == 1
 
-replace ml_dur2 = 12 		if country == "NO" & year == 2015 & ml_eli == 1 & gender == 1
+replace ml_dur2 = 12 		if country == "NO" & year == 2019 & ml_eli == 1 & gender == 1
 							
 										
 
